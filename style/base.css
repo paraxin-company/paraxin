@@ -1,0 +1,151 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    direction: rtl;
+}
+:root{
+    --paraxin-color: purple;
+    --menu-color: #7e7e7e;
+    --background-color-header: white;
+    --background-color-header-seconde: rgb(241 237 236);
+    --youtube-color: #CD201F; 
+    --github-color: #333333; 
+    --telegram-color: #0088CC; 
+    --facebook-color: #3B5998; 
+}
+body{
+    height: 100vh;
+}
+.menu-container{
+    background-color: var(--background-color-header);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 25px;
+}
+.menu ul{
+    list-style-type: none;
+}
+.menu ul li{
+    display: inline-block;
+    padding: 10px 10px;
+}
+.menu a{
+    text-decoration: none;
+    color: var(--menu-color);
+    font-size: 21px;
+    font-weight: 400;
+}
+.menu a:hover, .selected-menu a{
+    color: black;
+    border-bottom: 3px solid var(--paraxin-color);
+}
+.drop-down i{
+    transition: transform .2s linear;
+    color: var(--menu-color);
+    padding: 2px;
+}
+.drop-down:hover i{
+    transform: rotate(-180deg);
+    color: black;
+}
+.second-menu{
+    display: none;
+}
+.menu ul li:hover ul{
+    display: block;
+    position: absolute;
+    background-color: var(--background-color-header-seconde);
+    width: 150px;
+    box-shadow: rgba(0, 0, 0, 0.15) 0px 15px 25px, rgba(0, 0, 0, 0.05) 0px 5px 10px;
+}
+.brand{
+    padding: 25px 10px;
+}
+.brand a{
+    text-decoration: none;
+    color: var(--paraxin-color);
+    font-size: 35px;
+    font-weight: 800;
+}
+footer{
+    padding: 0 30px;
+    background-color: var(--background-color-header-seconde);
+}
+.content{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+.related-links{
+    padding: 25px 15px;
+    /* background-color: blue; */
+    display: flex;
+    flex-direction: column;
+}
+.related-links li a{
+    text-decoration: none;
+    line-height: 25px;
+    color: black;
+}
+.related-links li a:hover{
+    text-decoration: underline;
+    color: var(--telegram-color)
+}
+.social-media{
+    padding: 25px 15px;
+    text-align: center;
+}
+.social-media ul{
+    list-style-type: none;
+}
+.social-media li{
+    display: inline-block;
+}
+.social-media li i{
+    display: block;
+    font-size: 30px;
+    padding: 20px 15px 5px;
+}
+.social-media li a{
+    text-decoration: none;
+    color: var(--menu-color);
+    font-size: 0;
+}
+.social-media .youtube:hover a{
+    font-size: 15px;
+    color: var(--youtube-color)
+}
+.social-media .github:hover a{
+    font-size: 15px;
+    color: var(--github-color);
+}
+.social-media .telegram:hover a{
+    font-size: 15px;
+    color: var(--telegram-color)
+}
+.social-media .facebook:hover a{
+    font-size: 15px;
+    color: var(--facebook-color);
+}
+footer hr{
+    width: 50%;
+    color: var(--background-color-header-seconde);
+    text-align: center;
+    margin: 15px auto;
+}
+.copyright{
+    text-align: center;
+    padding: 0px 0px 25px;
+}
+.copyright p{
+    font-size: 14px;
+    color: var(--menu-color);
+}
+.paraxin-link{
+    color: var(--paraxin-color);
+    text-decoration: none;
+    font-size: 16px;
+    font-weight: 700;
+}
