@@ -12,10 +12,15 @@
     --youtube-color: #CD201F; 
     --github-color: #333333; 
     --telegram-color: #0088CC; 
-    --facebook-color: #3B5998; 
+    --instagram-color: #E1306C;
+    --mail-color: #DB3A1B;
+    --linkedin-color: #0077B5;
+    --call-color: #189D0E;
 }
 body{
     height: 100vh;
+    width: 95%;
+    margin: 0 auto;
 }
 .menu-container{
     background-color: var(--background-color-header);
@@ -69,6 +74,67 @@ body{
     font-size: 35px;
     font-weight: 800;
 }
+.contact-section{
+    display: flex;
+    position: fixed;
+    right: 15px;
+    bottom: 15px;
+    border-radius: 20px;
+    align-items: center;
+}
+.contact-section a{
+    text-decoration: none;
+    position: relative;
+    background-color: var(--call-color);
+    border-radius: 20px;
+    width: 48px;
+    height: 48px;
+}
+.contact-section a::before{
+    content: "";
+    position: absolute;
+    background-color: var(--call-color);
+    width: 48px;
+    height: 48px;
+    border-radius: 20px;
+    left: 0px;
+    bottom: 0px;
+    z-index: -1;
+    animation: reapid-scale 1s infinite ease-out;
+    -webkit-animation: reapid-scale 1s infinite ease-out;
+    -o-animation: reapid-scale 1s infinite ease-out;
+    -moz-animation: reapid-scale 1s infinite ease-out;
+    -ms-animation: reapid-scale 1s infinite ease-out;
+}
+.contact-section i{
+    font-size: 20px;
+    color: white;
+    display: flex;
+    line-height: 48px;
+    justify-content: center;
+    animation: rotate-icon .5s infinite ease-out alternate;
+    -webkit-animation: rotate-icon .5s infinite ease-out alternate;
+    -o-animation: rotate-icon .5s infinite ease-out alternate;
+    -moz-animation: rotate-icon .5s infinite ease-out alternate;
+    -ms-animation: rotate-icon .5s infinite ease-out alternate;
+}
+@keyframes rotate-icon{
+    from{
+        transform: rotate(20deg);
+    }
+    to{
+        transform: rotate(-20deg);
+    }
+}
+@keyframes reapid-scale{
+    from{
+        opacity: .8;
+    }
+    to{
+        opacity: 0.3;
+        transform: scale(1.4);
+    }
+}
 footer{
     padding: 0 30px;
     background-color: var(--background-color-header-seconde);
@@ -77,11 +143,12 @@ footer{
     display: flex;
     justify-content: space-around;
     align-items: center;
+    flex-wrap: wrap;
 }
 .related-links{
     padding: 25px 15px;
-    /* background-color: blue; */
     display: flex;
+    max-width: 200px;
     flex-direction: column;
 }
 .related-links li a{
@@ -106,7 +173,7 @@ footer{
 .social-media li i{
     display: block;
     font-size: 30px;
-    padding: 20px 15px 5px;
+    padding: 20px 17px 5px;
 }
 .social-media li a{
     text-decoration: none;
@@ -125,12 +192,20 @@ footer{
     font-size: 15px;
     color: var(--telegram-color)
 }
-.social-media .facebook:hover a{
+.social-media .email:hover a{
     font-size: 15px;
-    color: var(--facebook-color);
+    color: var(--mail-color);
+}
+.social-media .instagram:hover a{
+    font-size: 15px;
+    color: var(--instagram-color);
+}
+.social-media .linkedin:hover a{
+    font-size: 15px;
+    color: var(--linkedin-color);
 }
 footer hr{
-    width: 50%;
+    width: 70%;
     color: var(--background-color-header-seconde);
     text-align: center;
     margin: 15px auto;
@@ -141,6 +216,7 @@ footer hr{
 }
 .copyright p{
     font-size: 14px;
+    line-height: 20px;
     color: var(--menu-color);
 }
 .paraxin-link{
