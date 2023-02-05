@@ -1,4 +1,4 @@
-@import url(http://awebfont.ir/css?id=1116);
+/* @import url(http://awebfont.ir/css?id=1116); */
 *{
     margin: 0;
     padding: 0;
@@ -8,6 +8,7 @@
 :root{
     --paraxin-color: purple;
     --menu-color: #7e7e7e;
+    --menu-hover-color: black;
     --background-color-header: white;
     --background-color-header-seconde: rgb(241 237 236);
     --youtube-color: #CD201F; 
@@ -17,13 +18,17 @@
     --mail-color: #DB3A1B;
     --linkedin-color: #0077B5;
     --call-color: #189D0E;
-    --font-color: #7e7e7e;
+    --text-color: #2d3f4c;
     /* --font-color: #b3b3b3; */
+    --main-font-size: 15px;
+    --header-font-size: 17px;
+    --h-font-size: 20px;
 }
 body{
     height: 100vh;
-    font-family: 'B Yekan', tahoma, Arial;
-    font-size: 16px;
+    font-family: iran;
+    font-size: var(--main-font-size);
+    letter-spacing: -1px;
 }
 .header{
     background-color: var(--background-color-header);
@@ -68,12 +73,12 @@ body{
 .menu a{
     text-decoration: none;
     color: var(--menu-color);
-    font-size: 21px;
+    font-size: var(--header-font-size);
     font-weight: 400;
 }
 .menu a:hover, .selected-menu a{
-    color: black;
-    font-weight: 700;
+    color: var(--menu-hover-color);
+    font-weight: 500;
     border-bottom: 3px solid var(--paraxin-color);
 }
 .drop-down i{
@@ -83,7 +88,7 @@ body{
 }
 .drop-down:hover i{
     transform: rotate(-180deg);
-    color: black;
+    color: var(--menu-hover-color);
 }
 .second-menu{
     display: none;
@@ -101,21 +106,22 @@ body{
     padding: 25px 10px;
     display: flex;
     justify-content: center;
-    align-items: center;
+    align-items: baseline;
     flex-grow: 1;
 }
 .user-side a{
     text-decoration: none;
-    font-size: 21px;
+    font-size: var(--header-font-size);
     font-weight: 400;
     color: var(--paraxin-color);
-    margin-left: 10px;
+    margin-left: 8px;
 }
 .user-side .login{
+    font-size: var(--header-font-size);
     background-color: var(--paraxin-color);
     color: var(--background-color-header);
-    padding: 5px 15px;
-    border-radius: 35px;
+    padding: 5px 20px;
+    border-radius: 10px;
 }
 .first-view img{
     position: relative;
@@ -207,7 +213,7 @@ footer{
 }
 .related-links li a:hover{
     text-decoration: underline;
-    color: black;
+    color: var(--menu-hover-color);
     font-weight: 500;
 }
 .social-media{
@@ -215,7 +221,7 @@ footer{
     text-align: center;
 }
 .social-media h3{
-    color: var(--font-color);
+    color: var(--text-color);
 }
 .social-media ul{
     list-style-type: none;
@@ -225,7 +231,7 @@ footer{
 }
 .social-media li i{
     display: block;
-    font-size: 27px;
+    font-size: 25px;
     padding: 20px 22px 5px;
 }
 .social-media li a{
@@ -259,7 +265,7 @@ footer{
 }
 footer hr{
     width: 70%;
-    color: var(--background-color-header-seconde);
+    color: var(--text-color);
     text-align: center;
     margin: 15px auto;
 }
@@ -268,13 +274,13 @@ footer hr{
     padding: 0px 0px 25px;
 }
 .copyright p{
-    font-size: 14px;
+    font-size: 13px;
     line-height: 20px;
-    color: black;
+    color: var(--text-color);
 }
 .paraxin-link{
     color: var(--paraxin-color);
     text-decoration: none;
-    font-size: 16px;
-    font-weight: 700;
+    font-size: 15px;
+    font-weight: 500;
 }

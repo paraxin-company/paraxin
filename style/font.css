@@ -1,0 +1,7 @@
+@font-face {
+    font-family: 'iran';
+    src: url('../font/IranianSans-Bold.ttf') format('TrueType'),
+    url('../font/IranianSans-Bold.eot') format('OpenType'),
+    url('../font/IranianSans-Bold.woff2') format('woff2'),
+    url('../font/IranianSans-Bold.woff') format('woff');
+}
