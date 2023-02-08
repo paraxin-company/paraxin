@@ -1,3 +1,5 @@
+@import url("../../style/base.css");
+@import url("services-style.css");
 .form-type{
     display: flex;
     flex-direction: column;
@@ -23,14 +25,30 @@
     justify-content: flex-end;
     margin: 20px 0px;
 }
-.link-form a{
-    text-decoration: none;
-    padding: 10px 15px;
-    color: var(--paraxin-color);
-    border: 2px solid var(--paraxin-color);
-    border-radius: 10px;
+.form-section{
+    margin: 25px 0px;
+    padding: 20px 0px 40px;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
 }
-.link-form a:hover{
-    color: var(--background-color-header);
-    background-color: var(--paraxin-color);
+.form-desc{
+    width: 40%;
+}
+.form-desc h3{
+    margin: 15px 0px;
+}
+.form-desc p{
+    margin-bottom: 10px;
+    padding: var(--padding-a-field);
+    text-indent: var(--line-height-p);
+    border-radius: var(--border-radius-a-filed);
+    text-align: justify;
+    line-height: var(--line-height-p);
+}
+.form-img-desc{
+    width: 60%;
+}
+.form-img-desc img{
+    width: 100%;
 }

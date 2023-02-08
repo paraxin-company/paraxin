@@ -10,6 +10,11 @@
     margin: 25px 0px;
     padding: 20px 0px 40px;
 }
+.section ul{
+    list-style-type: none;
+    display: flex;
+    flex-wrap: wrap;
+}
 .caption{
     display: flex;
     justify-content: center;
@@ -33,11 +38,6 @@
     color: var(--paraxin-color);
     font-weight: 900;
     font-size: 30px;
-}
-.section ul{
-    list-style-type: none;
-    display: flex;
-    flex-wrap: wrap;
 }
 .user-upinion{
     padding: 15px 25px;

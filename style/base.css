@@ -1,4 +1,4 @@
-/* @import url(http://awebfont.ir/css?id=1116); */
+@import url("font.css");
 *{
     margin: 0;
     padding: 0;
@@ -29,12 +29,16 @@
     --h-font-size: 20px;
 
     --line-height-p: 25px;
+
+    --padding-a-field: 10px 15px;
+    --border-radius-a-filed: 10px;
 }
 body{
     height: 100vh;
     font-family: iran;
     font-size: var(--main-font-size);
     letter-spacing: -1px;
+    color: var(--text-color);
 }
 .header{
     background-color: var(--background-color-header);
@@ -289,4 +293,15 @@ footer hr{
     text-decoration: none;
     font-size: 15px;
     font-weight: 500;
+}
+.style-link-in-paraxin{
+    text-decoration: none;
+    padding: var(--padding-a-field);
+    color: var(--paraxin-color);
+    border: 2px solid var(--paraxin-color);
+    border-radius: var(--border-radius-a-filed);
+}
+.style-link-in-paraxin:hover{
+    color: var(--background-color-header);
+    background-color: var(--paraxin-color);
 }

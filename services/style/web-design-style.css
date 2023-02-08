@@ -1,3 +1,5 @@
+@import url("../../style/base.css");
+@import url("services-style.css");
 .ability{
     width: 25%;
     padding: 15px 25px;
