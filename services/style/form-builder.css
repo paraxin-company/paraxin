@@ -1,0 +1,36 @@
+.form-type{
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+    text-align: center;
+    padding: 15px 25px;
+    margin: 0px 5px;
+    width: 30%;
+}
+.form-type img{
+    width: 60%;
+    align-self: center;
+    margin: 0px 0px 15px;
+}
+.form-type h3{
+    margin: 0px 0px 20px;
+}
+.form-type p{
+    text-align: justify;
+    line-height: var(--line-height-p);
+}
+.link-form{
+    justify-content: flex-end;
+    margin: 20px 0px;
+}
+.link-form a{
+    text-decoration: none;
+    padding: 10px 15px;
+    color: var(--paraxin-color);
+    border: 2px solid var(--paraxin-color);
+    border-radius: 10px;
+}
+.link-form a:hover{
+    color: var(--background-color-header);
+    background-color: var(--paraxin-color);
+}

@@ -1,0 +1,68 @@
+.body{
+    width: 90%;
+    margin: auto;
+    font-family: iran;
+    font-size: var(--main-font-size);
+    color: var(--text-color);
+    letter-spacing: -1px;
+}
+.section{
+    margin: 25px 0px;
+    padding: 20px 0px 40px;
+}
+.caption{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px 0px;
+    margin: 15px 0px;
+}
+.caption h1{
+    padding: 15px 10px;
+    font-size: 25px;
+    letter-spacing: -2px;
+}
+.caption::before{
+    content: "\227C";
+    color: var(--paraxin-color);
+    font-weight: 900;
+    font-size: 30px;
+}
+.caption::after{
+    content: "\227D";
+    color: var(--paraxin-color);
+    font-weight: 900;
+    font-size: 30px;
+}
+.section ul{
+    list-style-type: none;
+    display: flex;
+    flex-wrap: wrap;
+}
+.user-upinion{
+    padding: 15px 25px;
+    text-align: center;
+    background-color: pink;
+    width: 31.33%;
+    margin: 0 1% 20px;
+}
+.user-upinion p{
+    background-color: red;
+    text-align: justify;
+    margin: 15px 0px 10px;
+}
+.user-upinion .img{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: yellowgreen;
+    margin: 15px auto 10px;
+    /* padding: 10px; */
+    border-radius: 50%;
+    width: 180px;
+    height: 180px;
+    overflow: hidden;
+}
+.user-upinion .img img{
+    width: 100%;
+}
