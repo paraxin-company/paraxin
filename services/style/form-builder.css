@@ -1,35 +1,13 @@
 @import url("services-style.css");
-.form-type{
-    display: flex;
-    flex-direction: column;
-    flex-grow: 1;
-    text-align: center;
-    padding: 15px 25px;
-    margin: 0px 5px;
-    width: 30%;
-}
-.form-type img{
-    width: 60%;
-    align-self: center;
-    margin: 0px 0px 15px;
-}
-.form-type h3{
-    margin: 0px 0px 20px;
-}
-.form-type p{
-    text-align: justify;
-    line-height: var(--line-height-p);
-}
-.link-form{
-    justify-content: flex-end;
-    margin: 20px 0px;
-}
 .form-section{
     margin: 25px 0px;
     padding: 20px 0px 40px;
     display: flex;
     flex-wrap: wrap;
     align-items: center;
+}
+.form-section:nth-child(even){
+    flex-direction: row-reverse;
 }
 .form-desc{
     width: 40%;

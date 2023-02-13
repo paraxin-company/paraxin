@@ -1,1 +1,93 @@
 @import url("base.css");
+.text-content{
+    margin: 20px 0px 25px;
+}
+.text-content p{
+    text-align: center;
+}
+.text-content a{
+    color: blue;
+    text-decoration: none;
+    font-size: 16px;
+    margin: 0px 2px;
+}
+.text-content a:hover{
+    text-decoration: underline;
+}
+.section{
+    margin: 25px 0px;
+    padding: 20px 0px 40px;
+}
+.section ul{
+    list-style-type: none;
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+}
+.caption{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 20px 0px;
+    margin: 15px 0px;
+}
+.caption h1{
+    padding: 15px 10px;
+    font-size: 25px;
+    letter-spacing: -2px;
+}
+.form-type{
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+    text-align: center;
+    padding: 15px 25px;
+    margin: 5px 5px;
+    width: 30%;
+}
+.form-type img{
+    width: 60%;
+    align-self: center;
+    margin: 0px 0px 15px;
+}
+.form-type h3{
+    margin: 0px 0px 20px;
+}
+.form-type p{
+    text-align: justify;
+    line-height: var(--line-height-p);
+}
+.link-form{
+    justify-content: flex-end;
+    margin: 20px 0px;
+}
+.ability-paraxin{
+    margin: 20px 0px 50px;
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    align-items: center;
+}
+.ability-paraxin:nth-child(even){
+    flex-direction: row-reverse;
+}
+.ability-paraxin-desc{
+    width: 45%;
+}
+.ability-paraxin-desc h2{
+    margin: 15px 0px;
+}
+.ability-paraxin-desc p{
+    margin: 0 0 15px 0;
+    text-indent: var(--line-height-p);
+    text-align: justify;
+}
+.ability-paraxin-img{
+    display: flex;
+    justify-content: center;
+    width: 55%;
+}
+.ability-paraxin-img img{
+    width: 85%;
+}

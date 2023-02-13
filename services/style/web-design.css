@@ -12,7 +12,7 @@
 }
 .ability p{
     font-size: 12px;
-    line-height: 30px;
+    line-height: var(--line-height-p);
     color: var(--main-font-size);
 }
 .ability .des{
@@ -45,7 +45,7 @@
 }
 .level p{
     margin-bottom: 10px;
-    line-height: 25px;
+    line-height: var(--line-height-p);
 }
 .pro-web{
     display: flex;
@@ -62,23 +62,9 @@
     margin-bottom: 25px;
 }
 .pro-web-text p{
-    line-height: 27px;
+    line-height: var(--line-height-p);
     margin-bottom: 15px;
     text-align: justify;
-}
-.pro-web-text p:nth-last-of-type(1){
-    margin-bottom: 55px
-}
-.pro-web-text a{
-    text-decoration: none;
-    padding: 15px 20px;
-    border-radius: 10px;
-    color: var(--paraxin-color);
-    border: 2px solid var(--paraxin-color);
-}
-.pro-web-text a:hover{
-    color: var(--background-color-header);
-    background-color: var(--paraxin-color);
 }
 .pro-web-img{
     width: 60%;
@@ -135,22 +121,11 @@
     color: black;
     font-weight: 500;
 }
-.cv-item .cv-item-des a{
-    margin-top: 10px;
-    font-weight: 800;
-    text-decoration: none;
-    padding: 10px 25px;
-    border-radius: 8px;
-    border: 2px solid var(--paraxin-color);
-    color: var(--paraxin-color);
-    background-color: var(--background-color-header);
-}
 .cv-item .cv-item-des a i{
     padding-left: 5px;
 }
-.cv-item .cv-item-des a:hover{
-    color: var(--background-color-header);
-    background-color: var(--paraxin-color);
+.cv-item-link-padding{
+    padding: 5px 10px;
 }
 .more-cv{
     margin: 25px 0px;
@@ -158,37 +133,6 @@
     justify-content: center;
     align-items: baseline;
 }
-.more-cv a{
-    padding: 15px 30px;
-    border-radius: 10px;
-    text-decoration: none;
-    font-size: 18px;
-    font-weight: 400;
-    background-color: var(--background-color-header);
-    color: var(--paraxin-color);
-    border: 2px solid var(--paraxin-color);
-}
-.more-cv a:hover{
-    color: var(--background-color-header);
-    background-color: var(--paraxin-color);
-}
 .more-cv i{
     padding: 0px 5px 0px 10px;
-}
-.order{
-    padding: 0px 0px 15px;
-    margin: 0px 0px 15px;
-    display: flex;
-    justify-content: center;
-}
-.order a{
-    text-decoration: none;
-    padding: 15px 20px;
-    border-radius: 10px;
-    color: var(--paraxin-color);
-    border: 2px solid var(--paraxin-color);
-}
-.order a:hover{
-    color: var(--background-color-header);
-    background-color: var(--paraxin-color);
 }

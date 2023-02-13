@@ -28,9 +28,9 @@
     --header-font-size: 17px;
     --h-font-size: 20px;
 
-    --line-height-p: 25px;
+    --line-height-p: 27px;
 
-    --padding-a-field: 10px 15px;
+    --padding-a-field: 11px 20px;
     --border-radius-a-filed: 10px;
 }
 body{
@@ -39,6 +39,11 @@ body{
     font-size: var(--main-font-size);
     letter-spacing: -1px;
     color: var(--text-color);
+    line-height: var(--line-height-p);
+}
+.body{
+    width: 90%;
+    margin: auto;
 }
 .header{
     background-color: var(--background-color-header);
@@ -304,4 +309,9 @@ footer hr{
 .style-link-in-paraxin:hover{
     color: var(--background-color-header);
     background-color: var(--paraxin-color);
+}
+.a-flex-center{
+    display: flex;
+    margin-top: 20px;
+    justify-content: center;
 }
