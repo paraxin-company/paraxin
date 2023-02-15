@@ -7,7 +7,7 @@
 }
 :root{
     /* color in paraxin */
-    --paraxin-color: purple;
+    --paraxin-color: #800080;
     --menu-color: #7e7e7e;
     --menu-hover-color: black;
     --background-color-header: white;
@@ -55,7 +55,8 @@ body{
     width: 100%;
     left: 0;
     top: 0;
-    background: linear-gradient(to bottom,rgba(239, 248, 254, 0), rgb(212, 236, 254));
+    background-color: transparent;
+    /* background: linear-gradient(to bottom,rgba(239, 248, 254, 0), rgb(212, 236, 254)); */
 }
 .header .menu-container{
     display: flex;

@@ -1,6 +1,6 @@
 @import url("base.css");
 .text-content{
-    margin: 20px 0px 25px;
+    margin: 60px 0px;
 }
 .text-content p{
     text-align: center;
@@ -80,7 +80,7 @@
 }
 .ability-paraxin-desc p{
     margin: 0 0 15px 0;
-    text-indent: var(--line-height-p);
+    text-indent: calc(var(--line-height-p) - 10px);
     text-align: justify;
 }
 .ability-paraxin-img{
