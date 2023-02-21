@@ -1,6 +1,5 @@
 @import url("services-style.css");
 .ability{
-    width: 25%;
     padding: 15px 25px;
     text-align: center;
 }
@@ -52,11 +51,13 @@
     flex-wrap: wrap;
     align-items: center;
     justify-content: center;
+    flex-direction: column;
     margin: 30px 0px;
-    padding: 30px 0px
+    padding: 30px 15px
 }
 .pro-web-text{
-    width: 40%;
+    padding: 15px 0px;
+    width: 100%;
 }
 .pro-web-text h2{
     margin-bottom: 25px;
@@ -67,25 +68,23 @@
     text-align: justify;
 }
 .pro-web-img{
-    width: 60%;
+    width: 100%;
     padding-right: 20px;
     overflow: hidden;
+    padding: 15px 0px;
 }
 .pro-web-img img{
     width: 100%;
 }
 .cv-item{
     position: relative;
-    margin: 0px 5px;
-    width: 31.33%;
-    margin: 0 1% 20px;
     border: 1px solid gray;
-    border-radius: 20px;
+    border-radius: 10px;
     overflow: hidden;
     box-shadow: rgba(50, 50, 93, 0.25) 0px 13px 27px -5px, rgba(0, 0, 0, 0.3) 0px 8px 16px -8px;
 }
 .cv-item .cv-item-image{
-    height: 250px;
+    height: 300px;
 }
 .cv-item .cv-item-image img{
     width: 100%;
@@ -127,6 +126,11 @@
 .cv-item-link-padding{
     padding: 5px 10px;
 }
+.cv-responsive{
+    width: 90%;
+    margin: 10px auto;
+}
+
 .more-cv{
     margin: 25px 0px;
     display: flex;
@@ -135,4 +139,40 @@
 }
 .more-cv i{
     padding: 0px 5px 0px 10px;
+}
+.row{
+    width: 90%;
+    margin: auto;
+}
+@media screen and (min-width: 768px){
+    .row{
+        width: 50%;
+    }
+    .cv-responsive{
+        width: 48%;
+        margin: 10px 5px;
+    }
+}
+@media screen and (min-width: 992px){
+    .row{
+        width: 33.33%;
+    }
+    .cv-responsive{
+        width: 31.33%;
+        margin: 10px 5px;
+    }
+    .pro-web{
+        flex-direction: row;
+    }
+    .pro-web-text{
+        width: 45%;
+    }
+    .pro-web-img{
+        width: 55%;
+    }
+}
+@media screen and (min-width: 1200px){
+    .row{
+        width: 25%;
+    }
 }

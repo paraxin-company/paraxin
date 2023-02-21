@@ -1,6 +1,6 @@
 @import url("services-style.css");
 .form-section{
-    margin: 25px 0px;
+    margin: 50px 0px;
     padding: 20px 0px 40px;
     display: flex;
     flex-wrap: wrap;
@@ -10,10 +10,10 @@
     flex-direction: row-reverse;
 }
 .form-desc{
-    width: 40%;
+    width: 45%;
 }
 .form-desc h3{
-    margin: 15px 0px;
+    margin: 15px 19px;
 }
 .form-desc p{
     margin-bottom: 10px;
@@ -24,8 +24,19 @@
     line-height: var(--line-height-p);
 }
 .form-img-desc{
-    width: 60%;
+    width: 55%;
 }
 .form-img-desc img{
     width: 100%;
+}
+@media screen and (max-width: 992px){
+    .form-section{
+        flex-direction: column;
+    }
+    .form-desc{
+        width: 100%;
+    }
+    .form-img-desc{
+        width: 100%;
+    }
 }

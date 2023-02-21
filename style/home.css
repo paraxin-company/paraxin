@@ -1,6 +1,7 @@
 @import url("base.css");
 .text-content{
     margin: 60px 0px;
+    padding: 0px 15px;
 }
 .text-content p{
     text-align: center;
@@ -13,16 +14,6 @@
 }
 .text-content a:hover{
     text-decoration: underline;
-}
-.section{
-    margin: 25px 0px;
-    padding: 20px 0px 40px;
-}
-.section ul{
-    list-style-type: none;
-    display: flex;
-    flex-wrap: wrap;
-    flex-direction: row;
 }
 .caption{
     display: flex;
@@ -37,14 +28,19 @@
     font-size: 25px;
     letter-spacing: -2px;
 }
+.caption p{
+    text-align: center;
+}
 .form-type{
     display: flex;
     flex-direction: column;
-    flex-grow: 1;
     text-align: center;
-    padding: 15px 25px;
-    margin: 5px 5px;
-    width: 30%;
+    padding: 15px 40px;
+    width: 90%;
+    margin: 20px auto;
+}
+.form-type:hover{
+    box-shadow: rgba(17, 17, 26, 0.1) 0px 0px 16px;
 }
 .form-type img{
     width: 60%;
@@ -64,16 +60,17 @@
 }
 .ability-paraxin{
     margin: 20px 0px 50px;
+    padding: 0px 15px;
     display: flex;
     flex-wrap: wrap;
-    flex-direction: row;
+    flex-direction: column;
     align-items: center;
 }
 .ability-paraxin:nth-child(even){
     flex-direction: row-reverse;
 }
 .ability-paraxin-desc{
-    width: 45%;
+    width: 100%;
 }
 .ability-paraxin-desc h2{
     margin: 15px 0px;
@@ -86,8 +83,27 @@
 .ability-paraxin-img{
     display: flex;
     justify-content: center;
-    width: 55%;
+    width: 100%;
 }
 .ability-paraxin-img img{
     width: 85%;
+}
+@media screen and (min-width: 768px){
+    .form-type{
+        width: 49%;
+    }
+}
+@media screen and (min-width: 992px){
+    .ability-paraxin{
+        flex-direction: row;
+    }
+    .ability-paraxin-img{
+        width: 55%;
+    }
+    .ability-paraxin-desc{
+        width: 45%;
+    }
+    .form-type{
+        width: 31.33%;
+    }
 }

@@ -1,13 +1,4 @@
 @import url("../../style/base.css");
-.section{
-    margin: 25px 0px;
-    padding: 20px 0px 40px;
-}
-.section ul{
-    list-style-type: none;
-    display: flex;
-    flex-wrap: wrap;
-}
 .caption{
     display: flex;
     justify-content: center;
@@ -46,9 +37,8 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    background-color: yellowgreen;
+    background-color: rgb(74, 110, 3);
     margin: 15px auto 10px;
-    /* padding: 10px; */
     border-radius: 50%;
     width: 180px;
     height: 180px;

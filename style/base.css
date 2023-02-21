@@ -42,7 +42,7 @@ body{
     line-height: var(--line-height-p);
 }
 .body{
-    width: 90%;
+    max-width: 1300px;
     margin: auto;
 }
 .header{
@@ -219,7 +219,6 @@ footer{
 .related-links{
     padding: 25px 15px;
     display: flex;
-    max-width: 200px;
     flex-direction: column;
 }
 .related-links li a{
@@ -315,4 +314,30 @@ footer hr{
     display: flex;
     margin-top: 20px;
     justify-content: center;
+}
+.section{
+    margin: 25px 0px;
+    padding: 20px 0px 40px;
+}
+.section ul{
+    list-style-type: none;
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+    align-items: center;
+}
+@media screen and (min-width: 768px){
+    .section ul{
+        flex-direction: row;
+    }
+}
+@media screen and (min-width: 992px){
+    .section ul{
+        flex-direction: row;
+    }
+}
+@media screen and (min-width: 1200px){
+    .section ul{
+        flex-direction: row;
+    }
 }
