@@ -326,6 +326,17 @@ footer hr{
     flex-direction: column;
     align-items: center;
 }
+@media screen and (max-width: 600px){
+    .contact-section{
+        right: 10px;
+        bottom: 10px;
+    }
+}
+@media screen and (max-width: 1200px){
+    .first-view img{
+        height: auto;
+    }
+}
 @media screen and (min-width: 768px){
     .section ul{
         flex-direction: row;
