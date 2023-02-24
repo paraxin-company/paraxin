@@ -22,7 +22,6 @@
     --text-color: #2d3f4c;
     /* --font-color: #b3b3b3; */
 
-
     /* font size in paraxin */
     --main-font-size: 15px;
     --header-font-size: 17px;
@@ -30,7 +29,7 @@
 
     --line-height-p: 27px;
 
-    --padding-a-field: 11px 20px;
+    --padding-a-field: 9px 20px;
     --border-radius-a-filed: 10px;
 }
 body{
@@ -42,6 +41,7 @@ body{
     line-height: var(--line-height-p);
 }
 .body{
+    padding: 15px 10px;
     max-width: 1300px;
     margin: auto;
 }
@@ -326,7 +326,7 @@ footer hr{
     flex-direction: column;
     align-items: center;
 }
-@media screen and (max-width: 600px){
+@media screen and (max-width: 992px){
     .contact-section{
         right: 10px;
         bottom: 10px;

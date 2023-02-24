@@ -17,7 +17,6 @@
 }
 .form-desc p{
     margin-bottom: 10px;
-    padding: var(--padding-a-field);
     text-indent: var(--line-height-p);
     border-radius: var(--border-radius-a-filed);
     text-align: justify;

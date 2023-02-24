@@ -1,1 +1,124 @@
 @import url("base.css");
+.contact-form{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border: 2px solid lightgray;
+    padding: 25px 10px;
+    border-radius: var(--border-radius-a-filed);
+    margin: 40px 0px 50px;
+}
+.input-field{
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    align-items: center;
+}
+.input-field input{
+    border: 1px solid var(--menu-color);
+    margin: 5px 8px;
+    padding: 10px 10px;
+    width: 23.5%;
+    font-size: var(--main-font-size);
+    border-radius: var(--border-radius-a-filed);
+}
+.department{
+    margin: 5px 8px;
+    padding: 10px 10px;
+    width: 23.5%;
+    font-size: var(--main-fontize);
+    border-radius: var(--border-radius-a-filed);
+}
+.client-text{
+    font-size: var(--main-font-size);
+    display: block;
+    margin: 5px 150px;
+    padding: 15px;
+    width: 50%;
+}
+.licence{
+    width: 100%;
+    text-align: center;
+    margin: 15px 0px;
+}
+.send{
+    margin: 10px auto;
+    padding: 4px 20px;
+    text-align: center;
+    border: 2px solid var(--paraxin-color);
+    font-weight: 900;
+    font-size: 20px;
+    letter-spacing: 1px;
+    border-radius: var(--border-radius-a-filed);
+    background-color: white;
+    color: var(--paraxin-color);
+}
+.send:hover{
+    color: white;
+    background-color: var(--paraxin-color);
+}
+@media screen and (max-width: 568px){
+    .input-field input{
+        width: 90%;
+        margin: 5px auto;
+    }
+    .department{
+        width: 90%;
+        margin: 5px auto;
+    }
+    .client-text{
+        width: 90%;
+        margin: auto;
+    }
+}
+@media screen and (min-width: 568px){
+    .input-field input{
+        margin: 5px auto;
+        width: 48%;
+    }
+    .department{
+        margin: 5px auto;
+        width: 48%;
+    }
+    .client-text{
+        margin: auto;
+        width: 90%;
+    }
+}
+@media screen and (min-width: 768px){
+    .input-field input{
+        width: 49%;
+        margin: 5px auto;
+    }
+    .department{
+        width: 49%;
+        margin: 5px auto;
+    }
+    .client-text{
+        width: 70%;
+    }
+}
+@media screen and (min-width: 992px){
+    .input-field input{
+        width: 32.33%;
+    }
+    .department{
+        width: 32.33%;
+    }
+    .client-text{
+        width: 60%;
+    }
+}
+@media screen and (min-width: 1200px){
+    .input-field input{
+        width: 23.5%;
+        margin: 5px 8px;
+    }
+    .department{
+        width: 23.5%;
+        margin: 5px 8px;
+    }
+    .client-text{
+        width: 50%;
+    }
+}
