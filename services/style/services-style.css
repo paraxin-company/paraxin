@@ -23,27 +23,3 @@
     font-weight: 900;
     font-size: 30px;
 }
-.user-upinion{
-    padding: 15px 25px;
-    text-align: center;
-    width: 31.33%;
-    margin: 0 1% 20px;
-}
-.user-upinion p{
-    text-align: justify;
-    margin: 15px 0px 10px;
-}
-.user-upinion .img{
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background-color: rgb(74, 110, 3);
-    margin: 15px auto 10px;
-    border-radius: 50%;
-    width: 180px;
-    height: 180px;
-    overflow: hidden;
-}
-.user-upinion .img img{
-    width: 100%;
-}

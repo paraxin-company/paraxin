@@ -315,18 +315,23 @@ footer hr{
 }
 .desc{
     width: 100%;
-    margin: 0 0 15px 0;
+    margin: 0 0 13px 0;
     text-indent: calc(var(--line-height-p) - 10px);
     text-align: justify;
+}
+.header-title{
+    margin-bottom: 15px;
+    font-size: var(--h-font-size);
+    color: var(--github-color);
 }
 .row{
     display: flex;
     flex-wrap: wrap;
     align-items: center;
-    padding: 10px 0px 30px;
+    padding: 0px 0px 0px;
 }
 [class*="col-"]{
-    padding: 10px 30px;
+    padding: 5px 10px;
 }
 .img-responsive{
     width: 100%;

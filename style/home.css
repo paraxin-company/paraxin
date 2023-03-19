@@ -62,22 +62,3 @@
 .paraxin-ability h2{
     margin: 15px 0px;
 }
-/* @media screen and (min-width: 768px){
-    .form-type{
-        width: 49%;
-    }
-}
-@media screen and (min-width: 992px){
-    .ability-paraxin{
-        flex-direction: row;
-    }
-    .ability-paraxin-img{
-        width: 55%;
-    }
-    .ability-paraxin-desc{
-        width: 45%;
-    }
-    .form-type{
-        width: 31.33%;
-    }
-} */
