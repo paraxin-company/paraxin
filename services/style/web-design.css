@@ -112,35 +112,3 @@
 .more-cv i{
     padding: 0px 5px 0px 10px;
 }
-/* @media screen and (min-width: 768px){
-    .row{
-        width: 50%;
-    }
-    .cv-responsive{
-        width: 48%;
-        margin: 10px 5px;
-    }
-}
-@media screen and (min-width: 992px){
-    .row{
-        width: 33.33%;
-    }
-    .cv-responsive{
-        width: 31.33%;
-        margin: 10px 5px;
-    }
-    .pro-web{
-        flex-direction: row;
-    }
-    .pro-web-text{
-        width: 45%;
-    }
-    .pro-web-img{
-        width: 55%;
-    }
-}
-@media screen and (min-width: 1200px){
-    .row{
-        width: 25%;
-    }
-} */

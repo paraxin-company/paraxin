@@ -330,6 +330,9 @@ footer hr{
     align-items: center;
     padding: 0px 0px 0px;
 }
+.row:nth-child(even){
+    flex-direction: row-reverse;
+}
 [class*="col-"]{
     padding: 5px 10px;
 }
