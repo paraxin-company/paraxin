@@ -7,41 +7,59 @@
     <link rel="stylesheet" href="style/qr-code.css">
     <link rel="icon" href="../media/paraxin-icon.ico" type="image/icon">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css" integrity="sha512-SzlrxWUlpfuzQ+pcUCosxcglQRNAq/DZjVsC0lE40xsADsfeQoEypE+enwcOiGjk/bSuGGKHEyjSoQ1zVisanQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
 </head>
 <body>
-    <div class="header">
-        <div class="menu-container">
-            <div class="brand">
-                <a href="../home.html">paraxin</a>
+    <nav class="navbar navbar-expand-md bg-light fixed-top">
+        <div class="container-fluid">
+            <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
+                <div class="offcanvas-header">
+                    <h5 class="offcanvas-title" id="offcanvasNavbarLabel">Paraxin</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+                </div>
+                <div class="offcanvas-body">
+                    <ul class="navbar-nav justify-content-start flex-grow-1 pe-3">
+                        <li class="nav-item">
+                            <a class="nav-link" href="../home.html">خانه</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">مقالات</a>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                خدمات
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li><a class="dropdown-item" href="web-design.html">طراحی سایت</a></li>
+                                <li><a class="dropdown-item" href="form-builder.html">فرم ساز</a></li>
+                                <li><a class="dropdown-item active" href="#">Qr کد ساز</a></li>
+                            </ul>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                بیشتر
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li><a class="dropdown-item" href="../about.html">درباره ما</a></li>
+                                <li><a class="dropdown-item" href="../contact.html">تماس با ما</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+                <div class="offcanvas-footer">
+                    <p class="text-center">Paraxin &#169; | 1401-1403</p>
+                </div>
             </div>
-            <div class="menu">
-                <ul>
-                    <li><a href="../home.html">خانه</a></li>
-                    <li><a href="#">مرکز آموزش</a></li>
-                    <li><a class="drop-down" href="#">خدمات<i class="fa-solid fa-angle-down"></i></a>
-                        <ul class="second-menu">
-                            <li><a href="web-design.html">طراحی سایت</a></li>
-                            <li class="selected-menu"><a href="#">کیو آر کد ساز</a></li>
-                            <li><a href="form-builder.html">فرم ساز</a></li>
-                        </ul>
-                    </li>
-                    <li><a class="drop-down" href="#">بیشتر<i class="fa-solid fa-angle-down"></i></a>
-                        <ul class="second-menu">
-                            <li><a href="../about.html">درباره ما</a></li>
-                            <li><a href="../contact.html">تماس با ما</a></li>
-                        </ul>
-                    </li>
-                </ul>
-            </div>
+            <a class="navbar-brand" href="../home.html">paraxin image</a>
         </div>
-        <div class="user-side">
-            <a href="#">ثبت نام</a>
-            <a href="#" class="login">ورود</a>
-        </div>
-    </div>
+    </nav>
     <div class="contact-section">
         <a href="#" title="تماس با پشتیبان تیم پاراکسین"><i class="fa-solid fa-phone"></i></a>
     </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe" crossorigin="anonymous"></script>
 </body>
 <footer>
     <div class="content">
