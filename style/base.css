@@ -46,19 +46,53 @@ body{
     font-size: var(--main-font-size);
     margin: auto;
 }
-.first-view img{
-    position: relative;
-    z-index: 1;
-    width: 100%;
+.display-f-r{
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+}
+.display-f-c{
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+}
+.flex-justify-center{
+    justify-content: center;
+}
+.flex-align-center{
+    align-items: center;
+}
+.flex-justify-s-a{
+    justify-content: space-around;
+}
+.first-view{
+    padding: 35px 30px;
+}
+.bg-color-view{
+    background-color: #1f032b;
+}
+.img-header{
+    width: 90%;
     height: auto;
+    margin: 0 auto;
+}
+.change-white{
+    color: white;
+    width: 80%;
+    padding: 15px;
+    margin: 0 auto;
+    text-align: center;
 }
 .contact-section{
-    display: flex;
     position: fixed;
     right: 5px;
     bottom: 5px;
     border-radius: 20px;
-    align-items: center;
+    z-index: 999999;
+}
+.social-menu a{
+    color: var(--menu-color);
+    padding: 5px;
 }
 .contact-section a{
     text-decoration: none;
@@ -88,8 +122,8 @@ body{
     font-size: 20px;
     color: white;
     display: flex;
-    line-height: 48px;
     justify-content: center;
+    line-height: 48px;
     animation: rotate-icon .5s infinite ease-out alternate;
     -webkit-animation: rotate-icon .5s infinite ease-out alternate;
     -o-animation: rotate-icon .5s infinite ease-out alternate;
@@ -116,12 +150,6 @@ body{
 footer{
     padding: 0 30px;
     background-color: var(--background-color-header-seconde);
-}
-.content{
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
-    flex-wrap: wrap;
 }
 .related-links{
     padding: 25px 15px;
@@ -228,11 +256,6 @@ footer hr{
     text-indent: calc(var(--line-height-p) - 10px);
     text-align: justify;
 }
-.header-title{
-    margin-bottom: 15px;
-    font-size: var(--h-font-size);
-    color: var(--github-color);
-}
 .row{
     display: flex;
     flex-wrap: wrap;
@@ -263,12 +286,12 @@ footer hr{
         bottom: 10px;
     }
     .offcanvas-footer{display: none;}
+    .social-menu{display: none;}
 }
 @media screen and (min-width: 992px){
     .col-lg-3{width: 25%;}
     .col-lg-4{width: 33.33%;}
     .col-lg-6{width: 50%;}
-    .first-view img{height: 100vh;}
 }
 @media screen and (min-width: 1200px){
     .contact-section{

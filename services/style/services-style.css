@@ -23,3 +23,15 @@
     font-weight: 900;
     font-size: 30px;
 }
+.opinion-container{
+    margin: auto;
+    width: 80%;
+    text-align: center;
+}
+.profile{
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    overflow: hidden;
+    margin: 0 auto 15px;
+}
