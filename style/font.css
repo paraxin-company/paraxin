@@ -1,7 +1,8 @@
-@font-face {
-    font-family: 'iran';
-    src: url('../font/IranianSans-Bold.ttf') format('TrueType'),
-    url('../font/IranianSans-Bold.eot') format('OpenType'),
-    url('../font/IranianSans-Bold.woff2') format('woff2'),
-    url('../font/IranianSans-Bold.woff') format('woff');
+@import url('https://fonts.googleapis.com/css2?family=Lalezar&display=swap');
+@font-face{
+    font-family: 'vazir';
+    src: url('../font/vazir/Vazir.ttf') format('Truetype'),
+    url('../font/vazir/Vazir.eot') format('OpenType'),
+    url('../font/vazir/Vazir.woff') format('woff'),
+    url('../font/vazir/Vazir.woff') format('woff2');
 }

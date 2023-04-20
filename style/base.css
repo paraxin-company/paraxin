@@ -1,14 +1,8 @@
 @import url("font.css");
-*{
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    direction: rtl;
-}
 :root{
     /* color in paraxin */
     --paraxin-color: #800080;
-    --menu-color: #7e7e7e;
+    --menu-color: #efefef;
     --menu-hover-color: black;
     --background-color-header: white;
     --background-color-header-seconde: rgb(241 237 236);
@@ -20,31 +14,59 @@
     --linkedin-color: #0077B5;
     --call-color: #189D0E;
     --text-color: #2d3f4c;
+    --link-color: #747474;
     /* --font-color: #b3b3b3; */
-
     /* font size in paraxin */
-    --main-font-size: 20px;
+    --main-font-size: 16px;
     --header-font-size: 17px;
     --h-font-size: 20px;
-
     --line-height-p: 27px;
-
     --padding-a-field: 9px 20px;
     --border-radius-a-filed: 10px;
 }
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    direction: rtl;
+    font-family: 'vazir' sans-serif;
+    font-size: var(--main-font-size);
+}
 body{
     height: 100vh;
-    font-family: iran;
-    /* font-size: var(--main-font-size); */
     letter-spacing: -1px;
     color: var(--text-color);
     line-height: var(--line-height-p);
 }
+.tit{
+    font-family: 'Lalezar', cursive;
+    font-size: 2rem !important;
+}
 .body{
     padding: 15px 15px;
     max-width: 1300px;
-    font-size: var(--main-font-size);
+    line-height: 30px;
+    /* font-size: var(--main-font-size); */
     margin: auto;
+}
+.navbar-color{
+    background-color: var(--menu-color) !important;
+}
+.offcanvas{
+    background-color: var(--menu-color) !important;
+}
+.dropdown-menu{
+    background-color: var(--menu-color) !important;
+}
+.social-media-nav{
+    color: var(--link-color);
+    padding: 4px;
+}
+.social-media-nav i{
+    font-size: 20px;
+}
+.social-media-nav:hover{
+    color: var(--paraxin-color);
 }
 .imgs{
     width: 100px;
@@ -69,10 +91,10 @@ body{
     justify-content: space-around;
 }
 .first-view{
-    padding: 35px 30px;
+    padding: 25px 30px;
 }
 .bg-color-view{
-    background-color: #1f032b;
+    background: linear-gradient(to bottom, #864e00, #ffab23);
 }
 .img-header{
     width: 90%;
@@ -93,10 +115,6 @@ body{
     border-radius: 20px;
     z-index: 999999;
     visibility: hidden;
-}
-.social-menu a{
-    color: var(--menu-color);
-    padding: 7px;
 }
 .contact-section a{
     text-decoration: none;
@@ -163,7 +181,7 @@ footer{
 .related-links li a{
     text-decoration: none;
     line-height: 25px;
-    color:var(--menu-color);
+    color:var(--link-color);
 }
 .related-links li a:hover{
     text-decoration: underline;
@@ -175,7 +193,8 @@ footer{
     text-align: center;
 }
 .social-media h3{
-    padding: 15px 10px;
+    padding: 12px 10px;
+    font-size: 25px !important;
     color: var(--text-color);
 }
 .social-media ul{
@@ -192,26 +211,26 @@ footer{
 }
 .social-media li a{
     text-decoration: none;
-    color: var(--menu-color);
+    color: var(--link-color);
     font-size: 0;
 }
-.social-media .youtube:hover a{
+.youtube:hover a{
     font-size: 15px;
     color: var(--youtube-color)
 }
-.social-media .github:hover a{
+.github:hover a{
     font-size: 15px;
     color: var(--github-color);
 }
-.social-media .telegram:hover a{
+.telegram:hover a{
     font-size: 15px;
     color: var(--telegram-color)
 }
-.social-media .email:hover a{
+.email:hover a{
     font-size: 15px;
     color: var(--mail-color);
 }
-.social-media .linkedin:hover a{
+.linkedin:hover a{
     font-size: 15px;
     color: var(--linkedin-color);
 }
@@ -223,12 +242,12 @@ footer hr{
 }
 .copyright{
     text-align: center;
-    padding: 0px 0px 25px;
+    padding: 0px 0px 10px;
 }
 .copyright p{
     font-size: 13px;
-    line-height: 20px;
-    color: var(--text-color);
+    line-height: 10px;
+    color: rgb(108, 108, 108);
 }
 .paraxin-link{
     color: var(--paraxin-color);
