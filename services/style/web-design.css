@@ -17,6 +17,8 @@
     font-size: 19px;
 }
 .level{
+    padding: 0px 15px !important;
+    margin: 0px 0px 45px;
     text-align: center;
 }
 .level .img{

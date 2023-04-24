@@ -5,7 +5,6 @@
     --menu-color: #efefef;
     --menu-hover-color: black;
     --background-color-header: white;
-    --background-color-header-seconde: rgb(241 237 236);
     --youtube-color: #CD201F; 
     --github-color: #333333; 
     --telegram-color: #0088CC; 
@@ -171,12 +170,10 @@ body{
 }
 footer{
     padding: 0 30px;
-    background-color: var(--background-color-header-seconde);
+    background-color: var(--menu-color);
 }
-.related-links{
-    padding: 25px 15px;
-    display: flex;
-    flex-direction: column;
+.related-links li{
+    list-style-type: none;
 }
 .related-links li a{
     text-decoration: none;
@@ -187,6 +184,11 @@ footer{
     text-decoration: underline;
     color: var(--menu-hover-color);
     font-weight: 500;
+}
+.topic-link{
+    width: 75%;
+    padding: 10px 0px;
+    margin-top: 10px;
 }
 .social-media{
     padding: 20px 5px;
@@ -278,10 +280,11 @@ footer hr{
     text-align: justify;
 }
 .row{
-    display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-    padding: 15px 0px 5px;
+    display: flex !important;
+    flex-wrap: wrap !important;
+    align-items: center !important;
+    padding: 15px 0px 5px !important;
+    /* margin: 25px 0px !important; */
 }
 .row:nth-child(even){
     flex-direction: row-reverse;
@@ -300,8 +303,8 @@ footer hr{
 }
 .col-sm-12{width: 100%;}
 @media screen and (min-width: 768px){
-    .col-md-6{width: 50%;}
-    .col-md-12{width: 100%;}
+    /* .col-md-6{width: 50%;}
+    .col-md-12{width: 100%;} */
     .contact-section{
         right: 10px;
         bottom: 10px;
@@ -311,9 +314,9 @@ footer hr{
     .contact-section{visibility: visible;}
 }
 @media screen and (min-width: 992px){
-    .col-lg-3{width: 25%;}
+    /* .col-lg-3{width: 25%;}
     .col-lg-4{width: 33.33%;}
-    .col-lg-6{width: 50%;}
+    .col-lg-6{width: 50%;} */
 }
 @media screen and (min-width: 1200px){
     .contact-section{
