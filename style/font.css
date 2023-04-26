@@ -6,3 +6,11 @@
     url('../font/vazir/Vazir.woff') format('woff'),
     url('../font/vazir/Vazir.woff') format('woff2');
 }
+@font-face{
+    font-family: 'irsans';
+    src: url('../font/iran-sans/IranianSans.ttf') format('Truetype'),
+    url('../font/iran-sans/IranianSans.eot') format('OpenType'),
+    url('../font/iran-sans/IranianSans.woff') format('woff'),
+    url('../font/iran-sans/IranianSans.woff2') format('woff2');
+}
+/* "Negarsans Bold",-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Oxygen-Sans,Ubuntu,Cantarell,"Helvetica Neue",sans-serif; */

@@ -1,27 +1,4 @@
 @import url("../../style/base.css");
-.caption{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin: 100px 0px 0px;
-}
-.caption h1{
-    padding: 15px 10px 0px !important;
-    font-size: 25px;
-    letter-spacing: -2px;
-}
-.caption::before{
-    content: "\227C";
-    color: var(--paraxin-color);
-    font-weight: 900;
-    font-size: 30px;
-}
-.caption::after{
-    content: "\227D";
-    color: var(--paraxin-color);
-    font-weight: 900;
-    font-size: 30px;
-}
 .opinion-container{
     margin: auto;
     width: 80%;
@@ -33,4 +10,24 @@
     border-radius: 50%;
     overflow: hidden;
     margin: 0 auto 15px;
+}
+.first-view{
+    padding: 0px 30px;
+    margin-bottom: 15px;
+    background-image: url("../../media/wave.svg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: right;
+    height: 89vh;
+}
+.fv-text{
+    width: 80%;
+    padding: 15px;
+    margin: 0 auto;
+    text-align: center;
+}
+.img-header{
+    width: 90%;
+    height: auto;
+    margin: 0 auto;
 }
