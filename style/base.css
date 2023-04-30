@@ -6,7 +6,7 @@
     /* for download image use this code for color #B2299F */
     --menu-color: #efefef;
     --menu-hover-color: black;
-    --background-color-header: white;
+    --background-color-body: white;
     --youtube-color: #CD201F; 
     --github-color: #333333; 
     --telegram-color: #0088CC; 
@@ -27,7 +27,7 @@
     padding: 0;
     box-sizing: border-box;
     direction: rtl !important;
-    font-family: 'irsans' sans-serif;
+    font-family: 'vazir', cursive !important;
     font-size: var(--main-font-size);
 }
 body{
@@ -48,11 +48,10 @@ body{
 }
 .english-font{
     /* font-family: 'Orbitron', sans-serif; */
-    font-family: sans-serif;
+    font-family: serif;
     text-transform: uppercase;
     font-size: 13px !important;
     letter-spacing: 0px;
-    font-weight: bold;
     word-spacing: 2px;
     color: #5f727f;
 }
@@ -275,12 +274,13 @@ footer hr{
     text-decoration: none;
     padding: var(--padding-a-field);
     color: var(--paraxin-color);
+    background-color: var(--background-color-body);;
     border: 3px solid var(--paraxin-color);
     border-radius: var(--border-radius-a-filed);
     font-size: 18px;
 }
 .style-link-in-paraxin:hover{
-    color: var(--background-color-header);
+    color: var(--background-color-body);
     background-color: var(--paraxin-color);
 }
 .a-flex-center{
@@ -296,29 +296,32 @@ footer hr{
 }
 .row{
     display: flex !important;
-    flex-wrap: wrap !important;
-    align-items: center !important;
+    flex-direction: row;
     justify-content: center !important;
-    padding: 15px 0px 5px !important;
-    /* margin: 25px 0px !important; */
+    align-items: center !important;
 }
 .row:nth-child(even){
     flex-direction: row-reverse;
 }
 [class*="col-"]{
-    padding: 5px 10px;
+    padding: 6px 4px !important;
 }
-.img-responsive{
+.img-responsive , .img-container{
     width: 100%;
 }
-.img-container{
-    width: 100%;
+.img-header{
+    width: 90%;
+    height: auto;
+    margin: 0 auto;
 }
 .dropdown-item{
     text-align: right !important;
 }
 .dropdown-menu[data-bs-popper]{
     right: 10%;
+}
+.h-82vh{
+    height: 82vh;
 }
 @media screen and (max-width: 992px){
     .img-container{

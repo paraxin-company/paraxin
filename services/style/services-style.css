@@ -26,8 +26,7 @@
     margin: 0 auto;
     text-align: center;
 }
-.img-header{
-    width: 90%;
-    height: auto;
-    margin: 0 auto;
+.header-title{
+    font-size: 18px;
+    font-weight: bold;
 }
