@@ -13,8 +13,11 @@
     color: var(--paraxin-color);
     font-size: 25px;
 }
+#send-mail{
+    padding-top: 90px;
+}
 .form{
-    padding: 20px 40px;
+    padding: 20px 40px 15px;
     border: 3px solid var(--paraxin-color);
     border-top-left-radius: 15px;
     border-bottom-right-radius: 15px;

@@ -26,7 +26,21 @@
     margin: 0 auto;
     text-align: center;
 }
+.stands-for{
+    color: red;
+    font-weight: bold;
+}
 .header-title{
     font-size: 18px;
     font-weight: bold;
+}
+@media screen and (max-width: 768px){
+    .img-header{
+        width: 50%;
+    }    
+}
+@media screen and (max-width: 568px) {
+    .img-header{
+        width: 85%;
+    }
 }

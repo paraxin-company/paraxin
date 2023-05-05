@@ -10,7 +10,7 @@
     <link rel="stylesheet" href="style/about.css">
     <link rel="icon" href="media/paraxin icon.png" type="image/icon">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css" integrity="sha512-SzlrxWUlpfuzQ+pcUCosxcglQRNAq/DZjVsC0lE40xsADsfeQoEypE+enwcOiGjk/bSuGGKHEyjSoQ1zVisanQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous"><link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
 </head>
 <body>
     <nav class=" navbar navbar-color navbar-expand-md fixed-top">
@@ -47,9 +47,9 @@
                                     <i class="fas fa-paint-brush d-md-none px-1"></i>
                                     <span>طراحی سایت</span>
                                 </a></li>
-                                <li><a class="dropdown-item" href="services/form-builder.html">
+                                <li><a class="dropdown-item" href="services/fap-builder.html">
                                     <i class="fas fa-clone d-md-none px-1"></i>
-                                    <span>فرم ساز</span>
+                                    <span>فاپ ساز</span>
                                 </a></li>
                                 <li><a class="dropdown-item" href="services/Qr-code.html">
                                     <i class="fa-sharp fa-solid fa-qrcode d-md-none px-1"></i>
@@ -88,7 +88,7 @@
                     <p class="text-center">Paraxin &#169; | 1401-1403</p>
                 </div>
             </div>
-            <a class="navbar-brand" href="index.html"><img class="imgs" src="media/paraxin icon.png"></a>
+            <a class="navbar-brand" href="index.html"><img class="imgs" alt="برند پاراکسین" src="media/paraxin icon.png"></a>
         </div>
     </nav><div class="padding-69px"></div>
     <div class="contact-section display-f-r flex-justify-center">
@@ -123,26 +123,45 @@
                 <li><a href="#">آخرین مقاله</a></li>
                 <li><a href="#">آخرین مقاله</a></li>
                 <li><a href="#">آخرین مقاله</a></li>
-                <li><a href="#">آخرین مقاله</a></li>
             </ul>
         </div>
         <div class="related-links col-sm-12 col-md-4 col-xl-2">
             <h5 class="fw-bold topic-link border-b-paraxin">خدمات</h5>
             <ul>
-                <li><a href="#">طراحی سایت</a></li>
-                <li><a href="#">آزمون‌ساز آنلاین</a></li>
-                <li><a href="#">پرسشنامه‌ساز آنلاین</a></li>
-                <li><a href="#">فرم‌ساز آنلاین</a></li>
-                <li><a href="services/Qr-code.html">کیو آر کد ساز</a></li>
+                <li><a href="services/web-design.html">طراحی سایت</a></li>
+                <li><a href="services/fap-builder.html#fap-builder-link">فاپ‌ساز آنلاین</a></li>
+                <li><a href="services/Qr-code.html">کیو آر کد ساز</a></li><hr class="footer-hr">
+                <li><a href="sample.html">نمونه کارها</a></li>
             </ul>
         </div>
         <div class="related-links col-sm-12 col-md-4 col-xl-2">
             <h5 class="fw-bold topic-link border-b-paraxin">راه های ارتباطی<h5>
             <ul>
-                <li><a href="#">ربات تلگرام</a></li>
+                <li><button type="button" class="robot-button" data-bs-toggle="modal" data-bs-target="#robot">
+                    ربات تلگرام
+                  </button></li>
                 <li><a href="contact.html#send-mail">فرم تماس</a></li>
-                <li><a href="about.html">درباره پاراکسین</a></li>
             </ul>
+            <div class="modal fade" id="robot" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            <h1 class="modal-title fs-5" id="exampleModalLabel">ربات تلگرام پاراکسین</h1>
+                        </div>
+                        <div class="modal-body">
+                            <p>برای استفاده از ربات پاراکسین می توانید در تلگرام 
+                                paraxin-support
+                                رو سرچ کنید یا اینکه دکمه ی انتقال به ربات را بزنین تا شما را به آدرس تلگرامی انتقال دهد .
+                            </p>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-danger" data-bs-dismiss="modal">بی خیال</button>
+                            <a href="https://t.me/paraxin_support" target="_blank" class="btn btn-success">انتقال به ربات</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
         <div class="social-media col-sm-12 col-xl-6">
             <h3 class="tit">شبکه های اجتماعی پاراکسین</h3>

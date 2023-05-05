@@ -1,0 +1,14 @@
+@import url('base.css');
+.filter{
+    padding: 15px !important;
+}
+.filter-divider{
+    margin:0px 7px;
+}
+.row-reverse{
+    flex-direction: row-reverse;
+}
+form input{
+    margin-left: 9px;
+    margin-right: 0px;
+}

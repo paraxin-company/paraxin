@@ -37,7 +37,7 @@ body{
     line-height: var(--line-height-p);
 }
 .body{
-    padding: 15px 15px;
+    padding: 15px 25px;
     max-width: 1300px;
     line-height: 30px;
     margin: auto;
@@ -202,6 +202,19 @@ footer{
     padding: 10px 0px;
     margin-top: 10px;
 }
+.robot-button{
+    color: var(--link-color);
+    border: none;
+}
+.robot-button:hover{
+    text-decoration: underline;
+    color: black;
+}
+.footer-hr{
+    padding: 0px;
+    margin: 1px;
+    width: 78%;
+}
 .social-media{
     padding: 20px 5px;
     text-align: center;
@@ -310,7 +323,7 @@ footer hr{
     width: 100%;
 }
 .img-header{
-    width: 90%;
+    width: 85%;
     height: auto;
     margin: 0 auto;
 }

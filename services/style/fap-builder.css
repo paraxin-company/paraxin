@@ -1,7 +1,9 @@
 @import url("services-style.css");
+#fap-builder-link{
+    padding-top: 90px;
+}
 .form-type{
-    display: flex;
-    flex-direction: column;
+    padding: 5px 15px !important;
     text-align: center;
 }
 .form-type:hover{
