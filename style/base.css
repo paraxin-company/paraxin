@@ -118,7 +118,6 @@ body{
     border-radius: 20px;
     left: 0px;
     bottom: 0px;
-    z-index: 2;
     animation: reapid-scale 1s infinite ease-out;
     -webkit-animation: reapid-scale 1s infinite ease-out;
     -o-animation: reapid-scale 1s infinite ease-out;
@@ -336,6 +335,19 @@ footer hr{
 .h-82vh{
     height: 82vh;
 }
+
+
+
+
+
+i{
+    color: red !important;
+}
+
+
+
+
+
 @media screen and (max-width: 992px){
     .img-container{
         width: 60% !important;
