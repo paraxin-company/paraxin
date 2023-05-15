@@ -2,16 +2,15 @@
 .conect{
     position: relative;
 }
-.conect span i{
+.conect img{
     position: absolute;
     z-index: 5;
     right: 50%;
     bottom: 100%;
     transform: translate(50%, 50%);
-    padding: 0px 15px;
+    padding: 0px 10px;
     background-color: var(--background-color-body);
     color: var(--paraxin-color);
-    font-size: 25px;
 }
 #send-mail{
     padding-top: 90px;

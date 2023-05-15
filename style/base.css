@@ -47,7 +47,6 @@ body{
     font-size: 2rem !important;
 }
 .english-font{
-    /* font-family: 'Orbitron', sans-serif; */
     font-family: serif;
     text-transform: uppercase;
     font-size: 13px !important;
@@ -59,14 +58,7 @@ body{
     background-color: var(--menu-color) !important;
 }
 .social-media-nav{
-    color: var(--link-color);
     padding: 4px;
-}
-.social-media-nav i{
-    font-size: 20px;
-}
-.social-media-nav:hover{
-    color: var(--paraxin-color);
 }
 .imgs{
     width: 100px;
@@ -124,12 +116,13 @@ body{
     -moz-animation: reapid-scale 1s infinite ease-out;
     -ms-animation: reapid-scale 1s infinite ease-out;
 }
-.contact-section i{
-    font-size: 20px;
-    color: white;
+.contact-section span{
     display: flex;
     justify-content: center;
-    line-height: 48px;
+    margin-top: 12px;
+}
+.contact-section img{
+    width: 26px;
     animation: rotate-icon .5s infinite ease-out alternate;
     -webkit-animation: rotate-icon .5s infinite ease-out alternate;
     -o-animation: rotate-icon .5s infinite ease-out alternate;
@@ -223,42 +216,23 @@ footer{
     font-size: 25px !important;
     color: var(--text-color);
 }
-.social-media ul{
-    list-style-type: none;
-    padding-right: 27px;
-}
-.social-media li{
+.social-media a{
+    font-size: 13px;
+    padding: 7px 0px 20px;
     display: inline-block;
-}
-.social-media li i{
-    display: block;
-    font-size: 25px;
-    padding: 5px 19px 0px;
-}
-.social-media li a{
     text-decoration: none;
-    color: var(--link-color);
-    font-size: 0;
+    color: var(--menu-color);
 }
-.youtube:hover a{
-    font-size: 15px;
-    color: var(--youtube-color)
+.social-brand{
+    width: 25px;
 }
-.github:hover a{
-    font-size: 15px;
-    color: var(--github-color);
+.social-media a .social-name{
+    padding: 0px 5px 0px;
+    font-weight: bold;
+    display: block;
 }
-.telegram:hover a{
-    font-size: 15px;
-    color: var(--telegram-color)
-}
-.email:hover a{
-    font-size: 15px;
-    color: var(--mail-color);
-}
-.linkedin:hover a{
-    font-size: 15px;
-    color: var(--linkedin-color);
+.social-media a:hover .social-name{
+    color: black;
 }
 footer hr{
     width: 70%;
@@ -335,19 +309,6 @@ footer hr{
 .h-82vh{
     height: 82vh;
 }
-
-
-
-
-
-i{
-    color: red !important;
-}
-
-
-
-
-
 @media screen and (max-width: 992px){
     .img-container{
         width: 60% !important;
