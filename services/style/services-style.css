@@ -1,4 +1,25 @@
 @import url("../../style/base.css");
+.caption{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 100px 0px 0px;
+}
+.caption h1{
+    padding: 15px 10px 0px !important;
+    font-size: 25px;
+    letter-spacing: -2px;
+}
+.caption::before{
+    content: "\227C";
+    color: var(--paraxin-color);
+    font-size: 30px;
+}
+.caption::after{
+    content: "\227D";
+    color: var(--paraxin-color);
+    font-size: 30px;
+}
 .opinion-container{
     margin: auto;
     width: 80%;
@@ -18,7 +39,7 @@
     background-repeat: no-repeat;
     background-size: cover;
     background-position: right;
-    height: 89vh;
+    height: 90vh;
 }
 .fv-text{
     width: 80%;
@@ -27,7 +48,7 @@
     text-align: center;
 }
 .stands-for{
-    color: red;
+    color: var(--mail-color);
     font-weight: bold;
 }
 .header-title{

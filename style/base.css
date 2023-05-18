@@ -61,7 +61,10 @@ body{
     background-color: var(--menu-color) !important;
 }
 .social-media-nav{
-    padding: 4px;
+    padding: 5px;
+}
+.social-media-nav img{
+    width: 20px;
 }
 .simple-link{
     background-color: var(--background-color-body);
@@ -158,29 +161,6 @@ body{
         opacity: 0.3;
         transform: scale(1.4);
     }
-}
-.caption{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin: 100px 0px 0px;
-}
-.caption h1{
-    padding: 15px 10px 0px !important;
-    font-size: 25px;
-    letter-spacing: -2px;
-}
-.caption::before{
-    content: "\227C";
-    color: var(--paraxin-color);
-    font-weight: 900;
-    font-size: 30px;
-}
-.caption::after{
-    content: "\227D";
-    color: var(--paraxin-color);
-    font-weight: 900;
-    font-size: 30px;
 }
 footer{
     padding: 0 30px;
