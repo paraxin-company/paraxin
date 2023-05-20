@@ -15,8 +15,3 @@
 .text-content a:hover{
     text-decoration: underline;
 }
-.paraxin-ability{
-    display: flex;
-    flex-wrap: wrap;
-    flex-direction: column;
-}
