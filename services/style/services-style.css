@@ -32,15 +32,6 @@
     overflow: hidden;
     margin: 0 auto 15px;
 }
-.first-view{
-    padding: 0px 30px;
-    margin-bottom: 15px;
-    background-image: url("../../media/wave.svg");
-    background-repeat: no-repeat;
-    background-size: cover;
-    background-position: right;
-    height: 90vh;
-}
 .fv-text{
     width: 80%;
     padding: 15px;
@@ -54,6 +45,11 @@
 .header-title{
     font-size: 18px;
     font-weight: bold;
+}
+.img-header{
+    width: 85%;
+    height: auto;
+    margin: 0 auto;
 }
 @media screen and (max-width: 768px){
     .img-header{

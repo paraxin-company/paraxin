@@ -288,19 +288,20 @@ footer hr{
 .img-responsive , .img-container{
     width: 100%;
 }
-.img-header{
-    width: 85%;
-    height: auto;
-    margin: 0 auto;
-}
 .dropdown-item{
     text-align: right !important;
 }
 .dropdown-menu[data-bs-popper]{
     right: 10%;
 }
-.h-82vh{
-    height: 82vh;
+.first-view{
+    padding: 0px 30px;
+    margin-bottom: 15px;
+    background-image: url("../media/wave.svg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: right;
+    height: 90vh;
 }
 .accordion-button::after{
     margin: 0 auto 0 0 !important;
