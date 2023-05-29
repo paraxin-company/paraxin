@@ -243,7 +243,6 @@ footer hr{
     color: rgb(108, 108, 108);
 }
 .paraxin-link{
-    /* color: #b75f0c; */
     color: var(--paraxin-color);
     text-decoration: none;
     font-size: 13px;
@@ -272,6 +271,9 @@ footer hr{
     margin: 0 0 13px 0;
     text-indent: calc(var(--line-height-p) - 10px);
     text-align: justify;
+}
+.m-t-150-px{
+    margin-top: 150px !important;
 }
 .row{
     display: flex !important;
