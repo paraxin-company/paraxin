@@ -11,8 +11,12 @@
 .text-content p{
     text-align: center;
 }
-.paraxin-ability{
-    display: flex;
-    flex-wrap: wrap;
-    flex-direction: column;
+.text-content a{
+    color: blue;
+    text-decoration: none;
+    font-size: 16px;
+    margin: 0px 2px;
+}
+.text-content a:hover{
+    text-decoration: underline;
 }
