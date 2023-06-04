@@ -4,7 +4,7 @@
 }
 .conect img{
     position: absolute;
-    z-index: 5;
+    width: 50px;
     right: 50%;
     bottom: 100%;
     transform: translate(50%, 50%);

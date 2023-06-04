@@ -37,6 +37,7 @@ body{
     line-height: var(--line-height-p);
 }
 .body{
+    overflow: hidden;
     padding: 15px 25px;
     max-width: 1300px;
     line-height: 30px;
