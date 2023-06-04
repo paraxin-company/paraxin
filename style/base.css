@@ -12,7 +12,7 @@
     --telegram-color: #0088CC; 
     --mail-color: #DB3A1B;
     --linkedin-color: #0077B5;
-    --call-color: #fe2de2;
+    --call-color: #189D0E;
     --text-color: #2d3f4c;
     --link-color: #747474;
     --main-font-size: 16px;
@@ -135,11 +135,23 @@ body{
 .contact-section span{
     display: flex;
     justify-content: center;
-    margin-top: 8px;
+    margin-top: 12px;
 }
 .contact-section img{
-    z-index: 5;
-    width: 35px;
+    width: 26px;
+    animation: rotate-icon .5s infinite ease-out alternate;
+    -webkit-animation: rotate-icon .5s infinite ease-out alternate;
+    -o-animation: rotate-icon .5s infinite ease-out alternate;
+    -moz-animation: rotate-icon .5s infinite ease-out alternate;
+    -ms-animation: rotate-icon .5s infinite ease-out alternate;
+}
+@keyframes rotate-icon{
+    from{
+        transform: rotate(20deg);
+    }
+    to{
+        transform: rotate(-20deg);
+    }
 }
 @keyframes reapid-scale{
     from{
