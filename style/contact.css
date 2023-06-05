@@ -4,7 +4,7 @@
 }
 .conect img{
     position: absolute;
-    z-index: 5;
+    width: 50px;
     right: 50%;
     bottom: 100%;
     transform: translate(50%, 50%);
@@ -13,7 +13,7 @@
     color: var(--paraxin-color);
 }
 #send-mail{
-    padding-top: 90px;
+    padding-top: 92px;
 }
 .form{
     padding: 20px 40px 15px;
