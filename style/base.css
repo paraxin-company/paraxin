@@ -12,7 +12,7 @@
     --telegram-color: #0088CC; 
     --mail-color: #DB3A1B;
     --linkedin-color: #0077B5;
-    --call-color: #189D0E;
+    --call-color: #e635ce;
     --text-color: #2d3f4c;
     --link-color: #747474;
     --main-font-size: 16px;
@@ -37,10 +37,14 @@ body{
     line-height: var(--line-height-p);
 }
 .body{
+    overflow: hidden;
     padding: 15px 25px;
     max-width: 1300px;
     line-height: 30px;
     margin: auto;
+}
+.dropdown-menu[data-bs-popper]{
+    width: 250px;
 }
 .tit{
     font-family: 'Lalezar', cursive !important;
@@ -58,7 +62,20 @@ body{
     background-color: var(--menu-color) !important;
 }
 .social-media-nav{
-    padding: 4px;
+    padding: 5px;
+}
+.social-media-nav img{
+    width: 20px;
+}
+.simple-link{
+    background-color: var(--background-color-body);
+    color: blue !important;
+    text-decoration: none !important;
+    font-size: 16px !important;
+    margin: 0px 2px !important;
+}
+.simple-link:hover{
+    text-decoration: underline !important;
 }
 .imgs{
     width: 100px;
@@ -119,23 +136,11 @@ body{
 .contact-section span{
     display: flex;
     justify-content: center;
-    margin-top: 12px;
+    margin-top: 8px;
 }
 .contact-section img{
-    width: 26px;
-    animation: rotate-icon .5s infinite ease-out alternate;
-    -webkit-animation: rotate-icon .5s infinite ease-out alternate;
-    -o-animation: rotate-icon .5s infinite ease-out alternate;
-    -moz-animation: rotate-icon .5s infinite ease-out alternate;
-    -ms-animation: rotate-icon .5s infinite ease-out alternate;
-}
-@keyframes rotate-icon{
-    from{
-        transform: rotate(20deg);
-    }
-    to{
-        transform: rotate(-20deg);
-    }
+    z-index: 5;
+    width: 35px;
 }
 @keyframes reapid-scale{
     from{
@@ -145,29 +150,6 @@ body{
         opacity: 0.3;
         transform: scale(1.4);
     }
-}
-.caption{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin: 100px 0px 0px;
-}
-.caption h1{
-    padding: 15px 10px 0px !important;
-    font-size: 25px;
-    letter-spacing: -2px;
-}
-.caption::before{
-    content: "\227C";
-    color: var(--paraxin-color);
-    font-weight: 900;
-    font-size: 30px;
-}
-.caption::after{
-    content: "\227D";
-    color: var(--paraxin-color);
-    font-weight: 900;
-    font-size: 30px;
 }
 footer{
     padding: 0 30px;
@@ -250,7 +232,6 @@ footer hr{
     color: rgb(108, 108, 108);
 }
 .paraxin-link{
-    /* color: #b75f0c; */
     color: var(--paraxin-color);
     text-decoration: none;
     font-size: 13px;
@@ -280,6 +261,9 @@ footer hr{
     text-indent: calc(var(--line-height-p) - 10px);
     text-align: justify;
 }
+.m-t-150-px{
+    margin-top: 150px !important;
+}
 .row{
     display: flex !important;
     flex-direction: row;
@@ -295,19 +279,23 @@ footer hr{
 .img-responsive , .img-container{
     width: 100%;
 }
-.img-header{
-    width: 85%;
-    height: auto;
-    margin: 0 auto;
-}
 .dropdown-item{
     text-align: right !important;
 }
 .dropdown-menu[data-bs-popper]{
     right: 10%;
 }
-.h-82vh{
-    height: 82vh;
+.first-view{
+    padding: 0px 30px;
+    margin-bottom: 15px;
+    background-image: url("../media/wave.svg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: right;
+    height: 90vh;
+}
+.accordion-button::after{
+    margin: 0 auto 0 0 !important;
 }
 @media screen and (max-width: 992px){
     .img-container{
