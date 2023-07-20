@@ -67,6 +67,10 @@ body{
 .social-media-nav img{
     width: 20px;
 }
+.menu-divider{
+    border: 1px solid var(--paraxin-color);
+    padding: 0px !important;
+}
 .simple-link{
     background-color: var(--background-color-body);
     color: blue !important;
