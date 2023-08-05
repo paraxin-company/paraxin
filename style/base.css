@@ -51,10 +51,9 @@ body{
     font-size: 2rem !important;
 }
 .english-font{
-    font-family: 'Indie Flower', cursive !important;
-    letter-spacing: .2rem !important;
-    font-weight: bold !important;
-    font-size: 18px !important;
+    font-family: 'Edu SA Beginner', cursive;
+    letter-spacing: .03rem !important;
+    font-size: 15px !important;
 }
 .navbar-color , .offcanvas , .dropdown-menu{
     background-color: var(--menu-color) !important;
