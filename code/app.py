@@ -13,3 +13,7 @@ def about():
 @app.route('/contact')
 def contact():
     return render_template('contact.html')
+
+@app.route('/weblog')
+def weblog():
+    return render_template('weblog.html')

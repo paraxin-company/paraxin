@@ -34,7 +34,7 @@
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link {% block weblog %}{% endblock %}" href="weblog.html">
+                            <a class="nav-link {% block weblog %}{% endblock %}" href="{{ url_for('weblog') }}">
                                 <i class="bi bi-clipboard-data d-md-none px-1"></i>
                                 <span>وبلاگ</span>
                             </a>
@@ -121,10 +121,10 @@
         <div class="related-links col-sm-12 col-md-4 col-xl-2">
             <h5 class="fw-bold topic-link border-b-paraxin">آخرین مقالات</h5>
             <ul>
-                <li><a href="weblog.html">آخرین مقاله</a></li>
-                <li><a href="weblog.html">آخرین مقاله</a></li>
-                <li><a href="weblog.html">آخرین مقاله</a></li>
-                <li><a href="weblog.html">آخرین مقاله</a></li>
+                <li><a href="{{ url_for('weblog') }}">آخرین مقاله</a></li>
+                <li><a href="{{ url_for('weblog') }}">آخرین مقاله</a></li>
+                <li><a href="{{ url_for('weblog') }}">آخرین مقاله</a></li>
+                <li><a href="{{ url_for('weblog') }}">آخرین مقاله</a></li>
             </ul>
         </div>
         <div class="related-links col-sm-12 col-md-4 col-xl-2">
