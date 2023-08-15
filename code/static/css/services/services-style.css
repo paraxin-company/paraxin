@@ -1,4 +1,4 @@
-@import url("../../style/base.css");
+@import url("../base.css");
 .caption{
     display: flex;
     justify-content: center;
