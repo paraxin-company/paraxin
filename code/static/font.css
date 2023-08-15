@@ -3,8 +3,8 @@
 
 @font-face{
     font-family: 'vazir';
-    src: url('../font/vazir/Vazir.ttf') format('Truetype'),
-    url('../font/vazir/Vazir.eot') format('OpenType'),
-    url('../font/vazir/Vazir.woff') format('woff'),
-    url('../font/vazir/Vazir.woff') format('woff2');
+    src: url('font/vazir/Vazir.ttf') format('Truetype'),
+    url('font/vazir/Vazir.eot') format('OpenType'),
+    url('font/vazir/Vazir.woff') format('woff'),
+    url('font/vazir/Vazir.woff') format('woff2');
 }

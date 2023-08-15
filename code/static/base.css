@@ -252,6 +252,9 @@ footer hr{
     color: var(--background-color-body);
     background-color: var(--paraxin-color);
 }
+.robot-button{
+    background-color: transparent !important;
+}
 .a-flex-center{
     display: flex;
     margin-top: 20px;
