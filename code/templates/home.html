@@ -6,7 +6,7 @@
 {% block style %}static/home.css{% endblock %}
 {% block home %}active{% endblock %}
 
-{% block divBody %}
+{% block content %}
 <div class="row">
     <div class="col-sm-12 col-md-6 col-lg-7 my-3 animate__animated animate__zoomInDown wow" data-wow-delay=".4s">
         <h1 class="tit px-4 text-center">تجربه‌ایی تکرار نشدنی و خلق اتفاق های خوب با تیم پاراکسین</h1>
@@ -157,7 +157,7 @@
         ارائه کند. هدف ما ایجاد تجربه‌ی خوب و به یاد ماندنی برای شما عزیزان است .<br>
         در صورت بروز یا روبه‌رویی با مشکل می توانید از طریق این <a class="simple-link" href="contact.html#send-mail">لینک</a> با تیم پشتیبانی در ارتباط باشین 
         و اگر در مورد پاراکسین چیزی 
-        نمی دانید می توانید از طریق این <a class="simple-link" href="about.html">لینک</a> اطلاعات کسب کنید.
+        نمی دانید می توانید از طریق این <a class="simple-link" href="{{url_for('about')}}">لینک</a> اطلاعات کسب کنید.
     </p>
 </div>
 {% endblock %}

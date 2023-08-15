@@ -75,7 +75,7 @@
                                 <span>بیشتر</span>
                             </a>
                             <ul class="dropdown-menu">
-                                <li><a class="dropdown-item {% block about %}{% endblock %}" href="about.html">
+                                <li><a class="dropdown-item {% block about %}{% endblock %}" href="{{ url_for('about') }}">
                                     <i class="bi bi-file-earmark-person px-1"></i>
                                     <span>درباره ما</span>
                                 </a></li>
@@ -107,7 +107,7 @@
         <a href="contact.html#send-mail" title="تماس با پشتیبان تیم پاراکسین"><span><img src="static/media/svg file/conversation.svg"></span></a>
     </div>
     <div class="body">
-        {% block divBody %}{% endblock %}
+        {% block content %}{% endblock %}
     </div>
     {% block wave %}{% endblock %}
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe" crossorigin="anonymous"></script>
