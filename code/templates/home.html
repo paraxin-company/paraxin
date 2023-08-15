@@ -3,7 +3,7 @@
 {% block title %}paraxin | لیست خدمات پاراکسین{% endblock %}
 {% block keyword %}تیم پاراکسین, پاراکسین, paraxin, لیست خدمات پاراکسین, خدمات پاراکسین, صفحه‌ی اصلی پاراکسین{% endblock %}
 {% block desc %}لیستی از تمامی خدمات تیم آورده شده است، در صورت تمایل برای استفاده از خدمات می توانید از طریق لینکی که در زیر توضیحات هر بخش ...{% endblock %}
-{% block style %}static/home.css{% endblock %}
+{% block style %}static/css/home.css{% endblock %}
 {% block home %}active{% endblock %}
 
 {% block content %}
@@ -155,7 +155,7 @@
 <div class="text-content">
     <p>تیم پاراکسین تمام تلاش خود را می کند تا بتواند بهترین و حرفه ایی ترین امکانات و خدمات رو به کاربران خود
         ارائه کند. هدف ما ایجاد تجربه‌ی خوب و به یاد ماندنی برای شما عزیزان است .<br>
-        در صورت بروز یا روبه‌رویی با مشکل می توانید از طریق این <a class="simple-link" href="contact.html#send-mail">لینک</a> با تیم پشتیبانی در ارتباط باشین 
+        در صورت بروز یا روبه‌رویی با مشکل می توانید از طریق این <a class="simple-link" href="{{ url_for('contact') }}#send-mail">لینک</a> با تیم پشتیبانی در ارتباط باشین 
         و اگر در مورد پاراکسین چیزی 
         نمی دانید می توانید از طریق این <a class="simple-link" href="{{url_for('about')}}">لینک</a> اطلاعات کسب کنید.
     </p>
