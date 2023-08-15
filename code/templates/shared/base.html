@@ -40,7 +40,7 @@
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link {% block sample %}{% endblock %}" href="sample.html">
+                            <a class="nav-link {% block sample %}{% endblock %}" href="{{ url_for('work_sample') }}">
                                 <i class="bi bi-person-workspace d-md-none px-1"></i>
                                 <span>نمونه کار</span>
                             </a>
@@ -134,7 +134,7 @@
                 <li><a href="services/Logo-design.html">طراحی لوگو</a></li>
                 <li><a href="services/Fap-builder.html#fap-builder-link">فاپ‌ساز آنلاین</a></li>
                 <li><a href="services/Qr-code.html">کیو آر کد ساز</a></li><hr class="footer-hr">
-                <li><a href="sample.html">نمونه کارها</a></li>
+                <li><a href="{{ url_for('work_sample') }}">نمونه کارها</a></li>
             </ul>
         </div>
         <div class="related-links col-sm-12 col-md-4 col-xl-2">

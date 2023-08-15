@@ -17,3 +17,7 @@ def contact():
 @app.route('/weblog')
 def weblog():
     return render_template('weblog.html')
+
+@app.route('/sample')
+def work_sample():
+    return render_template('sample.html')
