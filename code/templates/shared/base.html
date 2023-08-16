@@ -62,7 +62,7 @@
                                     <i class="bi bi-ui-checks px-1"></i>
                                     <span>فاپ ساز</span>
                                 </a></li>
-                                <li><a class="dropdown-item {% block qrcode %}{% endblock %}" href="services/Qr-code.html">
+                                <li><a class="dropdown-item {% block qrcode %}{% endblock %}" href="{{url_for('qrcode')}}">
                                     <i class="bi bi-qr-code-scan px-1"></i>
                                     <span>کیو آر کد ساز</span>
                                 </a></li>
@@ -133,7 +133,7 @@
                 <li><a href="{{url_for('site_design')}}">طراحی سایت</a></li>
                 <li><a href="{{url_for('logo_design')}}">طراحی لوگو</a></li>
                 <li><a href="services/Fap-builder.html#fap-builder-link">فاپ‌ساز آنلاین</a></li>
-                <li><a href="services/Qr-code.html">کیو آر کد ساز</a></li><hr class="footer-hr">
+                <li><a href="{{url_for('qrcode')}}">کیو آر کد ساز</a></li><hr class="footer-hr">
                 <li><a href="{{url_for('work_sample')}}">نمونه کارها</a></li>
             </ul>
         </div>

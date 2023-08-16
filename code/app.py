@@ -30,6 +30,9 @@ def site_design():
 def logo_design():
     return render_template('logo-design.html')
 
+@app.route('/qr-code')
+def qrcode():
+    return render_template('qr-code.html')
 
 if __name__ == "__main__":
     app.run()
