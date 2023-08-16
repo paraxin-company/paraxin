@@ -26,6 +26,10 @@ def work_sample():
 def site_design():
     return render_template('web-design.html')
 
+@app.route('/logo-design')
+def logo_design():
+    return render_template('logo-design.html')
+
 
 if __name__ == "__main__":
     app.run()

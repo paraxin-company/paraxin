@@ -54,7 +54,7 @@
                                     <i class="bi bi-code-square px-1"></i>
                                     <span>طراحی سایت</span>
                                 </a></li>
-                                <li><a class="dropdown-item {% block logo %}{% endblock %}" href="services/Logo-design.html">
+                                <li><a class="dropdown-item {% block logo %}{% endblock %}" href="{{url_for('logo_design')}}">
                                     <i class="bi bi-brush px-1"></i>
                                     <span>طراحی لوگو</span>
                                 </a></li>
@@ -131,7 +131,7 @@
             <h5 class="fw-bold topic-link border-b-paraxin">خدمات</h5>
             <ul>
                 <li><a href="{{url_for('site_design')}}">طراحی سایت</a></li>
-                <li><a href="services/Logo-design.html">طراحی لوگو</a></li>
+                <li><a href="{{url_for('logo_design')}}">طراحی لوگو</a></li>
                 <li><a href="services/Fap-builder.html#fap-builder-link">فاپ‌ساز آنلاین</a></li>
                 <li><a href="services/Qr-code.html">کیو آر کد ساز</a></li><hr class="footer-hr">
                 <li><a href="{{url_for('work_sample')}}">نمونه کارها</a></li>
