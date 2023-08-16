@@ -58,7 +58,7 @@
                                     <i class="bi bi-brush px-1"></i>
                                     <span>طراحی لوگو</span>
                                 </a></li>
-                                <li><a class="dropdown-item {% block fap %}{% endblock %}" href="services/Fap-builder.html">
+                            <li><a class="dropdown-item {% block fap %}{% endblock %}" href="{{url_for('fap')}}">
                                     <i class="bi bi-ui-checks px-1"></i>
                                     <span>فاپ ساز</span>
                                 </a></li>
@@ -132,7 +132,7 @@
             <ul>
                 <li><a href="{{url_for('site_design')}}">طراحی سایت</a></li>
                 <li><a href="{{url_for('logo_design')}}">طراحی لوگو</a></li>
-                <li><a href="services/Fap-builder.html#fap-builder-link">فاپ‌ساز آنلاین</a></li>
+                <li><a href="{{url_for('fap')}}">فاپ‌ساز آنلاین</a></li>
                 <li><a href="{{url_for('qrcode')}}">کیو آر کد ساز</a></li><hr class="footer-hr">
                 <li><a href="{{url_for('work_sample')}}">نمونه کارها</a></li>
             </ul>

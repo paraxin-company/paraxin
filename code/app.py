@@ -34,5 +34,9 @@ def logo_design():
 def qrcode():
     return render_template('qr-code.html')
 
+@app.route('/fap-builder')
+def fap():
+    return render_template('fap-builder.html')
+
 if __name__ == "__main__":
     app.run()

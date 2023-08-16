@@ -1,352 +1,179 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>paraxin | فاپ‌ساز های آنلاین پاراکسین</title>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="keywords" content="فرم‌ساز آنلاین ,آزمون‌ساز آنلاین ,پرسشنامه‌ساز آنلاین, فاپ‌ساز پاراکسین, فاپ‌ساز, paraxin, تیم پاراکسین, پاراکسین, فاپ‌ساز چیست">
-    <meta name="description" content="ابزار فاپ‌ساز به شما کمک می کند تا بتوانید به صورت سریع و ساده، ابزارهایی را برای ارزیابی و اندازه گیری دانش و توانایی کاربران خود ایجاد کنید. همچنین، با استفاده از این ابزارها...">
-    <meta name="author" content="paraxin company">
-    <link rel="stylesheet" href="style/fap-builder.css">
-    <link rel="icon" href="../media/paraxin icon.png" type="image/icon">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
-</head>
-<body>
-    <nav class="navbar navbar-color navbar-expand-md fixed-top">
-        <div class="container-fluid">
-            <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
-                <div class="offcanvas-header">
-                    <h1 class="offcanvas-title english-font px-2" id="offcanvasNavbarLabel">Paraxin</h1>
-                    <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
-                </div>
-                <div class="offcanvas-body">
-                    <ul class="navbar-nav justify-content-start flex-grow-1 pe-3">
-                        <li class="nav-item">
-                            <a class="nav-link" aria-current="page" href="../.">
-                                <i class="bi bi-house d-md-none px-1"></i>
-                                <span>خانه</span>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="../weblog.html">
-                                <i class="bi bi-clipboard-data d-md-none px-1"></i>
-                                <span>وبلاگ</span>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="../sample.html">
-                                <i class="bi bi-person-workspace d-md-none px-1"></i>
-                                <span>نمونه کار</span>
-                            </a>
-                        </li>
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                <i class="bi bi-tools d-md-none px-1"></i>
-                                <span>خدمات</span>
-                            </a>
-                            <ul class="dropdown-menu">
-                                <li><a class="dropdown-item" href="Web-design.html">
-                                    <i class="bi bi-code-square px-1"></i>
-                                    <span>طراحی سایت</span>
-                                </a></li>
-                                <li><a class="dropdown-item" href="Logo-design.html">
-                                    <i class="bi bi-brush px-1"></i>
-                                    <span>طراحی لوگو</span>
-                                </a></li>
-                                <li><a class="dropdown-item active" href="Fap-builder.html">
-                                    <i class="bi bi-ui-checks px-1"></i>
-                                    <span>فاپ ساز</span>
-                                </a></li>
-                                <li><a class="dropdown-item" href="Qr-code.html">
-                                    <i class="bi bi-qr-code-scan px-1"></i>
-                                    <span>کیو آر کد ساز</span>
-                                </a></li>
-                            </ul>
-                        </li>
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                <i class="bi bi-ui-radios-grid d-md-none px-1"></i>
-                                <span>بیشتر</span>
-                            </a>
-                            <ul class="dropdown-menu">
-                                <li><a class="dropdown-item" href="../about.html">
-                                    <i class="bi bi-file-earmark-person px-1"></i>
-                                    <span>درباره ما</span>
-                                </a></li>
-                                <li><a class="dropdown-item" href="../contact.html">
-                                    <i class="bi bi-telephone px-1"></i>
-                                    <span>تماس با ما</span>
-                                </a></li>
-                            </ul>
-                        </li>
-                    </ul>
-                </div>
-                <div class="offcanvas-footer">
-                    <div class="social-menu text-center">
-                        <p>شبکه های اجتماعی</p>
-                        <a target="_blanck" class="social-media-nav" href="https://youtube.com/paraxin" title="حساب یوتیوب پاراکسین"><img src="../media/svg file/youtube.svg"></a>
-                        <a target="_blanck" class="social-media-nav" href="https://github.com/paraxin-company" title="حساب گیت پاراکسین"><img src="../media/svg file/github.svg"></a>
-                        <a target="_blanck" class="social-media-nav" href="https://t.me/paraxin_company" title="حساب تلگرام پاراکسین"><img src="../media/svg file/telegram.svg"></a>
-                        <a target="_blanck" class="social-media-nav" href="mailto:info@paraxin.ir" title="ایمیل پاراکسین"><img src="../media/svg file/envelope-fill.svg"></a>
-                        <a target="_blanck" class="social-media-nav" href="https://www.linkedin.com/in/paraxin-company/" title="حساب لینکدین پاراکسین"><img src="../media/svg file/linkedin.svg"></a>
+{% extends 'shared/base.html' %}
+
+{% block title %}paraxin | فاپ‌ساز های آنلاین پاراکسین{% endblock %}
+{% block keyword %}فرم‌ساز آنلاین ,آزمون‌ساز آنلاین ,پرسشنامه‌ساز آنلاین, فاپ‌ساز پاراکسین, فاپ‌ساز, paraxin, تیم پاراکسین, پاراکسین, فاپ‌ساز چیست{% endblock %}
+{% block desc %}ابزار فاپ‌ساز به شما کمک می کند تا بتوانید به صورت سریع و ساده، ابزارهایی را برای ارزیابی و اندازه گیری دانش و توانایی کاربران خود ایجاد کنید. همچنین، با استفاده از این ابزارها...{% endblock %}
+{% block style %}../static/css/services/fap-builder.css{% endblock %}
+{% block fap %}active{% endblock %}
+
+
+{% block first_view%}
+<div class="first-view display-f-r flex-align-center flex-justify-center">
+    <div class="display-f-r flex-align-center flex-justify-center col-sm-12 col-md-6 animate__animated animate__rubberBand wow">
+        <img src="../static/media/form builder/Spreadsheets.svg" alt="فاپ‌ساز در دنیای پاراکسین" class="img-header">
+    </div>
+    <div class="col-sm-12 col-md-6 display-f-r flex-align-center flex-justify-center">
+        <div class="fv-text animate__animated animate__zoomInDown wow" data-wow-delay=".4s">
+            <h1 class="tit">فاپ‌ساز</h1>
+            <p class="animate__animated animate__flash wow" data-wow-delay="1.5s"><span class="stands-for">فاپ</span> ساز ترکیبی از کلمات <span class="stands-for">ف</span>رم‌ساز ،<span class="stands-for">آ</span>زمون‌ساز ،<span class="stands-for">پ</span>رسشنامه‌ساز است.</p>
+        </div>
+    </div>
+</div>
+{% endblock %}
+{% block content%}
+<div id="fap-builder-link" class="m-t-150-px caption animate__animated animate__zoomInDown wow">
+    <h3 class="tit">فاپ‌ساز های پاراکسین</h3>
+</div>
+<div class="row">
+    <div class="form-type col-sm-12 col-md-6 col-lg-4 animate__animated animate__fadeInUpBig wow">
+        <img src="../static/media/form builder/Customer Survey.svg" alt="پرسشنامه‌ساز آنلاین پاراکسین">
+        <h3>پرسشنامه ساز</h3>
+        <p class="desc">
+            پرسشنامه ساز یک ابزار آنلاین است که به کاربران امکان می دهد تا پرسشنامه های مختلفی را 
+            برای جمع آوری اطلاعات از کاربران و مخاطبان خود ایجاد کنند. این ابزار امکان اضافه کردن سوالات 
+            مختلفی را به پرسشنامه فراهم می کند، از جمله سوالات باز، چند گزینه ای، انتخابی و غیره. 
+        </p>
+        <div class="link-form">
+            <a class="style-link-in-paraxin animate__animated animate__flash wow" data-wow-delay=".3s" href="#">رایگان امتحان کنید</a>
+        </div>
+    </div>
+    <div class="form-type col-sm-12 col-md-6 col-lg-4 animate__animated animate__fadeInUpBig wow" data-wow-delay=".3s">
+        <img src="../static/media/form builder/online test.svg" alt="آزمون‌ساز آنلاین پاراکسین">
+        <h3>آزمون‌ساز</h3>
+        <p class="desc">
+            آزمون ساز یک ابزار آنلاین است که به کاربران امکان می دهد تا آزمون های 
+            مختلفی را برای ارزیابی دانش و توانایی کاربران خود ایجاد کنند. با استفاده از این ابزار، کاربران 
+            می توانند سوالات مختلفی را به آزمون خود اضافه کرده و امتیازدهی و نمره دهی به صورت خودکار انجام شود. 
+        </p>
+        <div class="link-form">
+            <a class="style-link-in-paraxin animate__animated animate__flash wow" data-wow-delay=".6s" href="#">رایگان امتحان کنید</a>
+        </div>
+    </div>
+    <div class="form-type col-sm-12 col-md-6 col-lg-4 animate__animated animate__fadeInUpBig wow" data-wow-delay=".6s">
+        <img src="../static/media/form builder/form builder.svg" alt="فرم‌ساز آنلاین پاراکسین">
+        <h3>فرم ساز</h3>
+        <p class="desc">
+            فرم ساز یک ابزار است که به شما اجازه می دهد 
+            تا فرم های وب را بسازید و آنها را در وب سایت خود قرار دهید. با استفاده از فرم ساز، شما می توانید 
+            انواع فرم های مختلفی را بسازید، از جمله فرم های تماس، فرم های ثبت نام، فرم های نظر سنجی و غیره. 
+        </p>
+        <div class="link-form">
+            <a class="style-link-in-paraxin animate__animated animate__flash wow" data-wow-delay=".9s" href="#">رایگان امتحان کنید</a>
+        </div>
+    </div>
+</div>
+<div class="caption animate__animated animate__zoomInDown wow m-t-150-px">
+    <h1 class="tit" class="tit">فواید استفاده از فاپ‌ساز</h1>
+</div>
+<div class="row">
+    <div class="col-md-12 col-lg-6 animate__animated animate__backInLeft wow">
+        <ul class="px-3">
+            <p>استفاده از ابزارهای فرم‌ساز، پرسشنامه‌ساز و آزمون‌ساز دارای فواید زیادی است که شامل صرفه جویی در زمان و هزینه، دقت بالا، قابلیت تنظیم، پاسخگویی به نیازهای مختلف و نتایج آنی می باشد . </p>
+            <li><span class="stands-for">نتایج آنی : </span> با استفاده از این ابزارها، می توانید نتایج ارزیابی را به صورت آنی دریافت کنید و به راحتی بتوانید آنها را تحلیل کنید .</li>
+            <li><span class="stands-for">دقت بالا : </span> با استفاده از این ابزارها، می توانید از طریق پرسش های دقیق و معتبر، دانش و توانایی کاربران خود را ارزیابی کنید و نتایج دقیق و قابل اعتمادی دریافت کنید .</li>
+        </ul>
+    </div>
+    <div class="col-md-12 col-lg-6 animate__animated animate__backInRight wow">
+        <ul class="px-3">
+            <li><span class="stands-for">پاسخگویی به نیازهای مختلف : </span> این ابزارها برای مدارس، شرکت ها، سازمان ها و هر کسی که به دنبال ارزیابی و اندازه گیری دانش و توانایی کاربران خود است، مناسب هستند .</li>
+            <li><span class="stands-for">صرفه جویی در زمان و هزینه : </span> استفاده از ابزارهای فرم ساز، پرسشنامه ساز و آزمون ساز به شما کمک می کند تا بدون نیاز به طراحی و تولید دستی فرم ها و پرسشنامه ها، آنها را به سرعت و با کیفیت بالا تولید کنید .</li>
+            <li><span class="stands-for">قابلیت تنظیم : </span> با استفاده از این ابزارها، می توانید فرم ها، پرسشنامه ها و آزمون های خود را با توجه به نیازهای خود تنظیم کنید و به سادگی برای هر مورد، پاسخگویی کنید .</li>
+        </ul>
+    </div>
+    
+</div>
+<div class="row m-t-150-px">
+    <div class="col-md-12 col-lg-7 my-3 animate__animated animate__fadeInRight wow" data-wow-delay=".5s">
+        <div class="accordion" id="accordionPanelsStayOpenExample">
+            <div class="accordion-item">
+                <h2 class="accordion-header">
+                    <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseOne" aria-expanded="true" aria-controls="panelsStayOpen-collapseOne">
+                        <span class="text-danger">#1 </span> فرق بین پرسشنامه ساز و آزمون ساز چیه ؟
+                    </button>
+                </h2>
+                <div id="panelsStayOpen-collapseOne" class="accordion-collapse collapse show">
+                    <div class="accordion-body">
+                        پرسشنامه ساز و آزمون ساز هر دو ابزار آنلاین هستند که برای ایجاد ابزارهای ارزیابی و اندازه 
+                        گیری دانش و توانایی کاربران استفاده می شوند. اما فرق اصلی بین این دو ابزار 
+                        در نوع سوالاتی است که در هر یک از آنها قابل اضافه کردن هستند. در پرسشنامه 
+                        ساز، سوالات بیشتر به صورت چهار گزینه ای و با گزینه های پاسخ مشخص می باشند. 
+                        در حالی که در آزمون ساز، سوالات ممکن است به صورت چند گزینه ای، صحیح/غلط، 
+                        تشریحی و... باشند. همچنین، در آزمون ساز، قابلیت تعیین زمان محدود برای 
+                        پاسخ به سوالات وجود دارد که در پرسشنامه ساز معمولاً این قابلیت وجود ندارد.
                     </div>
-                    <hr class="my-3 menu-divider">
-                    <p class="text-center">Paraxin &#169; | 1402 (2023)</p>
                 </div>
             </div>
-            <a class="navbar-brand" href="../."><img class="imgs" alt="لوگوی پاراکسین" src="../media/paraxin icon.png"></a>
-        </div>
-    </nav><div class="padding-69px"></div>
-    <div class="first-view display-f-r flex-align-center flex-justify-center">
-        <div class="display-f-r flex-align-center flex-justify-center col-sm-12 col-md-6 animate__animated animate__rubberBand wow">
-            <img src="../media/form builder/Spreadsheets.svg" alt="فاپ‌ساز در دنیای پاراکسین" class="img-header">
-        </div>
-        <div class="col-sm-12 col-md-6 display-f-r flex-align-center flex-justify-center">
-            <div class="fv-text animate__animated animate__zoomInDown wow" data-wow-delay=".4s">
-                <h1 class="tit">فاپ‌ساز</h1>
-                <p class="animate__animated animate__flash wow" data-wow-delay="1.5s"><span class="stands-for">فاپ</span> ساز ترکیبی از کلمات <span class="stands-for">ف</span>رم‌ساز ،<span class="stands-for">آ</span>زمون‌ساز ،<span class="stands-for">پ</span>رسشنامه‌ساز است.</p>
+            <div class="accordion-item">
+                <h2 class="accordion-header">
+                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseTwo" aria-expanded="false" aria-controls="panelsStayOpen-collapseTwo">
+                        <span class="text-danger">#2 </span> چرا از فاپ‌ساز پاراکسین باید استفاده کنم ؟ 
+                    </button>
+                </h2>
+                <div id="panelsStayOpen-collapseTwo" class="accordion-collapse collapse">
+                    <div class="accordion-body">
+                        استفاده از ابزارهای فاپ‌ساز به شما کمک می کند تا بتوانید به صورت سریع و ساده، 
+                        ابزارهایی را برای ارزیابی و اندازه گیری دانش و توانایی کاربران خود ایجاد کنید. همچنین، 
+                        با استفاده از این ابزارها، می توانید نتایج ارزیابی را به صورت آنی دریافت کنید و به 
+                        راحتی بتوانید آنها را تحلیل کنید. این ابزارها برای مدارس، شرکت ها، سازمان ها و هر 
+                        کسی که به دنبال ارزیابی و اندازه گیری دانش و توانایی کاربران خود است، مناسب هستند.
+                    </div>
+                </div>
             </div>
         </div>
     </div>
-    <div class="contact-section display-f-r flex-justify-center">
-        <a href="../contact.html#send-mail" title="تماس با پشتیبان تیم پاراکسین"><span><img src="../media/svg file/conversation.svg"></span></a>
+    <div class="col-sm-12 col-lg-5 my-3 img-container animate__animated animate__rubberBand wow" data-wow-delay=".5s">
+        <img class="img-responsive" src="../static/media/FAQs.svg" alt="سوالات متداول درباره فاپ‌ساز پاراکسین">
     </div>
-    <div class="body">
-        <div id="fap-builder-link" class="m-t-150-px caption animate__animated animate__zoomInDown wow">
-            <h3 class="tit">فاپ‌ساز های پاراکسین</h3>
-        </div>
-        <div class="row">
-            <div class="form-type col-sm-12 col-md-6 col-lg-4 animate__animated animate__fadeInUpBig wow">
-                <img src="../media/form builder/Customer Survey.svg" alt="پرسشنامه‌ساز آنلاین پاراکسین">
-                <h3>پرسشنامه ساز</h3>
-                <p class="desc">
-                    پرسشنامه ساز یک ابزار آنلاین است که به کاربران امکان می دهد تا پرسشنامه های مختلفی را 
-                    برای جمع آوری اطلاعات از کاربران و مخاطبان خود ایجاد کنند. این ابزار امکان اضافه کردن سوالات 
-                    مختلفی را به پرسشنامه فراهم می کند، از جمله سوالات باز، چند گزینه ای، انتخابی و غیره. 
-                </p>
-                <div class="link-form">
-                    <a class="style-link-in-paraxin animate__animated animate__flash wow" data-wow-delay=".3s" href="#">رایگان امتحان کنید</a>
+</div>
+<div class="caption animate__animated animate__zoomInDown wow m-t-150-px">
+    <h1 class="tit text-center">نظر کاربران درباره‌ فاپ‌ساز پاراکسین</h1>
+</div>
+<div id="CustomerOpinion" class="carousel carousel-dark slide my-3" data-bs-ride="carousel">
+    <div class="carousel-inner">
+        <div class="carousel-item text-center display-f-r flex-align-center flex-justify-center active" data-bs-interval="2000">
+            <div class="opinion-container">
+                <div class="profile">
+                    <img class="img-responsive" src="../static/media/undraw_pic_profile.svg">
                 </div>
-            </div>
-            <div class="form-type col-sm-12 col-md-6 col-lg-4 animate__animated animate__fadeInUpBig wow" data-wow-delay=".3s">
-                <img src="../media/form builder/online test.svg" alt="آزمون‌ساز آنلاین پاراکسین">
-                <h3>آزمون‌ساز</h3>
-                <p class="desc">
-                    آزمون ساز یک ابزار آنلاین است که به کاربران امکان می دهد تا آزمون های 
-                    مختلفی را برای ارزیابی دانش و توانایی کاربران خود ایجاد کنند. با استفاده از این ابزار، کاربران 
-                    می توانند سوالات مختلفی را به آزمون خود اضافه کرده و امتیازدهی و نمره دهی به صورت خودکار انجام شود. 
-                </p>
-                <div class="link-form">
-                    <a class="style-link-in-paraxin animate__animated animate__flash wow" data-wow-delay=".6s" href="#">رایگان امتحان کنید</a>
-                </div>
-            </div>
-            <div class="form-type col-sm-12 col-md-6 col-lg-4 animate__animated animate__fadeInUpBig wow" data-wow-delay=".6s">
-                <img src="../media/form builder/form builder.svg" alt="فرم‌ساز آنلاین پاراکسین">
-                <h3>فرم ساز</h3>
-                <p class="desc">
-                    فرم ساز یک ابزار است که به شما اجازه می دهد 
-                    تا فرم های وب را بسازید و آنها را در وب سایت خود قرار دهید. با استفاده از فرم ساز، شما می توانید 
-                    انواع فرم های مختلفی را بسازید، از جمله فرم های تماس، فرم های ثبت نام، فرم های نظر سنجی و غیره. 
-                </p>
-                <div class="link-form">
-                    <a class="style-link-in-paraxin animate__animated animate__flash wow" data-wow-delay=".9s" href="#">رایگان امتحان کنید</a>
+                <div>
+                    <h3 class="header-title">company name</h3>
+                    <p class="desc">this is Lorem ipsum dolor sit amet consectetur adipisicing elit. Maiores placeat neque accusamus nihil minima earum, dolore blanditiis rerum eos ex nemo commodi, eligendi distinctio iusto harum ea facere corrupti expedita. description</p>
                 </div>
             </div>
         </div>
-        <div class="caption animate__animated animate__zoomInDown wow m-t-150-px">
-            <h1 class="tit" class="tit">فواید استفاده از فاپ‌ساز</h1>
-        </div>
-        <div class="row">
-            <div class="col-md-12 col-lg-6 animate__animated animate__backInLeft wow">
-                <ul class="px-3">
-                    <p>استفاده از ابزارهای فرم‌ساز، پرسشنامه‌ساز و آزمون‌ساز دارای فواید زیادی است که شامل صرفه جویی در زمان و هزینه، دقت بالا، قابلیت تنظیم، پاسخگویی به نیازهای مختلف و نتایج آنی می باشد . </p>
-                    <li><span class="stands-for">نتایج آنی : </span> با استفاده از این ابزارها، می توانید نتایج ارزیابی را به صورت آنی دریافت کنید و به راحتی بتوانید آنها را تحلیل کنید .</li>
-                    <li><span class="stands-for">دقت بالا : </span> با استفاده از این ابزارها، می توانید از طریق پرسش های دقیق و معتبر، دانش و توانایی کاربران خود را ارزیابی کنید و نتایج دقیق و قابل اعتمادی دریافت کنید .</li>
-                </ul>
-            </div>
-            <div class="col-md-12 col-lg-6 animate__animated animate__backInRight wow">
-                <ul class="px-3">
-                    <li><span class="stands-for">پاسخگویی به نیازهای مختلف : </span> این ابزارها برای مدارس، شرکت ها، سازمان ها و هر کسی که به دنبال ارزیابی و اندازه گیری دانش و توانایی کاربران خود است، مناسب هستند .</li>
-                    <li><span class="stands-for">صرفه جویی در زمان و هزینه : </span> استفاده از ابزارهای فرم ساز، پرسشنامه ساز و آزمون ساز به شما کمک می کند تا بدون نیاز به طراحی و تولید دستی فرم ها و پرسشنامه ها، آنها را به سرعت و با کیفیت بالا تولید کنید .</li>
-                    <li><span class="stands-for">قابلیت تنظیم : </span> با استفاده از این ابزارها، می توانید فرم ها، پرسشنامه ها و آزمون های خود را با توجه به نیازهای خود تنظیم کنید و به سادگی برای هر مورد، پاسخگویی کنید .</li>
-                </ul>
-            </div>
-            
-        </div>
-        <div class="row m-t-150-px">
-            <div class="col-md-12 col-lg-7 my-3 animate__animated animate__fadeInRight wow" data-wow-delay=".5s">
-                <div class="accordion" id="accordionPanelsStayOpenExample">
-                    <div class="accordion-item">
-                        <h2 class="accordion-header">
-                            <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseOne" aria-expanded="true" aria-controls="panelsStayOpen-collapseOne">
-                                <span class="text-danger">#1 </span> فرق بین پرسشنامه ساز و آزمون ساز چیه ؟
-                            </button>
-                        </h2>
-                        <div id="panelsStayOpen-collapseOne" class="accordion-collapse collapse show">
-                            <div class="accordion-body">
-                                پرسشنامه ساز و آزمون ساز هر دو ابزار آنلاین هستند که برای ایجاد ابزارهای ارزیابی و اندازه 
-                                گیری دانش و توانایی کاربران استفاده می شوند. اما فرق اصلی بین این دو ابزار 
-                                در نوع سوالاتی است که در هر یک از آنها قابل اضافه کردن هستند. در پرسشنامه 
-                                ساز، سوالات بیشتر به صورت چهار گزینه ای و با گزینه های پاسخ مشخص می باشند. 
-                                در حالی که در آزمون ساز، سوالات ممکن است به صورت چند گزینه ای، صحیح/غلط، 
-                                تشریحی و... باشند. همچنین، در آزمون ساز، قابلیت تعیین زمان محدود برای 
-                                پاسخ به سوالات وجود دارد که در پرسشنامه ساز معمولاً این قابلیت وجود ندارد.
-                            </div>
-                        </div>
-                    </div>
-                    <div class="accordion-item">
-                        <h2 class="accordion-header">
-                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseTwo" aria-expanded="false" aria-controls="panelsStayOpen-collapseTwo">
-                                <span class="text-danger">#2 </span> چرا از فاپ‌ساز پاراکسین باید استفاده کنم ؟ 
-                            </button>
-                        </h2>
-                        <div id="panelsStayOpen-collapseTwo" class="accordion-collapse collapse">
-                            <div class="accordion-body">
-                                استفاده از ابزارهای فاپ‌ساز به شما کمک می کند تا بتوانید به صورت سریع و ساده، 
-                                ابزارهایی را برای ارزیابی و اندازه گیری دانش و توانایی کاربران خود ایجاد کنید. همچنین، 
-                                با استفاده از این ابزارها، می توانید نتایج ارزیابی را به صورت آنی دریافت کنید و به 
-                                راحتی بتوانید آنها را تحلیل کنید. این ابزارها برای مدارس، شرکت ها، سازمان ها و هر 
-                                کسی که به دنبال ارزیابی و اندازه گیری دانش و توانایی کاربران خود است، مناسب هستند.
-                            </div>
-                        </div>
-                    </div>
+        <div class="carousel-item text-center display-f-r flex-align-center flex-justify-center" data-bs-interval="2000">
+            <div class="opinion-container">
+                <div class="profile">
+                    <img class="img-responsive" src="../static/media/undraw_pic_profile.svg">
                 </div>
-            </div>
-            <div class="col-sm-12 col-lg-5 my-3 img-container animate__animated animate__rubberBand wow" data-wow-delay=".5s">
-                <img class="img-responsive" src="../media/FAQs.svg" alt="سوالات متداول درباره فاپ‌ساز پاراکسین">
-            </div>
-        </div>
-        <div class="caption animate__animated animate__zoomInDown wow m-t-150-px">
-            <h1 class="tit text-center">نظر کاربران درباره‌ فاپ‌ساز پاراکسین</h1>
-        </div>
-        <div id="CustomerOpinion" class="carousel carousel-dark slide my-3" data-bs-ride="carousel">
-            <div class="carousel-inner">
-                <div class="carousel-item text-center display-f-r flex-align-center flex-justify-center active" data-bs-interval="2000">
-                    <div class="opinion-container">
-                        <div class="profile">
-                            <img class="img-responsive" src="../media/undraw_pic_profile.svg">
-                        </div>
-                        <div>
-                            <h3 class="header-title">company name</h3>
-                            <p class="desc">this is Lorem ipsum dolor sit amet consectetur adipisicing elit. Maiores placeat neque accusamus nihil minima earum, dolore blanditiis rerum eos ex nemo commodi, eligendi distinctio iusto harum ea facere corrupti expedita. description</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="carousel-item text-center display-f-r flex-align-center flex-justify-center" data-bs-interval="2000">
-                    <div class="opinion-container">
-                        <div class="profile">
-                            <img class="img-responsive" src="../media/undraw_pic_profile.svg">
-                        </div>
-                        <div>
-                            <h3 class="header-title">company name</h3>
-                            <p class="desc">this is Lorem ipsum dolor sit amet consectetur adipisicing elit. Maiores placeat neque accusamus nihil minima earum, dolore blanditiis rerum eos ex nemo commodi, eligendi distinctio iusto harum ea facere corrupti expedita. description</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="carousel-item text-center display-f-r flex-align-center flex-justify-center" data-bs-interval="2000">
-                    <div class="opinion-container">
-                        <div class="profile">
-                            <img class="img-responsive" src="../media/undraw_pic_profile.svg">
-                        </div>
-                        <div>
-                            <h3 class="header-title">company name</h3>
-                            <p class="desc">this is Lorem ipsum dolor sit amet consectetur adipisicing elit. Maiores placeat neque accusamus nihil minima earum, dolore blanditiis rerum eos ex nemo commodi, eligendi distinctio iusto harum ea facere corrupti expedita. description</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <button class="carousel-control-prev" type="button" data-bs-target="#CustomerOpinion" data-bs-slide="prev">
-                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                <span class="visually-hidden">Previous</span>
-            </button>
-            <button class="carousel-control-next" type="button" data-bs-target="#CustomerOpinion" data-bs-slide="next">
-                <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                <span class="visually-hidden">Next</span>
-            </button>
-        </div>
-        <div class="a-flex-center my-5">
-            <a class="style-link-in-paraxin animate__animated animate__wobble wow" data-wow-delay=".5s" href="#fap-builder-link">همین الان امتحان کنید</a>
-        </div>
-    </div>
-    <div class="pt-4">
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320">
-            <path fill="#efefef" fill-opacity="1" d="M0,0L30,10.7C60,21,120,43,180,53.3C240,64,300,64,360,85.3C420,107,480,149,540,176C600,203,660,213,720,192C780,171,840,117,900,106.7C960,96,1020,128,1080,154.7C1140,181,1200,203,1260,208C1320,213,1380,203,1410,197.3L1440,192L1440,320L1410,320C1380,320,1320,320,1260,320C1200,320,1140,320,1080,320C1020,320,960,320,900,320C840,320,780,320,720,320C660,320,600,320,540,320C480,320,420,320,360,320C300,320,240,320,180,320C120,320,60,320,30,320L0,320Z"></path>
-        </svg>
-    </div>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe" crossorigin="anonymous"></script>
-    <script src="../js/wow.js"></script>
-    <script>
-        new WOW() .init();
-    </script>
-</body>
-<footer>
-    <div class="row">
-        <div class="related-links col-sm-12 col-md-4 col-xl-2">
-            <h5 class="fw-bold topic-link border-b-paraxin">آخرین مقالات</h5>
-            <ul>
-                <li><a href="../weblog.html">آخرین مقاله</a></li>
-                <li><a href="../weblog.html">آخرین مقاله</a></li>
-                <li><a href="../weblog.html">آخرین مقاله</a></li>
-                <li><a href="../weblog.html">آخرین مقاله</a></li>
-            </ul>
-        </div>
-        <div class="related-links col-sm-12 col-md-4 col-xl-2">
-            <h5 class="fw-bold topic-link border-b-paraxin">خدمات</h5>
-            <ul>
-                <li><a href="Web-design.html">طراحی سایت</a></li>
-                <li><a href="Logo-design.html">طراحی لوگو</a></li>
-                <li><a href="#fap-builder-link">فاپ‌ساز آنلاین</a></li>
-                <li><a href="Qr-code.html">کیو آر کد ساز</a></li><hr class="footer-hr">
-                <li><a href="../sample.html">نمونه کارها</a></li>
-            </ul>
-        </div>
-        <div class="related-links col-sm-12 col-md-4 col-xl-2">
-            <h5 class="fw-bold topic-link border-b-paraxin">راه های ارتباطی<h5>
-            <ul>
-                <li><button type="button" class="robot-button" data-bs-toggle="modal" data-bs-target="#robot">
-                    ربات تلگرام
-                  </button></li>
-                <li><a href="../contact.html#send-mail">فرم تماس</a></li>
-            </ul>
-            <div class="modal fade" id="robot" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                <div class="modal-dialog">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                            <h1 class="modal-title fs-5" id="exampleModalLabel">ربات تلگرام پاراکسین</h1>
-                        </div>
-                        <div class="modal-body">
-                            <p>برای استفاده از ربات پاراکسین می توانید در تلگرام 
-                                paraxin_bot
-                                رو سرچ کنید تا با ربات ارتباط برقرار کنید یا اینکه دکمه ی انتقال به ربات را بزنین تا شما را به آدرس تلگرامی انتقال دهد .
-                            </p>
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-danger" data-bs-dismiss="modal">بی خیال</button>
-                            <a href="https://t.me/paraxin_bot" target="_blank" class="btn btn-success">انتقال به ربات</a>
-                        </div>
-                    </div>
+                <div>
+                    <h3 class="header-title">company name</h3>
+                    <p class="desc">this is Lorem ipsum dolor sit amet consectetur adipisicing elit. Maiores placeat neque accusamus nihil minima earum, dolore blanditiis rerum eos ex nemo commodi, eligendi distinctio iusto harum ea facere corrupti expedita. description</p>
                 </div>
             </div>
         </div>
-        <div class="social-media col-sm-12 col-xl-6">
-            <h5 class="tit">شبکه های اجتماعی پاراکسین</h5>
-                <a target="_blanck" href="https://youtube.com/paraxin" title="حساب یوتیوب پاراکسین"><img class="social-brand" src="../media/svg file/youtube.svg"><span class="social-name">Youtube</span></a>
-                <a target="_blanck" href="https://github.com/paraxin-company" title="حساب گیت پاراکسین"><img class="social-brand" src="../media/svg file/github.svg"><span class="social-name">Github</span></a>
-                <a target="_blanck" href="https://t.me/paraxin_company" title="حساب تلگرام پاراکسین"><img class="social-brand" src="../media/svg file/telegram.svg"><span class="social-name">Telegram</span></a>
-                <a target="_blanck" href="mailto:info@paraxin.ir" title="ایمیل پاراکسین"><img class="social-brand" src="../media/svg file/envelope-fill.svg"><span class="social-name">Email</span></a>
-                <a target="_blanck" href="https://www.linkedin.com/in/paraxin-company/" title="حساب لینکدین پاراکسین"><img class="social-brand" src="../media/svg file/linkedin.svg"><span class="social-name">Linkedin</span></a>
+        <div class="carousel-item text-center display-f-r flex-align-center flex-justify-center" data-bs-interval="2000">
+            <div class="opinion-container">
+                <div class="profile">
+                    <img class="img-responsive" src="../static/media/undraw_pic_profile.svg">
+                </div>
+                <div>
+                    <h3 class="header-title">company name</h3>
+                    <p class="desc">this is Lorem ipsum dolor sit amet consectetur adipisicing elit. Maiores placeat neque accusamus nihil minima earum, dolore blanditiis rerum eos ex nemo commodi, eligendi distinctio iusto harum ea facere corrupti expedita. description</p>
+                </div>
             </div>
         </div>
     </div>
-    <hr><div class="copyright">
-        <p>تمامی حقوق برای تیم <a href="../." class="paraxin-link">پاراکسین</a> محفوظ می باشد.</p>
-        <p>1402 (2023) &#169;</p>
-    </div>
-</footer>
-</html>
+    <button class="carousel-control-prev" type="button" data-bs-target="#CustomerOpinion" data-bs-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Previous</span>
+    </button>
+    <button class="carousel-control-next" type="button" data-bs-target="#CustomerOpinion" data-bs-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Next</span>
+    </button>
+</div>
+<div class="a-flex-center my-5">
+    <a class="style-link-in-paraxin animate__animated animate__wobble wow" data-wow-delay=".5s" href="#fap-builder-link">همین الان امتحان کنید</a>
+</div>
+{% endblock %}
