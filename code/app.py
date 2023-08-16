@@ -21,3 +21,11 @@ def weblog():
 @app.route('/sample')
 def work_sample():
     return render_template('sample.html')
+
+@app.route('/web-design')
+def site_design():
+    return render_template('web-design.html')
+
+
+if __name__ == "__main__":
+    app.run()
