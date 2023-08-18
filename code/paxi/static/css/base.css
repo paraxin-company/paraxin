@@ -153,6 +153,9 @@ body{
         transform: scale(1.4);
     }
 }
+.t-center{
+    text-align: center !important;
+}
 footer{
     padding: 0 30px;
     background-color: var(--menu-color);

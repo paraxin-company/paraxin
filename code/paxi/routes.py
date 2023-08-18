@@ -1,5 +1,5 @@
 from paxi import app
-from flask import render_template, url_for
+from flask import render_template, url_for, redirect, abort
 
 @app.route('/')
 def home():
@@ -37,5 +37,10 @@ def qrcode():
 def fap():
     return render_template('fap-builder.html')
 
-if __name__ == "__main__":
-    app.run()
+@app.errorhandler(404)
+def page_not_found(error):
+    return render_template('404.html')
+
+@app.route('/<inputs>')
+def other(inputs):
+    abort(404)
