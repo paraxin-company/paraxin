@@ -14,28 +14,12 @@
         <div class="filter col-sm-12 col-lg-3 mt-2">
             <h2 class="tit text-center">فیلتر</h2>
             <form>
-                <div class="row">
-                    <div class="col-sm-6 col-lg-12 my-1">
-                        <label for="">موقعیت پروژه</label><br>
-                        <label for="iran">ایران</label>
-                        <input type="radio" id="iran" name="location">
-                        <label for="international">بین و المللی</label>
-                        <input type="radio" id="international" name="location">
-                        <hr class="filter-divider">
-                    </div>
-                    <div class="col-sm-6 col-lg-12 my-1">
-                        <label>نوع پروژه</label><br>
-                        <label for="site">سایت </label>
-                        <input type="checkbox" id="site">
-                        <label for="seo">seo (سئو)</label>
-                        <input type="checkbox" id="seo">
-                        <label for="logo">طراحی لوگو</label>
-                        <input type="checkbox" id="logo">
-                        <label for="all">همه</label>
-                        <input type="checkbox" id="all">
-                        <hr class="filter-divider">
-                    </div>
-                </div>
+                <label>دسته بندی پروژه ها</label><br>
+                {% for item in category%}
+                <label for="{{item.text}}">{{item.text}}</label>
+                <input type="checkbox" id="{{item.text}}"><br>
+                {% endfor %}
+                <hr class="filter-divider">
                 <div class="text-center">
                     <input class="style-link-in-paraxin mt-2" type="submit" value="اعمال فیلتر">
                 </div>
@@ -43,7 +27,42 @@
         </div>
         <div style="padding:0px 12px !important;" class="col-sm-12 col-lg-9 mt-2">
             <div class="row">
-                <div class="col-xs-12 col-sm-10 col-md-6 m-auto">هنوز پروژه ایی به ثبت نرسیده است</div>
+                {% for item in sample %}
+                <div class="col-xs-12 col-sm-6 col-md-4">
+                    <div class="card">
+                        <a class="links" href="{{url_for('detail', id=item.id)}}">
+                            <img src="{{item.baner}}" class="card-img-top">
+                            <div class="card-body">
+                                <h5 class="card-title">{{item.title}}</h5>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+                {% endfor %}
+                {% for item in sample %}
+                <div class="col-xs-12 col-sm-6 col-md-4">
+                    <div class="card">
+                        <a class="links" href="{{url_for('detail', id=item.id)}}">
+                            <img src="{{item.baner}}" class="card-img-top">
+                            <div class="card-body">
+                                <h5 class="card-title">{{item.title}}</h5>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+                {% endfor %}
+                {% for item in sample %}
+                <div class="col-xs-12 col-sm-6 col-md-4">
+                    <div class="card">
+                        <a class="links" href="{{url_for('detail', id=item.id)}}">
+                            <img src="{{item.baner}}" class="card-img-top">
+                            <div class="card-body">
+                                <h5 class="card-title">{{item.title}}</h5>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+                {% endfor %}
             </div>
         </div>
     </div>

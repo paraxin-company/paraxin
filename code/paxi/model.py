@@ -14,27 +14,28 @@ class User(db.Model):
     def __repr__(self):
         return f"{self.id}) {self.fullname}"
 
+class Category(db.Model):
+    # TODO: work sample category table
+    id = db.Column(db.Integer, primary_key=True)
+    text = db.Column(db.String(70), nullable=False, unique=True)
+    samples = db.relationship('Sample', backref='cat', lazy=True)
+
+    def __repr__(self):
+        return f"{self.id}) {self.text}"
+
 class Sample(db.Model):
     # TODO: work sample table
     id = db.Column(db.Integer, primary_key=True)
     title = db.Column(db.String(90), nullable=False)
     content = db.Column(db.Text)
+    baner = db.Column(db.String(50), nullable=False)
     album = db.Column(db.Text)
     date = db.Column(db.DateTime, default=datetime.datetime.now)
     keyword = db.Column(db.String(120), nullable=False)
-    groups = db.relationship('Category', backref='group', lazy=True)
+    category_id = db.Column(db.Integer, db.ForeignKey('category.id'), nullable=False)
 
     def __repr__(self):
         return f"{self.id}) {self.title[:30]} | {self.date}"
-
-class Category(db.Model):
-    # TODO: work sample category table
-    id = db.Column(db.Integer, primary_key=True)
-    text = db.Column(db.String(70), nullable=False, unique=True)
-    sample_id = db.Column(db.Integer, db.ForeignKey('sample.id'), nullable=False)
-
-    def __repr__(self):
-        return f"{self.id}) {self.text}"
 
 class Weblog(db.Model):
     # TODO: weblog table
