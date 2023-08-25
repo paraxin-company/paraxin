@@ -7,6 +7,22 @@
 {% block weblog %}active{% endblock %}
 
 {% block content %}
-<!-- data goes here -->
-<h3 class="text-center p-4 tit">هنوز چیزی ارسال نشده</h3>
-{% endblock %}
+<div class="my-5">
+    <p class="tit">وبلاگ پاراکسین</p>
+    <div class="row">
+        {% for web_log in info %}
+        <div class="col-xs-12 col-sm-8 col-md-6 col-lg-4">
+            <div class="card">
+                <a href="{{url_for('weblog_info', id=web_log.id)}}">
+                    <img src="{{web_log.baner}}" alt="{{web_log.title}}" class="card-img-top">
+                </a>
+                <div class="card-body">
+                    <h4 class="card-title">{{web_log.title}}</h4>
+                    <p class="desc">{{web_log.content[0:140]+"..."}}<a class="links" href="{{url_for('weblog_info', id=web_log.id)}}">ادامه ی متلب</a></p>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock content %}

@@ -1,8 +1,5 @@
 @import url('base.css');
 
-.card:hover{
-    box-shadow: 0px 0px 10px 0.5px;
-}
 .filter{
     padding: 25px !important;
     align-self: flex-start;
@@ -20,4 +17,7 @@ form input{
     text-decoration: none;
     line-height: 25px;
     color:var(--link-color);
+}
+.card:hover{
+    box-shadow: 0px 0px 10px 0.5px;
 }

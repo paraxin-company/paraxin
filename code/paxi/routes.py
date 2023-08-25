@@ -16,19 +16,30 @@ def contact():
 
 @app.route('/weblog')
 def weblog():
-    return render_template('weblog.html')
+    try:
+        web_log = Weblog.query.order_by(Weblog.date).all()
+        return render_template('weblog.html', info=web_log)
+    except:
+        abort(404)
+
+@app.route('/weblog/<int:id>')
+def weblog_info(id):
+    try:
+        web_log = Weblog.query.get(id)
+        return redirect(render_template('home.html', info=web_log))
+    except:
+        abort(404)
 
 @app.route('/sample', methods=['GET', 'POST'])
 def work_sample():
-    if request.method == 'GET':
-        try:
-            sample = Sample.query.all()
-            category = Category.query.all()
-            return render_template('sample.html', sample=sample, category=category)
-        except:
-            abort(404)
+    try:
+        sample = Sample.query.all()
+        category = Category.query.all()
+        return render_template('sample.html', sample=sample, category=category)
+    except:
+        abort(404)
 
-@app.route('/detail/<id>')
+@app.route('/sample/<int:id>')
 def detail(id):
     try:
         sample = Sample.query.get(id)
@@ -53,9 +64,9 @@ def fap():
     return render_template('fap-builder.html')
 
 @app.route('/<inputs>')
-def other(inputs):
+def page_not_found(inputs):
     abort(404)
 
 @app.errorhandler(404)
-def page_not_found(error):
+def page_not_found_error(error):
     return render_template('404.html')

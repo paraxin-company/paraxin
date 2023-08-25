@@ -31,9 +31,9 @@
                 <div class="col-xs-12 col-sm-6 col-md-4">
                     <div class="card">
                         <a class="links" href="{{url_for('detail', id=item.id)}}">
-                            <img src="{{item.baner}}" class="card-img-top">
+                            <img src="{{item.baner}}" alt="{{item.title}}" class="card-img-top">
                             <div class="card-body">
-                                <h5 class="card-title">{{item.title}}</h5>
+                                <h5 class="card-title desc">{{item.title}}</h5>
                             </div>
                         </a>
                     </div>

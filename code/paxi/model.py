@@ -42,7 +42,7 @@ class Weblog(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     title = db.Column(db.String(100), nullable=False)
     content = db.Column(db.Text)
-    album = db.Column(db.Text)
+    baner = db.Column(db.Text)
     keyword = db.Column(db.String(120), nullable=False)
     date = db.Column(db.DateTime, default=datetime.datetime.now)
 
