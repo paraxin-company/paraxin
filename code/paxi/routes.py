@@ -1,5 +1,6 @@
+from flask import render_template, url_for, redirect, abort, request
+from paxi.model import User, Category, Weblog, Sample
 from paxi import app
-from flask import render_template, url_for, redirect, abort
 
 @app.route('/')
 def home():
@@ -17,9 +18,23 @@ def contact():
 def weblog():
     return render_template('weblog.html')
 
-@app.route('/sample')
+@app.route('/sample', methods=['GET', 'POST'])
 def work_sample():
-    return render_template('sample.html')
+    if request.method == 'GET':
+        try:
+            sample = Sample.query.all()
+            category = Category.query.all()
+            return render_template('sample.html', sample=sample, category=category)
+        except:
+            abort(404)
+
+@app.route('/detail/<id>')
+def detail(id):
+    try:
+        sample = Sample.query.get(id)
+        return f'amir this is simpel text {sample}'
+    except:
+        abort(404)
 
 @app.route('/web-design')
 def site_design():
@@ -37,10 +52,10 @@ def qrcode():
 def fap():
     return render_template('fap-builder.html')
 
-@app.errorhandler(404)
-def page_not_found(error):
-    return render_template('404.html')
-
 @app.route('/<inputs>')
 def other(inputs):
     abort(404)
+
+@app.errorhandler(404)
+def page_not_found(error):
+    return render_template('404.html')

@@ -1,14 +1,23 @@
 @import url('base.css');
+
+.card:hover{
+    box-shadow: 0px 0px 10px 0.5px;
+}
 .filter{
-    padding: 15px !important;
+    padding: 25px !important;
+    align-self: flex-start;
 }
 .filter-divider{
-    margin:0px 7px;
+    margin:10px 7px;
 }
 .row-reverse{
     flex-direction: row-reverse;
 }
 form input{
-    margin-left: 9px;
-    margin-right: 0px;
+    margin-right: 5px;
+}
+.links{
+    text-decoration: none;
+    line-height: 25px;
+    color:var(--link-color);
 }
