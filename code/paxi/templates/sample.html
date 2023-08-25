@@ -7,7 +7,7 @@
 {% block sample %}active{% endblock %}
 
 {% block content%}
-    <div class="text-cetner">
+    <div class="text-cetner mt-5">
         <h1 class="tit">نمونه کار ها</h1>
     </div>
     <div class="row row-reverse">
@@ -27,30 +27,6 @@
         </div>
         <div style="padding:0px 12px !important;" class="col-sm-12 col-lg-9 mt-2">
             <div class="row">
-                {% for item in sample %}
-                <div class="col-xs-12 col-sm-6 col-md-4">
-                    <div class="card">
-                        <a class="links" href="{{url_for('detail', id=item.id)}}">
-                            <img src="{{item.baner}}" class="card-img-top">
-                            <div class="card-body">
-                                <h5 class="card-title">{{item.title}}</h5>
-                            </div>
-                        </a>
-                    </div>
-                </div>
-                {% endfor %}
-                {% for item in sample %}
-                <div class="col-xs-12 col-sm-6 col-md-4">
-                    <div class="card">
-                        <a class="links" href="{{url_for('detail', id=item.id)}}">
-                            <img src="{{item.baner}}" class="card-img-top">
-                            <div class="card-body">
-                                <h5 class="card-title">{{item.title}}</h5>
-                            </div>
-                        </a>
-                    </div>
-                </div>
-                {% endfor %}
                 {% for item in sample %}
                 <div class="col-xs-12 col-sm-6 col-md-4">
                     <div class="card">
