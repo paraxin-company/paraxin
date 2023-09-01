@@ -1,1 +1,4 @@
 readme.md
+venv*
+__pycache__*
+media*

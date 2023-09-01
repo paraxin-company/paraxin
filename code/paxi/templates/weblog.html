@@ -1,0 +1,28 @@
+{% extends 'shared/base.html' %}
+
+{% block title %}paraxin{% endblock %}
+{% block keyword %}{% endblock %}
+{% block desc %}{% endblock %}
+{% block style %}static/css/weblog.css{% endblock %}
+{% block weblog %}active{% endblock %}
+
+{% block content %}
+<div class="my-5">
+    <p class="tit">وبلاگ پاراکسین</p>
+    <div class="row">
+        {% for web_log in info %}
+        <div class="col-xs-12 col-sm-8 col-md-6 col-lg-4">
+            <div class="card">
+                <a href="{{url_for('weblog_info', id=web_log.id)}}">
+                    <img src="{{web_log.baner}}" alt="{{web_log.title}}" class="card-img-top">
+                </a>
+                <div class="card-body">
+                    <h5 class="card-title melo">{{web_log.title}}</h5>
+                    <p class="desc">{{web_log.content[0:140]+"..."}}<a class="links" href="{{url_for('weblog_info', id=web_log.id)}}">ادامه ی متلب</a></p>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock content %}
