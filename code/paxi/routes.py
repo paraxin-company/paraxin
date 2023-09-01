@@ -25,8 +25,8 @@ def weblog():
 @app.route('/weblog/<int:id>')
 def weblog_info(id):
     try:
-        web_log = Weblog.query.get(id)
-        return redirect(render_template('home.html', info=web_log))
+        web_log = Weblog.query.get_or_404(id)
+        return render_template('detail.html', info=web_log)
     except:
         abort(404)
 
