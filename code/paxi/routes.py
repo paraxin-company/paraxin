@@ -49,19 +49,19 @@ def detail(id):
 
 @app.route('/web-design')
 def site_design():
-    return render_template('web-design.html')
+    return render_template('services/web-design.html')
 
 @app.route('/logo-design')
 def logo_design():
-    return render_template('logo-design.html')
+    return render_template('services/logo-design.html')
 
 @app.route('/qr-code')
 def qrcode():
-    return render_template('qr-code.html')
+    return render_template('services/qr-code.html')
 
 @app.route('/fap-builder')
 def fap():
-    return render_template('fap-builder.html')
+    return render_template('services/fap-builder.html')
 
 @app.route('/<inputs>')
 def page_not_found(inputs):
