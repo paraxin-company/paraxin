@@ -3,7 +3,7 @@
 {% block title %}paraxin | لیست خدمات پاراکسین{% endblock %}
 {% block keyword %}تیم پاراکسین, پاراکسین, paraxin, لیست خدمات پاراکسین, خدمات پاراکسین, صفحه‌ی اصلی پاراکسین{% endblock %}
 {% block desc %}لیستی از تمامی خدمات تیم آورده شده است، در صورت تمایل برای استفاده از خدمات می توانید از طریق لینکی که در زیر توضیحات هر بخش ...{% endblock %}
-{% block style %}static/css/home.css{% endblock %}
+{% block style %}{{url_for('static', filename='css/home.css')}}{% endblock %}
 {% block home %}active{% endblock %}
 
 {% block content %}
@@ -15,7 +15,7 @@
         </p>                
     </div>
     <div class="col-sm-12 col-md-6 col-lg-5 my-2 img-container">
-        <img class="img-responsive temps animate__animated animate__rubberBand wow" src="static/media/improving.png" alt="شروع کار با تیم پاراکسین">
+        <img class="img-responsive temps animate__animated animate__rubberBand wow" src="{{url_for('static', filename='media/improving.png')}}" alt="شروع کار با تیم پاراکسین">
     </div>
 </div>
 <div class="text-content">
@@ -39,7 +39,7 @@
         </div>
     </div>
     <div class="col-sm-12 col-lg-5 my-3 img-container">
-        <img class="img-responsive animate__animated animate__rubberBand wow" src="static/media/web design/Website Creator.svg" alt="نمونه عکس طراحی سایت برای صفحه پاراکسین">
+        <img class="img-responsive animate__animated animate__rubberBand wow" src="{{url_for('static', filename='media/web design/Website Creator.svg')}}" alt="نمونه عکس طراحی سایت برای صفحه پاراکسین">
     </div>
 </div>
 <div class="row m-t-150-px">
@@ -56,7 +56,7 @@
         </div>
     </div>
     <div class="col-sm-12 col-lg-5 my-3 img-container">
-        <img class="img-responsive animate__animated animate__rubberBand wow" src="static/media/logo design/logo design.svg" alt="نمونه عکس طراحی سایت برای صفحه پاراکسین">
+        <img class="img-responsive animate__animated animate__rubberBand wow" src="{{url_for('static', filename='media/logo design/logo design.svg')}}" alt="نمونه عکس طراحی سایت برای صفحه پاراکسین">
     </div>
 </div>
 <div class="row m-t-150-px">
@@ -71,7 +71,7 @@
         </div>
     </div>
     <div class="img-container col-sm-12 col-lg-5 my-3 animate__animated animate__rubberBand wow">
-        <img class="img-responsive" src="static/media/form builder/online test.svg" alt="نمونه عکس فاپ‌ساز برای صفحه پاراکسین">
+        <img class="img-responsive" src="{{url_for('static', filename='media/form builder/online test.svg')}}" alt="نمونه عکس فاپ‌ساز برای صفحه پاراکسین">
     </div>
 </div>
 <div class="row m-t-150-px">
@@ -89,7 +89,7 @@
         </div>
     </div>
     <div class="col-sm-12 col-lg-5 my-3 img-container animate__animated animate__rubberBand wow">
-        <img class="img-responsive" src="static/media/qr code/QR Code intro.svg" alt="نمونه عکس کیو آر کد برای صفحه پاراکسین">
+        <img class="img-responsive" src="{{url_for('static', filename='media/qr code/QR Code intro.svg')}}" alt="نمونه عکس کیو آر کد برای صفحه پاراکسین">
     </div>
 </div>
 <div class="row m-t-150-px">
@@ -123,7 +123,7 @@
                         این تیم خوش آمد گوی افراد حرفه‌ایی و کار بلد است و برایش فرقی ندارد که ملیت شما چیست
                         و یا از کدوم شهر ایران می باشید. تنها ملاک سنجش، علم و تجربه است .<br>
                         در صورتی که شرایط را دارین و دوست دارین با این تیم همکاری کنید و در کنار افراد متخصص
-                        قرار بگیرید می توانید از صفحه تماس با ما، <a class="simple-link" href="contact.html#send-mail">فرم تماس</a> را پر کنید (دقت کنید که حتما دپارتمان را روی دعوت به همکاری بگذارید) و یا از طریق 
+                        قرار بگیرید می توانید از صفحه تماس با ما، <a class="simple-link" href="{{url_for('contact')}}#send-mail">فرم تماس</a> را پر کنید (دقت کنید که حتما دپارتمان را روی دعوت به همکاری بگذارید) و یا از طریق 
                         <button type="button" class="robot-button simple-link" data-bs-toggle="modal" data-bs-target="#robot">
                             ربات تلگرام
                         </button> با پشتیبانی ارتباط برقرار کنید و درخواست را به آنها بگوید .
@@ -149,13 +149,13 @@
         </div>
     </div>
     <div class="col-sm-12 col-lg-5 my-3 img-container">
-        <img class="img-responsive animate__animated animate__rubberBand wow" src="static/media/FAQs.svg" alt="سوالات متداول درباره پاراکسین">
+        <img class="img-responsive animate__animated animate__rubberBand wow" src="{{url_for('static', filename='media/FAQs.svg')}}" alt="سوالات متداول درباره پاراکسین">
     </div>
 </div>
 <div class="text-content">
     <p>تیم پاراکسین تمام تلاش خود را می کند تا بتواند بهترین و حرفه ایی ترین امکانات و خدمات رو به کاربران خود
         ارائه کند. هدف ما ایجاد تجربه‌ی خوب و به یاد ماندنی برای شما عزیزان است .<br>
-        در صورت بروز یا روبه‌رویی با مشکل می توانید از طریق این <a class="simple-link" href="{{ url_for('contact') }}#send-mail">لینک</a> با تیم پشتیبانی در ارتباط باشین 
+        در صورت بروز یا روبه‌رویی با مشکل می توانید از طریق این <a class="simple-link" href="{{url_for('contact')}}#send-mail">لینک</a> با تیم پشتیبانی در ارتباط باشین 
         و اگر در مورد پاراکسین چیزی 
         نمی دانید می توانید از طریق این <a class="simple-link" href="{{url_for('about')}}">لینک</a> اطلاعات کسب کنید.
     </p>
