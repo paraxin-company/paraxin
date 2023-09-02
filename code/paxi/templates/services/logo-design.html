@@ -3,13 +3,13 @@
 {% block title %}paraxin | طراحی و ساخت انواع لوگو، توسط تیم پاراکسین{% endblock %}
 {% block keyword %}طراحی لوگو, لوگو حرفه‌ای, تیم پاراکسین, پاراکسین, طراحی لوگوی ساده, طراحی لوگو سه بعدی, طراحی لوگوی 3d, paraxin, طراحی لوگوی نام و نشان, طارحی لوگوی پویا, طارحی لوگو ترکیبی, طارحی لوگوی تصویری{% endblock %}
 {% block desc %}لوگو یک نماد یا نشانه است که برای شناسایی و تمایز بخشی خاص از یک برند، شرکت یا سازمان استفاده می‌شود. لوگوها عموماً شامل ترکیبی از الفبا، حروف، شکل‌ها، نمادها و رنگ‌ها هستند که به صورت منحصر به فرد طراحی شده‌اند...{% endblock %}
-{% block style %}../static/css/services/logo-design.css{% endblock %}
+{% block style %}{{url_for('static', filename='css/services/logo-design.css')}}{% endblock %}
 {% block logo %}active{% endblock %}
 
 {% block first_view%}
 <div class="first-view display-f-r flex-align-center flex-justify-center">
     <div class="display-f-r flex-align-center flex-justify-center col-sm-12 col-md-6 p-5 animate__animated animate__rubberBand wow">
-        <img src="../static/media/logo design/Icon design.svg" alt="طراحی لوگو در دنیای پاراکسین" class="img-header">
+        <img src="{{url_for('static', filename='media/logo design/Icon design.svg')}}" alt="طراحی لوگو در دنیای پاراکسین" class="img-header">
     </div>
     <div class="col-sm-12 col-md-6  display-f-r flex-align-center flex-justify-center">
         <div class="fv-text animate__animated animate__zoomInDown wow" data-wow-delay=".4s">
@@ -56,7 +56,7 @@
         </div>
     </div>
     <div class="col-md-12 col-lg-5 my-5 img-container animate__animated animate__rubberBand wow" data-wow-delay=".5s">
-        <img class="img-responsive" src="../static/media/logo design/light bulb.svg" alt="راه اندازی لوگو توسط تیم پاراکسین">
+        <img class="img-responsive" src="{{url_for('static', filename='media/logo design/light bulb.svg')}}" alt="راه اندازی لوگو توسط تیم پاراکسین">
     </div>
 </div>
 <div class="row m-t-150-px">
@@ -99,7 +99,7 @@
         </div>
     </div>
     <div class="col-sm-12 col-lg-5 my-3 img-container animate__animated animate__rubberBand wow" data-wow-delay=".5s">
-        <img class="img-responsive" src="../static/media/FAQs.svg" alt="سوالات متداول درباره طراحی لوگو پاراکسین">
+        <img class="img-responsive" src="{{url_for('static', filename='media/FAQs.svg')}}" alt="سوالات متداول درباره طراحی لوگو پاراکسین">
     </div>
 </div>
 <div class="caption m-t-150-px animate__animated animate__zoomInDown wow">
@@ -110,7 +110,7 @@
         <div class="carousel-item text-center display-f-r flex-align-center flex-justify-center active" data-bs-interval="2000">
             <div class="opinion-container">
                 <div class="profile">
-                    <img class="img-responsive" src="../static/media/undraw_pic_profile.svg">
+                    <img class="img-responsive" src="{{url_for('static', filename='media/undraw_pic_profile.svg')}}">
                 </div>
                 <div>
                     <h3 class="header-title">company name</h3>
@@ -121,7 +121,7 @@
         <div class="carousel-item text-center display-f-r flex-align-center flex-justify-center" data-bs-interval="2000">
             <div class="opinion-container">
                 <div class="profile">
-                    <img class="img-responsive" src="../static/media/undraw_pic_profile.svg">
+                    <img class="img-responsive" src="{{url_for('static', filename='media/undraw_pic_profile.svg')}}">
                 </div>
                 <div>
                     <h3 class="header-title">company name</h3>
@@ -132,7 +132,7 @@
         <div class="carousel-item text-center display-f-r flex-align-center flex-justify-center" data-bs-interval="2000">
             <div class="opinion-container">
                 <div class="profile">
-                    <img class="img-responsive" src="../static/media/undraw_pic_profile.svg">
+                    <img class="img-responsive" src="{{url_for('static', filename='media/undraw_pic_profile.svg')}}">
                 </div>
                 <div>
                     <h3 class="header-title">company name</h3>

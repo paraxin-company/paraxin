@@ -3,14 +3,14 @@
 {% block title %}paraxin | ساخت آنلاین کیوآرکد(QR code){% endblock %}
 {% block keyword %}ساخت کیوآرکد, qr code, ساخت کیوآرکد به صورت آنلاین, کیوآرکد چیست, تاریخچه‌ی به وجود آمدن کیوآرکد, پاراکسین, تیم پاراکسین, paraxin{% endblock %}
 {% block desc %}پاراکسین ارائه دهنده‌ی سرویس آنلاین کیوآرکد است اونم به صورت سریع و کارآمد. شما می توانید تجربه ی ساخت و استفاده از QR code را از طریق این سرویس داشته باشین...{% endblock %}
-{% block style %}../static/css/services/qr-code.css{% endblock %}
+{% block style %}{{url_for('static', filename='css/services/qr-code.css')}}{% endblock %}
 {% block qrcode %}active{% endblock %}
 
 
 {% block first_view%}
 <div class="first-view display-f-r flex-align-center flex-justify-center">
     <div class="display-f-r flex-align-center flex-justify-center col-sm-12 col-md-6 p-5 animate__animated animate__rubberBand wow">
-        <img src="../static/media/qr code/QR Code.svg" alt="کیوآرکد در دنیای پاراکسین" class="img-header">
+        <img src="{{url_for('static', filename='media/qr code/QR Code.svg')}}" alt="کیوآرکد در دنیای پاراکسین" class="img-header">
     </div>
     <div class="col-sm-12 col-md-6  display-f-r flex-align-center flex-justify-center">
         <div class="fv-text animate__animated animate__zoomInDown wow" data-wow-delay=".4s">
@@ -53,7 +53,7 @@
         </p>
     </div>
     <div class="col-sm-12 col-lg-5 img-container animate__animated animate__rubberBand wow" data-wow-delay=".5s">
-        <img class="img-responsive" src="../static/media/qr code/Time machine.svg" alt="تاریخچه‌ی به وجود آمدن کیوآرکد">
+        <img class="img-responsive" src="{{url_for('static', filename='media/qr code/Time machine.svg')}}" alt="تاریخچه‌ی به وجود آمدن کیوآرکد">
     </div>
 </div>
 <div class="row m-t-150-px">
@@ -104,7 +104,7 @@
         </div>
     </div>
     <div class="col-sm-12 col-lg-5 my-5 img-container animate__animated animate__rubberBand wow" data-wow-delay=".5s">
-        <img class="img-responsive" src="../static/media/FAQs.svg" alt="سوالات متداول درباره کیوآرکد پاراکسین">
+        <img class="img-responsive" src="{{url_for('static', filename='media/FAQs.svg')}}" alt="سوالات متداول درباره کیوآرکد پاراکسین">
     </div>
 </div>
 {% endblock %}

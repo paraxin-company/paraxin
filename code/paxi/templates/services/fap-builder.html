@@ -3,14 +3,14 @@
 {% block title %}paraxin | فاپ‌ساز های آنلاین پاراکسین{% endblock %}
 {% block keyword %}فرم‌ساز آنلاین ,آزمون‌ساز آنلاین ,پرسشنامه‌ساز آنلاین, فاپ‌ساز پاراکسین, فاپ‌ساز, paraxin, تیم پاراکسین, پاراکسین, فاپ‌ساز چیست{% endblock %}
 {% block desc %}ابزار فاپ‌ساز به شما کمک می کند تا بتوانید به صورت سریع و ساده، ابزارهایی را برای ارزیابی و اندازه گیری دانش و توانایی کاربران خود ایجاد کنید. همچنین، با استفاده از این ابزارها...{% endblock %}
-{% block style %}../static/css/services/fap-builder.css{% endblock %}
+{% block style %}{{url_for('static', filename='css/services/fap-builder.css')}}{% endblock %}
 {% block fap %}active{% endblock %}
 
 
 {% block first_view%}
 <div class="first-view display-f-r flex-align-center flex-justify-center">
     <div class="display-f-r flex-align-center flex-justify-center col-sm-12 col-md-6 animate__animated animate__rubberBand wow">
-        <img src="../static/media/form builder/Spreadsheets.svg" alt="فاپ‌ساز در دنیای پاراکسین" class="img-header">
+        <img src="{{url_for('static', filename='media/fap builder/Spreadsheets.svg')}}" alt="فاپ‌ساز در دنیای پاراکسین" class="img-header">
     </div>
     <div class="col-sm-12 col-md-6 display-f-r flex-align-center flex-justify-center">
         <div class="fv-text animate__animated animate__zoomInDown wow" data-wow-delay=".4s">
@@ -26,7 +26,7 @@
 </div>
 <div class="row">
     <div class="form-type col-sm-12 col-md-6 col-lg-4 animate__animated animate__fadeInUpBig wow">
-        <img src="../static/media/form builder/Customer Survey.svg" alt="پرسشنامه‌ساز آنلاین پاراکسین">
+        <img src="{{url_for('static', filename='media/fap builder/Customer Survey.svg')}}" alt="پرسشنامه‌ساز آنلاین پاراکسین">
         <h3>پرسشنامه ساز</h3>
         <p class="desc">
             پرسشنامه ساز یک ابزار آنلاین است که به کاربران امکان می دهد تا پرسشنامه های مختلفی را 
@@ -38,7 +38,7 @@
         </div>
     </div>
     <div class="form-type col-sm-12 col-md-6 col-lg-4 animate__animated animate__fadeInUpBig wow" data-wow-delay=".3s">
-        <img src="../static/media/form builder/online test.svg" alt="آزمون‌ساز آنلاین پاراکسین">
+        <img src="{{url_for('static', filename='media/fap builder/online test.svg')}}" alt="آزمون‌ساز آنلاین پاراکسین">
         <h3>آزمون‌ساز</h3>
         <p class="desc">
             آزمون ساز یک ابزار آنلاین است که به کاربران امکان می دهد تا آزمون های 
@@ -50,7 +50,7 @@
         </div>
     </div>
     <div class="form-type col-sm-12 col-md-6 col-lg-4 animate__animated animate__fadeInUpBig wow" data-wow-delay=".6s">
-        <img src="../static/media/form builder/form builder.svg" alt="فرم‌ساز آنلاین پاراکسین">
+        <img src="{{url_for('static', filename='media/fap builder/form builder.svg')}}" alt="فرم‌ساز آنلاین پاراکسین">
         <h3>فرم ساز</h3>
         <p class="desc">
             فرم ساز یک ابزار است که به شما اجازه می دهد 
@@ -122,7 +122,7 @@
         </div>
     </div>
     <div class="col-sm-12 col-lg-5 my-3 img-container animate__animated animate__rubberBand wow" data-wow-delay=".5s">
-        <img class="img-responsive" src="../static/media/FAQs.svg" alt="سوالات متداول درباره فاپ‌ساز پاراکسین">
+        <img class="img-responsive" src="{{url_for('static', filename='media/FAQs.svg')}}" alt="سوالات متداول درباره فاپ‌ساز پاراکسین">
     </div>
 </div>
 <div class="caption animate__animated animate__zoomInDown wow m-t-150-px">
@@ -133,7 +133,7 @@
         <div class="carousel-item text-center display-f-r flex-align-center flex-justify-center active" data-bs-interval="2000">
             <div class="opinion-container">
                 <div class="profile">
-                    <img class="img-responsive" src="../static/media/undraw_pic_profile.svg">
+                    <img class="img-responsive" src="{{url_for('static', filename='media/undraw_pic_profile.svg')}}">
                 </div>
                 <div>
                     <h3 class="header-title">company name</h3>
@@ -144,7 +144,7 @@
         <div class="carousel-item text-center display-f-r flex-align-center flex-justify-center" data-bs-interval="2000">
             <div class="opinion-container">
                 <div class="profile">
-                    <img class="img-responsive" src="../static/media/undraw_pic_profile.svg">
+                    <img class="img-responsive" src="{{url_for('static', filename='media/undraw_pic_profile.svg')}}">
                 </div>
                 <div>
                     <h3 class="header-title">company name</h3>
@@ -155,7 +155,7 @@
         <div class="carousel-item text-center display-f-r flex-align-center flex-justify-center" data-bs-interval="2000">
             <div class="opinion-container">
                 <div class="profile">
-                    <img class="img-responsive" src="../static/media/undraw_pic_profile.svg">
+                    <img class="img-responsive" src="{{url_for('static', filename='media/undraw_pic_profile.svg')}}">
                 </div>
                 <div>
                     <h3 class="header-title">company name</h3>
