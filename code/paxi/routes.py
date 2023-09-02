@@ -22,30 +22,25 @@ def weblog():
     except:
         abort(404)
 
-@app.route('/weblog/<int:id>')
-def weblog_info(id):
-    try:
-        web_log = Weblog.query.get_or_404(id)
-        return render_template('detail.html', info=web_log)
-    except:
-        abort(404)
+@app.route('/weblog/detail/<int:id>')
+def weblog_detail(id):
+    web_log = Weblog.query.get_or_404(id)
+    return render_template('detail.html', data=web_log)
+    
 
-@app.route('/sample', methods=['GET', 'POST'])
+@app.route('/work-sample', methods=['GET', 'POST'])
 def work_sample():
-    try:
+    # try:
         sample = Sample.query.all()
         category = Category.query.all()
         return render_template('sample.html', sample=sample, category=category)
-    except:
-        abort(404)
+    # except:
+    #     abort(404)
 
-@app.route('/sample/<int:id>')
-def detail(id):
-    try:
-        sample = Sample.query.get(id)
-        return f'amir this is simpel text {sample}'
-    except:
-        abort(404)
+@app.route('/work-sample/detail/<int:id>')
+def work_sample_detail(id):
+    sample = Sample.query.get_or_404(id)
+    return render_template('detail.html', data=sample)
 
 @app.route('/web-design')
 def site_design():

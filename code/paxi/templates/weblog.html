@@ -14,12 +14,12 @@
             {% for web_log in info %}
             <div class="col-xs-12 col-sm-8 col-md-6 col-lg-4">
                 <div class="card">
-                    <a href="{{url_for('weblog_info', id=web_log.id)}}">
+                    <a href="{{url_for('weblog_detail', id=web_log.id)}}">
                         <img src="{{web_log.baner}}" alt="{{web_log.title}}" class="card-img-top">
                     </a>
                     <div class="card-body">
                         <p class="card-title melo">{{web_log.title}}</p>
-                        <p class="desc">{{web_log.content[0:140]+"..."}}<a class="links" href="{{url_for('weblog_info', id=web_log.id)}}">ادامه ی متلب</a></p>
+                        <p class="desc">{{web_log.content[0:140]+"..."}}<a class="links" href="{{url_for('weblog_detail', id=web_log.id)}}">ادامه ی متلب</a></p>
                     </div>
                 </div>
             </div>
