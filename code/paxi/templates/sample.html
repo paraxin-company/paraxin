@@ -3,7 +3,7 @@
 {% block title %}paraxin{% endblock %}
 {% block keyword %}{% endblock %}
 {% block desc %}{% endblock %}
-{% block style %}static/css/sample.css{% endblock %}
+{% block style %}{{url_for('static', filename='css/sample.css')}}{% endblock %}
 {% block sample %}active{% endblock %}
 
 {% block content%}
