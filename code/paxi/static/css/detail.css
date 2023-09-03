@@ -1,1 +1,20 @@
 @import url("base.css");
+.slider{
+    align-self: flex-start;
+    background-color: #f0f0f0;
+    border-radius: 15px;
+}
+.text-center{
+    text-align: center;
+}
+.date{
+    color: var(--link-color);
+    font-size: 14px !important;
+}
+.keyword{
+    background-color: #d1d1d1;
+    margin: 3px 3px;
+    padding: 3px 7px;
+    border-radius: 10px;
+    display: inline-block;
+}

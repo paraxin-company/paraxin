@@ -30,14 +30,20 @@ def weblog_detail(id):
 
 @app.route('/work-sample', methods=['GET', 'POST'])
 def work_sample():
-    sample = Sample.query.all()
-    category = Category.query.all()
-    return render_template('sample.html', sample=sample, category=category)
+    try:
+        sample = Sample.query.all()
+        category = Category.query.all()
+        return render_template('sample.html', sample=sample, category=category)
+    except:
+        abort(404)
 
 @app.route('/work-sample/detail/<int:id>')
 def work_sample_detail(id):
-    sample = Sample.query.get_or_404(id)
-    return render_template('detail.html', data=sample)
+    try:
+        sample = Sample.query.get_or_404(id)
+        return render_template('detail.html', data=sample)
+    except:
+        abort(404)
 
 @app.route('/web-design')
 def site_design():

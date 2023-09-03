@@ -6,7 +6,27 @@
 {% block style %}{{url_for('static', filename='css/detail.css')}}{% endblock %}
 
 {% block content %}
-<p>detail page</p>
+<div class="row row py-5">
+    <div class="col-sm-12 col-lg-9 mt-2 p-4">
+        {% if data %}
+            <h3 class="text-center">{{data.title}}</h3>
+            <div class="img-container">
+                <img class="img-responsive" alt="{{data.title}}" src="{{url_for('static', filename=data.baner)}}">
+            </div>
+            <p class="date py-1">تاریخ انتشار ( {{data.date.strftime('%d - %m - %Y')}} )</p><hr>
+            <p calss="py-5">{{data.content}}</p>
+        {% endif %}
+    </div>
+    <div class="slider col-sm-12 col-lg-3 mt-2 p-4">
+        <hr>
+        {% if data %}
+            <p class="text-center">کلمات کلیدی</p>
+            {% for keyw in data.keyword.split(',') %}
+                <p class="keyword">{{keyw}}</p>
+            {% endfor %}
+        {% endif %}
+    </div>
+</div>
 {% endblock %}
 {% block wave %}
 <div class="pt-4">
