@@ -15,10 +15,12 @@
             <h2 class="tit text-center">فیلتر</h2>
             <form>
                 <label>دسته بندی پروژه ها</label><br>
-                {% for item in category%}
-                <label for="{{item.text}}">{{item.text}}</label>
-                <input type="checkbox" id="{{item.text}}"><br>
-                {% endfor %}
+                {% if category %}
+                    {% for item in category %}
+                        <label for="{{item.text}}">{{item.text}}</label>
+                        <input type="checkbox" id="{{item.text}}"><br>
+                    {% endfor %}
+                {% endif %}
                 <hr class="filter-divider">
                 <div class="text-center">
                     <input class="style-link-in-paraxin mt-2" type="submit" value="اعمال فیلتر">
@@ -27,18 +29,20 @@
         </div>
         <div style="padding:0px 12px !important;" class="col-sm-12 col-lg-9 mt-2">
             <div class="row">
-                {% for item in sample %}
-                <div class="col-xs-12 col-sm-6 col-md-4">
-                    <div class="card">
-                        <a class="links" href="{{url_for('work_sample_detail', id=item.id)}}">
-                            <img src="{{item.baner}}" alt="{{item.title}}" class="card-img-top">
-                            <div class="card-body">
-                                <h5 class="card-title desc">{{item.title}}</h5>
-                            </div>
-                        </a>
+                {% if sample %}
+                    {% for item in sample %}
+                    <div class="col-xs-12 col-sm-6 col-md-4">
+                        <div class="card">
+                            <a class="links" href="{{url_for('work_sample_detail', id=item.id)}}">
+                                <img src="../static/{{item.baner}}" alt="{{item.title}}" class="card-img-top">
+                                <div class="card-body">
+                                    <h5 class="card-title desc">{{item.title}}</h5>
+                                </div>
+                            </a>
+                        </div>
                     </div>
-                </div>
-                {% endfor %}
+                    {% endfor %}
+                {% endif %}
             </div>
         </div>
     </div>
