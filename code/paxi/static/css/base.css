@@ -29,6 +29,7 @@
     direction: rtl !important;
     font-family: 'vazir', cursive !important;
     font-size: var(--main-font-size);
+    list-style-type: none;
 }
 body{
     height: 100vh;

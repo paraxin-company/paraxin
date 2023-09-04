@@ -4,6 +4,20 @@
     background-color: #f0f0f0;
     border-radius: 15px;
 }
+.related-section{
+    list-style-type: none !important;
+}
+.related-link{
+    text-indent: 5px !important;
+    text-decoration: none;
+    color: var(--link-color);
+}
+.related-link:hover{
+    color: black;
+}
+.dot{
+    color:black;
+}
 .text-center{
     text-align: center;
 }
@@ -13,7 +27,7 @@
 }
 .keyword{
     background-color: #d1d1d1;
-    margin: 3px 3px;
+    margin: 3px 2px;
     padding: 3px 7px;
     border-radius: 10px;
     display: inline-block;

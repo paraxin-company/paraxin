@@ -25,7 +25,7 @@ def weblog():
 @app.route('/weblog/detail/<int:id>')
 def weblog_detail(id):
     web_log = Weblog.query.get_or_404(id)
-    return render_template('detail.html', data=web_log)
+    return render_template('detail.html', data=web_log, galery=False)
     
 
 @app.route('/work-sample', methods=['GET', 'POST'])
@@ -41,7 +41,7 @@ def work_sample():
 def work_sample_detail(id):
     try:
         sample = Sample.query.get_or_404(id)
-        return render_template('detail.html', data=sample)
+        return render_template('detail.html', data=sample, galery=True)
     except:
         abort(404)
 

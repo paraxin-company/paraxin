@@ -7,19 +7,39 @@
 
 {% block content %}
 <div class="row row py-5">
-    <div class="col-sm-12 col-lg-9 mt-2 p-4">
+    <div class="col-sm-12 col-lg-9 p-4 pt-1">
         {% if data %}
             <h3 class="text-center">{{data.title}}</h3>
             <div class="img-container">
                 <img class="img-responsive" alt="{{data.title}}" src="{{url_for('static', filename=data.baner)}}">
             </div>
             <p class="date py-1">تاریخ انتشار ( {{data.date.strftime('%d - %m - %Y')}} )</p><hr>
-            <p calss="py-5">{{data.content}}</p>
+            <p calss="py-5 mt-5">{{data.content}}</p>
+            {% if galery == True %}
+                <p class="tit mt-5">گالری تصاویر</p>
+            {% endif %}
         {% endif %}
     </div>
-    <div class="slider col-sm-12 col-lg-3 mt-2 p-4">
-        <hr>
+    <div class="slider col-sm-12 col-lg-3 px-4 py-4 mt-5">
         {% if data %}
+            <p class="text-center">
+                لینک های مرتبط
+            </p>
+            <ul>
+                <li class="related-section">
+                    <a class="related-link" href="#"><span class="dot">aasfasdf </span>item one item one item one item one item one tiem one</a>
+                </li>
+                <li class="related-section">
+                    <a class="related-link" href="#">item two</a>
+                </li>
+                <li class="related-section">
+                    <a class="related-link" href="#">item three</a>
+                </li>
+                <li class="related-section">
+                    <a class="related-link" href="#">item four</a>
+                </li>
+            </ul>
+            <hr class="mt-5">
             <p class="text-center">کلمات کلیدی</p>
             {% for keyw in data.keyword.split(',') %}
                 <p class="keyword">{{keyw}}</p>
