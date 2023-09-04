@@ -2,7 +2,11 @@
 .slider{
     align-self: flex-start;
     background-color: #f0f0f0;
-    border-radius: 15px;
+    border-radius: var(--border-radius-image);
+}
+.baner{
+    border-radius: var(--border-radius-image);
+    width: 100%     ;
 }
 .related-section{
     list-style-type: none !important;
@@ -31,4 +35,22 @@
     padding: 3px 7px;
     border-radius: 10px;
     display: inline-block;
+}
+
+.image-gallery {
+    height: 300px;
+    border-radius: var(--border-radius-image);
+    width: 100%;
+    border: 6px solid var(--paraxin-color);
+    -webkit-filter: sepia(100%);
+    filter: sepia(100%);
+    transition-duration: 1s;
+}
+.image-gallery:hover {
+    border: 3px solid var(--paraxin-color);
+    -webkit-transform: scale(1.05);
+    -ms-transform: scale(1.05);
+    transform: scale(1.05);
+    -webkit-filter: none;
+    filter: none;
 }

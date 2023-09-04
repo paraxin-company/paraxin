@@ -21,6 +21,7 @@
     --line-height-p: 27px;
     --padding-a-field: 5px 20px;
     --border-radius-a-filed: 10px;
+    --border-radius-image: 15px;
 }
 *{
     margin: 0;

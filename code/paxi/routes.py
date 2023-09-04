@@ -25,14 +25,15 @@ def weblog():
 @app.route('/weblog/detail/<int:id>')
 def weblog_detail(id):
     web_log = Weblog.query.get_or_404(id)
-    return render_template('detail.html', data=web_log, galery=False)
-    
+    return render_template('detail.html', data=web_log, gallery=False)
 
 @app.route('/work-sample', methods=['GET', 'POST'])
 def work_sample():
     try:
         sample = Sample.query.all()
         category = Category.query.all()
+        print(sample)
+        print(category)
         return render_template('sample.html', sample=sample, category=category)
     except:
         abort(404)
@@ -40,8 +41,15 @@ def work_sample():
 @app.route('/work-sample/detail/<int:id>')
 def work_sample_detail(id):
     try:
+        gallery = False
         sample = Sample.query.get_or_404(id)
-        return render_template('detail.html', data=sample, galery=True)
+        try:
+            # check album in the colum is full or no (can we show the album or no)
+            if ',' in sample.album:
+                gallery = True
+        except:
+            gallery = False
+        return render_template('detail.html', data=sample, gallery=gallery)
     except:
         abort(404)
 

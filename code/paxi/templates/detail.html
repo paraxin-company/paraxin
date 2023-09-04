@@ -10,13 +10,20 @@
     <div class="col-sm-12 col-lg-9 p-4 pt-1">
         {% if data %}
             <h3 class="text-center">{{data.title}}</h3>
-            <div class="img-container">
-                <img class="img-responsive" alt="{{data.title}}" src="{{url_for('static', filename=data.baner)}}">
+            <div>
+                <img class="baner" alt="{{data.title}}" src="{{url_for('static', filename=data.baner)}}">
             </div>
             <p class="date py-1">تاریخ انتشار ( {{data.date.strftime('%d - %m - %Y')}} )</p><hr>
             <p calss="py-5 mt-5">{{data.content}}</p>
-            {% if galery == True %}
+            {% if gallery == True %}
                 <p class="tit mt-5">گالری تصاویر</p>
+                <div class="row">
+                    {% for select_image in data.album.split(',') %}
+                    <div class="col-sm-12 col-md-6">
+                        <img class="image-gallery" src="{{url_for('static', filename=select_image.strip())}}" width="500" height="500" alt=""></a>
+                    </div>
+                    {% endfor %}
+                </div>
             {% endif %}
         {% endif %}
     </div>
