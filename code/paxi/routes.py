@@ -41,7 +41,9 @@ def work_sample_detail(id):
 
 @app.route('/web-design')
 def site_design():
-    return render_template('services/web-design.html')
+    category = Category.query.get(1)
+    tops = Sample.query.filter_by(category_id=category.id).limit(6)
+    return render_template('services/web-design.html', tops=tops)
 
 @app.route('/logo-design')
 def logo_design():
