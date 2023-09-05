@@ -25,7 +25,8 @@ def weblog():
 @app.route('/weblog/detail/<int:id>')
 def weblog_detail(id):
     web_log = Weblog.query.get_or_404(id)
-    return render_template('detail.html', data=web_log, gallery=False)
+    related = Weblog.query.limit(6)
+    return render_template('detail.html', data=web_log, related=related)
 
 @app.route('/work-sample', methods=['GET', 'POST'])
 def work_sample():
@@ -43,13 +44,14 @@ def work_sample_detail(id):
     try:
         gallery = False
         sample = Sample.query.get_or_404(id)
+        related = Sample.query.filter_by(category_id=sample.category_id).limit(6)
         try:
             # check album in the colum is full or no (can we show the album or no)
             if ',' in sample.album:
                 gallery = True
         except:
             gallery = False
-        return render_template('detail.html', data=sample, gallery=gallery)
+        return render_template('detail.html', data=sample, related=related, gallery=gallery, sample=True)
     except:
         abort(404)
 

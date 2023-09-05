@@ -15,7 +15,7 @@
             </div>
             <p class="date py-1">تاریخ انتشار ( {{data.date.strftime('%d - %m - %Y')}} )</p><hr>
             <p calss="py-5 mt-5">{{data.content}}</p>
-            {% if gallery == True %}
+            {% if gallery %}
                 <p class="tit mt-5">گالری تصاویر</p>
                 <div class="row">
                     {% for select_image in data.album.split(',') %}
@@ -33,18 +33,27 @@
                 لینک های مرتبط
             </p>
             <ul>
-                <li class="related-section">
-                    <a class="related-link" href="#"><span class="dot">aasfasdf </span>item one item one item one item one item one tiem one</a>
-                </li>
-                <li class="related-section">
-                    <a class="related-link" href="#">item two</a>
-                </li>
-                <li class="related-section">
-                    <a class="related-link" href="#">item three</a>
-                </li>
-                <li class="related-section">
-                    <a class="related-link" href="#">item four</a>
-                </li>
+                {% if sample %}
+                    {% if related %}
+                        {% for item in related %}
+                        <li class="related-section">
+                            <a class="related-link" href="{{url_for('work_sample_detail', id=item.id)}}"><span class="dot">&#187; </span>{{item.title}}</a>
+                        </li>
+                        {% endfor %}
+                    {% else %}
+                        <p>موردی یافت نشد</p>
+                    {% endif %}
+                {% else %}
+                    {% if related %}
+                        {% for item in related %}
+                        <li class="related-section">
+                            <a class="related-link" href="{{url_for('weblog_detail', id=item.id)}}"><span class="dot">&#187; </span>{{item.title}}</a>
+                        </li>
+                        {% endfor %}
+                    {% else %}
+                        <p>موردی یافت نشد</p>
+                    {% endif %}
+                {% endif %}
             </ul>
             <hr class="mt-5">
             <p class="text-center">کلمات کلیدی</p>

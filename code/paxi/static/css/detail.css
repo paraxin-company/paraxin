@@ -36,7 +36,6 @@
     border-radius: 10px;
     display: inline-block;
 }
-
 .image-gallery {
     height: 300px;
     border-radius: var(--border-radius-image);
@@ -53,4 +52,8 @@
     transform: scale(1.05);
     -webkit-filter: none;
     filter: none;
+}
+.dot{
+    color: var(--paraxin-color2);
+    font-size: 20px;
 }
