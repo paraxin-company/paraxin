@@ -1,5 +1,6 @@
-from flask import render_template, url_for, redirect, abort, request
+from flask import render_template, abort, redirect, url_for
 from paxi.model import User, Category, Weblog, Sample
+from paxi.forms import LoginForm
 from paxi import app
 
 @app.route('/')
@@ -54,6 +55,14 @@ def qrcode():
 @app.route('/fap-builder')
 def fap():
     return render_template('services/fap-builder.html')
+
+@app.route('/panel/login', methods=['POST', 'GET'])
+def panel_login():
+    form = LoginForm()
+    if form.validate_on_submit():
+        print('submit is done')
+        return redirect(url_for('home'))
+    return render_template('panel/login.html', form=form)
 
 @app.route('/<inputs>')
 def page_not_found(inputs):
