@@ -1,7 +1,8 @@
 from flask import render_template, abort, redirect, url_for, flash
-from flask_login import login_user
+from flask_login import login_user, logout_user, current_user, login_required
 from paxi.model import User, Category, Weblog, Sample
 from paxi.forms import LoginForm
+from paxi.method import passwords
 from paxi import app
 
 @app.route('/')
@@ -62,17 +63,30 @@ def paxi_login():
     form = LoginForm()
     if form.validate_on_submit():
         user = User.query.filter_by(username=form.username.data).first()
-        if user and (user.password==form.password.data):
+        if user and passwords.check_pass(user.password, form.password.data):
             login_user(user, remember=form.remember.data)
+            print(form.remember.data)
             flash('ورود با موفقیت', 'success')
             return redirect(url_for('paxi_panel'))
         else:
             flash('اطلاعات وارد شده درست نمی باشد', 'danger')
     return render_template('panel/login.html', form=form)
 
+@app.route('/paxi/logout')
+def paxi_logout():
+    if not current_user.is_authenticated:
+        flash('هنوز وارد به نشده اید', 'danger')
+        return redirect(url_for('paxi_login'))
+    logout_user()
+    flash('خروج با موفقیت انجام شد', 'success')
+    return redirect(url_for('paxi_login'))
+
 @app.route('/paxi')
 def paxi_panel():
-    return render_template('panel/paxi.html')
+    if not current_user.is_authenticated:
+        flash('ابتدا باید وارد پکسی بشوید', 'danger')
+        return redirect(url_for('paxi_login'))
+    return render_template('panel/paxi.html', user=current_user)
 
 @app.route('/<inputs>')
 def page_not_found(inputs):

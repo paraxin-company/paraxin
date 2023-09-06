@@ -2,7 +2,6 @@ from paxi import db, login_manager
 from flask_login import UserMixin
 import datetime
 
-# a1277ca60f867fd6f16f19c30e69a8c9024ee2bf40efcf3a044d2b63c0f1640f: sha256: aspad/amiraspad
 @login_manager.user_loader
 def get_id(user_id):
     return User.query.get(int(user_id))
