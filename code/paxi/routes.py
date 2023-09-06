@@ -56,13 +56,17 @@ def qrcode():
 def fap():
     return render_template('services/fap-builder.html')
 
-@app.route('/panel/login', methods=['POST', 'GET'])
-def panel_login():
+@app.route('/paxi/login', methods=['POST', 'GET'])
+def paxi_login():
     form = LoginForm()
     if form.validate_on_submit():
         print('submit is done')
-        return redirect(url_for('home'))
+        return redirect(url_for('paxi_panel'))
     return render_template('panel/login.html', form=form)
+
+@app.route('/paxi')
+def paxi_panel():
+    return render_template('panel/paxi.html')
 
 @app.route('/<inputs>')
 def page_not_found(inputs):
