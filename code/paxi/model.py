@@ -1,15 +1,20 @@
-from paxi import db
+from paxi import db, login_manager
+from flask_login import UserMixin
 import datetime
 
 # a1277ca60f867fd6f16f19c30e69a8c9024ee2bf40efcf3a044d2b63c0f1640f: sha256: aspad/amiraspad
+@login_manager.user_loader
+def get_id(user_id):
+    return User.query.get(int(user_id))
 
-class User(db.Model):
+class User(db.Model, UserMixin):
     # TODO: admin table
     id = db.Column(db.Integer, primary_key=True)
     fullname = db.Column(db.String(50))
     username = db.Column(db.String(40), unique=True, nullable=False)
-    email = db.Column(db.String(100), unique=True, nullable=False)
+    email = db.Column(db.String(50), unique=True, nullable=False)
     password = db.Column(db.String(80), nullable=False)
+    profile = db.Column(db.String(40), nullable=False)
 
     def __repr__(self):
         return f"{self.id}) {self.fullname}"

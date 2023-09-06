@@ -1,4 +1,5 @@
-from flask import render_template, abort, redirect, url_for
+from flask import render_template, abort, redirect, url_for, flash
+from flask_login import login_user
 from paxi.model import User, Category, Weblog, Sample
 from paxi.forms import LoginForm
 from paxi import app
@@ -60,8 +61,13 @@ def fap():
 def paxi_login():
     form = LoginForm()
     if form.validate_on_submit():
-        print('submit is done')
-        return redirect(url_for('paxi_panel'))
+        user = User.query.filter_by(username=form.username.data).first()
+        if user and (user.password==form.password.data):
+            login_user(user, remember=form.remember.data)
+            flash('ورود با موفقیت', 'success')
+            return redirect(url_for('paxi_panel'))
+        else:
+            flash('اطلاعات وارد شده درست نمی باشد', 'danger')
     return render_template('panel/login.html', form=form)
 
 @app.route('/paxi')
