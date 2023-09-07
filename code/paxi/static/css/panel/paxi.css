@@ -49,6 +49,16 @@
 [class*="col-"]{
     padding: 0px !important;
 }
+.accordion-item:last-of-type .accordion-button.collapsed ,
+.accordion-item:first-of-type .accordion-button ,
+.accordion-body{
+    padding: 15px 7px !important;
+    color: black;
+    background-color: var(--menu-color) !important;
+}
+.action-link{
+    text-decoration: none;
+}
 @media screen and (max-width: 750px){
     .slider{
         visibility: hidden;

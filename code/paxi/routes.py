@@ -58,6 +58,13 @@ def qrcode():
 def fap():
     return render_template('services/fap-builder.html')
 
+@app.route('/paxi')
+def paxi_panel():
+    if not current_user.is_authenticated:
+        flash('ابتدا باید وارد پکسی بشوید', 'danger')
+        return redirect(url_for('paxi_login'))
+    return render_template('panel/paxi.html', user=current_user)
+
 @app.route('/paxi/login', methods=['POST', 'GET'])
 def paxi_login():
     form = LoginForm()
@@ -75,18 +82,19 @@ def paxi_login():
 @app.route('/paxi/logout')
 def paxi_logout():
     if not current_user.is_authenticated:
-        flash('هنوز وارد به نشده اید', 'danger')
+        flash('هنوز وارد نشده اید', 'danger')
         return redirect(url_for('paxi_login'))
     logout_user()
     flash('خروج با موفقیت انجام شد', 'success')
     return redirect(url_for('paxi_login'))
 
-@app.route('/paxi')
-def paxi_panel():
+@app.route('/paxi/weblog', methods=['POST', 'GET'])
+def paxi_weblog():
     if not current_user.is_authenticated:
-        flash('ابتدا باید وارد پکسی بشوید', 'danger')
+        flash('هنوز وارد نشده اید', 'danger')
         return redirect(url_for('paxi_login'))
-    return render_template('panel/paxi.html', user=current_user)
+    all_weblog = Weblog.query.all()
+    return render_template('panel/weblog.html',user=current_user, data=all_weblog)
 
 @app.route('/<inputs>')
 def page_not_found(inputs):
