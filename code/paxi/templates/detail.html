@@ -13,7 +13,7 @@
             <div>
                 <img class="baner" alt="{{data.title}}" src="{{url_for('static', filename=data.baner)}}">
             </div>
-            <p class="date py-1">تاریخ انتشار ( {{data.date.strftime('%d - %m - %Y')}} )</p><hr>
+            <p class="date py-1">تاریخ آخرین آبدیت ( {{data.date.strftime('%d - %m - %Y')}} )</p><hr>
             <p calss="py-5 mt-5">{{data.content}}</p>
             {% if gallery %}
                 <p class="tit mt-5">گالری تصاویر</p>

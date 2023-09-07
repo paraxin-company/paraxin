@@ -21,7 +21,7 @@ class User(db.Model, UserMixin):
 class Category(db.Model):
     # TODO: work sample category table
     id = db.Column(db.Integer, primary_key=True)
-    text = db.Column(db.String(70), nullable=False, unique=True)
+    text = db.Column(db.String(50), nullable=False, unique=True)
     samples = db.relationship('Sample', backref='cat', lazy=True)
 
     def __repr__(self):

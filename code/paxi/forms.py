@@ -13,14 +13,14 @@ class LoginForm(FlaskForm):
     remember = BooleanField('remember me')
 
 
-class WeblogForm(FlaskForm):
+class BaseForm(FlaskForm):
     title = StringField('title', validators=[
         DataRequired(),
         Length(min=10, max=98)
     ])
     content = TextAreaField('content', validators=[
         DataRequired(),
-        Length(min=50)
+        Length(min=100)
     ])
     baner = FileField('baner', validators=[
         DataRequired()
@@ -29,3 +29,6 @@ class WeblogForm(FlaskForm):
         DataRequired(),
         Length(min=10)
     ])
+
+class WeblogForm(BaseForm):
+    pass
