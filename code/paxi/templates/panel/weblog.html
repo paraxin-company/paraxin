@@ -3,13 +3,14 @@
 {% block style %}static/css/panel/weblog.css{% endblock %}
 
 {% block content %}
-<h1 class="text-center mt-4 tit">weblog</h1>
-<a class="btn btn-info" href="">create a new weblog</a>
+<h1 class="text-center mt-4 tit">Weblog Page</h1>
+<a class="btn btn-info" href="{{url_for('paxi_add_weblog')}}">افزودن وبلاگ</a>
 <table class="table mt-5">
     <thead>
         <tr>
             <th scope="col">id</th>
             <th scope="col">title</th>
+            <th scope="col">content</th>
             <th scope="col">date</th>
             <th scope="col">action</th>
         </tr>
@@ -18,7 +19,8 @@
         {% for log in data%}
         <tr>
             <th scope="row">{{log.id}}</th>
-            <td>{{log.title}}</td>
+            <td>{{log.title[:15]}}..</td>
+            <td>{{log.content[:25]}}..</td>
             <td>{{log.date}}</td>
             <td>
                 <span class="p-1"><a class="action-link" title="delete record" href="#">

@@ -1,9 +1,9 @@
 from flask import render_template, abort, redirect, url_for, flash
 from flask_login import login_user, logout_user, current_user, login_required
 from paxi.model import User, Category, Weblog, Sample
-from paxi.forms import LoginForm
+from paxi.forms import LoginForm, WeblogForm
 from paxi.method import passwords
-from paxi import app
+from paxi import app, db
 
 @app.route('/')
 def home():
@@ -93,8 +93,33 @@ def paxi_weblog():
     if not current_user.is_authenticated:
         flash('هنوز وارد نشده اید', 'danger')
         return redirect(url_for('paxi_login'))
+
     all_weblog = Weblog.query.all()
     return render_template('panel/weblog.html',user=current_user, data=all_weblog)
+
+@app.route('/paxi/weblog/add', methods=['POST', 'GET'])
+def paxi_add_weblog():
+    if not current_user.is_authenticated:
+        flash('هنوز وارد نشده اید', 'danger')
+        return redirect(url_for('paxi_login'))
+
+    weblog_form = WeblogForm()
+    if weblog_form.validate_on_submit():
+        add_weblog = Weblog(
+            title = weblog_form.title.data,
+            content = weblog_form.content.data,
+            keyword = weblog_form.keyword.data,
+            baner = '/media/weblog/'+weblog_form.baner.data
+        )
+
+        # add new record
+        db.session.add(add_weblog)
+        db.session.commit()
+
+        flash('رکورد جدید به درستی اضافه شد', 'success')
+        return redirect(url_for('paxi_weblog'))
+    
+    return render_template('panel/add_weblog.html', form=weblog_form, user=current_user)
 
 @app.route('/<inputs>')
 def page_not_found(inputs):

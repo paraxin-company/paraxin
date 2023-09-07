@@ -1,5 +1,5 @@
 from flask_wtf import FlaskForm
-from wtforms import StringField, PasswordField, BooleanField
+from wtforms import StringField, PasswordField, BooleanField, TextAreaField, FileField
 from wtforms.validators import DataRequired, Length
 
 class LoginForm(FlaskForm):
@@ -11,3 +11,21 @@ class LoginForm(FlaskForm):
         DataRequired()
     ])
     remember = BooleanField('remember me')
+
+
+class WeblogForm(FlaskForm):
+    title = StringField('title', validators=[
+        DataRequired(),
+        Length(min=10, max=98)
+    ])
+    content = TextAreaField('content', validators=[
+        DataRequired(),
+        Length(min=50)
+    ])
+    baner = FileField('baner', validators=[
+        DataRequired()
+    ])
+    keyword = TextAreaField('keyword', validators=[
+        DataRequired(),
+        Length(min=10)
+    ])
