@@ -6,7 +6,63 @@
 {% block style %}{{url_for('static', filename='css/detail.css')}}{% endblock %}
 
 {% block content %}
-<p>detail page</p>
+<div class="row row py-5">
+    <div class="col-sm-12 col-lg-9 p-4 pt-1">
+        {% if data %}
+            <h3 class="text-center">{{data.title}}</h3>
+            <div>
+                <img class="baner" alt="{{data.title}}" src="{{url_for('static', filename=data.baner)}}">
+            </div>
+            <p class="date py-1">تاریخ انتشار ( {{data.date.strftime('%d - %m - %Y')}} )</p><hr>
+            <p calss="py-5 mt-5">{{data.content}}</p>
+            {% if gallery %}
+                <p class="tit mt-5">گالری تصاویر</p>
+                <div class="row">
+                    {% for select_image in data.album.split(',') %}
+                    <div class="col-sm-12 col-md-6">
+                        <img class="image-gallery" src="{{url_for('static', filename=select_image.strip())}}" width="500" height="500" alt=""></a>
+                    </div>
+                    {% endfor %}
+                </div>
+            {% endif %}
+        {% endif %}
+    </div>
+    <div class="slider col-sm-12 col-lg-3 px-4 py-4 mt-5">
+        {% if data %}
+            <p class="text-center">
+                لینک های مرتبط
+            </p>
+            <ul>
+                {% if sample %}
+                    {% if related %}
+                        {% for item in related %}
+                        <li class="related-section">
+                            <a class="related-link" href="{{url_for('work_sample_detail', id=item.id)}}"><span class="dot">&#187; </span>{{item.title}}</a>
+                        </li>
+                        {% endfor %}
+                    {% else %}
+                        <p>موردی یافت نشد</p>
+                    {% endif %}
+                {% else %}
+                    {% if related %}
+                        {% for item in related %}
+                        <li class="related-section">
+                            <a class="related-link" href="{{url_for('weblog_detail', id=item.id)}}"><span class="dot">&#187; </span>{{item.title}}</a>
+                        </li>
+                        {% endfor %}
+                    {% else %}
+                        <p>موردی یافت نشد</p>
+                    {% endif %}
+                {% endif %}
+            </ul>
+            <hr class="mt-5">
+            <p class="text-center">کلمات کلیدی</p>
+            {% for keyw in data.keyword.split(',') %}
+                <p class="keyword">{{keyw}}</p>
+            {% endfor %}
+        {% endif %}
+    </div>
+</div>
 {% endblock %}
 {% block wave %}
 <div class="pt-4">

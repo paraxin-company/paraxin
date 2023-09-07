@@ -28,23 +28,41 @@ def weblog():
 @app.route('/weblog/detail/<int:id>')
 def weblog_detail(id):
     web_log = Weblog.query.get_or_404(id)
-    return render_template('detail.html', data=web_log)
-    
+    related = Weblog.query.limit(6)
+    return render_template('detail.html', data=web_log, related=related)
 
 @app.route('/work-sample', methods=['GET', 'POST'])
 def work_sample():
-    sample = Sample.query.all()
-    category = Category.query.all()
-    return render_template('sample.html', sample=sample, category=category)
+    try:
+        sample = Sample.query.all()
+        category = Category.query.all()
+        print(sample)
+        print(category)
+        return render_template('sample.html', sample=sample, category=category)
+    except:
+        abort(404)
 
 @app.route('/work-sample/detail/<int:id>')
 def work_sample_detail(id):
-    sample = Sample.query.get_or_404(id)
-    return render_template('detail.html', data=sample)
+    try:
+        gallery = False
+        sample = Sample.query.get_or_404(id)
+        related = Sample.query.filter_by(category_id=sample.category_id).limit(6)
+        try:
+            # check album in the colum is full or no (can we show the album or no)
+            if ',' in sample.album:
+                gallery = True
+        except:
+            gallery = False
+        return render_template('detail.html', data=sample, related=related, gallery=gallery, sample=True)
+    except:
+        abort(404)
 
 @app.route('/web-design')
 def site_design():
-    return render_template('services/web-design.html')
+    category = Category.query.get(1)
+    tops = Sample.query.filter_by(category_id=category.id).limit(6)
+    return render_template('services/web-design.html', tops=tops)
 
 @app.route('/logo-design')
 def logo_design():

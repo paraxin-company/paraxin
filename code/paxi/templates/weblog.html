@@ -15,7 +15,7 @@
             <div class="col-xs-12 col-sm-8 col-md-6 col-lg-4">
                 <div class="card">
                     <a href="{{url_for('weblog_detail', id=web_log.id)}}">
-                        <img src="{{web_log.baner}}" alt="{{web_log.title}}" class="card-img-top">
+                        <img src="{{url_for('static', filename=web_log.baner)}}" alt="{{web_log.title}}" class="card-img-top">
                     </a>
                     <div class="card-body">
                         <p class="card-title melo">{{web_log.title}}</p>

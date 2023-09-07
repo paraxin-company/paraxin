@@ -197,96 +197,23 @@
     <h1 class="tit">نمونه‌کارهای منتخب</h1>
 </div>
 <div class="row">
-    <div class="col-sm-12 col-md-6 col-lg-4 animate__animated animate__fadeIn wow" data-wow-delay=".1s">
-        <div class="cv-item">
-            <div class="cv-item-image">
-                <img src="{{url_for('static', filename='media/sample.jpg')}}">
-            </div>
-            <div class="cv-item-des">
-                <p>this is simple text</p>
-                <div class="a-flex-center">
-                    <a class="style-link-in-paraxin cv-item-link-padding" href="{{url_for('work_sample')}}">
-                        اطلاعات بیشتر
-                    </a>
+    {% for top in tops%}
+        <div class="col-sm-12 col-md-6 col-lg-4 animate__animated animate__fadeIn wow" data-wow-delay=".1s">
+            <div class="cv-item">
+                <div class="cv-item-image">
+                    <img src="{{url_for('static', filename=top.baner)}}">
+                </div>
+                <div class="cv-item-des">
+                    <p>{{top.title}}</p>
+                    <div class="a-flex-center">
+                        <a class="style-link-in-paraxin cv-item-link-padding" href="{{url_for('work_sample_detail', id=top.id)}}">
+                            اطلاعات بیشتر
+                        </a>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
-    <div class="col-sm-12 col-md-6 col-lg-4 animate__animated animate__fadeIn wow" data-wow-delay=".3s">
-        <div class="cv-item">
-            <div class="cv-item-image">
-                <img src="{{url_for('static', filename='media/sample.jpg')}}">
-            </div>
-            <div class="cv-item-des">
-                <p>this is simple text</p>
-                <div class="a-flex-center">
-                    <a class="style-link-in-paraxin cv-item-link-padding" href="{{url_for('work_sample')}}">
-                        اطلاعات بیشتر
-                    </a>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="col-sm-12 col-md-6 col-lg-4 animate__animated animate__fadeIn wow" data-wow-delay=".5s">
-        <div class="cv-item">
-            <div class="cv-item-image">
-                <img src="{{url_for('static', filename='media/sample.jpg')}}">
-            </div>
-            <div class="cv-item-des">
-                <p>this is simple text</p>
-                <div class="a-flex-center">
-                    <a class="style-link-in-paraxin cv-item-link-padding" href="{{url_for('work_sample')}}">
-                        اطلاعات بیشتر
-                    </a>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="col-sm-12 col-md-6 col-lg-4 animate__animated animate__fadeIn wow" data-wow-delay=".7s">
-        <div class="cv-item">
-            <div class="cv-item-image">
-                <img src="{{url_for('static', filename='media/sample.jpg')}}">
-            </div>
-            <div class="cv-item-des">
-                <p>this is simple text</p>
-                <div class="a-flex-center">
-                    <a class="style-link-in-paraxin cv-item-link-padding" href="{{url_for('work_sample')}}">
-                        اطلاعات بیشتر
-                    </a>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="col-sm-12 col-md-6 col-lg-4 animate__animated animate__fadeIn wow" data-wow-delay=".9s">
-        <div class="cv-item">
-            <div class="cv-item-image">
-                <img src="{{url_for('static', filename='media/sample.jpg')}}">
-            </div>
-            <div class="cv-item-des">
-                <p>this is simple text</p>
-                <div class="a-flex-center">
-                    <a class="style-link-in-paraxin cv-item-link-padding" href="{{url_for('work_sample')}}">
-                        اطلاعات بیشتر
-                    </a>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="col-sm-12 col-md-6 col-lg-4 animate__animated animate__fadeIn wow" data-wow-delay="1.1s">
-        <div class="cv-item">
-            <div class="cv-item-image">
-                <img src="{{url_for('static', filename='media/sample.jpg')}}">
-            </div>
-            <div class="cv-item-des">
-                <p>this is simple text</p>
-                <div class="a-flex-center">
-                    <a class="style-link-in-paraxin cv-item-link-padding" href="{{url_for('work_sample')}}">
-                        اطلاعات بیشتر
-                    </a>
-                </div>
-            </div>
-        </div>
-    </div>
+    {% endfor %}
 </div>
 <div class="a-flex-center">
     <a class="style-link-in-paraxin animate__animated animate__wobble wow" data-wow-delay=".5s" href="{{url_for('work_sample')}}">
