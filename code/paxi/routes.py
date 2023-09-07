@@ -137,6 +137,18 @@ def paxi_add_weblog():
     
     return render_template('panel/add_weblog.html', form=weblog_form)
 
+@app.route('/paxi/weblog/delete/<int:weblog_id>', methods=['GET', 'POST'])
+@login_required
+def paxi_delete_weblog(weblog_id):
+    current_weblog = Weblog.query.get_or_404(int(weblog_id))
+    
+    # delete record in tabel
+    db.session.delete(current_weblog)
+    db.session.commit()
+
+    flash('با موفقیت حذف شد','success')
+    return redirect(url_for('paxi_weblog'))
+
 @app.route('/<inputs>')
 def page_not_found(inputs):
     abort(404)
