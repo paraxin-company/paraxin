@@ -135,19 +135,46 @@ def paxi_add_weblog():
             flash('برای اضافه کردن رکورد جدید مشکلی پیش آمده است', 'danger')
             return redirect(url_for('paxi_weblog'))
     
-    return render_template('panel/add_weblog.html', form=weblog_form)
+    return render_template('panel/weblog_add.html', form=weblog_form)
 
 @app.route('/paxi/weblog/delete/<int:weblog_id>', methods=['GET', 'POST'])
 @login_required
 def paxi_delete_weblog(weblog_id):
     current_weblog = Weblog.query.get_or_404(int(weblog_id))
     
-    # delete record in tabel
+    # delete record in table
     db.session.delete(current_weblog)
     db.session.commit()
 
     flash('با موفقیت حذف شد','success')
     return redirect(url_for('paxi_weblog'))
+
+@app.route('/paxi/weblog/edit/<int:weblog_id>', methods=['POST', 'GET'])
+@login_required
+def paxi_edit_weblog(weblog_id):
+    current_weblog = Weblog.query.get(int(weblog_id))
+    weblog_form = WeblogForm()
+
+    if weblog_form.validate_on_submit():
+        # set new data into the record
+        current_weblog.title = weblog_form.title.data
+        current_weblog.content = weblog_form.content.data
+        current_weblog.baner = 'test'
+        current_weblog.keyword = weblog_form.keyword.data
+
+        # save changes into the table
+        db.session.commit()
+
+        flash(f'اطلاعات مربوط به رکورد ({current_weblog.id}) با موفقیت تغییر کرد', 'success')
+        return redirect(url_for('paxi_weblog'))
+
+    # set data in current_weblog
+    weblog_form.title.data = current_weblog.title
+    weblog_form.content.data = current_weblog.content
+    weblog_form.baner.data = current_weblog.baner
+    weblog_form.keyword.data = current_weblog.keyword
+
+    return render_template('/panel/weblog_edit.html', form=weblog_form)
 
 @app.route('/<inputs>')
 def page_not_found(inputs):

@@ -15,9 +15,15 @@
         <h1 class="english-font panel-name my-4">paxi panel</h1>
         <form action="", method="post">
             {{form.csrf_token}}
-            {{form.username.label(class="form-label english-font")}} {{form.username(class="form-control")}}
-            {{form.password.label(class="form-label english-font mt-2")}} {{form.password(class="form-control")}}
-            {{form.remember.label(class="from-label english-font mt-1 p-1")}}{{form.remember}}
+            <div class="form-floating mt-3">
+                {{form.username(class="form-control", placeholder="username")}}{{form.username.label(class="english-font")}}
+            </div>
+            <div class="form-floating mt-3">
+                {{form.password(class="form-control", placeholder="password")}}{{form.password.label(class="english-font")}}
+            </div>
+            <div class="form-check m-4 mt-2 p-1">
+                {{form.remember.label(class="form-check-label english-font")}}{{form.remember(class="form-check-input")}}
+            </div>
             <div class="text-center mt-4">
                 <input class="style-link-in-paraxin tit login-input" type="submit" value="ورود به پکسی">
             </div>
