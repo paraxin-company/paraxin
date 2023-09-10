@@ -4,6 +4,7 @@
 
 {% block content %}
 <h1 class="tit mt-4 text-center">{% block header %}{% endblock %}</h1>
+{% include "panel/form_errors.html" %}
 <form action="" method="post">
     {{form.csrf_token}}
     {{form.title.label(class="form-label english-font mt-3")}} {{form.title(class="form-control")}}

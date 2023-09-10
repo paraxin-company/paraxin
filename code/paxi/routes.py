@@ -1,7 +1,7 @@
 from flask import render_template, abort, redirect, url_for, flash, request
 from flask_login import login_user, logout_user, current_user, login_required
 from paxi.model import User, Category, Weblog, Sample
-from paxi.forms import LoginForm, WeblogForm
+from paxi.forms import LoginForm, WeblogForm, SampleForm
 from paxi.method import passwords
 from paxi import app, db
 
@@ -79,7 +79,7 @@ def fap():
 @app.route('/paxi')
 @login_required
 def paxi_panel():
-    return render_template('panel/paxi.html')
+    return render_template('panel/home.html')
 
 @app.route('/paxi/login', methods=['POST', 'GET'])
 def paxi_login():
@@ -117,7 +117,7 @@ def paxi_weblog():
 def paxi_add_weblog():
     weblog_form = WeblogForm()
     if weblog_form.validate_on_submit():
-        try:
+        # try:
             add_weblog = Weblog(
                 title = weblog_form.title.data,
                 content = weblog_form.content.data,
@@ -131,9 +131,9 @@ def paxi_add_weblog():
 
             flash('رکورد جدید به درستی اضافه شد', 'success')
             return redirect(url_for('paxi_weblog'))
-        except:
-            flash('برای اضافه کردن رکورد جدید مشکلی پیش آمده است', 'danger')
-            return redirect(url_for('paxi_weblog'))
+        # except:
+        #     flash('برای اضافه کردن رکورد جدید مشکلی پیش آمده است', 'danger')
+        #     return redirect(url_for('paxi_weblog'))
     
     return render_template('panel/weblog/add.html', form=weblog_form)
 
@@ -181,6 +181,36 @@ def paxi_edit_weblog(weblog_id):
 def paxi_work_sample():
     samples = Sample.query.all()
     return render_template('panel/work-sample/work-sample.html', data=samples)
+
+@app.route('/paxi/work-sample/edit/<int:sample_id>', methods=['GET', 'POST'])
+@login_required
+def paxi_work_sample_edit(sample_id):
+    sample_info = Sample.query.get_or_404(int(sample_id))
+    sample_form = SampleForm()
+    
+
+    if sample_form.validate_on_submit():
+        Sample(
+            title = sample_form.title.data,
+            content = sample_form.content.data,
+            baner = '/test/',
+            album = '/test/ablbum',
+            keyword = sample_form.keyword.data
+        )
+
+        # save changes
+        db.session.commit()
+        
+        flash('تغییرات با موفقیت اعمال شد', 'success')
+        return redirect(url_for('paxi_work_sample'))
+        
+    sample_form.title.data = sample_info.title
+    sample_form.content.data = sample_info.content
+    sample_form.baner.data = sample_info.baner
+    sample_form.album.data = sample_info.album
+    sample_form.keyword.data = sample_info.keyword
+
+    return render_template('panel/work-sample/edit.html', form=sample_form)
 
 @app.route('/paxi/work-sample/category')
 @login_required

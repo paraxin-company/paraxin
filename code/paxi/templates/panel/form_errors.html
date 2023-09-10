@@ -1,0 +1,29 @@
+{% if form.title and  form.title.errors %}
+    {% for error in form.title.errors %}
+        <p class="alert alert-danger">{{error}}</p>
+    {% endfor %}
+{% endif %}
+
+{% if form.content and form.content.errors %}
+    {% for error in form.content.errors %}
+        <p class="alert alert-danger">{{error}}</p>
+    {% endfor %}
+{% endif %}
+        
+{% if form.baner and form.baner.errors %}
+    {% for error in form.baner.errors %}
+        <p class="alert alert-danger">{{error}}</p>
+    {% endfor %}
+{% endif %}
+        
+{% if form.album and form.album.errors %}
+    {% for error in form.album.errors %}
+        <p class="alert alert-danger">{{error}}</p>
+    {% endfor %}
+{% endif %}
+        
+{% if form.keyword and form.keyword.errors %}
+    {% for error in form.keyword.errors %}
+        <p class="alert alert-danger">{{error}}</p>
+    {% endfor %}
+{% endif %}

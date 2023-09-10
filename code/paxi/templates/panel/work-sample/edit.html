@@ -1,0 +1,7 @@
+{% extends 'panel/base_form.html' %}
+
+{% block header %}ویرایش نمونه کار{% endblock %}
+{% block buttonText %}ویرایش نمونه کار{% endblock %}
+{% block inputs %}
+{{form.album.label(class="form-label english-font mt-3")}}{{form.album(class="form-control")}}
+{% endblock %}
