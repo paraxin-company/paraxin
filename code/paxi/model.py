@@ -26,6 +26,9 @@ class Category(db.Model):
 
     def __repr__(self):
         return f"{self.id}) {self.text}"
+    
+    def count(self):
+        return len(str(self.samples).split('|'))-1
 
 class Sample(db.Model):
     # TODO: work sample table
@@ -39,7 +42,7 @@ class Sample(db.Model):
     category_id = db.Column(db.Integer, db.ForeignKey('category.id'), nullable=False)
 
     def __repr__(self):
-        return f"{self.id}) {self.title[:30]} | {self.date}"
+        return f"|{self.id}"
 
 class Weblog(db.Model):
     # TODO: weblog table

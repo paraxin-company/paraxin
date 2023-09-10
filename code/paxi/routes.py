@@ -110,7 +110,7 @@ def paxi_logout():
 @login_required
 def paxi_weblog():
     all_weblog = Weblog.query.all()
-    return render_template('panel/weblog.html', data=all_weblog)
+    return render_template('panel/weblog/weblog.html', data=all_weblog)
 
 @app.route('/paxi/weblog/add', methods=['POST', 'GET'])
 @login_required
@@ -135,7 +135,7 @@ def paxi_add_weblog():
             flash('برای اضافه کردن رکورد جدید مشکلی پیش آمده است', 'danger')
             return redirect(url_for('paxi_weblog'))
     
-    return render_template('panel/weblog_add.html', form=weblog_form)
+    return render_template('panel/weblog/add.html', form=weblog_form)
 
 @app.route('/paxi/weblog/delete/<int:weblog_id>', methods=['GET', 'POST'])
 @login_required
@@ -174,7 +174,19 @@ def paxi_edit_weblog(weblog_id):
     weblog_form.baner.data = current_weblog.baner
     weblog_form.keyword.data = current_weblog.keyword
 
-    return render_template('/panel/weblog_edit.html', form=weblog_form)
+    return render_template('/panel/weblog/edit.html', form=weblog_form)
+
+@app.route('/paxi/work-sample')
+@login_required
+def paxi_work_sample():
+    samples = Sample.query.all()
+    return render_template('panel/work-sample/work-sample.html', data=samples)
+
+@app.route('/paxi/work-sample/category')
+@login_required
+def paxi_work_sample_category():
+    cats = Category.query.all()   
+    return render_template('panel/work-sample/category.html', data=cats)
 
 @app.route('/<inputs>')
 def page_not_found(inputs):
