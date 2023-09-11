@@ -4,7 +4,7 @@
 
 {% block content %}
 <h1 class="tit mt-4 text-center">{% block header %}{% endblock %}</h1>
-<form action="" method="post">
+<form action="" method="post" enctype="multipart/form-data">
     {{form.csrf_token}}
     {{form.title.label(class="form-label english-font mt-3")}} {{form.title(class="form-control")}}
     {{form.baner.label(class="form-label english-font mt-3")}} {{form.baner(class="form-control")}}

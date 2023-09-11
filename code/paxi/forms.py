@@ -27,7 +27,7 @@ class BaseForm(FlaskForm):
     ])
     keyword = TextAreaField('keyword', validators=[
         DataRequired(),
-        Length(min=10)
+        Length(min=10, max=100)
     ])
 
 class WeblogForm(BaseForm):

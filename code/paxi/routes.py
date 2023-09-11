@@ -2,8 +2,9 @@ from flask import render_template, abort, redirect, url_for, flash, request
 from flask_login import login_user, logout_user, current_user, login_required
 from paxi.model import User, Category, Weblog, Sample
 from paxi.forms import LoginForm, WeblogForm
-from paxi.method import passwords
-from paxi import app, db
+from paxi.method import passwords, files
+from paxi import app, db, folder_upload
+import os
 
 @app.route('/')
 def home():
@@ -118,19 +119,32 @@ def paxi_add_weblog():
     weblog_form = WeblogForm()
     if weblog_form.validate_on_submit():
         try:
-            add_weblog = Weblog(
-                title = weblog_form.title.data,
-                content = weblog_form.content.data,
-                keyword = weblog_form.keyword.data,
-                baner = '/media/weblog/'+weblog_form.baner.data
-            )
+            the_file = request.files['baner']
+            
+            if files.is_valid(the_file.filename):
+                baner_path = os.path.join(folder_upload, 'weblog', files.change_name(the_file.filename))
 
-            # add new record
-            db.session.add(add_weblog)
-            db.session.commit()
+                # save image in the path
+                the_file.save(baner_path)
 
-            flash('رکورد جدید به درستی اضافه شد', 'success')
-            return redirect(url_for('paxi_weblog'))
+                new_baner_path = files.get_url(baner_path, 'weblog')
+
+                add_weblog = Weblog(
+                    title = weblog_form.title.data,
+                    content = weblog_form.content.data,
+                    keyword = weblog_form.keyword.data,
+                    baner = str(new_baner_path)
+                )
+
+                # add new record
+                db.session.add(add_weblog)
+                db.session.commit()
+
+                flash('رکورد جدید به درستی اضافه شد', 'success')
+                return redirect(url_for('paxi_weblog'))
+            else:
+                flash('فرمت وارد شده مورد قبول نمی باشد', 'danger')
+                return redirect(url_for('paxi_add_weblog'))
         except:
             flash('برای اضافه کردن رکورد جدید مشکلی پیش آمده است', 'danger')
             return redirect(url_for('paxi_weblog'))
@@ -165,7 +179,7 @@ def paxi_edit_weblog(weblog_id):
         # save changes into the table
         db.session.commit()
 
-        flash(f'اطلاعات مربوط به رکورد ({current_weblog.id}) با موفقیت تغییر کرد', 'success')
+        flash(f'اطلاعات مربوط به رکورد ( {current_weblog.id}) با موفقیت تغییر کرد', 'success')
         return redirect(url_for('paxi_weblog'))
 
     # set data in current_weblog
