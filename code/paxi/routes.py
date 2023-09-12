@@ -10,13 +10,16 @@ import os
 def home():
     return render_template('home.html')
 
+
 @app.route('/about')
 def about():
-    return render_template('about.html')
+   return render_template('about.html')
+
 
 @app.route('/contact')
 def contact():
     return render_template('contact.html')
+
 
 @app.route('/weblog')
 def weblog():
@@ -26,11 +29,13 @@ def weblog():
     except:
         abort(404)
 
+
 @app.route('/weblog/detail/<int:id>')
 def weblog_detail(id):
     web_log = Weblog.query.get_or_404(id)
     related = Weblog.query.limit(6)
     return render_template('detail.html', data=web_log, related=related)
+
 
 @app.route('/work-sample', methods=['GET', 'POST'])
 def work_sample():
@@ -42,6 +47,7 @@ def work_sample():
         return render_template('sample.html', sample=sample, category=category)
     except:
         abort(404)
+
 
 @app.route('/work-sample/detail/<int:id>')
 def work_sample_detail(id):
@@ -59,28 +65,34 @@ def work_sample_detail(id):
     except:
         abort(404)
 
+
 @app.route('/web-design')
 def site_design():
     category = Category.query.get(1)
     tops = Sample.query.filter_by(category_id=category.id).limit(6)
     return render_template('services/web-design.html', tops=tops)
 
+
 @app.route('/logo-design')
 def logo_design():
     return render_template('services/logo-design.html')
+
 
 @app.route('/qr-code')
 def qrcode():
     return render_template('services/qr-code.html')
 
+
 @app.route('/fap-builder')
 def fap():
     return render_template('services/fap-builder.html')
+
 
 @app.route('/paxi')
 @login_required
 def paxi_panel():
     return render_template('panel/paxi.html')
+
 
 @app.route('/paxi/login', methods=['POST', 'GET'])
 def paxi_login():
@@ -107,11 +119,13 @@ def paxi_logout():
     flash('خروج با موفقیت انجام شد', 'success')
     return redirect(url_for('paxi_login'))
 
+
 @app.route('/paxi/weblog', methods=['POST', 'GET'])
 @login_required
 def paxi_weblog():
     all_weblog = Weblog.query.all()
     return render_template('panel/weblog.html', data=all_weblog)
+
 
 @app.route('/paxi/weblog/add', methods=['POST', 'GET'])
 @login_required
@@ -151,17 +165,32 @@ def paxi_add_weblog():
     
     return render_template('panel/weblog_add.html', form=weblog_form)
 
+
 @app.route('/paxi/weblog/delete/<int:weblog_id>', methods=['GET', 'POST'])
 @login_required
 def paxi_delete_weblog(weblog_id):
-    current_weblog = Weblog.query.get_or_404(int(weblog_id))
-    
-    # delete record in table
-    db.session.delete(current_weblog)
-    db.session.commit()
+    try:
+        current_weblog = Weblog.query.get_or_404(int(weblog_id))
+        
+        # get old file for delete
+        old_file = current_weblog.baner
+        
+        # delete record in table
+        db.session.delete(current_weblog)
+        db.session.commit()
 
-    flash('با موفقیت حذف شد','success')
-    return redirect(url_for('paxi_weblog'))
+        # try to delete file
+        result = files.delete_file(old_file)
+        if result == True:
+            flash(f'فایل {current_weblog.baner} با موفقیت پاک شد', 'success')
+        else:
+            flash(f'نتونستیم فایل {current_weblog.baner} رو پاک کنیم', 'danger')
+
+        flash('با موفقیت حذف شد','success')
+        return redirect(url_for('paxi_weblog'))
+    except:
+        flash(f'برای حذف کردن رکورد {current_weblog.id} مشکلی پیش آمده است','danger')
+        return redirect(url_for('paxi_weblog'))
 
 @app.route('/paxi/weblog/edit/<int:weblog_id>', methods=['POST', 'GET'])
 @login_required
@@ -171,17 +200,43 @@ def paxi_edit_weblog(weblog_id):
 
     if weblog_form.validate_on_submit():
         # set new data into the record
-        current_weblog.title = weblog_form.title.data
-        current_weblog.content = weblog_form.content.data
-        current_weblog.baner = 'test'
-        current_weblog.keyword = weblog_form.keyword.data
+        try:
+            if files.is_valid(weblog_form.baner.data.filename):
+                the_file = request.files['baner']
+                baner_path = os.path.join(folder_upload, 'weblog', files.change_name(the_file.filename))
 
-        # save changes into the table
-        db.session.commit()
+                # save image in the path
+                the_file.save(baner_path)
 
-        flash(f'اطلاعات مربوط به رکورد ( {current_weblog.id}) با موفقیت تغییر کرد', 'success')
-        return redirect(url_for('paxi_weblog'))
+                # get the old url for delete that
+                old_file = current_weblog.baner
 
+                new_baner_path = files.get_url(baner_path, 'weblog')
+
+                current_weblog.title = weblog_form.title.data
+                current_weblog.content = weblog_form.content.data
+                current_weblog.baner = new_baner_path
+                current_weblog.keyword = weblog_form.keyword.data
+
+                # save changes into the table
+                db.session.commit()
+
+                result = files.delete_file(old_file)
+                if result == True:
+                    flash(f'فایل {current_weblog.baner} با موفقیت پاک شد', 'success')
+                else:
+                    flash(f'نتونستیم فایل {current_weblog.baner} رو پاک کنیم', 'danger')
+
+                flash(f'اطلاعات مربوط به رکورد ( {current_weblog.id}) با موفقیت تغییر کرد', 'success')
+                return redirect(url_for('paxi_weblog'))
+            
+            else:
+                flash('فرمت وارد شده مورد قبول نمی باشد', 'danger')
+                return redirect(url_for('paxi_edit_weblog', weblog_id=current_weblog.id))
+        except:
+            flash(f'برای آبدیت کردن رکورد ( {current_weblog.id}) مشکلی پیش آمده است', 'danger')
+            return redirect(url_for('paxi_edit_weblog', weblog_id=current_weblog.id))
+    
     # set data in current_weblog
     weblog_form.title.data = current_weblog.title
     weblog_form.content.data = current_weblog.content
@@ -190,9 +245,11 @@ def paxi_edit_weblog(weblog_id):
 
     return render_template('/panel/weblog_edit.html', form=weblog_form)
 
+
 @app.route('/<inputs>')
 def page_not_found(inputs):
     abort(404)
+
 
 @app.errorhandler(404)
 def page_not_found_error(error):
