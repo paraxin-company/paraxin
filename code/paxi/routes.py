@@ -1,7 +1,7 @@
 from flask import render_template, abort, redirect, url_for, flash, request
 from flask_login import login_user, logout_user, current_user, login_required
 from paxi.model import User, Category, Weblog, Sample
-from paxi.forms import LoginForm, WeblogForm
+from paxi.forms import LoginForm, WeblogForm, SampleForm
 from paxi.method import passwords, files
 from paxi import app, db, folder_upload
 import os
@@ -91,7 +91,7 @@ def fap():
 @app.route('/paxi')
 @login_required
 def paxi_panel():
-    return render_template('panel/paxi.html')
+    return render_template('panel/home.html')
 
 
 @app.route('/paxi/login', methods=['POST', 'GET'])
@@ -124,7 +124,7 @@ def paxi_logout():
 @login_required
 def paxi_weblog():
     all_weblog = Weblog.query.all()
-    return render_template('panel/weblog.html', data=all_weblog)
+    return render_template('panel/weblog/weblog.html', data=all_weblog)
 
 
 @app.route('/paxi/weblog/add', methods=['POST', 'GET'])
@@ -154,16 +154,13 @@ def paxi_add_weblog():
                 db.session.add(add_weblog)
                 db.session.commit()
 
-                flash('رکورد جدید به درستی اضافه شد', 'success')
-                return redirect(url_for('paxi_weblog'))
-            else:
-                flash('فرمت وارد شده مورد قبول نمی باشد', 'danger')
-                return redirect(url_for('paxi_add_weblog'))
+            flash('رکورد جدید به درستی اضافه شد', 'success')
+            return redirect(url_for('paxi_weblog'))
         except:
             flash('برای اضافه کردن رکورد جدید مشکلی پیش آمده است', 'danger')
             return redirect(url_for('paxi_weblog'))
     
-    return render_template('panel/weblog_add.html', form=weblog_form)
+    return render_template('panel/weblog/add.html', form=weblog_form)
 
 
 @app.route('/paxi/weblog/delete/<int:weblog_id>', methods=['GET', 'POST'])
@@ -243,7 +240,49 @@ def paxi_edit_weblog(weblog_id):
     weblog_form.baner.data = current_weblog.baner
     weblog_form.keyword.data = current_weblog.keyword
 
-    return render_template('/panel/weblog_edit.html', form=weblog_form)
+    return render_template('/panel/weblog/edit.html', form=weblog_form)
+
+@app.route('/paxi/work-sample')
+@login_required
+def paxi_work_sample():
+    samples = Sample.query.all()
+    return render_template('panel/work-sample/work-sample.html', data=samples)
+
+@app.route('/paxi/work-sample/edit/<int:sample_id>', methods=['GET', 'POST'])
+@login_required
+def paxi_work_sample_edit(sample_id):
+    sample_info = Sample.query.get_or_404(int(sample_id))
+    sample_form = SampleForm()
+    
+
+    if sample_form.validate_on_submit():
+        Sample(
+            title = sample_form.title.data,
+            content = sample_form.content.data,
+            baner = '/test/',
+            album = '/test/ablbum',
+            keyword = sample_form.keyword.data
+        )
+
+        # save changes
+        db.session.commit()
+        
+        flash('تغییرات با موفقیت اعمال شد', 'success')
+        return redirect(url_for('paxi_work_sample'))
+        
+    sample_form.title.data = sample_info.title
+    sample_form.content.data = sample_info.content
+    sample_form.baner.data = sample_info.baner
+    sample_form.album.data = sample_info.album
+    sample_form.keyword.data = sample_info.keyword
+
+    return render_template('panel/work-sample/edit.html', form=sample_form)
+
+@app.route('/paxi/work-sample/category')
+@login_required
+def paxi_work_sample_category():
+    cats = Category.query.all()   
+    return render_template('panel/work-sample/category.html', data=cats)
 
 
 @app.route('/<inputs>')

@@ -1,6 +1,6 @@
 from flask_wtf import FlaskForm
-from wtforms import StringField, PasswordField, BooleanField, TextAreaField, FileField
-from wtforms.validators import DataRequired, Length
+from wtforms import StringField, PasswordField, BooleanField, TextAreaField, FileField, MultipleFileField
+from wtforms.validators import DataRequired, Length, ValidationError
 
 class LoginForm(FlaskForm):
     username = StringField('User name', validators=[
@@ -27,8 +27,15 @@ class BaseForm(FlaskForm):
     ])
     keyword = TextAreaField('keyword', validators=[
         DataRequired(),
-        Length(min=10, max=100)
+        Length(min=10, max=110)
     ])
+
+    def validate_keyword(self, keyword):
+        if ',' in keyword.data:
+            raise ValidationError('کاراکتر "," در قسمت کلمات کلیدی مورد قبول نیست')
 
 class WeblogForm(BaseForm):
     pass
+
+class SampleForm(BaseForm):
+    album = MultipleFileField('Album')
