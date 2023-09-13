@@ -2,7 +2,7 @@ from flask import render_template, abort, redirect, url_for, flash, request
 from flask_login import login_user, logout_user, current_user, login_required
 from paxi.model import User, Category, Weblog, Sample
 from paxi.forms import LoginForm, WeblogForm, SampleForm
-from paxi.method import passwords, files
+from paxi.method import passwords, files, comma
 from paxi import app, db, folder_upload
 import os
 
@@ -42,8 +42,6 @@ def work_sample():
     try:
         sample = Sample.query.all()
         category = Category.query.all()
-        print(sample)
-        print(category)
         return render_template('sample.html', sample=sample, category=category)
     except:
         abort(404)
@@ -104,13 +102,14 @@ def paxi_login():
         user = User.query.filter_by(username=form.username.data).first()
         if user and passwords.check_pass(user.password, form.password.data):
             login_user(user, remember=form.remember.data)
-            print(form.remember.data)
             next_page = request.args.get('next')
+            
             flash('ورود با موفقیت', 'success')
             return redirect(next_page if next_page else url_for('paxi_panel'))
         else:
             flash('اطلاعات وارد شده درست نمی باشد', 'danger')
     return render_template('panel/login.html', form=form)
+
 
 @app.route('/paxi/logout')
 @login_required
@@ -132,7 +131,7 @@ def paxi_weblog():
 def paxi_add_weblog():
     weblog_form = WeblogForm()
     if weblog_form.validate_on_submit():
-        try:
+        # try:
             the_file = request.files['baner']
             
             if files.is_valid(the_file.filename):
@@ -146,7 +145,7 @@ def paxi_add_weblog():
                 add_weblog = Weblog(
                     title = weblog_form.title.data,
                     content = weblog_form.content.data,
-                    keyword = weblog_form.keyword.data,
+                    keyword = comma.save(weblog_form.keyword.data),
                     baner = str(new_baner_path)
                 )
 
@@ -156,9 +155,9 @@ def paxi_add_weblog():
 
             flash('رکورد جدید به درستی اضافه شد', 'success')
             return redirect(url_for('paxi_weblog'))
-        except:
-            flash('برای اضافه کردن رکورد جدید مشکلی پیش آمده است', 'danger')
-            return redirect(url_for('paxi_weblog'))
+        # except:
+        #     flash('برای اضافه کردن رکورد جدید مشکلی پیش آمده است', 'danger')
+        #     return redirect(url_for('paxi_weblog'))
     
     return render_template('panel/weblog/add.html', form=weblog_form)
 
@@ -189,10 +188,11 @@ def paxi_delete_weblog(weblog_id):
         flash(f'برای حذف کردن رکورد {current_weblog.id} مشکلی پیش آمده است','danger')
         return redirect(url_for('paxi_weblog'))
 
+
 @app.route('/paxi/weblog/edit/<int:weblog_id>', methods=['POST', 'GET'])
 @login_required
 def paxi_edit_weblog(weblog_id):
-    current_weblog = Weblog.query.get(int(weblog_id))
+    current_weblog = Weblog.query.get_or_404(int(weblog_id))
     weblog_form = WeblogForm()
 
     if weblog_form.validate_on_submit():
@@ -202,27 +202,31 @@ def paxi_edit_weblog(weblog_id):
                 the_file = request.files['baner']
                 baner_path = os.path.join(folder_upload, 'weblog', files.change_name(the_file.filename))
 
-                # save image in the path
-                the_file.save(baner_path)
+                if files.rename_undo(os.path.basename(current_weblog.baner)) != weblog_form.baner.data.filename:
+                    # save image in the path
+                    the_file.save(baner_path)
 
-                # get the old url for delete that
-                old_file = current_weblog.baner
+                    # get the old url for delete that
+                    old_file = current_weblog.baner
 
-                new_baner_path = files.get_url(baner_path, 'weblog')
+                    new_baner_path = files.get_url(baner_path, 'weblog')
+                    current_weblog.baner = new_baner_path
+
+                    result = files.delete_file(old_file)
+                    if result == True:
+                        flash(f'فایل {current_weblog.baner} با موفقیت پاک شد', 'success')
+                    else:
+                        flash(f'نتونستیم فایل {current_weblog.baner} رو پاک کنیم', 'danger')
+                
+                else:
+                    current_weblog.baner = current_weblog.baner
 
                 current_weblog.title = weblog_form.title.data
                 current_weblog.content = weblog_form.content.data
-                current_weblog.baner = new_baner_path
-                current_weblog.keyword = weblog_form.keyword.data
+                current_weblog.keyword = comma.save(weblog_form.keyword.data)
 
                 # save changes into the table
                 db.session.commit()
-
-                result = files.delete_file(old_file)
-                if result == True:
-                    flash(f'فایل {current_weblog.baner} با موفقیت پاک شد', 'success')
-                else:
-                    flash(f'نتونستیم فایل {current_weblog.baner} رو پاک کنیم', 'danger')
 
                 flash(f'اطلاعات مربوط به رکورد ( {current_weblog.id}) با موفقیت تغییر کرد', 'success')
                 return redirect(url_for('paxi_weblog'))
@@ -237,16 +241,17 @@ def paxi_edit_weblog(weblog_id):
     # set data in current_weblog
     weblog_form.title.data = current_weblog.title
     weblog_form.content.data = current_weblog.content
-    weblog_form.baner.data = current_weblog.baner
-    weblog_form.keyword.data = current_weblog.keyword
+    weblog_form.keyword.data = comma.show(current_weblog.keyword)
 
-    return render_template('/panel/weblog/edit.html', form=weblog_form)
+    return render_template('/panel/weblog/edit.html', form=weblog_form, baner=current_weblog.baner)
+
 
 @app.route('/paxi/work-sample')
 @login_required
 def paxi_work_sample():
     samples = Sample.query.all()
     return render_template('panel/work-sample/work-sample.html', data=samples)
+
 
 @app.route('/paxi/work-sample/edit/<int:sample_id>', methods=['GET', 'POST'])
 @login_required
@@ -261,7 +266,7 @@ def paxi_work_sample_edit(sample_id):
             content = sample_form.content.data,
             baner = '/test/',
             album = '/test/ablbum',
-            keyword = sample_form.keyword.data
+            keyword = comma.save(sample_form.keyword.data)
         )
 
         # save changes
@@ -274,9 +279,10 @@ def paxi_work_sample_edit(sample_id):
     sample_form.content.data = sample_info.content
     sample_form.baner.data = sample_info.baner
     sample_form.album.data = sample_info.album
-    sample_form.keyword.data = sample_info.keyword
+    sample_form.keyword.data = comma.show(sample_info.keyword)
 
     return render_template('panel/work-sample/edit.html', form=sample_form)
+
 
 @app.route('/paxi/work-sample/category')
 @login_required
@@ -285,11 +291,6 @@ def paxi_work_sample_category():
     return render_template('panel/work-sample/category.html', data=cats)
 
 
-@app.route('/<inputs>')
-def page_not_found(inputs):
-    abort(404)
-
-
 @app.errorhandler(404)
 def page_not_found_error(error):
-    return render_template('404.html')
+    return render_template('404.html'), 404

@@ -28,6 +28,12 @@
     padding: 15px !important;
     background-color: var(--menu-color);
 }
+.paraxin-color{
+    color: var(--paraxin-color);
+}
+.ml-auto{
+    margin-left: auto !important;
+}
 .brand{
     margin: 10px auto;
     width: 150px;

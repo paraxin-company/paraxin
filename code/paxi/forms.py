@@ -16,18 +16,18 @@ class LoginForm(FlaskForm):
 class BaseForm(FlaskForm):
     title = StringField('title', validators=[
         DataRequired(),
-        Length(min=10, max=98)
+        Length(min=10, max=98, message="تعداد حرفی که در قسمت عنوان قرار دادین بیشتر 98 حرف است ")
     ])
     content = TextAreaField('content', validators=[
         DataRequired(),
-        Length(min=100)
+        Length(min=100, message="برای قسمت محتوا تعداد باید بیشتر از 100 تا حروف باشه")
     ])
     baner = FileField('baner', validators=[
         DataRequired()
     ])
     keyword = TextAreaField('keyword', validators=[
         DataRequired(),
-        Length(min=10, max=110)
+        Length(min=10, max=115, message="برای قسمت کلمات کلیدی نمیشه بیشتر از 115 تا حرف وارد کرد")
     ])
 
     def validate_keyword(self, keyword):
