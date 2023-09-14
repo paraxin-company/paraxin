@@ -1,8 +1,8 @@
 from flask import render_template, abort, redirect, url_for, flash, request
 from flask_login import login_user, logout_user, current_user, login_required
 from paxi.model import User, Category, Weblog, Sample
-from paxi.forms import LoginForm, WeblogForm, SampleForm
-from paxi.method import passwords, files, comma
+from paxi.forms import LoginForm, WeblogForm, SampleForm, CategoryForm
+from paxi.method import passwords, files, comma, folder
 from paxi import app, db, folder_upload
 import os
 
@@ -287,10 +287,74 @@ def paxi_work_sample_edit(sample_id):
 @app.route('/paxi/work-sample/category')
 @login_required
 def paxi_work_sample_category():
-    cats = Category.query.all()   
-    return render_template('panel/work-sample/category.html', data=cats)
+    cats = Category.query.order_by(Category.id).all()
+    cat_form = CategoryForm()
+    return render_template('panel/work-sample/category.html', data=cats, form=cat_form)
+
+
+@app.route('/paxi/work-sample/category/edit/<int:cat_id>', methods=['POST'])
+@login_required
+def paxi_work_sample_category_edit(cat_id):
+    try:
+        current_category = Category.query.get_or_404(int(cat_id))
+        cat_form = CategoryForm()
+        
+        result_folder_name = folder.check_name(cat_form.text.data)
+        if result_folder_name == True:
+            if current_category.text != cat_form.text.data:
+                if Category.query.filter_by(text=cat_form.text.data).first() == None:
+                    if folder.rename('sample', current_category.text, cat_form.text.data):
+                        current_category.text = cat_form.text.data
+                        
+                        # save changes
+                        db.session.commit()
+
+                        flash(f'اطلاعات دسته بندی با ID={current_category.id} با موفقیت تغییر کرد', 'success')
+                    else:
+                        flash('برای تغییر اسم پوشه در هاست مشکلی پیش آمده است', 'danger')
+                else:
+                    flash(f'دسته بندی با نام ({cat_form.text.data}) وجود دارد', 'danger')
+            else:
+                flash('اطلاعاتی تغییر نکرده است','danger')
+        else:
+            flash(result_folder_name, 'danger')
+    except:
+        flash(f'برای تغییر دسته بندی با ID={current_category.id} مشکلی پیش آمده است', 'danger')
+    return redirect(url_for('paxi_work_sample_category'))
+
+
+@app.route('/paxi/work-sample/category/add', methods=['POST'])
+@login_required
+def paxi_work_sample_category_add():
+    try:
+        cat_form = CategoryForm()
+        
+        result_folder_name = folder.check_name(cat_form.text.data)
+        if result_folder_name == True:
+            if Category.query.filter_by(text=cat_form.text.data).first() == None:
+                if folder.create('sample', cat_form.text.data):
+                    add_category = Category(text=cat_form.text.data)
+
+                    # save changes
+                    db.session.add(add_category)
+                    db.session.commit()
+                    flash(f'با موفقیت دسته بندی جدید برای نمونه کار ها اضافه شد ({cat_form.text.data})', 'success')
+                else:
+                    flash('برای اضافه کردن پوشه در هاست مشکلی پیش آمده است', 'danger')
+            else:
+                flash(f'دسته بندی با نام ({cat_form.text.data}) وجود دارد', 'danger')
+        else:
+            flash(result_folder_name, 'danger')
+    except:
+        flash(f'برای اضافه کردن دسته بندی نمونه کار جدید مشکلی پیش آمده است', 'danger')
+    return redirect(url_for('paxi_work_sample_category'))
 
 
 @app.errorhandler(404)
 def page_not_found_error(error):
     return render_template('404.html'), 404
+
+
+@app.errorhandler(405)
+def not_allowed(error):
+    return render_template('405.html'), 405

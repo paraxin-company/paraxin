@@ -31,9 +31,6 @@
 .paraxin-color{
     color: var(--paraxin-color);
 }
-.ml-auto{
-    margin-left: auto !important;
-}
 .brand{
     margin: 10px auto;
     width: 150px;
@@ -54,6 +51,13 @@
 }
 [class*="col-"]{
     padding: 0px !important;
+}
+.scape{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-between !important;
+    align-items: center !important;
 }
 .accordion-item:last-of-type .accordion-button.collapsed ,
 .accordion-item:first-of-type .accordion-button ,

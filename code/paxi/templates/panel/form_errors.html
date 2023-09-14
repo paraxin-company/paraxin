@@ -27,3 +27,9 @@
         <p class="alert alert-danger">{{error}}</p>
     {% endfor %}
 {% endif %}
+
+{% if form.text and form.text.errors %}
+    {% for error in form.text.errors %}
+        <p class="alert alert-danger">{{error}}</p>
+    {% endfor %}
+{% endif %}

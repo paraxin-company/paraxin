@@ -1,7 +1,5 @@
 {% extends 'panel/paxi.html' %}
 
-{% block style %}static/css/panel/weblog.css{% endblock %}
-
 {% block content %}
 <h1 class="paraxin-color text-center mt-4 tit">صفحه‌ی وبلاگ</h1>
 <a class="style-link-in-paraxin" href="{{url_for('paxi_add_weblog')}}">افزودن وبلاگ جدید</a>
@@ -30,7 +28,7 @@
                         </svg>
                     </a>
                     <div class="modal fade" id="exampleModal{{log.id}}" data-bs-backdrop="static" data-bs-keyboard="false" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                        <div class="modal-dialog modal-dialog-scrollable">
+                        <div class="modal-dialog">
                             <div class="modal-content">
                                 <div class="modal-header">
                                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
