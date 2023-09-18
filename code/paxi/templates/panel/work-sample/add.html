@@ -1,0 +1,8 @@
+{% extends 'panel/base_form.html' %}
+
+{% block header %}افزودن نمونه کار{% endblock %}
+{% block buttonText %}افزودن نمونه کار{% endblock %}
+{% block inputs %}
+{{form.category.label(class="form-label english-font mt-3")}}{{form.category(class="form-control")}}
+{{form.album.label(class="form-label english-font mt-3")}}{{form.album(class="form-control" ,accept=".png, .jfif, .jpeg, .jpg, .webp, .svg, .icon, .ico")}}
+{% endblock %}

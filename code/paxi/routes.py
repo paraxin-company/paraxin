@@ -53,12 +53,13 @@ def work_sample_detail(id):
         gallery = False
         sample = Sample.query.get_or_404(id)
         related = Sample.query.filter_by(category_id=sample.category_id).limit(6)
-        try:
-            # check album in the colum is full or no (can we show the album or no)
-            if ',' in sample.album:
-                gallery = True
-        except:
+        
+        # check album in the colum is full or no (can we show the album or no)
+        if '|,|' in sample.album:
+            gallery = True
+        else:
             gallery = False
+    
         return render_template('detail.html', data=sample, related=related, gallery=gallery, sample=True)
     except:
         abort(404)
@@ -66,7 +67,7 @@ def work_sample_detail(id):
 
 @app.route('/web-design')
 def site_design():
-    category = Category.query.get(1)
+    category = Category.query.filter_by(text='طراحی سایت').first()
     tops = Sample.query.filter_by(category_id=category.id).limit(6)
     return render_template('services/web-design.html', tops=tops)
 
@@ -95,7 +96,7 @@ def paxi_panel():
 @app.route('/paxi/login', methods=['POST', 'GET'])
 def paxi_login():
     if current_user.is_authenticated:
-        flash('شما به حساب خود وارد هستین نمی توانید دوباره به حساب خود وارد شوید', 'danger')
+        flash('نمی توان موقعی که login هستین دوباره login کنید', 'danger')
         return redirect(url_for('paxi_panel'))
     form = LoginForm()
     if form.validate_on_submit():
@@ -131,13 +132,12 @@ def paxi_weblog():
 def paxi_add_weblog():
     weblog_form = WeblogForm()
     if weblog_form.validate_on_submit():
-        # try:
+        try:
             the_file = request.files['baner']
             
             if files.is_valid(the_file.filename):
-                baner_path = os.path.join(folder_upload, 'weblog', files.change_name(the_file.filename))
-
                 # save image in the path
+                baner_path = os.path.join(folder_upload, 'weblog', files.change_name(the_file.filename))
                 the_file.save(baner_path)
 
                 new_baner_path = files.get_url(baner_path, 'weblog')
@@ -153,16 +153,18 @@ def paxi_add_weblog():
                 db.session.add(add_weblog)
                 db.session.commit()
 
-            flash('رکورد جدید به درستی اضافه شد', 'success')
+                flash('وبلاگ جدید به درستی اضافه شد', 'success')
+                return redirect(url_for('paxi_weblog'))
+            else:
+                flash(f'فرمت فایل مورد قبول نیست ({the_file.filename})', 'danger')
+                return redirect(url_for('paxi_weblog'))
+        except:
+            flash('برای اضافه کردن وبلاگ جدید مشکلی پیش آمده است', 'danger')
             return redirect(url_for('paxi_weblog'))
-        # except:
-        #     flash('برای اضافه کردن رکورد جدید مشکلی پیش آمده است', 'danger')
-        #     return redirect(url_for('paxi_weblog'))
-    
     return render_template('panel/weblog/add.html', form=weblog_form)
 
 
-@app.route('/paxi/weblog/delete/<int:weblog_id>', methods=['GET', 'POST'])
+@app.route('/paxi/weblog/delete/<int:weblog_id>', methods=['POST'])
 @login_required
 def paxi_delete_weblog(weblog_id):
     try:
@@ -178,14 +180,14 @@ def paxi_delete_weblog(weblog_id):
         # try to delete file
         result = files.delete_file(old_file)
         if result == True:
-            flash(f'فایل {current_weblog.baner} با موفقیت پاک شد', 'success')
+            flash(f'فایل با موفقیت پاک شد ({current_weblog.baner})', 'success')
         else:
-            flash(f'نتونستیم فایل {current_weblog.baner} رو پاک کنیم', 'danger')
+            flash(f'برای پاک کردن فایل مشکلی پیش آمده است ({current_weblog.baner})', 'danger')
 
-        flash('با موفقیت حذف شد','success')
+        flash(f'وبلاگ با موفقیت حذف شد ( id={current_weblog.id})','success')
         return redirect(url_for('paxi_weblog'))
     except:
-        flash(f'برای حذف کردن رکورد {current_weblog.id} مشکلی پیش آمده است','danger')
+        flash(f'برای حذف کردن وبلاگ مشکلی پیش آمده است ( id={current_weblog.id})','danger')
         return redirect(url_for('paxi_weblog'))
 
 
@@ -200,23 +202,22 @@ def paxi_edit_weblog(weblog_id):
         try:
             if files.is_valid(weblog_form.baner.data.filename):
                 the_file = request.files['baner']
-                baner_path = os.path.join(folder_upload, 'weblog', files.change_name(the_file.filename))
 
                 if files.rename_undo(os.path.basename(current_weblog.baner)) != weblog_form.baner.data.filename:
                     # save image in the path
+                    baner_path = os.path.join(folder_upload, 'weblog', files.change_name(the_file.filename))
                     the_file.save(baner_path)
 
                     # get the old url for delete that
                     old_file = current_weblog.baner
 
-                    new_baner_path = files.get_url(baner_path, 'weblog')
-                    current_weblog.baner = new_baner_path
+                    current_weblog.baner = files.get_url(baner_path, 'weblog')
 
                     result = files.delete_file(old_file)
                     if result == True:
-                        flash(f'فایل {current_weblog.baner} با موفقیت پاک شد', 'success')
+                        flash(f'فایل با موفقیت پاک شد ({current_weblog.baner})', 'success')
                     else:
-                        flash(f'نتونستیم فایل {current_weblog.baner} رو پاک کنیم', 'danger')
+                        flash(f'برای پاک کردن فایل مشکلی پیش آمده است ({current_weblog.baner})', 'danger')
                 
                 else:
                     current_weblog.baner = current_weblog.baner
@@ -228,16 +229,15 @@ def paxi_edit_weblog(weblog_id):
                 # save changes into the table
                 db.session.commit()
 
-                flash(f'اطلاعات مربوط به رکورد ( {current_weblog.id}) با موفقیت تغییر کرد', 'success')
+                flash(f'اطلاعات وبلاگ با موفقیت تغییر کرد ( id={current_weblog.id})', 'success')
                 return redirect(url_for('paxi_weblog'))
-            
             else:
-                flash('فرمت وارد شده مورد قبول نمی باشد', 'danger')
+                flash(f'فرمت فایل مورد قبول نیست ({weblog_form.baner.data.filename})', 'danger')
                 return redirect(url_for('paxi_edit_weblog', weblog_id=current_weblog.id))
         except:
-            flash(f'برای آبدیت کردن رکورد ( {current_weblog.id}) مشکلی پیش آمده است', 'danger')
+            flash(f'برای آبدیت کردن وبلاگ مشکلی پیش آمده است ( id={current_weblog.id})', 'danger')
             return redirect(url_for('paxi_edit_weblog', weblog_id=current_weblog.id))
-    
+
     # set data in current_weblog
     weblog_form.title.data = current_weblog.title
     weblog_form.content.data = current_weblog.content
@@ -253,9 +253,113 @@ def paxi_work_sample():
     return render_template('panel/work-sample/work-sample.html', data=samples)
 
 
+@app.route('/paxi/work-sample/add', methods=['GET', 'POST'])
+@login_required
+def paxi_add_work_sample():
+    try:
+        sample_form = SampleForm()
+        all_category = Category.query.order_by(Category.id).all()
+
+        if sample_form.validate_on_submit():
+            baner_image = request.files['baner']
+            album = request.files.getlist("album")
+
+            if files.is_valid(baner_image.filename):
+                # save baner in host
+                baner_path = os.path.join(os.path.join(folder_upload, 'sample'), sample_form.category.data, files.change_name(baner_image.filename))
+                baner_image.save(baner_path)
+
+                if len(album) >= 1:
+                    album_path_host = []
+                    # Iterate for each file in the files List, and Save them
+                    for image in album:
+                        if image:
+                            if files.is_valid(image.filename):
+                                # save album image in host
+                                album_path = os.path.join(os.path.join(folder_upload, 'sample'), sample_form.category.data, files.change_name(image.filename))
+                                album_path_host.append(files.get_url(album_path, os.path.join('sample', sample_form.category.data)))
+                                image.save(album_path)
+                            else:
+                                flash(f'فرمت فایل مورد قبول نیست ({image.filename})', 'danger')
+                                return redirect(url_for('paxi_work_sample'))
+                    if len(album_path_host) == 1:
+                        album_result = album_path_host[0]+'|,|'
+                    else:
+                        album_result = '|,|'.join(album_path_host)
+                else:
+                    album_result = ''
+
+                new_baner_path = files.get_url(baner_path, os.path.join('sample', sample_form.category.data))
+
+                # get category info fo add new record
+                for item in all_category:
+                    if sample_form.category.data in str(item):
+                        current_cat = item
+
+                add_sample = Sample(
+                    title = sample_form.title.data,
+                    content = sample_form.content.data,
+                    keyword = comma.save(sample_form.keyword.data),
+                    baner = str(new_baner_path),
+                    album = album_result,
+                    cat = current_cat
+                )
+
+                # save new record
+                db.session.add(add_sample)
+                db.session.commit()
+
+                flash('رکورد جدید به درستی اضافه شد', 'success')
+                return redirect(url_for('paxi_work_sample'))
+            else:
+                flash(f'فرمت فایل مورد قبول نیست ({baner_image.filename})', 'danger')
+                return redirect(url_for('paxi_work_sample'))
+        return render_template('panel/work-sample/add.html', form=sample_form, cats=all_category)
+    except:
+        flash('برای اضافه کردن رکورد جدید مشکلی پیش آمده است', 'danger')
+        return redirect(url_for('paxi_work_sample'))
+
+
+@app.route('/paxi/work-sample/delete/<int:sample_id>', methods=['POST'])
+@login_required
+def paxi_delete_work_sample(sample_id):
+    try:
+        current_sample = Sample.query.get_or_404(int(sample_id))
+
+        baner = current_sample.baner
+        album = current_sample.album
+
+        result = files.delete_file(baner)
+        if result == True:
+            flash(f'فایل با موفقیت پاک شد ({current_sample.baner})', 'success')
+        else:
+            flash(f'برای پاک کردن فایل مشکلی پیش آمده است ({current_sample.baner})', 'danger')
+
+        if '|,|' in album:
+            images_in_album = album.split('|,|')
+            for image in images_in_album:
+                if len(image) != 0:
+                    state_image = files.delete_file(image)
+                    if state_image == True:
+                        flash(f'فایل با موفقیت پاک شد ({image})', 'success')
+                    else:
+                        flash(f'برای پاک کردن فایل مشکلی پیش آمده است ({image})', 'danger')
+
+        
+        # delete record
+        db.session.delete(current_sample)
+        db.session.commit()
+
+        flash(f'نمونه کار با موفقیت حذف شد ( id={current_sample.id})','success')
+        return redirect(url_for('paxi_work_sample'))
+    except:
+        flash(f'برای حذف کردن نمونه کار مشکلی پیش آمده است ( id={current_sample.id})','danger')
+        return redirect(url_for('paxi_work_sample'))
+
+
 @app.route('/paxi/work-sample/edit/<int:sample_id>', methods=['GET', 'POST'])
 @login_required
-def paxi_work_sample_edit(sample_id):
+def paxi_edit_work_sample(sample_id):
     sample_info = Sample.query.get_or_404(int(sample_id))
     sample_form = SampleForm()
     
@@ -294,7 +398,7 @@ def paxi_work_sample_category():
 
 @app.route('/paxi/work-sample/category/edit/<int:cat_id>', methods=['POST'])
 @login_required
-def paxi_work_sample_category_edit(cat_id):
+def paxi_edit_work_sample_category(cat_id):
     try:
         current_category = Category.query.get_or_404(int(cat_id))
         cat_form = CategoryForm()
@@ -309,7 +413,7 @@ def paxi_work_sample_category_edit(cat_id):
                         # save changes
                         db.session.commit()
 
-                        flash(f'اطلاعات دسته بندی با ID={current_category.id} با موفقیت تغییر کرد', 'success')
+                        flash(f'اطلاعات دسته بندی با موفقیت تغییر کرد ( ID={current_category.id})', 'success')
                     else:
                         flash('برای تغییر اسم پوشه در هاست مشکلی پیش آمده است', 'danger')
                 else:
@@ -319,13 +423,13 @@ def paxi_work_sample_category_edit(cat_id):
         else:
             flash(result_folder_name, 'danger')
     except:
-        flash(f'برای تغییر دسته بندی با ID={current_category.id} مشکلی پیش آمده است', 'danger')
+        flash(f'برای تغییر دسته بندی مشکلی پیش آمده است ( ID={current_category.id})', 'danger')
     return redirect(url_for('paxi_work_sample_category'))
 
 
 @app.route('/paxi/work-sample/category/add', methods=['POST'])
 @login_required
-def paxi_work_sample_category_add():
+def paxi_add_work_sample_category():
     try:
         cat_form = CategoryForm()
         
@@ -338,16 +442,20 @@ def paxi_work_sample_category_add():
                     # save changes
                     db.session.add(add_category)
                     db.session.commit()
-                    flash(f'با موفقیت دسته بندی جدید برای نمونه کار ها اضافه شد ({cat_form.text.data})', 'success')
+                    flash(f'با موفقیت دسته بندی جدید برای نمونه کار اضافه شد ({cat_form.text.data})', 'success')
+                    return redirect(url_for('paxi_work_sample_category'))
                 else:
                     flash('برای اضافه کردن پوشه در هاست مشکلی پیش آمده است', 'danger')
+                    return redirect(url_for('paxi_work_sample_category'))
             else:
-                flash(f'دسته بندی با نام ({cat_form.text.data}) وجود دارد', 'danger')
+                flash(f'چنین دسته بندی وجود دارد ({cat_form.text.data})', 'danger')
+                return redirect(url_for('paxi_work_sample_category'))
         else:
             flash(result_folder_name, 'danger')
+            return redirect(url_for('paxi_work_sample_category'))
     except:
         flash(f'برای اضافه کردن دسته بندی نمونه کار جدید مشکلی پیش آمده است', 'danger')
-    return redirect(url_for('paxi_work_sample_category'))
+        return redirect(url_for('paxi_work_sample_category'))
 
 
 @app.errorhandler(404)

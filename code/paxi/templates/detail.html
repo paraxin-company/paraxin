@@ -18,10 +18,12 @@
             {% if gallery %}
                 <p class="tit mt-5">گالری تصاویر</p>
                 <div class="row">
-                    {% for select_image in data.album.split(',') %}
-                    <div class="col-sm-12 col-md-6">
-                        <img class="image-gallery" src="{{url_for('static', filename=select_image.strip())}}" width="500" height="500" alt=""></a>
-                    </div>
+                    {% for select_image in data.album.split('|,|') %}
+                        {% if select_image %}
+                            <div class="col-sm-12 col-md-6">
+                                <img class="image-gallery" src="{{url_for('static', filename=select_image.strip())}}" width="500" height="500" alt="برای لود کردن تصویر مشکلی پیش آمده است"></a>
+                            </div>
+                        {% endif %}
                     {% endfor %}
                 </div>
             {% endif %}
@@ -55,6 +57,9 @@
                     {% endif %}
                 {% endif %}
             </ul>
+            {% if sample %}
+            <hr class="mt-5"><p class="text-center">دسته بندی</p><p>{{data.cat.text}}</p>
+            {% endif %}
             <hr class="mt-5">
             <p class="text-center">کلمات کلیدی</p>
             {% for keyw in data.keyword.split(',') %}

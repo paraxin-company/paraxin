@@ -1,5 +1,5 @@
 from flask_wtf import FlaskForm
-from wtforms import StringField, PasswordField, BooleanField, TextAreaField, FileField, MultipleFileField
+from wtforms import StringField, PasswordField, BooleanField, TextAreaField, RadioField, FileField, MultipleFileField
 from wtforms.validators import DataRequired, Length, ValidationError
 from paxi.model import Category
 
@@ -39,8 +39,17 @@ class BaseForm(FlaskForm):
 class WeblogForm(BaseForm):
     pass
 
+
 class SampleForm(BaseForm):
-    album = MultipleFileField('Album')
+    all_category = Category.query.all()
+    category_list = []
+    
+    album = MultipleFileField('album')
+    for category in all_category:
+        category_list.append(category.text)
+    category = RadioField('category', choices=category_list, validators=[
+        DataRequired()
+    ])
 
 
 class CategoryForm(FlaskForm):

@@ -40,11 +40,12 @@
                                         ( {{log.id}})
                                         اطمینان دارید .
                                     </p>
+                                    <form class="scape pt-3" action="{{url_for('paxi_delete_weblog', weblog_id=log.id)}}" method="post">
+                                        <button type="button" class="ml-auto btn btn-success" data-bs-dismiss="modal">لغو</button>
+                                        <input type="submit" value="حذف رکورد ( {{log.id}})" class="btn btn-danger">
+                                    </form>
                                 </div>
-                                <div class="modal-footer">
-                                    <button type="button" class="ml-auto btn btn-success" data-bs-dismiss="modal">لغو</button>
-                                    <a href="{{url_for('paxi_delete_weblog', weblog_id=log.id)}}" class="btn btn-danger">حذف رکورد ( {{log.id}})</a>
-                                </div>
+                                
                             </div>
                         </div>
                     </div>

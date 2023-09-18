@@ -1,6 +1,8 @@
 from paxi import db, login_manager
 from flask_login import UserMixin
 import datetime
+from paxi import app
+app.app_context().push()
 
 @login_manager.user_loader
 def get_id(user_id):
@@ -13,7 +15,7 @@ class User(db.Model, UserMixin):
     username = db.Column(db.String(40), unique=True, nullable=False)
     email = db.Column(db.String(50), unique=True, nullable=False)
     password = db.Column(db.String(80), nullable=False)
-    profile = db.Column(db.String(40), nullable=False)
+    profile = db.Column(db.String(80), nullable=False)
 
     def __repr__(self):
         return f"{self.id}) {self.fullname}"
@@ -34,8 +36,8 @@ class Sample(db.Model):
     # TODO: work sample table
     id = db.Column(db.Integer, primary_key=True)
     title = db.Column(db.String(90), nullable=False)
-    content = db.Column(db.Text)
-    baner = db.Column(db.String(50), nullable=False)
+    content = db.Column(db.Text, nullable=False)
+    baner = db.Column(db.Text, nullable=False)
     album = db.Column(db.Text)
     date = db.Column(db.DateTime, default=datetime.datetime.now)
     keyword = db.Column(db.String(120), nullable=False)
@@ -48,8 +50,8 @@ class Weblog(db.Model):
     # TODO: weblog table
     id = db.Column(db.Integer, primary_key=True)
     title = db.Column(db.String(100), nullable=False)
-    content = db.Column(db.Text)
-    baner = db.Column(db.Text)
+    content = db.Column(db.Text, nullable=False)
+    baner = db.Column(db.Text, nullable=False)
     keyword = db.Column(db.String(120), nullable=False)
     date = db.Column(db.DateTime, default=datetime.datetime.now)
 

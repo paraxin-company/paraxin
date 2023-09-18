@@ -13,7 +13,7 @@
             </div>
             <div class="modal-body">
                 <p>
-                    <form action="{{url_for('paxi_work_sample_category_add')}}" method="post">
+                    <form action="{{url_for('paxi_add_work_sample_category')}}" method="post">
                         {{form.text.label(class="form-label tit mt-3")}} {{form.text(class="form-control")}}
                         <div class="scape pt-3">
                             <button type="button" class="btn btn-success" data-bs-dismiss="modal">لغو</button>
@@ -50,7 +50,7 @@
                             </div>
                             <div class="modal-body">
                                 <p>
-                                    <form action="{{url_for('paxi_work_sample_category_edit', cat_id=log.id)}}" method="post">    
+                                    <form action="{{url_for('paxi_edit_work_sample_category', cat_id=log.id)}}" method="post">    
                                         {{form.text.label(class="form-label tit mt-3")}} {{form.text(class="form-control", value=log.text)}}
                                         <div class="scape pt-3">
                                             <button type="button" class="btn btn-success" data-bs-dismiss="modal">لغو</button>

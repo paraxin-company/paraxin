@@ -40,16 +40,13 @@
     height: 300px;
     border-radius: var(--border-radius-image);
     width: 100%;
-    border: 6px solid var(--paraxin-color);
+    border: 8px solid var(--paraxin-color);
     -webkit-filter: sepia(100%);
     filter: sepia(100%);
-    transition-duration: 1s;
+    transition-duration: .5s;
 }
 .image-gallery:hover {
     border: 3px solid var(--paraxin-color);
-    -webkit-transform: scale(1.05);
-    -ms-transform: scale(1.05);
-    transform: scale(1.05);
     -webkit-filter: none;
     filter: none;
 }
