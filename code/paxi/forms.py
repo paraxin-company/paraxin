@@ -2,6 +2,7 @@ from flask_wtf import FlaskForm
 from wtforms import StringField, PasswordField, BooleanField, TextAreaField, RadioField, FileField, MultipleFileField
 from wtforms.validators import DataRequired, Length, ValidationError
 from paxi.model import Category
+from paxi import app
 
 class LoginForm(FlaskForm):
     username = StringField('User name', validators=[
@@ -41,6 +42,8 @@ class WeblogForm(BaseForm):
 
 
 class SampleForm(BaseForm):
+    app.app_context().push()
+    
     all_category = Category.query.all()
     category_list = []
     

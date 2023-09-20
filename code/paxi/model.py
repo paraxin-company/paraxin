@@ -1,8 +1,6 @@
 from paxi import db, login_manager
 from flask_login import UserMixin
 import datetime
-from paxi import app
-app.app_context().push()
 
 @login_manager.user_loader
 def get_id(user_id):

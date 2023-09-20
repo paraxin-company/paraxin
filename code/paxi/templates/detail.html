@@ -1,8 +1,6 @@
 {% extends 'base.html'%}
 
-{% block title %}paraxin | تماس با تیم پاراکسین{% endblock %}
-{% block keyword %}تماس با تیم پاراکسین, تماس با پاراکسین, ارتباط با پاراکسین, ارتباط با تیم پاراکسین, دپارتمان های پاراکسین, پشتیبان های پاراکسین, paraxin, پاراکسین, تیم پاراکسین{% endblock %}
-{% block desc %}برای اینکه بتوانید در کمترین زمان ممکن با تیم پشتیبانی در ارتباط باشین می توانید از طریق این صفحه اقدام کنید، پشتیبان ها در کمترین زمان ممکن پاسخ شما را می دهند{% endblock %}
+{% block title %}paraxin | صفحه جزیات{% endblock %}
 {% block style %}{{url_for('static', filename='css/detail.css')}}{% endblock %}
 
 {% block content %}
@@ -13,7 +11,7 @@
             <div>
                 <img class="baner" alt="{{data.title}}" src="{{url_for('static', filename=data.baner)}}">
             </div>
-            <p class="date py-1">تاریخ آخرین آبدیت ( {{data.date.strftime('%d- %m- %Y')}} )</p><hr>
+            <p class="date py-2">تاریخ آخرین آبدیت ( {{data.date.strftime('%d- %m- %Y')}} )</p><hr class="mt-5">
             <p calss="py-5 mt-5">{{data.content}}</p>
             {% if gallery %}
                 <p class="tit mt-5">گالری تصاویر</p>
