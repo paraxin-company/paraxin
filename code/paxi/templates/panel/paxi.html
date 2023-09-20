@@ -21,7 +21,7 @@
 				</div>
 				<ul class="menu mt-3">
 					<li class="nav-item p-2">
-						<a class="nav-link" href="{{url_for('paxi_weblog')}}">وبلاگ</a>
+						<a class="nav-link {% block weblog_page %}{% endblock %}" href="{{url_for('paxi_weblog')}}">وبلاگ</a>
 					</li>
 					<div class="accordion" id="accordionExample">
 						<div class="accordion-item">
@@ -33,10 +33,10 @@
 							<div id="sample-collapse" class="accordion-collapse collapse show" data-bs-parent="#accordionExample">
 								<div class="accordion-body">
 									<li class="nav-item p-2">
-										<a class="nav-link" href="{{url_for('paxi_work_sample_category')}}">دسته بندی</a>
+										<a class="nav-link {% block category_page %}{% endblock %}" href="{{url_for('paxi_work_sample_category')}}">دسته بندی</a>
 									</li>
 									<li class="nav-item p-2">
-										<a class="nav-link" href="{{url_for('paxi_work_sample')}}">کل نمونه ها</a>
+										<a class="nav-link {% block work_page %}{% endblock %}" href="{{url_for('paxi_work_sample')}}">کل نمونه ها</a>
 									</li>
 								</div>
 							</div>

@@ -65,6 +65,10 @@
 .action-link{
     text-decoration: none;
 }
+.active{
+    font-weight: bold !important;
+    color: var(--paraxin-color) !important;
+}
 @media screen and (max-width: 750px){
     .slider{
         visibility: hidden;
