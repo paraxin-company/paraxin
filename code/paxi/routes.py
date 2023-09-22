@@ -1,7 +1,7 @@
 from flask import render_template, abort, redirect, url_for, flash, request
 from flask_login import login_user, logout_user, current_user, login_required
 from paxi.model import User, Category, Weblog, Sample
-from paxi.forms import LoginForm, WeblogForm, SampleForm, CategoryForm
+from paxi.forms import LoginForm, WeblogForm, SampleForm, ProfileForm, CategoryForm
 from paxi.method import passwords, files, comma, folder
 from paxi import app, db, folder_upload
 import os
@@ -528,6 +528,55 @@ def paxi_add_work_sample_category():
     except:
         flash(f'برای اضافه کردن دسته بندی نمونه کار جدید مشکلی پیش آمده است', 'danger')
         return redirect(url_for('paxi_work_sample_category'))
+
+
+@app.route('/paxi/profile', methods=['POST', 'GET'])
+@login_required
+def profile():
+    profile_form = ProfileForm()
+
+    print('profile form')
+    if profile_form.validate_on_submit():
+        print('amir amir')
+        print(current_user.username)
+        print(current_user.password)
+        current_user.username = profile_form.username.data
+        current_user.password = passwords.get_hash(profile_form.password.data)
+        print(current_user.username)
+        print(current_user.password)
+
+        # save changes
+        db.session.commit()
+        flash('اطلاعات با موفقیت تغییر کرد', 'success')
+        return redirect(url_for('profile'))
+
+    return render_template('panel/profile.html', form=profile_form)
+
+
+@app.route('/paxi/profile/baner', methods=['POST'])
+@login_required
+def change_profile_baner():
+    the_file = request.files['profile_baner']
+    if files.is_valid(the_file.filename):
+        # save new profile image
+        profile_path = os.path.join(folder_upload, 'panel', files.change_name(the_file.filename))
+        the_file.save(profile_path)
+
+        # delete old profile image
+        result = files.delete_file(current_user.profile)
+        if result == True:
+            flash(f'فایل {current_user.profile} با موفقیت پاک شد', 'success')
+        else:
+            flash(f'نتونستیم فایل {current_user.profile} رو پاک کنیم', 'danger')
+
+        current_user.profile = files.get_url(profile_path, 'panel')
+
+        # save changes
+        db.session.commit()
+        flash('تصویر پروفایل شما با موفقیت عوض شد', 'success')
+    else:
+        flash(f'فرمت فایل مورد قبول نیست ({the_file.filename})', 'danger')
+    return redirect(url_for('profile'))
 
 
 @app.errorhandler(404)

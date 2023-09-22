@@ -1,6 +1,9 @@
 from flask_wtf import FlaskForm
 from wtforms import StringField, PasswordField, BooleanField, TextAreaField, RadioField, FileField, MultipleFileField
-from wtforms.validators import DataRequired, Length, ValidationError
+from wtforms.validators import DataRequired, Length, ValidationError, EqualTo
+from flask_login import current_user
+from paxi.method import passwords
+from paxi.model import User
 from paxi.model import Category
 from paxi import app
 
@@ -60,3 +63,28 @@ class CategoryForm(FlaskForm):
         DataRequired(),
         Length(min=8, max=45, message='اطلاعات وارده در بخش عنوان دسته بندی نباید کمتر از 8 و بیشتر از 45 حرف باشد')
     ])
+
+
+class ProfileForm(FlaskForm):
+    username = StringField('user name', validators=[DataRequired()])
+    password = PasswordField('new password', validators=[
+        DataRequired(),
+        Length(min=8)
+    ])
+    confirm_password = PasswordField('confirm new password', validators=[
+        DataRequired(),
+        EqualTo('password', message='پسورد وارد شده در قسمت پسورد جدید باید با هم برابر باشن')
+    ])
+    old_password = PasswordField('old password', validators=[DataRequired()])
+
+    def validate_username(self, username):
+        if current_user.username != username.data:
+            if current_user.fullname != username.data:
+                if User.query.filter_by(username=username.data).first():
+                    raise ValidationError(f'یوزر نیم {username.data} قبلا توسط کسی انتخاب شده است')
+            else:
+                raise ValidationError('نمی شه نام کاربری با اسم کامل یکی باشه (برای امنیت بیشتر توصیه میشه)')
+    
+    def validate_old_password(self, old_password):
+        if passwords.check_pass(current_user.password, old_password.data) == False:
+            raise ValidationError('پسورد وارد شده درست نمی باشد')

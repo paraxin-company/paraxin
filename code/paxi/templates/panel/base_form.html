@@ -3,8 +3,8 @@
 {% block style %}static/css/panel/base_form.css{% endblock %}
 
 {% block content %}
-<h1 class="tit mt-4 text-center">{% block header %}{% endblock %}</h1>
 {% include "panel/form_errors.html" %}
+<h1 class="tit mt-4 text-center">{% block header %}{% endblock %}</h1>
 <form action="" enctype="multipart/form-data" method="post">
     {{form.csrf_token}}
     {{form.title.label(class="form-label english-font mt-3")}} {{form.title(class="form-control")}}
