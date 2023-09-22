@@ -1,6 +1,8 @@
 from flask_wtf import FlaskForm
-from wtforms import StringField, PasswordField, BooleanField, TextAreaField, FileField, MultipleFileField
+from wtforms import StringField, PasswordField, BooleanField, TextAreaField, RadioField, FileField, MultipleFileField
 from wtforms.validators import DataRequired, Length, ValidationError
+from paxi.model import Category
+from paxi import app
 
 class LoginForm(FlaskForm):
     username = StringField('User name', validators=[
@@ -34,8 +36,27 @@ class BaseForm(FlaskForm):
         if ',' in keyword.data:
             raise ValidationError('کاراکتر "," در قسمت کلمات کلیدی مورد قبول نیست')
 
+
 class WeblogForm(BaseForm):
     pass
 
+
 class SampleForm(BaseForm):
-    album = MultipleFileField('Album')
+    app.app_context().push()
+    
+    all_category = Category.query.all()
+    category_list = []
+    
+    album = MultipleFileField('album')
+    for category in all_category:
+        category_list.append(category.text)
+    category = RadioField('category', choices=category_list, validators=[
+        DataRequired()
+    ])
+
+
+class CategoryForm(FlaskForm):
+    text = StringField('text', validators=[
+        DataRequired(),
+        Length(min=8, max=45, message='اطلاعات وارده در بخش عنوان دسته بندی نباید کمتر از 8 و بیشتر از 45 حرف باشد')
+    ])

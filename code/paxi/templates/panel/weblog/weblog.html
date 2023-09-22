@@ -1,8 +1,11 @@
 {% extends 'panel/paxi.html' %}
 
+<<<<<<< HEAD
 {% block style %}static/css/panel/weblog.css{% endblock %}
 {% block weblog_page %}active{% endblock %}
 
+=======
+>>>>>>> feature/work_sample_in_paxi
 {% block content %}
 <h1 class="paraxin-color text-center mt-4 tit">صفحه‌ی وبلاگ</h1>
 <a class="style-link-in-paraxin" href="{{url_for('paxi_add_weblog')}}">افزودن وبلاگ جدید</a>
@@ -31,7 +34,7 @@
                         </svg>
                     </a>
                     <div class="modal fade" id="exampleModal{{log.id}}" data-bs-backdrop="static" data-bs-keyboard="false" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                        <div class="modal-dialog modal-dialog-scrollable">
+                        <div class="modal-dialog">
                             <div class="modal-content">
                                 <div class="modal-header">
                                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
@@ -43,11 +46,12 @@
                                         ( {{log.id}})
                                         اطمینان دارید .
                                     </p>
+                                    <form class="scape pt-3" action="{{url_for('paxi_delete_weblog', weblog_id=log.id)}}" method="post">
+                                        <button type="button" class="ml-auto btn btn-success" data-bs-dismiss="modal">لغو</button>
+                                        <input type="submit" value="حذف رکورد ( {{log.id}})" class="btn btn-danger">
+                                    </form>
                                 </div>
-                                <div class="modal-footer">
-                                    <button type="button" class="ml-auto btn btn-success" data-bs-dismiss="modal">لغو</button>
-                                    <a href="{{url_for('paxi_delete_weblog', weblog_id=log.id)}}" class="btn btn-danger">حذف رکورد ( {{log.id}})</a>
-                                </div>
+                                
                             </div>
                         </div>
                     </div>

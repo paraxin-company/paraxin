@@ -14,7 +14,7 @@
         <div class="filter col-sm-12 col-lg-3 mt-2">
             <h2 class="tit text-center">فیلتر</h2>
             <form>
-                <label>دسته بندی پروژه ها</label><br>
+                <label>دسته بندی نمونه کار ها</label><br>
                 {% if category %}
                     {% for item in category %}
                         <label for="{{item.text}}">{{item.text}}</label>
@@ -34,9 +34,9 @@
                     <div class="col-xs-12 col-sm-6 col-md-4">
                         <div class="card">
                             <a class="links" href="{{url_for('work_sample_detail', id=item.id)}}">
-                                <img src="../static/{{item.baner}}" alt="{{item.title}}" class="card-img-top">
+                                <img src="{{url_for('static', filename=item.baner)}}" alt="{{item.title}}" class="card-img-top">
                                 <div class="card-body">
-                                    <h5 class="card-title desc">{{item.title}}</h5>
+                                    <p class="card-title">{{item.title}}</p>
                                 </div>
                             </a>
                         </div>

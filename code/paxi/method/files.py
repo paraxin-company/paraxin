@@ -8,7 +8,7 @@ def change_name(file_name):
 
 def is_valid(file_name):
     # TODO: check file format
-    valid_format = ['.jpg', '.png', '.jfif']
+    valid_format = ['.jpg', '.ico', '.jpeg', '.icon', '.svg', '.webp', '.png', '.jfif']
     return os.path.splitext(file_name)[1] in valid_format
 
 

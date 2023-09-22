@@ -8,7 +8,7 @@
 <form action="" enctype="multipart/form-data" method="post">
     {{form.csrf_token}}
     {{form.title.label(class="form-label english-font mt-3")}} {{form.title(class="form-control")}}
-    {{form.baner.label(class="form-label english-font mt-3")}} {% block baner_text %}{% endblock %} {{form.baner(class="form-control")}}
+    {{form.baner.label(class="form-label english-font mt-3")}} {% block baner_text %}{% endblock %} {{form.baner(class="form-control" ,accept=".png, .jfif, .jpeg, .jpg, .webp, .svg, .icon, .ico")}}
     {{form.keyword.label(class="form-label english-font mt-3")}} {{form.keyword(class="form-control")}}
     {{form.content.label(class="form-label english-font mt-3")}} {{form.content(class="form-control")}}
     {% block inputs %}{% endblock %}
