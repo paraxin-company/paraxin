@@ -1,4 +1,4 @@
-from hashlib import sha256
+from hashlib import sha256, md5
 
 def get_hash(phrase):
     #TODO: hash phrase and return hashed text
@@ -10,3 +10,6 @@ def check_pass(hashed, phrase):
     if hashed == get_hash(phrase):
         return True
     return False
+
+def small(name):
+    return md5(name.encode()).hexdigest()[:20]

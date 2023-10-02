@@ -137,7 +137,7 @@ def paxi_add_weblog():
             
             if files.is_valid(the_file.filename):
                 # save image in the path
-                baner_path = os.path.join(folder_upload, 'weblog', files.change_name(the_file.filename))
+                baner_path = os.path.join(folder_upload, 'weblog', files.rename_name(the_file.filename))
                 the_file.save(baner_path)
 
                 new_baner_path = files.get_url(baner_path, 'weblog')
@@ -205,7 +205,7 @@ def paxi_edit_weblog(weblog_id):
 
                 if files.rename_undo(os.path.basename(current_weblog.baner)) != weblog_form.baner.data.filename:
                     # save image in the path
-                    baner_path = os.path.join(folder_upload, 'weblog', files.change_name(the_file.filename))
+                    baner_path = os.path.join(folder_upload, 'weblog', files.rename_name(the_file.filename))
                     the_file.save(baner_path)
 
                     # get the old url for delete that
@@ -215,9 +215,9 @@ def paxi_edit_weblog(weblog_id):
 
                     result = files.delete_file(old_file)
                     if result == True:
-                        flash(f'فایل با موفقیت پاک شد ({current_weblog.baner})', 'success')
+                        flash(f'فایل با موفقیت پاک شد ({old_file})', 'success')
                     else:
-                        flash(f'برای پاک کردن فایل مشکلی پیش آمده است ({current_weblog.baner})', 'danger')
+                        flash(f'برای پاک کردن فایل مشکلی پیش آمده است ({old_file})', 'danger')
                 
                 else:
                     current_weblog.baner = current_weblog.baner
@@ -263,10 +263,13 @@ def paxi_add_work_sample():
         if sample_form.validate_on_submit():
             baner_image = request.files['baner']
             album = request.files.getlist("album")
-
+            
             if files.is_valid(baner_image.filename):
                 # save baner in host
-                baner_path = os.path.join(os.path.join(folder_upload, 'sample'), sample_form.category.data, files.change_name(baner_image.filename))
+                
+                new_category = passwords.small(sample_form.category.data)
+
+                baner_path = os.path.join(os.path.join(folder_upload, 'sample'), new_category, files.rename_name(baner_image.filename))
                 baner_image.save(baner_path)
 
                 if len(album) >= 1:
@@ -276,8 +279,8 @@ def paxi_add_work_sample():
                         if image:
                             if files.is_valid(image.filename):
                                 # save album image in host
-                                album_path = os.path.join(os.path.join(folder_upload, 'sample'), sample_form.category.data, files.change_name(image.filename))
-                                album_path_host.append(files.get_url(album_path, os.path.join('sample', sample_form.category.data)))
+                                album_path = os.path.join(os.path.join(folder_upload, 'sample'), new_category, files.rename_name(image.filename))
+                                album_path_host.append(files.get_url(album_path, os.path.join('sample', new_category)))
                                 image.save(album_path)
                             else:
                                 flash(f'فرمت فایل مورد قبول نیست ({image.filename})', 'danger')
@@ -290,7 +293,7 @@ def paxi_add_work_sample():
                     album_result = ''
 
                 # find baner path
-                new_baner_path = files.get_url(baner_path, os.path.join('sample', sample_form.category.data))
+                new_baner_path = files.get_url(baner_path, os.path.join('sample', new_category))
 
                 # find category info
                 for item in all_category:
@@ -363,10 +366,6 @@ def paxi_edit_work_sample(sample_id):
     current_sample = Sample.query.get_or_404(int(sample_id))
     all_category = Category.query.all()
 
-    category_list = []
-    for category in all_category:
-        category_list.append(category.text)
-
     sample_form = SampleForm()
 
     if sample_form.validate_on_submit():
@@ -376,7 +375,10 @@ def paxi_edit_work_sample(sample_id):
 
             if files.is_valid(baner_image.filename):
                 # save new baner in host
-                baner_path = os.path.join(os.path.join(folder_upload, 'sample'), sample_form.category.data, files.change_name(baner_image.filename))
+
+                new_category = passwords.small(sample_form.category.data)
+
+                baner_path = os.path.join(os.path.join(folder_upload, 'sample'), new_category, files.rename_name(baner_image.filename))
                 baner_image.save(baner_path)
 
                 # delete old baner
@@ -387,7 +389,7 @@ def paxi_edit_work_sample(sample_id):
                     flash(f'برای حذف کردن بنر قبلی مشکلی پیش آمده است ({current_sample.baner})', 'danger')
                 
                 # check album is set or no
-                if len(album) == 1 and sample_form.category.data == current_sample.cat.text:
+                if len(album) == 1 and new_category == current_sample.cat.text:
                     album_result = current_sample.album
                 else:
                     album_path_host = []
@@ -396,8 +398,8 @@ def paxi_edit_work_sample(sample_id):
                         if image:
                             if files.is_valid(image.filename):
                                 # save album image in host
-                                album_path = os.path.join(os.path.join(folder_upload, 'sample'), sample_form.category.data, files.change_name(image.filename))
-                                album_path_host.append(files.get_url(album_path, os.path.join('sample', sample_form.category.data)))
+                                album_path = os.path.join(os.path.join(folder_upload, 'sample'), new_category, files.rename_name(image.filename))
+                                album_path_host.append(files.get_url(album_path, os.path.join('sample', new_category)))
                                 image.save(album_path)
                             else:
                                 flash(f'فرمت فایل مورد قبول نیست ({image.filename})', 'danger')
@@ -418,7 +420,7 @@ def paxi_edit_work_sample(sample_id):
                                 flash(f'برای پاک کردن فایل مشکلی پیش آمده است ({image})', 'danger')
                 
                 # find baner path
-                new_baner_path = files.get_url(baner_path, os.path.join('sample', sample_form.category.data))
+                new_baner_path = files.get_url(baner_path, os.path.join('sample', new_category))
 
                 # find category info
                 for item in all_category:
@@ -443,6 +445,10 @@ def paxi_edit_work_sample(sample_id):
         except:
             flash(f'برای تغییر نمونه کار مشکلی پیش آمده است ( id={sample_id})','danger')
             return redirect(url_for('paxi_work_sample'))
+
+    category_list = []
+    for category in all_category:
+        category_list.append(category.text)
 
     sample_form.title.data = current_sample.title
     sample_form.content.data = current_sample.content
@@ -469,16 +475,17 @@ def paxi_edit_work_sample_category(cat_id):
         all_sample_match = Sample.query.filter_by(cat=current_category).all()
         cat_form = CategoryForm()
 
+        new_category_text = passwords.small(cat_form.text.data)
         result_folder_name = folder.check_name(cat_form.text.data)
         if result_folder_name == True:
             if current_category.text != cat_form.text.data:
-                if Category.query.filter_by(text=cat_form.text.data).first() == None:
-                    if folder.rename('sample', current_category.text, cat_form.text.data):
+                if Category.query.filter_by(text=new_category_text).first() == None:
+                    if folder.rename('sample', passwords.small(current_category.text), new_category_text):
                         # change sample directory
                         if all_sample_match:
                             for item in all_sample_match:
-                                item.baner = item.baner.replace(current_category.text, cat_form.text.data)
-                                item.album = item.album.replace(current_category.text, cat_form.text.data)
+                                item.baner = item.baner.replace(passwords.small(current_category.text), new_category_text)
+                                item.album = item.album.replace(passwords.small(current_category.text), new_category_text)
 
                         current_category.text = cat_form.text.data
                         
@@ -508,7 +515,7 @@ def paxi_add_work_sample_category():
         result_folder_name = folder.check_name(cat_form.text.data)
         if result_folder_name == True:
             if Category.query.filter_by(text=cat_form.text.data).first() == None:
-                if folder.create('sample', cat_form.text.data):
+                if folder.create('sample', passwords.small(cat_form.text.data)):
                     add_category = Category(text=cat_form.text.data)
 
                     # save changes
@@ -535,15 +542,9 @@ def paxi_add_work_sample_category():
 def profile():
     profile_form = ProfileForm()
 
-    print('profile form')
     if profile_form.validate_on_submit():
-        print('amir amir')
-        print(current_user.username)
-        print(current_user.password)
         current_user.username = profile_form.username.data
         current_user.password = passwords.get_hash(profile_form.password.data)
-        print(current_user.username)
-        print(current_user.password)
 
         # save changes
         db.session.commit()
@@ -557,9 +558,10 @@ def profile():
 @login_required
 def change_profile_baner():
     the_file = request.files['profile_baner']
+    
     if files.is_valid(the_file.filename):
         # save new profile image
-        profile_path = os.path.join(folder_upload, 'panel', files.change_name(the_file.filename))
+        profile_path = os.path.join(folder_upload, 'panel', files.rename_name(the_file.filename))
         the_file.save(profile_path)
 
         # delete old profile image

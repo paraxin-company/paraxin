@@ -1,9 +1,10 @@
 import os, datetime
+from paxi.method import passwords
 
-def change_name(file_name):
+def rename_name(file_name):
     # TODO: change file name
-    renamed = str(file_name).replace(' ', '_') if ' ' in file_name else file_name
-    return str(datetime.datetime.now().strftime("%Y-%m-%d-%H-%M"))+"1400."+renamed
+    file_name = passwords.small(file_name)+os.path.splitext(file_name)[1]
+    return str(datetime.datetime.now().strftime("%m-%d-%H-%M"))+"00."+file_name
 
 
 def is_valid(file_name):
@@ -35,4 +36,4 @@ def delete_file(file_address):
 
 def rename_undo(filename):
     # return filename
-    return filename.split('1400.')[1]
+    return filename.split('00.')[1]
