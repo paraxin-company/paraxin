@@ -25,7 +25,7 @@ class Category(db.Model):
     samples = db.relationship('Sample', backref='cat', lazy=True)
 
     def __repr__(self):
-        return f"{self.id}) {self.text}"
+        return f"[{self.id}, {self.text}]"
     
     def count(self):
         return len(str(self.samples).split('|'))-1

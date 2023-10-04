@@ -39,15 +39,29 @@ def weblog_detail(id):
 
 @app.route('/work-sample', methods=['GET', 'POST'])
 def work_sample():
-    try:
-        sample = Sample.query.all()
-        category = Category.query.all()
-        return render_template('sample.html', sample=sample, category=category)
-    except:
-        abort(404)
+    category = Category.query.all()
+
+    if request.method == 'POST':
+        sample = []
+        filter_text = []
+        is_sample_find = False
+
+        # get sample by category text
+        for cat in category:
+            if request.form.get(cat.text):
+                sample += Sample.query.filter_by(category_id = cat.id).all()
+                filter_text.append(cat.text)
+                is_sample_find = True
+
+        if len(sample) == 0 and is_sample_find == False:
+            sample = Sample.query.all()
+        return render_template('sample.html', sample=sample, category=category, filter_text=' ، '.join(filter_text))
+
+    sample = Sample.query.all()
+    return render_template('sample.html', sample=sample, category=category)
 
 
-@app.route('/work-sample/detail/<int:id>')
+@app.route('/work-sample/detail/<int:id>', methods=['GET'])
 def work_sample_detail(id):
     try:
         gallery = False

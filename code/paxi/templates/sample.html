@@ -9,16 +9,19 @@
 {% block content%}
     <div class="text-cetner mt-5">
         <h1 class="tit">نمونه کار ها</h1>
+        {% if filter_text %}
+        <p>نمونه‌های مربوط به ( {{filter_text}} )</p>
+        {% endif %}
     </div>
     <div class="row row-reverse">
         <div class="filter col-sm-12 col-lg-3 mt-2">
             <h2 class="tit text-center">فیلتر</h2>
-            <form>
+            <form action="" method="post">
                 <label>دسته بندی نمونه کار ها</label><br>
                 {% if category %}
                     {% for item in category %}
                         <label for="{{item.text}}">{{item.text}}</label>
-                        <input type="checkbox" id="{{item.text}}"><br>
+                        <input name="{{item.text}}" type="checkbox" id="{{item.text}}"><br>
                     {% endfor %}
                 {% endif %}
                 <hr class="filter-divider">
@@ -42,6 +45,8 @@
                         </div>
                     </div>
                     {% endfor %}
+                {% else %}
+                    <p class="text-center alert alert-danger">برای این دسته بندی چیزی ثبت نشده است</p>
                 {% endif %}
             </div>
         </div>
