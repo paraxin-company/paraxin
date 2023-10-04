@@ -115,3 +115,9 @@
     </svg>
 </div>
 {% endblock %}
+{% block animate %}
+<script src="{{url_for('static', filename='js/wow.js')}}"></script>
+<script>
+    new WOW() .init();
+</script>
+{% endblock %}

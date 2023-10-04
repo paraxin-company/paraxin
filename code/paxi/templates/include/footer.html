@@ -1,0 +1,62 @@
+<div class="row">
+    <div class="related-links col-sm-12 col-md-4 col-xl-2">
+        <h5 class="fw-bold topic-link border-b-paraxin">آخرین مقالات</h5>
+        <ul>
+            <li><a href="{{url_for('weblog')}}">آخرین مقاله</a></li>
+            <li><a href="{{url_for('weblog')}}">آخرین مقاله</a></li>
+            <li><a href="{{url_for('weblog')}}">آخرین مقاله</a></li>
+            <li><a href="{{url_for('weblog')}}">آخرین مقاله</a></li>
+        </ul>
+    </div>
+    <div class="related-links col-sm-12 col-md-4 col-xl-2">
+        <h5 class="fw-bold topic-link border-b-paraxin">خدمات</h5>
+        <ul>
+            <li><a href="{{url_for('site_design')}}">طراحی سایت</a></li>
+            <li><a href="{{url_for('logo_design')}}">طراحی لوگو</a></li>
+            <li><a href="{{url_for('fap')}}#fap-builder-link">فاپ‌ساز آنلاین</a></li>
+            <li><a href="{{url_for('qrcode')}}">کیو آر کد ساز</a></li><hr class="footer-hr">
+            <li><a href="{{url_for('work_sample')}}">نمونه کارها</a></li>
+        </ul>
+    </div>
+    <div class="related-links col-sm-12 col-md-4 col-xl-2">
+        <h5 class="fw-bold topic-link border-b-paraxin">راه های ارتباطی<h5>
+        <ul>
+            <li><button type="button" class="robot-button" data-bs-toggle="modal" data-bs-target="#robot">
+                ربات تلگرام
+              </button></li>
+            <li><a href="{{url_for('contact')}}#send-mail">فرم تماس</a></li>
+        </ul>
+        <div class="modal fade" id="robot" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        <h1 class="modal-title fs-5" id="exampleModalLabel">ربات تلگرام پاراکسین</h1>
+                    </div>
+                    <div class="modal-body">
+                        <p>برای استفاده از ربات پاراکسین می توانید در تلگرام 
+                            paraxin_bot
+                            رو سرچ کنید تا با ربات ارتباط برقرار کنید یا اینکه دکمه ی انتقال به ربات را بزنین تا شما را به آدرس تلگرامی انتقال دهد .
+                        </p>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-danger" data-bs-dismiss="modal">بی خیال</button>
+                        <a href="https://t.me/paraxin_bot" target="_blank" class="btn btn-success">انتقال به ربات</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="social-media col-sm-12 col-xl-6">
+        <h5 class="tit">شبکه های اجتماعی پاراکسین</h5>
+        <a target="_blanck" href="https://youtube.com/paraxin" title="حساب یوتیوب پاراکسین"><img class="social-brand" src="{{url_for('static', filename='media/svg_file/youtube.svg')}}"><span class="social-name">Youtube</span></a>
+        <a target="_blanck" href="https://github.com/paraxin-company" title="حساب گیت پاراکسین"><img class="social-brand" src="{{url_for('static', filename='media/svg_file/github.svg')}}"><span class="social-name">Github</span></a>
+        <a target="_blanck" href="https://t.me/paraxin_company" title="حساب تلگرام پاراکسین"><img class="social-brand" src="{{url_for('static', filename='media/svg_file/telegram.svg')}}"><span class="social-name">Telegram</span></a>
+        <a target="_blanck" href="mailto:info@paraxin.ir" title="ایمیل پاراکسین"><img class="social-brand" src="{{url_for('static', filename='media/svg_file/envelope-fill.svg')}}"><span class="social-name">Email</span></a>
+        <a target="_blanck" href="https://www.linkedin.com/in/paraxin-company/" title="حساب لینکدین پاراکسین"><img class="social-brand" src="{{url_for('static', filename='media/svg_file/linkedin.svg')}}"><span class="social-name">Linkedin</span></a>
+    </div>
+</div>
+<hr><div class="copyright">
+    <p>تمامی حقوق برای تیم <a href="{{url_for('home')}}" class="paraxin-link">پاراکسین</a> محفوظ می باشد.</p>
+    <p>1402 ( 2023) &#169;</p>
+</div>
