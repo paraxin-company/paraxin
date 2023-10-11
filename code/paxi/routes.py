@@ -23,11 +23,9 @@ def contact():
 
 @app.route('/weblog')
 def weblog():
-    try:
-        web_log = Weblog.query.order_by(Weblog.date).all()
-        return render_template('weblog.html', info=web_log)
-    except:
-        abort(404)
+    page = request.args.get('page', default=1, type=int)
+    web_log = Weblog.query.order_by(Weblog.date).paginate(page=page, per_page=12)
+    return render_template('weblog.html', info=web_log)
 
 
 @app.route('/weblog/detail/<int:id>')
