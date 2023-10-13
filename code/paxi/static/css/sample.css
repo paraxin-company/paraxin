@@ -1,11 +1,12 @@
 @import url('base.css');
 
+.search-label{
+    left: auto !important;
+    line-height: 22px !important;
+}
 .filter{
     padding: 25px !important;
     align-self: flex-start;
-}
-.filter-divider{
-    margin:10px 7px;
 }
 .row-reverse{
     flex-direction: row-reverse;
@@ -20,4 +21,8 @@ form input{
 }
 .card:hover{
     box-shadow: 0px 0px 10px 0.5px;
+}
+.pagination{
+    justify-content: center;
+    margin: 0px !important;
 }
