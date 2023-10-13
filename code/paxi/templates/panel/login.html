@@ -13,7 +13,7 @@
     <div class="container_form p-5">
         {% include "include/message.html" %}
         <h1 class="english-font panel-name my-4">paxi panel</h1>
-        <form action="", method="post">
+        <form action="" method="post">
             {{form.csrf_token}}
             <div class="form-floating mt-3">
                 {{form.username(class="form-control", placeholder="username")}}{{form.username.label(class="english-font")}}

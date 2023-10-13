@@ -23,11 +23,9 @@ def contact():
 
 @app.route('/weblog')
 def weblog():
-    try:
-        web_log = Weblog.query.order_by(Weblog.date).all()
-        return render_template('weblog.html', info=web_log)
-    except:
-        abort(404)
+    page = request.args.get('page', default=1, type=int)
+    web_log = Weblog.query.order_by(Weblog.date).paginate(page=page, per_page=12)
+    return render_template('weblog.html', info=web_log)
 
 
 @app.route('/weblog/detail/<int:id>')
@@ -37,28 +35,17 @@ def weblog_detail(id):
     return render_template('detail.html', data=web_log, related=related)
 
 
-@app.route('/work-sample', methods=['GET', 'POST'])
+@app.route('/work-sample', methods=['GET'])
 def work_sample():
-    category = Category.query.all()
+    page = request.args.get('page', default=1, type=int)
+    search = request.args.get('search')
 
-    if request.method == 'POST':
-        sample = []
-        filter_text = []
-        is_sample_find = False
+    if search:
+        sample = Sample.query.filter(Sample.title.contains(search)+Sample.keyword.contains(search)).paginate(page=page, per_page=12)
+    else:
+        sample = Sample.query.paginate(page=page, per_page=12)
 
-        # get sample by category text
-        for cat in category:
-            if request.form.get(cat.text):
-                sample += Sample.query.filter_by(category_id = cat.id).all()
-                filter_text.append(cat.text)
-                is_sample_find = True
-
-        if len(sample) == 0 and is_sample_find == False:
-            sample = Sample.query.all()
-        return render_template('sample.html', sample=sample, category=category, filter_text=' ، '.join(filter_text))
-
-    sample = Sample.query.all()
-    return render_template('sample.html', sample=sample, category=category)
+    return render_template('sample.html', sample=sample, search_text=search)
 
 
 @app.route('/work-sample/detail/<int:id>', methods=['GET'])
