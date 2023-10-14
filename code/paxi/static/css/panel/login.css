@@ -1,0 +1,31 @@
+@import url('../base.css');
+*{
+    direction: ltr !important;
+}
+.centralize{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-image: url('https://static-cse.canva.com/blob/572029/removingbackgroundimages_Unsplash.5de0da19.avif');
+    background-size: cover;
+}
+.container_form{
+    background-color: var(--menu-color);
+    width: 50% !important;
+    border-radius: 10px;
+}
+.login-input{
+    font-size: 20px !important;
+}
+.panel-name{
+    font-size: 25px !important;
+    color: var(--paraxin-color);
+    text-align: center;
+    font-weight: bold;
+}
+@media screen and (max-width: 768px){
+    .container_form{
+        width: 80% !important;
+    }
+}

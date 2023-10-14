@@ -1,0 +1,50 @@
+@import url('paxi.css');
+
+.in-back{
+    display: inline;
+    margin: 10px 10px;
+}
+.image-side{
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    background-color: #c6c6c6;
+    padding: 20px 0px 40px;
+    border-radius: 15px;
+}
+.edit-profile{
+    position: relative;
+}
+.input-profile{
+    background-color: #c6c6c6;
+}
+.pen{
+    position: absolute;
+    font-size: 45px !important;
+    background-color: white;
+    border-radius: 10px !important;
+    width: 25px !important;
+    height: 25px !important;
+    padding: 3px;
+    top: 90%;
+    left: -5px;
+}
+.pen:hover{
+    cursor: pointer !important;
+}
+.profile-image{
+    max-width: 200px;
+    border: 2px solid white;
+    border-radius: 20px;
+    margin: auto;
+}
+.hidden{
+    display: none;
+}
+.inputs{
+    margin-top: 5px;
+    padding: 5px;
+    border: 1px solid gray;
+}

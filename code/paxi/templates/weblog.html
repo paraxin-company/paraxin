@@ -1,28 +1,63 @@
-{% extends 'shared/base.html' %}
+{% extends 'base.html' %}
 
-{% block title %}paraxin{% endblock %}
+{% block title %}paraxin | وبلاگ پاراکسین{% endblock %}
 {% block keyword %}{% endblock %}
 {% block desc %}{% endblock %}
-{% block style %}static/css/weblog.css{% endblock %}
+{% block style %}{{url_for('static', filename='css/weblog.css')}}{% endblock %}
 {% block weblog %}active{% endblock %}
 
 {% block content %}
 <div class="my-5">
     <p class="tit">وبلاگ پاراکسین</p>
     <div class="row">
-        {% for web_log in info %}
-        <div class="col-xs-12 col-sm-8 col-md-6 col-lg-4">
-            <div class="card">
-                <a href="{{url_for('weblog_info', id=web_log.id)}}">
-                    <img src="{{web_log.baner}}" alt="{{web_log.title}}" class="card-img-top">
-                </a>
-                <div class="card-body">
-                    <h5 class="card-title melo">{{web_log.title}}</h5>
-                    <p class="desc">{{web_log.content[0:140]+"..."}}<a class="links" href="{{url_for('weblog_info', id=web_log.id)}}">ادامه ی متلب</a></p>
+        {% if info%}
+            {% for web_log in info %}
+            <div class="col-xs-12 col-sm-8 col-md-6 col-lg-4">
+                <div class="card">
+                    <a href="{{url_for('weblog_detail', id=web_log.id)}}">
+                        <img src="{{url_for('static', filename=web_log.baner)}}" alt="{{web_log.title}}" class="card-img-top">
+                    </a>
+                    <div class="card-body">
+                        <p class="card-title melo">{{web_log.title}}</p>
+                        <p class="desc">{{web_log.content[0:140]+"..."}}<a class="links" href="{{url_for('weblog_detail', id=web_log.id)}}">ادامه ی متلب</a></p>
+                    </div>
                 </div>
             </div>
-        </div>
-        {% endfor %}
+            {% endfor %}
+            <div class="mt-5 pt-5">
+                <nav aria-label="Page navigation example">
+                    <ul class="pagination">
+                        {% if info.has_prev %}
+                            <li class="page-item">
+                                <a class="page-link" href="{{url_for('weblog', page=info.page-1)}}" aria-label="Previous">
+                                    <span aria-hidden="true">&laquo;</span>
+                                </a>
+                            </li>
+                        {% else %}
+                            <li class="page-item disabled"><a class="page-link" href="#" aria-label="Previous"><span aria-hidden="true">&laquo;</span></a></li>
+                        {% endif %}
+                        
+                        {% for page in info.iter_pages() %}
+                            {% if page != info.page %}
+                                <li class="page-item"><a class="page-link" href="{{url_for('weblog', page=page)}}">{{page}}</a></li> 
+                            {% else %}
+                                <li class="page-item active"><a class="page-link" href="{{url_for('weblog', page=page)}}">{{page}}</a></li>
+                            {% endif %}
+                        {% endfor %}
+                        
+                        {% if info.has_next %}
+                            <li class="page-item">
+                                <a class="page-link" href="{{url_for('weblog', page=info.page+1)}}" aria-label="Next">
+                                    <span aria-hidden="true">&raquo;</span>
+                                </a>
+                            </li>
+                        {% else %}
+                            <li class="page-item disabled"><a class="page-link" href="#" aria-label="Previous"><span aria-hidden="true">&raquo;</span></a></li>
+                        {% endif %}
+                    </ul>
+                </nav>
+            </div>
+        {% endif %}
     </div>
 </div>
 {% endblock content %}

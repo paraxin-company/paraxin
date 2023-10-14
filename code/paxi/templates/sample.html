@@ -1,44 +1,85 @@
-{% extends 'shared/base.html'%}
+{% extends 'base.html'%}
 
-{% block title %}paraxin{% endblock %}
+{% block title %}paraxin | نمونه کار پاراکسین{% endblock %}
 {% block keyword %}{% endblock %}
 {% block desc %}{% endblock %}
-{% block style %}static/css/sample.css{% endblock %}
+{% block style %}{{url_for('static', filename='css/sample.css')}}{% endblock %}
 {% block sample %}active{% endblock %}
 
 {% block content%}
     <div class="text-cetner mt-5">
         <h1 class="tit">نمونه کار ها</h1>
+        {% if search_text %}
+            <p>نتایج مربوط به جست‌وجوی ( {{search_text}} )</p>
+        {% endif %}
     </div>
     <div class="row row-reverse">
         <div class="filter col-sm-12 col-lg-3 mt-2">
             <h2 class="tit text-center">فیلتر</h2>
-            <form>
-                <label>دسته بندی پروژه ها</label><br>
-                {% for item in category%}
-                <label for="{{item.text}}">{{item.text}}</label>
-                <input type="checkbox" id="{{item.text}}"><br>
-                {% endfor %}
-                <hr class="filter-divider">
+            <form action="">
+                <div class="form-floating mt-3">
+                    {% if search_text %}
+                        <input class="form-control" id="search" name="search" placeholder="search" required type="search" value="{{search_text}}"><label class="english-font search-label" for="search">جست‌وجو</label>
+                    {% else %}
+                        <input class="form-control" id="search" name="search" placeholder="search" required type="search" value=""><label class="english-font search-label" for="search">جست‌وجو</label>
+                    {% endif %}
+                </div>
                 <div class="text-center">
-                    <input class="style-link-in-paraxin mt-2" type="submit" value="اعمال فیلتر">
+                    <input class="style-link-in-paraxin mt-3" type="submit" value="جست‌وجو">
                 </div>
             </form>
         </div>
         <div style="padding:0px 12px !important;" class="col-sm-12 col-lg-9 mt-2">
             <div class="row">
-                {% for item in sample %}
-                <div class="col-xs-12 col-sm-6 col-md-4">
-                    <div class="card">
-                        <a class="links" href="{{url_for('detail', id=item.id)}}">
-                            <img src="{{item.baner}}" alt="{{item.title}}" class="card-img-top">
-                            <div class="card-body">
-                                <h5 class="card-title desc">{{item.title}}</h5>
-                            </div>
-                        </a>
+                {% if sample.total %}
+                    {% for item in sample %}
+                    <div class="col-xs-12 col-sm-6 col-md-4">
+                        <div class="card">
+                            <a class="links" href="{{url_for('work_sample_detail', id=item.id)}}">
+                                <img src="{{url_for('static', filename=item.baner)}}" alt="{{item.title}}" class="card-img-top">
+                                <div class="card-body">
+                                    <p class="card-title">{{item.title}}</p>
+                                </div>
+                            </a>
+                        </div>
                     </div>
-                </div>
-                {% endfor %}
+                    {% endfor %}
+                    <div class="mt-5 p-3">
+                        <nav aria-label="Page navigation example">
+                            <ul class="pagination">
+                                {% if sample.has_prev %}
+                                    <li class="page-item">
+                                        <a class="page-link" href="{{url_for('work_sample', page=sample.page-1, search=search_text)}}" aria-label="Previous">
+                                            <span aria-hidden="true">&laquo;</span>
+                                        </a>
+                                    </li>
+                                {% else %}
+                                    <li class="page-item disabled"><a class="page-link" href="#" aria-label="Previous"><span aria-hidden="true">&laquo;</span></a></li>
+                                {% endif %}
+                                
+                                {% for page in sample.iter_pages() %}
+                                    {% if page != sample.page %}
+                                        <li class="page-item"><a class="page-link" href="{{url_for('work_sample', page=page, search=search_text)}}">{{page}}</a></li> 
+                                    {% else %}
+                                        <li class="page-item active"><a class="page-link" href="{{url_for('work_sample', page=page, search=search_text)}}">{{page}}</a></li>
+                                    {% endif %}
+                                {% endfor %}
+                                
+                                {% if sample.has_next %}
+                                    <li class="page-item">
+                                        <a class="page-link" href="{{url_for('work_sample', page=sample.page+1, search=search_text)}}" aria-label="Next">
+                                            <span aria-hidden="true">&raquo;</span>
+                                        </a>
+                                    </li>
+                                {% else %}
+                                    <li class="page-item disabled"><a class="page-link" href="#" aria-label="Previous"><span aria-hidden="true">&raquo;</span></a></li>
+                                {% endif %}
+                            </ul>
+                        </nav>
+                    </div>
+                {% else %}
+                    <p class="text-center alert alert-danger">محتوایی برای ( {{search_text}} ) پیدا نشد</p>
+                {% endif %}
             </div>
         </div>
     </div>

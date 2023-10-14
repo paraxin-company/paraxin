@@ -1,15 +1,15 @@
-{% extends 'shared/base.html' %}
+{% extends 'base.html' %}
 
 {% block title %}paraxin | طراحی و ساخت انواع سایت، توسط تیم پاراکسین{% endblock %}
 {% block keyword %}طراحی و ساخت سایت, طراحی سایت شرکتی, طراحی سایت شخصی, طراحی سایت آموزشی, طراحی سایت صنعتی, طراحی سایت پزشکی, طراحی سایت بازرگانی, طراحی سایت نمایشگاهی, طراحی سایت فروشگاهی , طراحی سایت پاراکسین, برنامه‌نویسی وب, وب سایت, طراحی وب سایت, پاراکسین, تیم پاراکسین, paraxin, وبلاگ, طراحی سایت وبلاگی{% endblock %}
 {% block desc %}طراحی و ساخت انواع سایت های شرکتی ، سایت های شخصی، سایت های آموزشی، سایت های صنعتی، سایت های پزشکی، سایت های بازرگانی ، سایت های نمایشگاهی و سایت های فروشگاهی همه و همه توسط تیم پاراکسین...{% endblock %}
-{% block style %}../static/css/services/web-design.css{% endblock %}
+{% block style %}{{url_for('static', filename='css/services/web-design.css')}}{% endblock %}
 {% block site %}active{% endblock %}
 
 {% block first_view%}
 <div class="first-view display-f-r flex-align-center flex-justify-center">
     <div class="display-f-r flex-align-center flex-justify-center col-sm-12 col-md-6 animate__animated animate__rubberBand wow">
-        <img src="../static/media/web design/Hand coding.svg" alt="طراحی سایت در دنیای پاراکسین" class="img-header">
+        <img src="{{url_for('static', filename='media/web_design/Hand_coding.svg')}}" alt="طراحی سایت در دنیای پاراکسین" class="img-header">
     </div>
     <div class="display-f-r flex-align-center flex-justify-center col-sm-12 col-md-6">
         <div class="fv-text animate__animated animate__zoomInDown wow" data-wow-delay=".4s">
@@ -30,28 +30,28 @@
 <div class="row">
     <div class="shrinker level col-sm-12 col-md-6 col-lg-3 animate__animated animate__fadeInUpBig wow">
         <div class="img">
-            <img class="img-responsive" src="../static/media/web design/Curious.svg" alt="شناسایی نیازسنجی">
+            <img class="img-responsive" src="{{url_for('static', filename='media/web_design/Curious.svg')}}" alt="شناسایی نیازسنجی">
         </div>
         <h4 class="header-title">1. نیازسنجی</h3>
         <p>در ابتدا انتظارات شما بررسی و امکانات مورد نیاز وب‌سایت شما تدوین می‌شود؛ همچنین پیشنهادهایی جهت تولید محتوای موثر به شما ارائه می‌گردد.</p>
     </div>
     <div class="shrinker level col-sm-12 col-md-6 col-lg-3 animate__animated animate__fadeInUpBig wow" data-wow-delay=".2s">
         <div class="img">
-            <img class="img-responsive" src="../static/media/web design/Code typing.svg" alt="شروع برنامه‌نویسی">
+            <img class="img-responsive" src="{{url_for('static', filename='media/web_design/Code_typing.svg')}}" alt="شروع برنامه‌نویسی">
         </div>
         <h4 class="header-title">2. طراحی و برنامه‌نویسی</h3>
         <p>طراحی سایت متناسب با فعالیت و هویت کسب و کار شما انجام شده و قابلیت‌های مورد نظر شما برنامه‌نویسی و بخش‌های مختلف سایت پیاده‌سازی می‌شود.</p>
     </div>
     <div class="shrinker level col-sm-12 col-md-6 col-lg-3 animate__animated animate__fadeInUpBig wow" data-wow-delay=".4s">
         <div class="img">
-            <img class="img-responsive" src="../static/media/web design/Fast loading.svg" alt="بهینه برای موتور‌های جستجو">
+            <img class="img-responsive" src="{{url_for('static', filename='media/web_design/Fast_loading.svg')}}" alt="بهینه برای موتور‌های جستجو">
         </div>
         <h4 class="header-title">3. بهینه‌سازی</h3>
         <p>در صورتی که مایل به کسب جایگاهی مناسب در گوگل هستید، سایت شما در موتورهای جستجو ثبت شده و از نظر سرعت و عملکرد بهینه خواهد شد.</p>
     </div>
     <div class="shrinker level col-sm-12 col-md-6 col-lg-3 animate__animated animate__fadeInUpBig wow" data-wow-delay=".6s">
         <div class="img">
-            <img class="img-responsive" src="../static/media/web design/Webinar.svg" alt="آموزش و انتقال دانش">
+            <img class="img-responsive" src="{{url_for('static', filename='media/web_design/Webinar.svg')}}" alt="آموزش و انتقال دانش">
         </div>
         <h4 class="header-title">4. آموزش و پشتیبانی</h3>
         <p>در یک جلسه، نحوه‌ی مدیریت و انتشار محتوا در سایت به شما آموزش داده می‌شود و پس از آن نیز با پشتیبانی حرفه‌ای، همراهتان هستیم.</p>
@@ -87,28 +87,28 @@
 <div class="row">
     <div class="shrinker ability col-sm-12 col-md-6 col-lg-3 animate__animated animate__fadeInUpBig wow">
         <div class="img-container">
-            <img class="img-responsive" src="../static/media/web design/responsive.svg" alt="سازگاری با انواع دستگاه‌ها">
+            <img class="img-responsive" src="{{url_for('static', filename='media/web_design/responsive.svg')}}" alt="سازگاری با انواع دستگاه‌ها">
         </div>
         <h4 class="header-title">سازگاری با انواع دستگاه‌ها</h4>
         <p class="english-font">Responsive Design</p>
     </div>
     <div class="shrinker ability col-sm-12 col-md-6 col-lg-3 animate__animated animate__fadeInUpBig wow" data-wow-delay=".2s">
         <div class="img-container">
-            <img class="img-responsive" src="../static/media/web design/Smiley face.svg" alt="رضایت کامل مشتریان">
+            <img class="img-responsive" src="{{url_for('static', filename='media/web_design/Smiley_face.svg')}}" alt="رضایت کامل مشتریان">
         </div>    
         <h4 class="header-title">رضایت کامل مشتریان</h4>
         <p class="english-font">Customers Satisfaction</p>
     </div>
     <div class="shrinker ability col-sm-12 col-md-6 col-lg-3 animate__animated animate__fadeInUpBig wow" data-wow-delay=".4s">
         <div class="img-container">
-            <img class="img-responsive" src="../static/media/web design/Business support.svg" alt="شش ماه پشتیبانی از کد منبع">
+            <img class="img-responsive" src="{{url_for('static', filename='media/web_design/Business_support.svg')}}" alt="شش ماه پشتیبانی از کد منبع">
         </div>
         <h4 class="header-title">6 ماه پشتیبانی رایگان از کد‌ منبع</h4>
         <p class="english-font">Six Months Source Code Support</p>
     </div>
     <div class="shrinker ability col-sm-12 col-md-6 col-lg-3 animate__animated animate__fadeInUpBig wow" data-wow-delay=".6s">
         <div class="img-container">
-            <img class="img-responsive" src="../static/media/web design/SEO analytics.svg" alt="بهینه برای موتورهای جستجو">
+            <img class="img-responsive" src="{{url_for('static', filename='media/web_design/SEO_analytics.svg')}}" alt="بهینه برای موتورهای جستجو">
         </div>
         <h4 class="header-title">بهینه برای موتورهای جستجو</h4>
         <p class="english-font">Optimized For Search Engines</p>
@@ -125,7 +125,7 @@
         </div>
     </div>
     <div class="col-md-12 col-lg-5 my-5 img-container animate__animated animate__rubberBand wow" data-wow-delay=".5s">
-        <img class="img-responsive" src="../static/media/web design/Coding workshop.svg" alt="راه‌اندازی سایت برای کسب و کار">
+        <img class="img-responsive" src="{{url_for('static', filename='media/web_design/Coding_workshop.svg')}}" alt="راه‌اندازی سایت برای کسب و کار">
     </div>
 </div>
 <div class="row m-t-150-px">
@@ -190,103 +190,30 @@
         </div>
     </div>
     <div class="col-sm-12 col-lg-5 my-3 img-container animate__animated animate__rubberBand wow" data-wow-delay=".5s">
-        <img class="img-responsive" src="../static/media/FAQs.svg" alt="سوالات متداول درباره طراحی سایت پاراکسین">
+        <img class="img-responsive" src="{{url_for('static', filename='media/FAQs.svg')}}" alt="سوالات متداول درباره طراحی سایت پاراکسین">
     </div>
 </div>
 <div class="caption m-t-150-px animate__animated animate__zoomInDown wow">
     <h1 class="tit">نمونه‌کارهای منتخب</h1>
 </div>
 <div class="row">
-    <div class="col-sm-12 col-md-6 col-lg-4 animate__animated animate__fadeIn wow" data-wow-delay=".1s">
-        <div class="cv-item">
-            <div class="cv-item-image">
-                <img src="../static/media/sample.jpg">
-            </div>
-            <div class="cv-item-des">
-                <p>this is simple text</p>
-                <div class="a-flex-center">
-                    <a class="style-link-in-paraxin cv-item-link-padding" href="{{url_for('work_sample')}}">
-                        اطلاعات بیشتر
-                    </a>
+    {% for top in tops%}
+        <div class="col-sm-12 col-md-6 col-lg-4 animate__animated animate__fadeIn wow" data-wow-delay=".1s">
+            <div class="cv-item">
+                <div class="cv-item-image">
+                    <img src="{{url_for('static', filename=top.baner)}}">
+                </div>
+                <div class="cv-item-des">
+                    <p>{{top.title}}</p>
+                    <div class="a-flex-center">
+                        <a class="style-link-in-paraxin cv-item-link-padding" href="{{url_for('work_sample_detail', id=top.id)}}">
+                            اطلاعات بیشتر
+                        </a>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
-    <div class="col-sm-12 col-md-6 col-lg-4 animate__animated animate__fadeIn wow" data-wow-delay=".3s">
-        <div class="cv-item">
-            <div class="cv-item-image">
-                <img src="../static/media/sample.jpg">
-            </div>
-            <div class="cv-item-des">
-                <p>this is simple text</p>
-                <div class="a-flex-center">
-                    <a class="style-link-in-paraxin cv-item-link-padding" href="{{url_for('work_sample')}}">
-                        اطلاعات بیشتر
-                    </a>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="col-sm-12 col-md-6 col-lg-4 animate__animated animate__fadeIn wow" data-wow-delay=".5s">
-        <div class="cv-item">
-            <div class="cv-item-image">
-                <img src="../static/media/sample.jpg">
-            </div>
-            <div class="cv-item-des">
-                <p>this is simple text</p>
-                <div class="a-flex-center">
-                    <a class="style-link-in-paraxin cv-item-link-padding" href="{{url_for('work_sample')}}">
-                        اطلاعات بیشتر
-                    </a>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="col-sm-12 col-md-6 col-lg-4 animate__animated animate__fadeIn wow" data-wow-delay=".7s">
-        <div class="cv-item">
-            <div class="cv-item-image">
-                <img src="../static/media/sample.jpg">
-            </div>
-            <div class="cv-item-des">
-                <p>this is simple text</p>
-                <div class="a-flex-center">
-                    <a class="style-link-in-paraxin cv-item-link-padding" href="{{url_for('work_sample')}}">
-                        اطلاعات بیشتر
-                    </a>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="col-sm-12 col-md-6 col-lg-4 animate__animated animate__fadeIn wow" data-wow-delay=".9s">
-        <div class="cv-item">
-            <div class="cv-item-image">
-                <img src="../static/media/sample.jpg">
-            </div>
-            <div class="cv-item-des">
-                <p>this is simple text</p>
-                <div class="a-flex-center">
-                    <a class="style-link-in-paraxin cv-item-link-padding" href="{{url_for('work_sample')}}">
-                        اطلاعات بیشتر
-                    </a>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="col-sm-12 col-md-6 col-lg-4 animate__animated animate__fadeIn wow" data-wow-delay="1.1s">
-        <div class="cv-item">
-            <div class="cv-item-image">
-                <img src="../static/media/sample.jpg">
-            </div>
-            <div class="cv-item-des">
-                <p>this is simple text</p>
-                <div class="a-flex-center">
-                    <a class="style-link-in-paraxin cv-item-link-padding" href="{{url_for('work_sample')}}">
-                        اطلاعات بیشتر
-                    </a>
-                </div>
-            </div>
-        </div>
-    </div>
+    {% endfor %}
 </div>
 <div class="a-flex-center">
     <a class="style-link-in-paraxin animate__animated animate__wobble wow" data-wow-delay=".5s" href="{{url_for('work_sample')}}">
@@ -301,7 +228,7 @@
         <div class="carousel-item text-center display-f-r flex-align-center flex-justify-center active" data-bs-interval="2000">
             <div class="opinion-container">
                 <div class="profile">
-                    <img class="img-responsive" src="../static/media/undraw_pic_profile.svg">
+                    <img class="img-responsive" src="{{url_for('static', filename='media/undraw_pic_profile.svg')}}">
                 </div>
                 <div>
                     <h3 class="header-title">company name</h3>
@@ -312,7 +239,7 @@
         <div class="carousel-item text-center display-f-r flex-align-center flex-justify-center" data-bs-interval="2000">
             <div class="opinion-container">
                 <div class="profile">
-                    <img class="img-responsive" src="../static/media/undraw_pic_profile.svg">
+                    <img class="img-responsive" src="{{url_for('static', filename='media/undraw_pic_profile.svg')}}">
                 </div>
                 <div>
                     <h3 class="header-title">company name</h3>
@@ -323,7 +250,7 @@
         <div class="carousel-item text-center display-f-r flex-align-center flex-justify-center" data-bs-interval="2000">
             <div class="opinion-container">
                 <div class="profile">
-                    <img class="img-responsive" src="../static/media/undraw_pic_profile.svg">
+                    <img class="img-responsive" src="{{url_for('static', filename='media/undraw_pic_profile.svg')}}">
                 </div>
                 <div>
                     <h3 class="header-title">company name</h3>
@@ -351,4 +278,10 @@
         <path fill="#efefef" fill-opacity="1" d="M0,0L30,10.7C60,21,120,43,180,53.3C240,64,300,64,360,85.3C420,107,480,149,540,176C600,203,660,213,720,192C780,171,840,117,900,106.7C960,96,1020,128,1080,154.7C1140,181,1200,203,1260,208C1320,213,1380,203,1410,197.3L1440,192L1440,320L1410,320C1380,320,1320,320,1260,320C1200,320,1140,320,1080,320C1020,320,960,320,900,320C840,320,780,320,720,320C660,320,600,320,540,320C480,320,420,320,360,320C300,320,240,320,180,320C120,320,60,320,30,320L0,320Z"></path>
     </svg>
 </div>
+{% endblock %}
+{% block animate %}
+<script src="{{url_for('static', filename='js/wow.js')}}"></script>
+<script>
+    new WOW() .init();
+</script>
 {% endblock %}

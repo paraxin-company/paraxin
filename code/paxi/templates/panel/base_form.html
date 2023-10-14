@@ -1,0 +1,17 @@
+{% extends 'panel/paxi.html' %}
+
+{% block style %}static/css/panel/base_form.css{% endblock %}
+
+{% block content %}
+{% include "panel/form_errors.html" %}
+<h1 class="tit mt-4 text-center">{% block header %}{% endblock %}</h1>
+<form action="" enctype="multipart/form-data" method="post">
+    {{form.csrf_token}}
+    {{form.title.label(class="form-label english-font mt-3")}} {{form.title(class="form-control")}}
+    {{form.baner.label(class="form-label english-font mt-3")}} {% block baner_text %}{% endblock %} {{form.baner(class="form-control" ,accept=".png, .jfif, .jpeg, .jpg, .webp, .svg, .icon, .ico")}}
+    {{form.keyword.label(class="form-label english-font mt-3")}} {{form.keyword(class="form-control")}}
+    {{form.content.label(class="form-label english-font mt-3")}} {{form.content(class="form-control")}}
+    {% block inputs %}{% endblock %}
+    <input class="style-link-in-paraxin mt-4 px-3 py-1" type="submit" value="{% block buttonText %}{% endblock %}">    
+</form>
+{% endblock %}

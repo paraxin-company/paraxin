@@ -1,0 +1,56 @@
+@import url("base.css");
+.slider{
+    align-self: flex-start;
+    background-color: #f0f0f0;
+    border-radius: var(--border-radius-image);
+}
+.baner{
+    border-radius: var(--border-radius-image);
+    width: 100%     ;
+}
+.related-section{
+    list-style-type: none !important;
+}
+.related-link{
+    text-indent: 5px !important;
+    text-decoration: none;
+    color: var(--link-color);
+}
+.related-link:hover{
+    color: black;
+}
+.dot{
+    color:black;
+}
+.text-center{
+    text-align: center;
+}
+.date{
+    color: var(--link-color);
+    font-size: 14px !important;
+}
+.keyword{
+    background-color: #d1d1d1;
+    margin: 3px 2px;
+    padding: 3px 7px;
+    border-radius: 10px;
+    display: inline-block;
+}
+.image-gallery {
+    height: 300px;
+    border-radius: var(--border-radius-image);
+    width: 100%;
+    border: 8px solid var(--paraxin-color);
+    -webkit-filter: sepia(100%);
+    filter: sepia(100%);
+    transition-duration: .5s;
+}
+.image-gallery:hover {
+    border: 3px solid var(--paraxin-color);
+    -webkit-filter: none;
+    filter: none;
+}
+.dot{
+    color: var(--paraxin-color2);
+    font-size: 20px;
+}
