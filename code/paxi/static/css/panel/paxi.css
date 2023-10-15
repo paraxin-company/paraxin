@@ -5,21 +5,22 @@
     justify-content: space-between;
 }
 .search-button{
-    background-color: var(--link-color);
+    background-color: #b768ac;
     color: white;
-    padding: 4px 6px;
+    padding: 4px 7px 4px 5px;
     font-size: 20px;
     border: 2px solid var(--paraxin-color);
-    border-radius: 0px 10px 10px 0px !important;
+    border-radius: 0px 50px 50px 0px !important;
 }
 .search-button:hover{
-    background-color: black;
+    background-color: var(--paraxin-color);
     color: white;
 }
 .search-input{
     padding-right: 10px;
-    border-radius: 10px 0px 0px 10px !important;
+    border-radius: 50px 0px 0px 50px !important;
     border: 2px solid var(--paraxin-color) !important;
+    border-right: 0px !important;
 }
 .viewport{
     display: flex;

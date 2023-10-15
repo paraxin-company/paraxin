@@ -475,7 +475,9 @@ def paxi_edit_work_sample(sample_id):
 @app.route('/paxi/work-sample/category')
 @login_required
 def paxi_work_sample_category():
-    cats = Category.query.order_by(Category.id).all()
+    page = request.args.get('page', default=1, type=int)
+
+    cats = Category.query.order_by(Category.id).paginate(page=page, per_page=15)
     cat_form = CategoryForm()
     return render_template('panel/work-sample/category.html', data=cats, form=cat_form)
 
