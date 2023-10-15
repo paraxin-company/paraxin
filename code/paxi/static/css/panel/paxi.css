@@ -1,4 +1,26 @@
 @import url("../base.css");
+
+.flex-container{
+    display: flex;
+    justify-content: space-between;
+}
+.search-button{
+    background-color: var(--link-color);
+    color: white;
+    padding: 4px 6px;
+    font-size: 20px;
+    border: 2px solid var(--paraxin-color);
+    border-radius: 0px 10px 10px 0px !important;
+}
+.search-button:hover{
+    background-color: black;
+    color: white;
+}
+.search-input{
+    padding-right: 10px;
+    border-radius: 10px 0px 0px 10px !important;
+    border: 2px solid var(--paraxin-color) !important;
+}
 .viewport{
     display: flex;
     flex-direction: row;
@@ -72,6 +94,10 @@
 .active{
     font-weight: bold !important;
     color: var(--paraxin-color) !important;
+}
+.pagination{
+    justify-content: center;
+    margin: 0px !important;
 }
 @media screen and (max-width: 750px){
     .slider{

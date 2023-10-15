@@ -124,8 +124,14 @@ def paxi_logout():
 @app.route('/paxi/weblog', methods=['POST', 'GET'])
 @login_required
 def paxi_weblog():
-    all_weblog = Weblog.query.all()
-    return render_template('panel/weblog/weblog.html', data=all_weblog)
+    page = request.args.get('page', default=1, type=int)
+    search = request.args.get('search')
+
+    if search:
+        all_weblog = Weblog.query.filter(Weblog.keyword.contains(search)+Weblog.title.contains(search)).paginate(page=page, per_page=20)
+    else:
+        all_weblog = Weblog.query.paginate(page=page, per_page=20)
+    return render_template('panel/weblog/weblog.html', data=all_weblog, search_text=search)
 
 
 @app.route('/paxi/weblog/add', methods=['POST', 'GET'])
