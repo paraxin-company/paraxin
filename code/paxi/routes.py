@@ -128,9 +128,9 @@ def paxi_weblog():
     search = request.args.get('search')
 
     if search:
-        all_weblog = Weblog.query.filter(Weblog.keyword.contains(search)+Weblog.title.contains(search)).paginate(page=page, per_page=20)
+        all_weblog = Weblog.query.filter(Weblog.keyword.contains(search)+Weblog.title.contains(search)).paginate(page=page, per_page=15)
     else:
-        all_weblog = Weblog.query.paginate(page=page, per_page=20)
+        all_weblog = Weblog.query.paginate(page=page, per_page=15)
     return render_template('panel/weblog/weblog.html', data=all_weblog, search_text=search)
 
 
@@ -256,8 +256,14 @@ def paxi_edit_weblog(weblog_id):
 @app.route('/paxi/work-sample')
 @login_required
 def paxi_work_sample():
-    samples = Sample.query.all()
-    return render_template('panel/work-sample/work-sample.html', data=samples)
+    page = request.args.get('page', default=1, type=int)
+    search = request.args.get('search')
+
+    if search:
+        samples = Sample.query.filter(Sample.title.contains(search)+Sample.keyword.contains(search)).paginate(page=page, per_page=15)
+    else:
+        samples = Sample.query.paginate(page=page, per_page=15)
+    return render_template('panel/work-sample/work-sample.html', data=samples, search_text=search)
 
 
 @app.route('/paxi/work-sample/add', methods=['GET', 'POST'])
