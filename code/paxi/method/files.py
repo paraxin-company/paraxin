@@ -13,6 +13,14 @@ def is_valid(file_name):
     return os.path.splitext(file_name)[1] in valid_format
 
 
+def is_valid_album(album):
+    # TODO: check each image in album and them return realated value
+    for item in album:
+        if is_valid(item.filename) == False:
+            return False
+    return True
+
+
 def get_url(path, folder):
     # TODO: return image url for save in database
     dir = os.path.join('media', folder)
