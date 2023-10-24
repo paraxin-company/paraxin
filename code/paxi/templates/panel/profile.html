@@ -7,7 +7,7 @@
 <div class="row mt-3">
     <div class="col-xs-12 col-sm-12 col-md-12 col-lg-4 col-xl-3">
         <form action="{{url_for('change_profile_baner')}}" method="post" class="image-side" enctype="multipart/form-data">
-            <p>خوش آمدین {{current_user.fullname}}</p>
+            <p>سلام {{current_user.fullname}}</p>
             <input type="file" name="profile_baner" id="profile_baner" accept=".png, .jfif, .jpeg, .jpg, .webp, .svg, .icon, .ico" required class="hidden">
             <div class="edit-profile">
                 <label for="profile_baner">

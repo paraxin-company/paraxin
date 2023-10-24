@@ -2,3 +2,4 @@ readme.md
 venv*
 __pycache__*
 media*
+node_modules

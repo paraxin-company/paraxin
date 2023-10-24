@@ -1,5 +1,6 @@
 @import url("../base.css");
 
+<<<<<<< HEAD
 .flex-container{
     display: flex;
     justify-content: space-between;
@@ -22,6 +23,8 @@
     border: 2px solid var(--paraxin-color) !important;
     border-right: 0px !important;
 }
+=======
+>>>>>>> feature/bug-fix
 .viewport{
     display: flex;
     flex-direction: row;
