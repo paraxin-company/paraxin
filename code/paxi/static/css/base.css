@@ -48,10 +48,7 @@ body{
 .dropdown-menu[data-bs-popper]{
     width: 250px;
 }
-.tit{
-    font-family: 'Lalezar', cursive !important;
-    font-size: 2rem !important;
-}
+
 .english-font{
     font-family: 'Edu SA Beginner', cursive;
     letter-spacing: .03rem !important;
@@ -162,27 +159,6 @@ footer{
     padding: 0 30px;
     background-color: var(--menu-color);
 }
-.related-links li{
-    list-style-type: none;
-}
-.related-links li a{
-    text-decoration: none;
-    line-height: 25px;
-    color:var(--link-color);
-}
-.related-links li a:hover{
-    text-decoration: underline;
-    color: var(--menu-hover-color);
-    font-weight: 500;
-}
-.border-b-paraxin{
-    border-bottom: 4px solid var(--paraxin-color);
-}
-.topic-link{
-    width: 75%;
-    padding: 10px 0px;
-    margin-top: 10px;
-}
 .robot-button{
     color: var(--link-color);
     border: none;
@@ -190,59 +166,6 @@ footer{
 .robot-button:hover{
     text-decoration: underline;
     color: black;
-}
-.footer-hr{
-    padding: 0px;
-    margin: 1px;
-    width: 78%;
-}
-.social-media{
-    padding: 20px 5px;
-    text-align: center;
-}
-.social-media h3{
-    padding: 12px 10px;
-    font-size: 25px !important;
-    color: var(--text-color);
-}
-.social-media a{
-    font-size: 13px;
-    padding: 7px 0px 20px;
-    display: inline-block;
-    text-decoration: none;
-    color: var(--menu-color);
-}
-.social-brand{
-    width: 25px;
-}
-.social-media a .social-name{
-    padding: 0px 5px 0px;
-    font-weight: bold;
-    display: block;
-}
-.social-media a:hover .social-name{
-    color: black;
-}
-footer hr{
-    width: 70%;
-    color: var(--text-color);
-    text-align: center;
-    margin: 15px auto;
-}
-.copyright{
-    text-align: center;
-    padding: 0px 0px 10px;
-}
-.copyright p{
-    font-size: 13px;
-    line-height: 10px;
-    color: rgb(108, 108, 108);
-}
-.paraxin-link{
-    color: var(--paraxin-color);
-    text-decoration: none;
-    font-size: 13px;
-    font-weight: 500;
 }
 .style-link-in-paraxin{
     text-decoration: none;
@@ -256,9 +179,6 @@ footer hr{
 .style-link-in-paraxin:hover{
     color: var(--background-color-body);
     background-color: var(--paraxin-color);
-}
-.robot-button{
-    background-color: transparent !important;
 }
 .a-flex-center{
     display: flex;

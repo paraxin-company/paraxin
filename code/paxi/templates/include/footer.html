@@ -1,30 +1,30 @@
-<div class="row">
-    <div class="related-links col-sm-12 col-md-4 col-xl-2">
-        <h5 class="fw-bold topic-link border-b-paraxin">آخرین مقالات</h5>
-        <ul>
-            <li><a href="{{url_for('weblog')}}">آخرین مقاله</a></li>
-            <li><a href="{{url_for('weblog')}}">آخرین مقاله</a></li>
-            <li><a href="{{url_for('weblog')}}">آخرین مقاله</a></li>
-            <li><a href="{{url_for('weblog')}}">آخرین مقاله</a></li>
+<div class="py-8 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+    <div class="md:col-span-2 lg:col-span-1">
+        <h5 class="pb-2 text-gray-600 border-b-4 w-8/12 sm:w-full border-paraxin-c-200">آخرین مقالات</h5>
+        <ul class="mt-4 text-gray-500">
+            <li><a class="hover:text-gray-950 hover:underline" href="{{url_for('weblog')}}">آخرین مقاله</a></li>
+            <li><a class="hover:text-gray-950 hover:underline" href="{{url_for('weblog')}}">آخرین مقاله</a></li>
+            <li><a class="hover:text-gray-950 hover:underline" href="{{url_for('weblog')}}">آخرین مقاله</a></li>
+            <li><a class="hover:text-gray-950 hover:underline" href="{{url_for('weblog')}}">آخرین مقاله</a></li>
         </ul>
     </div>
-    <div class="related-links col-sm-12 col-md-4 col-xl-2">
-        <h5 class="fw-bold topic-link border-b-paraxin">خدمات</h5>
-        <ul>
-            <li><a href="{{url_for('site_design')}}">طراحی سایت</a></li>
-            <li><a href="{{url_for('logo_design')}}">طراحی لوگو</a></li>
-            <li><a href="{{url_for('fap')}}#fap-builder-link">فاپ‌ساز آنلاین</a></li>
-            <li><a href="{{url_for('qrcode')}}">کیو آر کد ساز</a></li><hr class="footer-hr">
-            <li><a href="{{url_for('work_sample')}}">نمونه کارها</a></li>
+    <div>
+        <h5 class="pb-2 text-gray-600 border-b-4 w-8/12 sm:w-full border-paraxin-c-200">خدمات</h5>
+        <ul class="mt-4 text-gray-500">
+            <li><a class="hover:text-gray-950 hover:underline" href="{{url_for('site_design')}}">طراحی سایت</a></li>
+            <li><a class="hover:text-gray-950 hover:underline" href="{{url_for('logo_design')}}">طراحی لوگو</a></li>
+            <li><a class="hover:text-gray-950 hover:underline" href="{{url_for('fap')}}#fap-builder-link">فاپ‌ساز آنلاین</a></li>
+            <li><a class="hover:text-gray-950 hover:underline" href="{{url_for('qrcode')}}">کیو آر کد ساز</a></li><hr class="w-8/12 sm:w-full my-2 border border-gray-400">
+            <li><a class="hover:text-gray-950 hover:underline" href="{{url_for('work_sample')}}">نمونه کارها</a></li>
         </ul>
     </div>
-    <div class="related-links col-sm-12 col-md-4 col-xl-2">
-        <h5 class="fw-bold topic-link border-b-paraxin">راه های ارتباطی<h5>
-        <ul>
-            <li><button type="button" class="robot-button" data-bs-toggle="modal" data-bs-target="#robot">
-                ربات تلگرام
-              </button></li>
-            <li><a href="{{url_for('contact')}}#send-mail">فرم تماس</a></li>
+    <div>
+        <h5 class="pb-2 text-gray-600 border-b-4 w-8/12 sm:w-full border-paraxin-c-200">راه های ارتباطی<h5>
+        <ul class="mt-4 text-gray-500">
+            <li>
+                <a class="hover:underline hover:text-gray-950" data-bs-target="#robot">ربات تلگرام</a>
+            </li>
+            <li><a class="hover:text-gray-950 hover:underline" href="{{url_for('contact')}}#send-mail">فرم تماس</a></li>
         </ul>
         <div class="modal fade" id="robot" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div class="modal-dialog">
@@ -47,16 +47,29 @@
             </div>
         </div>
     </div>
-    <div class="social-media col-sm-12 col-xl-6">
-        <h5 class="tit">شبکه های اجتماعی پاراکسین</h5>
-        <a target="_blanck" href="https://youtube.com/paraxin" title="حساب یوتیوب پاراکسین"><img class="social-brand" src="{{url_for('static', filename='media/svg_file/youtube.svg')}}"><span class="social-name">Youtube</span></a>
-        <a target="_blanck" href="https://github.com/paraxin-company" title="حساب گیت پاراکسین"><img class="social-brand" src="{{url_for('static', filename='media/svg_file/github.svg')}}"><span class="social-name">Github</span></a>
-        <a target="_blanck" href="https://t.me/paraxin_company" title="حساب تلگرام پاراکسین"><img class="social-brand" src="{{url_for('static', filename='media/svg_file/telegram.svg')}}"><span class="social-name">Telegram</span></a>
-        <a target="_blanck" href="mailto:info@paraxin.ir" title="ایمیل پاراکسین"><img class="social-brand" src="{{url_for('static', filename='media/svg_file/envelope-fill.svg')}}"><span class="social-name">Email</span></a>
-        <a target="_blanck" href="https://www.linkedin.com/in/paraxin-company/" title="حساب لینکدین پاراکسین"><img class="social-brand" src="{{url_for('static', filename='media/svg_file/linkedin.svg')}}"><span class="social-name">Linkedin</span></a>
+    <div class="text-center pt-5">
+        <h5 class="font-tit text-2xl text-gray-600">شبکه های اجتماعی پاراکسین</h5>
+        <div class="mt-6 flex gap-4 justify-center items-center">
+            <a class="transition hover:scale-125 duration-700" target="_blanck" href="https://youtube.com/paraxin" title="حساب یوتیوب پاراکسین">
+                <img class="w-8" src="{{url_for('static', filename='media/svg_file/youtube.svg')}}">
+            </a>
+            <a class="transition hover:scale-125 duration-700" target="_blanck" href="https://github.com/paraxin-company" title="حساب گیت پاراکسین">
+                <img class="w-8" src="{{url_for('static', filename='media/svg_file/github.svg')}}">
+            </a>
+            <a class="transition hover:scale-125 duration-700" target="_blanck" href="https://t.me/paraxin_company" title="حساب تلگرام پاراکسین">
+                <img class="w-8" src="{{url_for('static', filename='media/svg_file/telegram.svg')}}">
+            </a>
+            <a class="transition hover:scale-125 duration-700" target="_blanck" href="mailto:info@paraxin.ir" title="ایمیل پاراکسین">
+                <img class="w-8" src="{{url_for('static', filename='media/svg_file/envelope-fill.svg')}}">
+            </a>
+            <a class="transition hover:scale-125 duration-700" target="_blanck" href="https://www.linkedin.com/in/paraxin-company/" title="حساب لینکدین پاراکسین">
+                <img class="w-8" src="{{url_for('static', filename='media/svg_file/linkedin.svg')}}">
+            </a>
+        </div>
     </div>
 </div>
-<hr><div class="copyright">
-    <p>تمامی حقوق برای تیم <a href="{{url_for('home')}}" class="paraxin-link">پاراکسین</a> محفوظ می باشد.</p>
-    <p>1402 ( 2023) &#169;</p>
+<hr class="w-full my-6 md:w-9/12 md:mx-auto h-0 border border-paraxin-c-200">
+<div class="text-center text-gray-500 text-xs mt-4">
+    <p>تمامی حقوق برای تیم <a href="{{url_for('home')}}" class="text-paraxin-c-300 font-bold">پاراکسین</a> محفوظ می باشد.</p>
+    <p class="mt-1">1402 (2023) &#169;</p>
 </div>

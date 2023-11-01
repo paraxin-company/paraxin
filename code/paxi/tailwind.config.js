@@ -5,7 +5,24 @@ module.exports = {
     "templates/**/*.html"
 ],
   theme: {
-    extend: {},
+    extend: {
+      fontFamily:{
+        tit:['tit', 'cursive'],
+      },
+      container: {
+        center: true,
+        padding: '2rem',
+      },
+      colors: {
+        'paraxin-c': {
+          200: '#B2299F',
+          300: '#77005d',
+        },
+        gray: {
+          150: '#efefef',
+        }
+      },
+    },
   },
   plugins: [],
 }
