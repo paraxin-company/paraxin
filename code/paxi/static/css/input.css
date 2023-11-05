@@ -2,6 +2,7 @@
 @tailwind components;
 @tailwind utilities;
 
+[x-cloak] { display: none !important; }
 @font-face{
     font-family: 'vazir';
     src: url('../font/vazir/Vazir.ttf') format('Truetype'),

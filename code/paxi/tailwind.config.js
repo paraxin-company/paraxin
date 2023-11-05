@@ -6,6 +6,9 @@ module.exports = {
 ],
   theme: {
     extend: {
+      borderWidth: {
+        '3': '3px',
+      },
       fontFamily:{
         tit:['tit', 'cursive'],
       },
