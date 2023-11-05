@@ -1,4 +1,4 @@
-<div class="py-8 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+<div class="py-8 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
     <div class="md:col-span-2 lg:col-span-1">
         <h5 class="pb-2 text-gray-600 border-b-4 w-8/12 sm:w-full border-paraxin-c-200">آخرین مقالات</h5>
         <ul class="mt-4 text-gray-500">
@@ -20,32 +20,34 @@
     </div>
     <div>
         <h5 class="pb-2 text-gray-600 border-b-4 w-8/12 sm:w-full border-paraxin-c-200">راه های ارتباطی<h5>
-        <ul class="mt-4 text-gray-500">
+        <ul class="mt-4 text-gray-500" x-data="{modalRobot:false}">
             <li>
-                <a class="hover:underline hover:text-gray-950" data-bs-target="#robot">ربات تلگرام</a>
+                <div class="hover:underline hover:text-gray-950 cursor-pointer" x-on:click="modalRobot = true">ربات تلگرام</div>
             </li>
-            <li><a class="hover:text-gray-950 hover:underline" href="{{url_for('contact')}}#send-mail">فرم تماس</a></li>
-        </ul>
-        <div class="modal fade" id="robot" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                        <h1 class="modal-title fs-5" id="exampleModalLabel">ربات تلگرام پاراکسین</h1>
+            <div class="fixed z-50 inset-0 bg-gray-950 bg-opacity-50 flex items-start justify-center pt-24" x-cloak x-show="modalRobot">
+                <div class="bg-gray-150 rounded-md p-5 max-w-md">
+                    <div class="flex justify-between text-gray-900 mb-5">
+                        <p class="text-lg">ربات پاراکسین</p>
+                        <span class="cursor-pointer" x-on:click="modalRobot = false">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+                            </svg>                              
+                        </span>
                     </div>
-                    <div class="modal-body">
+                    <div>
                         <p>برای استفاده از ربات پاراکسین می توانید در تلگرام 
                             paraxin_bot
                             رو سرچ کنید تا با ربات ارتباط برقرار کنید یا اینکه دکمه ی انتقال به ربات را بزنین تا شما را به آدرس تلگرامی انتقال دهد .
                         </p>
                     </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-danger" data-bs-dismiss="modal">بی خیال</button>
-                        <a href="https://t.me/paraxin_bot" target="_blank" class="btn btn-success">انتقال به ربات</a>
+                    <div class="flex justify-between mt-5">
+                        <div class="bg-red-500 text-gray-100 rounded-md px-4 py-2 hover:bg-red-700" x-on:click="modalRobot = false">بی خیال</div>
+                        <a href="https://t.me/paraxin_bot" target="_blank" class="bg-green-500 text-gray-100 rounded-md px-4 py-2 hover:bg-green-700">انتقال به ربات</a>
                     </div>
                 </div>
             </div>
-        </div>
+            <li><a class="hover:text-gray-950 hover:underline" href="{{url_for('contact')}}#send-mail">فرم تماس</a></li>
+        </ul>
     </div>
     <div class="text-center pt-5">
         <h5 class="font-tit text-2xl text-gray-600">شبکه های اجتماعی پاراکسین</h5>

@@ -81,18 +81,10 @@ body{
 .padding-69px{
     padding-top: 69px !important;
 }
-.display-f-r{
-    display: flex;
-    flex-wrap: wrap;
-    flex-direction: row;
-}
 .display-f-c{
     display: flex;
     flex-wrap: wrap;
     flex-direction: column;
-}
-.flex-justify-center{
-    justify-content: center;
 }
 .flex-align-center{
     align-items: center;

@@ -12,8 +12,8 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
     <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
 </head>
-<body class="bg-gray-100">x
-    <nav class="fixed top-0 w-full z-50 mb-10">
+<body class="bg-gray-100">
+    <nav class="fixed top-0 w-full z-10 mb-10">
         <div class="flex justify-between flex-wrap items-center bg-gray-200 text-gray-500 px-5 mb-3 w-full" x-data="{menu : false}">
             <div class="py-2">
                 <a href="{{url_for('home')}}">
@@ -26,7 +26,7 @@
                 </svg>                  
             </button>
             
-            <div class="flex flex-col gap-5 justify-between overflow-hidden w-full sm:w-auto transition-all duration-700" x-cloak x-bind:class="menu ? 'h-auto' : 'h-0 sm:h-auto'">
+            <div class="flex flex-col gap-5 justify-between w-full overflow-hidden sm:w-auto transition-all duration-700" x-cloak x-bind:class="menu ? 'h-auto' : 'h-0 sm:h-auto'">
                 <ul class="flex flex-col sm:flex-row-reverse gap-4">
                     <li>
                         <a class="{% block home %}{% endblock %} hover:text-gray-950 flex items-center" href="{{url_for('home')}}">
@@ -165,9 +165,18 @@
             </div>
         </div>
     </nav>
-    <div class="padding-69px"></div>
-    <div class="contact-section display-f-r flex-justify-center">
-        <a href="{{url_for('contact')}}#send-mail" title="تماس با پشتیبان تیم پاراکسین"><span><img src="{{url_for('static', filename='media/svg_file/conversation.svg')}}"></span></a>
+    <div class="h-18"></div>
+    <div class="hidden sm:flex justify-center bg-paraxin-c-200 border-3 border-paraxin-c-200 bg-opacity-50 items-center fixed right-2 bottom-3 p-1 w-12 hw-12 rounded-full contact-section">
+        <div class="relative">
+            <div class="absolute w-full h-full rounded-full bg-paraxin-c-200 opacity-60 animate-ping -z-10"></div>
+            <a href="{{url_for('contact')}}#send-mail" title="تماس با پشتیبان تیم پاراکسین">
+                <span class="text-paraxin-c-300">
+                    <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" class="w-full" viewBox="0 0 50 50">
+                        <path fill="currentColor" d="M 14 3.9902344 C 8.4886661 3.9902344 4 8.4789008 4 13.990234 L 4 35.990234 C 4 41.501568 8.4886661 45.990234 14 45.990234 L 36 45.990234 C 41.511334 45.990234 46 41.501568 46 35.990234 L 46 13.990234 C 46 8.4789008 41.511334 3.9902344 36 3.9902344 L 14 3.9902344 z M 18.005859 12.033203 C 18.633859 12.060203 19.210594 12.414031 19.558594 12.957031 C 19.954594 13.575031 20.569141 14.534156 21.369141 15.785156 C 22.099141 16.926156 22.150047 18.399844 21.498047 19.589844 L 20.033203 21.673828 C 19.637203 22.237828 19.558219 22.959703 19.824219 23.595703 C 20.238219 24.585703 21.040797 26.107203 22.466797 27.533203 C 23.892797 28.959203 25.414297 29.761781 26.404297 30.175781 C 27.040297 30.441781 27.762172 30.362797 28.326172 29.966797 L 30.410156 28.501953 C 31.600156 27.849953 33.073844 27.901859 34.214844 28.630859 C 35.465844 29.430859 36.424969 30.045406 37.042969 30.441406 C 37.585969 30.789406 37.939797 31.366141 37.966797 31.994141 C 38.120797 35.558141 35.359641 37.001953 34.556641 37.001953 C 34.000641 37.001953 27.316344 37.761656 19.777344 30.222656 C 12.238344 22.683656 12.998047 15.999359 12.998047 15.443359 C 12.998047 14.640359 14.441859 11.879203 18.005859 12.033203 z"></path>
+                    </svg>
+                </span>
+            </a>
+        </div>
     </div>
     {% block first_view%}{% endblock %}
     <div class="container px-5">
