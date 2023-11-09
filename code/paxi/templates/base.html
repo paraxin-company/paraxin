@@ -26,7 +26,7 @@
                 </svg>                  
             </button>
             
-            <div class="flex flex-col gap-5 justify-between w-full overflow-hidden sm:w-auto transition-all duration-700" x-cloak x-bind:class="menu ? 'h-auto' : 'h-0 sm:h-auto'">
+            <div class="flex flex-col gap-5 justify-between w-full overflow-hidden sm:w-auto transition-all duration-700" x-cloak x-bind:class="menu ? 'h-[90vh]' : 'h-0 sm:h-auto'">
                 <ul class="flex flex-col sm:flex-row-reverse gap-4">
                     <li>
                         <a class="{% block home %}{% endblock %} hover:text-gray-950 flex items-center" href="{{url_for('home')}}">
@@ -107,7 +107,7 @@
                         <div x-cloak x-show="open" @click.outside="open = false">
                             <ul class="bg-gray-200 fiexd sm:absolute mt-1 w-48 rounded-md p-2 border border-gray-400">
                                 <li>
-                                    <a class="{% block about %}{% endblock %} p-2 hover:text-gray-950 flex items-center" href="{{url_for('about')}}">
+                                    <a class="hover:text-gray-950 {% block about %}{% endblock %} p-2 flex items-center" href="{{url_for('about')}}">
                                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-4 h-4 ml-1">
                                             <path stroke-linecap="round" stroke-linejoin="round" d="M12 6.042A8.967 8.967 0 006 3.75c-1.052 0-2.062.18-3 .512v14.25A8.987 8.987 0 016 18c2.305 0 4.408.867 6 2.292m0-14.25a8.966 8.966 0 016-2.292c1.052 0 2.062.18 3 .512v14.25A8.987 8.987 0 0018 18a8.967 8.967 0 00-6 2.292m0-14.25v14.25" />
                                         </svg>
@@ -115,7 +115,7 @@
                                     </a>
                                 </li>
                                 <li>
-                                    <a class="{% block contact %}{% endblock %} p-2 hover:text-gray-950 flex items-center" href="{{url_for('contact')}}">
+                                    <a class="hover:text-gray-950 {% block contact %}{% endblock %} p-2 flex items-center" href="{{url_for('contact')}}">
                                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-4 h-4 ml-1">
                                             <path stroke-linecap="round" stroke-linejoin="round" d="M20.25 8.511c.884.284 1.5 1.128 1.5 2.097v4.286c0 1.136-.847 2.1-1.98 2.193-.34.027-.68.052-1.02.072v3.091l-3-3c-1.354 0-2.694-.055-4.02-.163a2.115 2.115 0 01-.825-.242m9.345-8.334a2.126 2.126 0 00-.476-.095 48.64 48.64 0 00-8.048 0c-1.131.094-1.976 1.057-1.976 2.192v4.286c0 .837.46 1.58 1.155 1.951m9.345-8.334V6.637c0-1.621-1.152-3.026-2.76-3.235A48.455 48.455 0 0011.25 3c-2.115 0-4.198.137-6.24.402-1.608.209-2.76 1.614-2.76 3.235v6.226c0 1.621 1.152 3.026 2.76 3.235.577.075 1.157.14 1.74.194V21l4.155-4.155" />
                                         </svg>                                          
@@ -166,9 +166,9 @@
         </div>
     </nav>
     <div class="h-18"></div>
-    <div class="hidden sm:flex justify-center bg-paraxin-c-200 border-3 border-paraxin-c-200 bg-opacity-50 items-center fixed right-2 bottom-3 p-1 w-12 hw-12 rounded-full contact-section">
+    <div class="z-50 hidden sm:flex justify-center bg-paraxin-c-200 border-3 border-paraxin-c-200 bg-opacity-50 items-center fixed right-2 bottom-3 p-1 w-12 hw-12 rounded-full">
         <div class="relative">
-            <div class="absolute w-full h-full rounded-full bg-paraxin-c-200 opacity-60 animate-ping -z-10"></div>
+            <div class="absolute w-full h-full rounded-full bg-paraxin-c-300 opacity-90 animate-ping"></div>
             <a href="{{url_for('contact')}}#send-mail" title="تماس با پشتیبان تیم پاراکسین">
                 <span class="text-paraxin-c-300">
                     <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" class="w-full" viewBox="0 0 50 50">

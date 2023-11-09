@@ -24,8 +24,14 @@
             <li>
                 <div class="hover:underline hover:text-gray-950 cursor-pointer" x-on:click="modalRobot = true">ربات تلگرام</div>
             </li>
-            <div class="fixed z-50 inset-0 bg-gray-950 bg-opacity-50 flex items-start justify-center pt-24" x-cloak x-show="modalRobot">
-                <div class="bg-gray-150 rounded-md p-5 max-w-md">
+            <div class="fixed z-50 inset-0 bg-gray-800 bg-opacity-40 flex items-start justify-center pt-24" x-cloak x-show="modalRobot"
+                x-transition:enter="transition ease-out duration-700"
+                x-transition:enter-start="opacity-0 -translate-y-7"
+                x-transition:enter-end="opacity-100 -translate-y-0"
+                x-transition:leave="transition ease-in duration-500"
+                x-transition:leave-start="opacity-100 -translate-y-0"
+                x-transition:leave-end="opacity-0 -translate-y-7">
+                <div class="bg-gray-150 border-2 border-gray-500 rounded-md p-5 mx-6 max-w-md">
                     <div class="flex justify-between text-gray-900 mb-5">
                         <p class="text-lg">ربات پاراکسین</p>
                         <span class="cursor-pointer" x-on:click="modalRobot = false">
@@ -41,8 +47,8 @@
                         </p>
                     </div>
                     <div class="flex justify-between mt-5">
-                        <div class="bg-red-500 text-gray-100 rounded-md px-4 py-2 hover:bg-red-700" x-on:click="modalRobot = false">بی خیال</div>
-                        <a href="https://t.me/paraxin_bot" target="_blank" class="bg-green-500 text-gray-100 rounded-md px-4 py-2 hover:bg-green-700">انتقال به ربات</a>
+                        <div class="bg-red-500 text-gray-100 cursor-pointer border-3 border-red-600 rounded-md px-4 py-2 hover:bg-red-600" x-on:click="modalRobot = false">بی خیال</div>
+                        <a href="https://t.me/paraxin_bot" target="_blank" class="bg-green-500 border-3 border-green-600 text-gray-100 rounded-md px-4 py-2 hover:bg-green-600">انتقال به ربات</a>
                     </div>
                 </div>
             </div>

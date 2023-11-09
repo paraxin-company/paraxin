@@ -174,12 +174,6 @@ footer{
     margin-top: 20px;
     justify-content: center;
 }
-.desc{
-    width: 100%;
-    margin: 0 0 13px 0;
-    text-indent: calc(var(--line-height-p) - 10px);
-    text-align: justify;
-}
 .m-t-150-px{
     margin-top: 150px !important;
 }
@@ -195,9 +189,7 @@ footer{
 [class*="col-"]{
     padding: 6px 4px !important;
 }
-.img-responsive , .img-container{
-    width: 100%;
-}
+
 .dropdown-item{
     text-align: right !important;
 }
@@ -215,18 +207,6 @@ footer{
 }
 .accordion-button::after{
     margin: 0 auto 0 0 !important;
-}
-@media screen and (max-width: 992px){
-    .img-container{
-        width: 60% !important;
-        margin: auto !important;
-    }
-}
-@media screen and (max-width: 768px){
-    .img-container{
-        width: 75% !important;
-        margin: auto !important;
-    }
 }
 @media screen and (min-width: 768px){
     .contact-section{

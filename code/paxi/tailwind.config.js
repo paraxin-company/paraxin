@@ -17,7 +17,7 @@ module.exports = {
       },
       container: {
         center: true,
-        padding: '2rem',
+        padding: '4rem',
       },
       colors: {
         'paraxin-c': {

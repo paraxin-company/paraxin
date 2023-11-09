@@ -17,6 +17,21 @@
     url('../font/lalezar/Lalezar.woff') format('woff'),
     url('../font/lalezar/Lalezar.woff2') format('woff2');
 }
+.sub-nav{
+    @apply text-gray-100 rounded-md bg-paraxin-c-200;
+}
+.main-nav{
+    @apply underline text-paraxin-c-200;
+}
+.header-text{
+    @apply font-tit text-2xl mb-3;
+}
+.link-paraxin{
+    @apply text-xl px-3 py-1 rounded-md bg-paraxin-c-200 text-gray-100 border-3 border-paraxin-c-300 hover:bg-gray-100 hover:ring-4 hover:ring-paraxin-c-200 hover:ring-opacity-50 hover:text-paraxin-c-200;
+}
+.simple-input{
+    @apply w-full rounded-lg shadow-md focus:outline-none;
+}
 @layer base {
     *{
         direction: rtl;
