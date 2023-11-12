@@ -3,106 +3,106 @@
 {% block title %}paraxin | لیست خدمات پاراکسین{% endblock %}
 {% block keyword %}تیم پاراکسین, پاراکسین, paraxin, لیست خدمات پاراکسین, خدمات پاراکسین, صفحه‌ی اصلی پاراکسین{% endblock %}
 {% block desc %}لیستی از تمامی خدمات تیم آورده شده است، در صورت تمایل برای استفاده از خدمات می توانید از طریق لینکی که در زیر توضیحات هر بخش ...{% endblock %}
-{% block style %}{{url_for('static', filename='css/home.css')}}{% endblock %}
 {% block home %}main-nav hover:text-paraxin-c-200{% endblock %}
 
 {% block content %}
-<div class="row">
-    <div class="col-sm-12 col-md-6 col-lg-7 my-3 animate__animated animate__zoomInDown wow" data-wow-delay=".4s">
-        <h1 class="tit px-4 text-center">تجربه‌ایی تکرار نشدنی و خلق اتفاق های خوب با تیم پاراکسین</h1>
+<div class="simple-container p-6">
+    <div class="w-full md:w-3/5">
+        <img class="temps bg-paraxin-c-300 rounded-3xl animate__animated animate__rubberBand wow" src="{{url_for('static', filename='media/improving.png')}}" alt="شروع کار با تیم پاراکسین">
+    </div>
+    <div class="text-container animate__animated animate__zoomInDown wow" data-wow-delay=".4s">
+        <h1 class="header-text text-center">تجربه‌ایی تکرار نشدنی و خلق اتفاق های خوب با تیم پاراکسین</h1>
         <p class="text-center animate__animated animate__flash wow" data-wow-delay="1.5s">
             پاراکسین به شما کمک می کند تا همیشه آنلاین بمانید
         </p>                
     </div>
-    <div class="col-sm-12 col-md-6 col-lg-5 my-2 img-container">
-        <img class="img-responsive temps animate__animated animate__rubberBand wow" src="{{url_for('static', filename='media/improving.png')}}" alt="شروع کار با تیم پاراکسین">
-    </div>
 </div>
-<div class="text-content">
+<div class="text-center my-28 pt-6">
     <p>
         لیستی از خدمات تیم در ذیل آورده شده است، در صورت تمایل برای استفاده از خدمات می توانید از
         طریق لینکی که در زیر توضیحات هر بخش گذاشته شده است استفاده کنید.
     </p>
 </div>
-<div class="row m-t-150-px">
-    <div class="paraxin-ability col-sm-12 col-lg-7 my-3 animate__animated animate__fadeInRight wow" data-wow-delay=".5s">
-        <h3 class="tit animate__animated animate__fadeIn wow" data-wow-delay="1.5s">طراحی و ساخت سایت</h3>
-        <p class="desc">
+<div class="simple-container mt-40">
+    <div class="text-container animate__animated animate__fadeInRight wow" data-wow-delay=".5s">
+        <h3 class="header-text animate__animated animate__fadeIn wow" data-wow-delay="1.5s">طراحی و ساخت سایت</h3>
+        <p class="indent-1">
             طراحی و ساخت سایت به معنای ایجاد یک فضای مجازی برای کسب و کار، سازمان یا فرد است که به وسیله آن می‌توانند خدمات، محصولات و اطلاعات خود را به صورت آنلاین به مخاطبان ارائه دهند. طراحی سایت باید به گونه‌ای باشد که کاربران بتوانند به راحتی به اطلاعات مورد نیازشان دسترسی پیدا کنند و همچنین سایت باید بهینه شده باشد تا در موتورهای جستجو قابل دسترس باشد. برای ساخت سایت، ابتدا باید نیازهای کسب و کار یا سازمان را شناسایی کرده و سپس با توجه به این نیازها، طراحی و ساخت سایت را آغاز کرد. در این فرآیند، باید به طراحی رابط کاربری، استفاده از فناوری‌های مناسب، بهینه‌سازی سایت و ایجاد محتوای مناسب توجه کرد. در نهایت، باید از طریق تست و بهینه‌سازی، اطمینان حاصل کرد که سایت به گونه‌ای طراحی و ساخته شده است که به بهترین شکل ممکن عمل می‌کند.
         </p>
-        <p class="desc">
+        <p class="indent-1">
             تمامی مواردی که گفته شد توسط تیم قدرتمند پاراکسین در کمترین زمان ممکن انجام می شود .
         </p>
-        <p class="desc">شما می توانید از طریق لینک زیر از امکانات طراحی و ساخت سایت استفاده کنید.</p>
-        <div class="a-flex-center">
-            <a class="style-link-in-paraxin animate__animated animate__wobble wow" data-wow-delay="2s" href="{{url_for('site_design')}}" title="paraxin web design page">همین الان امتحان کنید</a>
+        <p class="indent-1">شما می توانید از طریق لینک زیر از امکانات طراحی و ساخت سایت استفاده کنید.</p>
+        <div class="flex justify-center mt-5">
+            <a class="paraxin-pro-link animate__animated animate__wobble wow" data-wow-delay="2s" href="{{url_for('site_design')}}" title="paraxin web design page">همین الان امتحان کنید</a>
         </div>
     </div>
-    <div class="col-sm-12 col-lg-5 my-3 img-container">
-        <img class="img-responsive animate__animated animate__rubberBand wow" src="{{url_for('static', filename='media/web_design/Website_Creator.svg')}}" alt="نمونه عکس طراحی سایت برای صفحه پاراکسین">
+    <div class="w-full md:w-3/5">
+        <img class="animate__animated animate__rubberBand wow" src="{{url_for('static', filename='media/web_design/Website_Creator.svg')}}" alt="نمونه عکس طراحی سایت برای صفحه پاراکسین">
     </div>
 </div>
-<div class="row m-t-150-px">
-    <div class="paraxin-ability col-sm-12 col-lg-7 my-3 animate__animated animate__fadeInLeft wow" data-wow-delay=".5s">
-        <h3 class="tit animate__animated animate__fadeIn wow" data-wow-delay="1.5s">طراحی و ساخت لوگو</h3>
-        <p class="desc">
+<div class="simple-container mt-40">
+    <div class="text-container animate__animated animate__fadeInLeft wow" data-wow-delay=".5s">
+        <h3 class="header-text animate__animated animate__fadeIn wow" data-wow-delay="1.5s">طراحی و ساخت لوگو</h3>
+        <p class="indent-1">
             لوگو یک نماد یا نشانه است که برای شناسایی و تمایز بخشی خاص از یک برند، شرکت یا سازمان استفاده می‌شود. لوگوها عموماً شامل ترکیبی از الفبا، حروف، شکل‌ها، نمادها و رنگ‌ها هستند که به صورت منحصر به فرد طراحی شده‌اند. این علامت‌ها به منظور به خاطرسپاری آسان و شناسایی سریع برند توسط مخاطبان و مشتریان استفاده می‌شود. لوگوها معمولاً بر روی محصولات، سایت‌ها، بسته‌بندی‌ها، تابلوها و متعلقات دیگر شرکت نمایش داده می‌شوند. طراحی لوگو باید منحصر به فرد، قابل تشخیص و قابل حفظ باشد تا بتواند هویت و شخصیت برند را به خوبی نمایش دهد.                </p>
-        <p class="desc">
+        <p class="indent-1">
             طراحی لوگو به صورت کاملا حرفه ایی توسط تیم طراحی قدرتمند پاراکسین در کمترین زمان ممکن انجام می شود .
         </p>
-        <p class="desc">شما می توانید از طریق لینک زیر از امکانات طراحی و ساخت لوگو استفاده کنید.</p>
-        <div class="a-flex-center">
-            <a class="style-link-in-paraxin animate__animated animate__wobble wow" data-wow-delay="2s" href="{{url_for('logo_design')}}" title="paraxin Logo design page">همین الان امتحان کنید</a>
+        <p class="indent-1">شما می توانید از طریق لینک زیر از امکانات طراحی و ساخت لوگو استفاده کنید.</p>
+        <div class="flex justify-center mt-5">
+            <a class="paraxin-pro-link animate__animated animate__wobble wow" data-wow-delay="2s" href="{{url_for('logo_design')}}" title="paraxin Logo design page">همین الان امتحان کنید</a>
         </div>
     </div>
-    <div class="col-sm-12 col-lg-5 my-3 img-container">
-        <img class="img-responsive animate__animated animate__rubberBand wow" src="{{url_for('static', filename='media/logo_design/logo_design.svg')}}" alt="نمونه عکس طراحی سایت برای صفحه پاراکسین">
+    <div class="w-full md:w-3/5">
+        <img class="animate__animated animate__rubberBand wow" src="{{url_for('static', filename='media/logo_design/logo_design.svg')}}" alt="نمونه عکس طراحی سایت برای صفحه پاراکسین">
     </div>
 </div>
-<div class="row m-t-150-px">
-    <div class="paraxin-ability col-sm-12 col-lg-7 my-3 animate__animated animate__fadeInRight wow" data-wow-delay=".5s">
-        <h3 class="tit animate__animated animate__fadeIn wow" data-wow-delay="1.5s">فاپ‌ساز</h3>
-        <p class="desc">
+<div class="simple-container mt-40">
+    <div class="text-container animate__animated animate__fadeInRight wow" data-wow-delay=".5s">
+        <h3 class="header-text animate__animated animate__fadeIn wow" data-wow-delay="1.5s">فاپ‌ساز</h3>
+        <p class="indent-1">
             فاپ‌ساز ترکیبی از کلمات فرم‌ساز، آزمون‌ساز و پرسشنامه‌ساز است که همگی ابزارهایی هستند که به کاربران اجازه می‌دهند تا فرم‌ها، آزمون‌ها و پرسش‌نامه‌های خود را به صورت آنلاین طراحی و ساخته و با دیگران به اشتراک بگذارند. این ابزارها به شرکت‌ها، سازمان‌ها، مدارس و حتی افراد عادی کمک می‌کنند تا به راحتی و با کمترین هزینه، فرم‌ها و آزمون‌های مورد نیاز خود را طراحی و اجرا کنند. همچنین، این ابزارها به کاربران امکان می‌دهند تا به صورت آنلاین پاسخ‌های خود را ارسال و نتایج را دریافت کنند. با استفاده از فرم ساز، آزمون ساز و پرسش نامه ساز، می‌توانید به راحتی به داده‌های مورد نیاز دسترسی پیدا کنید و تصمیمات بهتری برای کسب و کار یا سازمان خود بگیرید.
         </p>
-        <p class="desc">شما می توانید از طریق لینک زیر از امکانات ساخت فاپ‌ساز استفاده کنید.</p>
-        <div class="a-flex-center">
-            <a class="style-link-in-paraxin animate__animated animate__wobble wow" data-wow-delay="2s" href="{{url_for('fap')}}" title="paraxin form builder page">رایگان امتحان کنید</a>
+        <p class="indent-1">شما می توانید از طریق لینک زیر از امکانات ساخت فاپ‌ساز استفاده کنید.</p>
+        <div class="flex justify-center mt-5">
+            <a class="paraxin-pro-link animate__animated animate__wobble wow" data-wow-delay="2s" href="{{url_for('fap')}}" title="paraxin form builder page">رایگان امتحان کنید</a>
         </div>
     </div>
-    <div class="img-container col-sm-12 col-lg-5 my-3 animate__animated animate__rubberBand wow">
-        <img class="img-responsive" src="{{url_for('static', filename='media/fap_builder/online_test.svg')}}" alt="نمونه عکس فاپ‌ساز برای صفحه پاراکسین">
+    <div class="w-full md:w-3/5 animate__animated animate__rubberBand wow">
+        <img src="{{url_for('static', filename='media/fap_builder/online_test.svg')}}" alt="نمونه عکس فاپ‌ساز برای صفحه پاراکسین">
     </div>
 </div>
-<div class="row m-t-150-px">
-    <div class="paraxin-ability col-sm-12 col-lg-7 my-3 animate__animated animate__fadeInLeft wow" data-wow-delay=".5s">
-        <h3 class="tit animate__animated animate__fadeIn wow" data-wow-delay="1.5s">ساخت Qr code (کیو‌آر کد)</h3>
-        <p class="desc">
+<div class="simple-container mt-40">
+    <div class="text-container animate__animated animate__fadeInLeft wow" data-wow-delay=".5s">
+        <h3 class="header-text animate__animated animate__fadeIn wow" data-wow-delay="1.5s">ساخت Qr code (کیو‌آر کد)</h3>
+        <p class="indent-1">
             کد QR، یک ابزار بسیار قدرتمند و مفید است که به شما اجازه می‌دهد تا با اسکن کردن آن با گوشی هوشمند خود، به صورت سریع و آسان به اطلاعات مورد نظر دسترسی پیدا کنید. این کد، معمولا در کارت‌های ویزیت، بروشورها، تبلیغات و حتی بر روی محصولات قرار داده می‌شود و با اسکن آن، شما می‌توانید به صفحات وب، فایل‌های PDF، تصاویر و غیره دسترسی پیدا کنید. با استفاده از کد QR، می‌توانید به راحتی اطلاعات خود را با دیگران به اشتراک بگذارید و به شکلی ساده و موثر با مخاطبین خود ارتباط برقرار کنید.
         </p>
-        <p class="desc">یکی از امکانات مهم تیم پاراکسین برای خدمات رسانی به کاربران خود ساخت کیو‌آر کد است. 
+        <p class="indent-1">یکی از امکانات مهم تیم پاراکسین برای خدمات رسانی به کاربران خود ساخت کیو‌آر کد است. 
             که به کاربران خود حس متفاوت بودن می دهد آن هم به صورت رایگان. با استفاده از QR code ساز پاراکسین بهتر دیده شوید و در اوج بمانید.
         </p>
-        <p class="desc">شما می توانید از طریق لینک زیر از امکانات ساخت کیو‌آر کد استفاده کنید.</p>
-        <div class="a-flex-center">
-            <a class="style-link-in-paraxin animate__animated animate__wobble wow" data-wow-delay="2s" href="{{url_for('qrcode')}}" title="paraxin Qr code page">رایگان امتحان کنید</a>
+        <p class="indent-1">شما می توانید از طریق لینک زیر از امکانات ساخت کیو‌آر کد استفاده کنید.</p>
+        <div class="flex justify-center mt-5">
+            <a class="paraxin-pro-link animate__animated animate__wobble wow" data-wow-delay="2s" href="{{url_for('qrcode')}}" title="paraxin Qr code page">رایگان امتحان کنید</a>
         </div>
     </div>
-    <div class="col-sm-12 col-lg-5 my-3 img-container animate__animated animate__rubberBand wow">
-        <img class="img-responsive" src="{{url_for('static', filename='media/qr_code/QR_Code_intro.svg')}}" alt="نمونه عکس کیو آر کد برای صفحه پاراکسین">
+    <div class="w-full md:w-3/5 animate__animated animate__rubberBand wow">
+        <img src="{{url_for('static', filename='media/qr_code/QR_Code_intro.svg')}}" alt="نمونه عکس کیو آر کد برای صفحه پاراکسین">
     </div>
 </div>
-<div class="row m-t-150-px">
-    <div class="col-md-12 col-lg-7 my-3 animate__animated animate__fadeInRight wow" data-wow-delay=".5s">
-        <div class="accordion" id="accordionPanelsStayOpenExample">
-            <div class="accordion-item">
-                <h2 class="accordion-header">
-                    <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseOne" aria-expanded="true" aria-controls="panelsStayOpen-collapseOne">
-                        <span class="text-danger">#1 </span> چرا تیم پاراکسین ؟
-                    </button>
-                </h2>
-                <div id="panelsStayOpen-collapseOne" class="accordion-collapse collapse show">
-                    <div class="accordion-body">
+<div class="simple-container mt-40">
+    <div class="text-container animate__animated animate__fadeInRight wow" data-wow-delay=".5s">
+        <div class="flex flex-col gap-5 p-5">
+            <div x-data="{ faq: true }">
+                <div class="flex items-center gap-1 cursor-pointer" @click="faq = ! faq">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-4 h-4 transition duration-300" x-bind:class="{'rotate-180':faq}">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5" />
+                    </svg> 
+                    <span class="text-red-500">#1 </span> چرا تیم پاراکسین ؟
+                </div>
+                <div x-cloak x-show="faq" @click.outside="faq = false">
+                    <div class="faq-content">
                         <ol class="px-3">
                             <li>تیم پاراکسین متشکل شده از افراد متخصص ایرانی و خارجی است و روز به روز بر قدرت تیم افزوده می شود .</li>
                             <li>تیم پشتیبانی پاسخگوی شما در طول 24 ساعت شبانه روز و 7 روز هفته است .</li>
@@ -112,47 +112,49 @@
                     </div>
                 </div>
             </div>
-            <div class="accordion-item">
-                <h2 class="accordion-header">
-                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseTwo" aria-expanded="false" aria-controls="panelsStayOpen-collapseTwo">
-                        <span class="text-danger">#2 </span> چگونه می‌تونم عضو این تیم بشم ؟
-                    </button>
-                </h2>
-                <div id="panelsStayOpen-collapseTwo" class="accordion-collapse collapse">
-                    <div class="accordion-body">
+            <div x-data="{ faq: false }">
+                <div class="flex items-center gap-1 cursor-pointer" @click="faq = ! faq">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-4 h-4 transition duration-300" x-bind:class="{'rotate-180':faq}">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5" />
+                    </svg> 
+                    <span class="text-red-500">#2 </span> چگونه می‌تونم عضو این تیم بشم ؟
+                </div>
+                <div x-cloak x-show="faq" @click.outside="faq = false">
+                    <div class="faq-content">
                         این تیم خوش آمد گوی افراد حرفه‌ایی و کار بلد است و برایش فرقی ندارد که ملیت شما چیست
                         و یا از کدوم شهر ایران می باشید. تنها ملاک سنجش، علم و تجربه است .<br>
                         در صورتی که شرایط را دارین و دوست دارین با این تیم همکاری کنید و در کنار افراد متخصص
                         قرار بگیرید می توانید از صفحه تماس با ما، <a class="simple-link" href="{{url_for('contact')}}#send-mail">فرم تماس</a> را پر کنید (دقت کنید که حتما دپارتمان را روی دعوت به همکاری بگذارید) و یا از طریق 
-                        <button type="button" class="robot-button simple-link" data-bs-toggle="modal" data-bs-target="#robot">
+                        <a href="https://t.me/paraxin_bot" target="_blank" class="inline-block cursor-pointer simple-link">
                             ربات تلگرام
-                        </button> با پشتیبانی ارتباط برقرار کنید و درخواست را به آنها بگوید .
+                        </a> با پشتیبانی ارتباط برقرار کنید و درخواست را به آنها بگوید .
                     </div>
                 </div>
             </div>
-            <div class="accordion-item">
-                <h2 class="accordion-header">
-                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseThree" aria-expanded="false" aria-controls="panelsStayOpen-collapseThree">
-                        <span class="text-danger">#3 </span> چگونه می‌تونم از آخرین اخبار پاراکسین مطلع بشم ؟
-                    </button>
-                </h2>
-                <div id="panelsStayOpen-collapseThree" class="accordion-collapse collapse">
-                    <div class="accordion-body">
+            <div x-data="{ faq: false }">
+                <div class="flex items-center gap-1 cursor-pointer" @click="faq = ! faq">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-4 h-4 transition duration-300" x-bind:class="{'rotate-180':faq}">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5" />
+                    </svg> 
+                    <span class="text-red-500">#3 </span> چگونه می‌تونم از آخرین اخبار پاراکسین مطلع بشم ؟
+                </div>
+                <div x-cloak x-show="faq" @click.outside="faq = false">
+                    <div class="faq-content">
                         برای مطلع شدن از آخرین اخبار و اطلاع رسانی‌های تیم می توانید به 
-                        <button type="button" class="robot-button simple-link" data-bs-toggle="modal" data-bs-target="#robot">
+                        <a class="inline-block cursor-pointer simple-link" href="https://t.me/paraxin_bot" target="_blank">
                             ربات تلگرام
-                        </button>
+                        </a>
                         پیام بدین، ربات شما را راهنمایی می کند تا با کمترین زحمت به اطلاعات دسترسی داشته باشین .
                     </div>
                 </div>
             </div>
         </div>
     </div>
-    <div class="col-sm-12 col-lg-5 my-3 img-container">
-        <img class="img-responsive animate__animated animate__rubberBand wow" src="{{url_for('static', filename='media/FAQs.svg')}}" alt="سوالات متداول درباره پاراکسین">
+    <div class="w-full md:w-3/5">
+        <img class="animate__animated animate__rubberBand wow" src="{{url_for('static', filename='media/FAQs.svg')}}" alt="سوالات متداول درباره پاراکسین">
     </div>
 </div>
-<div class="text-content">
+<div class="text-center mt-40">
     <p>تیم پاراکسین تمام تلاش خود را می کند تا بتواند بهترین و حرفه ایی ترین امکانات و خدمات رو به کاربران خود
         ارائه کند. هدف ما ایجاد تجربه‌ی خوب و به یاد ماندنی برای شما عزیزان است .<br>
         در صورت بروز یا روبه‌رویی با مشکل می توانید از طریق این <a class="simple-link" href="{{url_for('contact')}}#send-mail">لینک</a> با تیم پشتیبانی در ارتباط باشین 

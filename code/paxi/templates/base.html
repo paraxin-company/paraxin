@@ -166,9 +166,9 @@
         </div>
     </nav>
     <div class="h-18"></div>
-    <div class="z-50 hidden sm:flex justify-center bg-paraxin-c-200 border-3 border-paraxin-c-200 bg-opacity-50 items-center fixed right-2 bottom-3 p-1 w-12 hw-12 rounded-full">
+    <div class="hidden sm:flex justify-center bg-paraxin-c-200 border-3 border-paraxin-c-200 bg-opacity-50 items-center fixed right-2 bottom-3 p-1 w-12 hw-12 rounded-full">
         <div class="relative">
-            <div class="absolute w-full h-full rounded-full bg-paraxin-c-300 opacity-90 animate-ping"></div>
+            <div class="-z-10 absolute w-full h-full rounded-full bg-paraxin-c-300 opacity-90 animate-ping"></div>
             <a href="{{url_for('contact')}}#send-mail" title="تماس با پشتیبان تیم پاراکسین">
                 <span class="text-paraxin-c-300">
                     <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" class="w-full" viewBox="0 0 50 50">
@@ -179,7 +179,7 @@
         </div>
     </div>
     {% block first_view%}{% endblock %}
-    <div class="container px-5">
+    <div class="container px-5 overflow-hidden">
         {% block content %}{% endblock %}
     </div>
     {% block wave %}{% endblock %}

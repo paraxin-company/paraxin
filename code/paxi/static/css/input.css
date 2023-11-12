@@ -26,15 +26,31 @@
 .header-text{
     @apply font-tit text-2xl mb-3;
 }
-.link-paraxin{
-    @apply text-xl px-3 py-1 rounded-md bg-paraxin-c-200 text-gray-100 border-3 border-paraxin-c-300 hover:bg-gray-100 hover:ring-4 hover:ring-paraxin-c-200 hover:ring-opacity-50 hover:text-paraxin-c-200;
+.paraxin-pro-link{
+    @apply font-tit text-xl px-3 py-1 rounded-md text-paraxin-c-300 border-4 border-paraxin-c-300 hover:text-white hover:bg-paraxin-c-200 hover:ring-4 hover:ring-offset-1 hover:ring-paraxin-c-200 hover:ring-opacity-40;
 }
 .simple-input{
     @apply w-full rounded-lg shadow-md focus:outline-none;
+}
+.simple-container{
+    @apply grid md:flex md:justify-center md:items-center;
+}
+.simple-container:nth-child(even){
+    @apply md:flex-row-reverse;
+}
+.simple-link{
+    @apply text-indigo-600 hover:underline;
+}
+.text-container{
+    @apply w-full flex flex-col p-5;
+}
+.faq-content{
+    @apply bg-gray-200 border-gray-900 rounded-lg p-5;
 }
 @layer base {
     *{
         direction: rtl;
         font-family: 'vazir', cursive;
+        line-height: 28px;
     }
 }

@@ -3,25 +3,25 @@
 {% block title %}paraxin | درباره‌ی تیم پاراکسین{% endblock %}
 {% block keyword %}درباره‌ی تیم پاراکسین, درباره‌ی پاراکسین, پاراکسین به چه معناست, تیم پاراکسین, پاراکسین, paraxin{% endblock %}
 {% block desc %}تیم  پاراکسی همگی از متخصصین با تجربه ایرانی و خارجی هستند که در کنار هم و در یک قاب فعالیت می کنن. افرادی که توانایی بسیاری در زمینه  ...{% endblock %}
-{% block about %}sub-nav hover:text-gray-200{% endblock %}
+{% block about %}sub-nav hover:text-gray-100{% endblock %}
 
 {% block content %}
-<div class="grid gird-cols-1 md:flex">
+<div class="simple-container">
     <div class="w-full md:w-3/5">
         <img class="animate__animated animate__rubberBand wow" src="static/media/about/About_us_page.svg" alt="درباره ی تیم پاراکسین">
     </div>
     <div class="w-full flex flex-col justify-center items-center animate__animated animate__zoomInDown wow" data-wow-delay=".4s">
-        <h1 class="header-text">درباره‌ی پاراکسین</h1>
+        <h1 class="header-text text-center">درباره‌ی پاراکسین</h1>
         <p class="animate__animated animate__flash wow" data-wow-delay="1.5s">
             هر آنچه که بخواین درباره پاراکسین بدانید در این صفحه یافت می شود.
         </p>                
     </div>
 </div>
-<div class="grid gird-cols-1 md:flex md:flex-row-reverse mt-40 overflow-hidden">
+<div class="simple-container mt-40">
     <div class="w-full md:w-3/5">
         <img src="{{url_for('static', filename='media/about/friendship.svg')}}" class="animate__animated animate__rubberBand wow" alt="داستان شکل گیری تیم">
     </div>
-    <div class="w-full flex flex-col p-5 justify-center items-center animate__animated animate__fadeInRight wow" data-wow-delay=".5s">
+    <div class="text-container animate__animated animate__fadeInRight wow" data-wow-delay=".5s">
         <h1 class="header-text animate__animated animate__fadeIn wow" data-wow-delay="1.5s">داستان شکل گیری پاراکسین</h1>
         <p class="text-justify">
             ایده ی شکل گیری این تیم اولین بار در سال 1400 به فکرمان رسید و تا اجرایی این ایده یک سال به طول انجامید و برای اولین
@@ -32,11 +32,11 @@
         </p>
     </div>
 </div>
-<div class="grid gird-cols-1 md:flex mt-40 overflow-hidden">
+<div class="simple-container mt-40">
     <div class="w-full md:w-3/5">
         <img src="{{url_for('static', filename='media/paraxin_icon.png')}}" alt="پاراکسین یعنی چه؟" class="animate__animated animate__rubberBand wow">
     </div>
-    <div class="w-full flex flex-col p-5 justify-center items-center animate__animated animate__fadeInLeft wow" data-wow-delay=".5s">
+    <div class="text-container animate__animated animate__fadeInLeft wow" data-wow-delay=".5s">
         <h1 class="header-text animate__animated animate__fadeIn wow" data-wow-delay="1.5s">پاراکسین به چه معناست ؟</h1>
         <p class="text-justify">
             کلمه پاراکسین (به لاتین paraxin) ترکیبی از 2 کلمه parax و in است. کلمه parax (پاراکس) ریشه‌ی هخامنشی دارد به معنی مهندس طراح
