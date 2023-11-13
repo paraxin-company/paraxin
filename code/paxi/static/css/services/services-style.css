@@ -32,24 +32,9 @@
     overflow: hidden;
     margin: 0 auto 15px;
 }
-.fv-text{
-    width: 80%;
-    padding: 15px;
-    margin: 0 auto;
-    text-align: center;
-}
-.stands-for{
-    color: var(--paraxin-color2);
-    font-weight: bold;
-}
 .header-title{
     font-size: 18px;
     font-weight: bold;
-}
-.img-header{
-    width: 85%;
-    height: auto;
-    margin: 0 auto;
 }
 @media screen and (max-width: 768px){
     .img-header{

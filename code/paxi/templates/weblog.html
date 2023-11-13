@@ -3,59 +3,60 @@
 {% block title %}paraxin | وبلاگ پاراکسین{% endblock %}
 {% block keyword %}{% endblock %}
 {% block desc %}{% endblock %}
-{% block style %}{{url_for('static', filename='css/weblog.css')}}{% endblock %}
 {% block weblog %}active{% endblock %}
 
 {% block content %}
 <div class="my-5">
-    <p class="tit">وبلاگ پاراکسین</p>
-    <div class="row">
+    <p class="font-tit mb-5 text-xl">وبلاگ پاراکسین</p>
+    <div>
         {% if info%}
-            {% for web_log in info %}
-            <div class="col-xs-12 col-sm-8 col-md-6 col-lg-4">
-                <div class="card">
+            <div class="grid gap-5 grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
+                {% for web_log in info %}
+                <div class="overflow-hidden border-2 border-gray-300 w-full rounded-xl hover:shadow-xl">
                     <a href="{{url_for('weblog_detail', id=web_log.id)}}">
-                        <img src="{{url_for('static', filename=web_log.baner)}}" alt="{{web_log.title}}" class="card-img-top">
+                        <img class="w-full" src="{{url_for('static', filename=web_log.baner)}}" alt="{{web_log.title}}">
                     </a>
-                    <div class="card-body">
-                        <p class="card-title melo">{{web_log.title}}</p>
-                        <p class="desc">{{web_log.content[0:140]+"..."}}<a class="links" href="{{url_for('weblog_detail', id=web_log.id)}}">ادامه ی متلب</a></p>
+                    <div class="p-2">
+                        <p class="text-gray-600">{{web_log.title}}</p>
+                        <p>{{web_log.content}}<a class="text-blue-500 text-opacity-50 font-tit hover:underline hover:underline-offset-4" href="{{url_for('weblog_detail', id=web_log.id)}}">... ادامه ی متلب</a></p>
                     </div>
                 </div>
+                {% endfor %}
             </div>
-            {% endfor %}
-            <div class="mt-5 pt-5">
-                <nav aria-label="Page navigation example">
-                    <ul class="pagination">
-                        {% if info.has_prev %}
-                            <li class="page-item">
-                                <a class="page-link" href="{{url_for('weblog', page=info.page-1)}}" aria-label="Previous">
-                                    <span aria-hidden="true">&laquo;</span>
-                                </a>
-                            </li>
+            <div class="my-10 flex justify-center items-center">
+                <ul class="pagination">
+                    {% if info.has_prev %}
+                        <li class="pagination-control">
+                            <a href="{{url_for('weblog', page=info.page-1)}}" aria-label="Previous">
+                                <span>&laquo;</span>
+                            </a>
+                        </li>
+                    {% else %}
+                        <li class="pagination-control pagination-disable">
+                            <span>&laquo;</span>
+                        </li>
+                    {% endif %}
+                    
+                    {% for page in info.iter_pages() %}
+                        {% if page != info.page %}
+                        <li class="pagination-item"><a href="{{url_for('weblog', page=page)}}">{{page}}</a></li> 
                         {% else %}
-                            <li class="page-item disabled"><a class="page-link" href="#" aria-label="Previous"><span aria-hidden="true">&laquo;</span></a></li>
+                        <li class="pagination-item pagination-here"><a href="{{url_for('weblog', page=page)}}">{{page}}</a></li>
                         {% endif %}
-                        
-                        {% for page in info.iter_pages() %}
-                            {% if page != info.page %}
-                                <li class="page-item"><a class="page-link" href="{{url_for('weblog', page=page)}}">{{page}}</a></li> 
-                            {% else %}
-                                <li class="page-item active"><a class="page-link" href="{{url_for('weblog', page=page)}}">{{page}}</a></li>
-                            {% endif %}
-                        {% endfor %}
-                        
-                        {% if info.has_next %}
-                            <li class="page-item">
-                                <a class="page-link" href="{{url_for('weblog', page=info.page+1)}}" aria-label="Next">
-                                    <span aria-hidden="true">&raquo;</span>
-                                </a>
-                            </li>
-                        {% else %}
-                            <li class="page-item disabled"><a class="page-link" href="#" aria-label="Previous"><span aria-hidden="true">&raquo;</span></a></li>
-                        {% endif %}
-                    </ul>
-                </nav>
+                    {% endfor %}
+                    
+                    {% if info.has_next %}
+                        <li class="pagination-control">
+                            <a href="{{url_for('weblog', page=info.page+1)}}" aria-label="Next">
+                                <span>&raquo;</span>
+                            </a>
+                        </li>
+                    {% else %}
+                        <li class="pagination-control pagination-disable">
+                            <span>&raquo;</span>
+                        </li>
+                    {% endif %}
+                </ul>
             </div>
         {% endif %}
     </div>

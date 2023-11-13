@@ -20,6 +20,9 @@
 .sub-nav{
     @apply text-gray-100 rounded-md bg-paraxin-c-200;
 }
+.sub-nav:hover{
+    @apply text-gray-100;
+}
 .main-nav{
     @apply underline text-paraxin-c-200;
 }
@@ -46,6 +49,27 @@
 }
 .faq-content{
     @apply bg-gray-200 border-gray-900 rounded-lg p-5;
+}
+.pagination{
+    @apply flex flex-row justify-center items-center rounded-xl overflow-hidden  border border-gray-500;
+}
+.pagination-item{
+    @apply px-3 py-1 border-x border-gray-400 text-paraxin-c-200 cursor-pointer;
+}
+.pagination-here{
+    @apply bg-paraxin-c-200 bg-opacity-80 text-white;
+}
+.pagination-control{
+    @apply px-3 py-1 text-paraxin-c-200 cursor-pointer;
+}
+.pagination-disable{
+    @apply bg-gray-300 text-gray-500 cursor-default;
+}
+.alert-danger{
+    @apply text-red-700 border-2 border-red-600 border-opacity-50 bg-red-100 bg-opacity-50 rounded-md px-4 py-3;
+}
+.alert-success{
+    @apply text-green-700 border-2 border-green-600 border-opacity-50 bg-green-100 bg-opacity-50 rounded-md px-4 py-3;
 }
 @layer base {
     *{
