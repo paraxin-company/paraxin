@@ -12,7 +12,7 @@
         {% if info%}
             <div class="grid gap-5 grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
                 {% for web_log in info %}
-                <div class="overflow-hidden border-2 border-gray-300 w-full rounded-xl hover:shadow-xl">
+                <div class="overflow-hidden border-2 border-gray-300 w-full rounded-xl hover:border-gray-500 hover:shadow-2xl">
                     <a href="{{url_for('weblog_detail', id=web_log.id)}}">
                         <img class="w-full" src="{{url_for('static', filename=web_log.baner)}}" alt="{{web_log.title}}">
                     </a>

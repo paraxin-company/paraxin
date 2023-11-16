@@ -30,10 +30,13 @@
     @apply font-tit text-2xl mb-3;
 }
 .paraxin-pro-link{
-    @apply font-tit text-xl px-3 py-1 rounded-md text-paraxin-c-300 border-4 border-paraxin-c-300 hover:text-white hover:bg-paraxin-c-200 hover:ring-4 hover:ring-offset-1 hover:ring-paraxin-c-200 hover:ring-opacity-40;
+    @apply font-tit text-xl px-4 py-1 rounded-md text-paraxin-c-300 border-3 border-paraxin-c-300 hover:ring-2 hover:bg-paraxin-c-200 hover:bg-opacity-20 hover:ring-offset-1 hover:ring-paraxin-c-200 hover:ring-opacity-40;
 }
 .simple-input{
     @apply w-full rounded-lg shadow-md focus:outline-none;
+}
+.box{
+    @apply overflow-hidden border-2 border-gray-300 w-full rounded-xl hover:border-gray-500 hover:shadow-2xl;
 }
 .simple-container{
     @apply grid md:flex md:justify-center md:items-center;
@@ -65,11 +68,14 @@
 .pagination-disable{
     @apply bg-gray-300 text-gray-500 cursor-default;
 }
+.alert{
+    @apply flex items-center gap-3 px-4 py-3;
+}
 .alert-danger{
-    @apply text-red-700 border-2 border-red-600 border-opacity-50 bg-red-100 bg-opacity-50 rounded-md px-4 py-3;
+    @apply text-red-700 border-2 border-red-600 border-opacity-50 bg-red-100 bg-opacity-50 rounded-md;
 }
 .alert-success{
-    @apply text-green-700 border-2 border-green-600 border-opacity-50 bg-green-100 bg-opacity-50 rounded-md px-4 py-3;
+    @apply text-green-700 border-2 border-green-600 border-opacity-50 bg-green-100 bg-opacity-50 rounded-md;
 }
 @layer base {
     *{
@@ -77,4 +83,13 @@
         font-family: 'vazir', cursive;
         line-height: 28px;
     }
+    .top-site .top-site-descryption{
+        background-color: rgba(228, 136, 208, 0.851);
+        visibility: hidden;
+        transform: translateY(320px);
+    }
+    .top-site:hover .top-site-descryption{
+        transform: translateY(0px);
+        visibility: visible;
+    }    
 }

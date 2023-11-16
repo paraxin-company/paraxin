@@ -1,25 +1,24 @@
 {% extends 'base.html'%}
 
-{% block title %}paraxin | صفحه جزیات{% endblock %}
-{% block style %}{{url_for('static', filename='css/detail.css')}}{% endblock %}
+{% block title %}paraxin | صفحه جزئیات{% endblock %}
 
 {% block content %}
-<div class="row row py-5">
-    <div class="col-sm-12 col-lg-9 p-4 pt-1">
+<div class="grid grid-cols-1 gap-5 lg:gap-10 mt-7 md:grid-cols-3 lg:grid-cols-4">
+    <div class="col-span-2 md:col-span-3">
         {% if data %}
-            <h3 class="text-center">{{data.title}}</h3>
+            <h3 class="text-center text-xl mb-2">{{data.title}}</h3>
             <div>
-                <img class="baner" alt="{{data.title}}" src="{{url_for('static', filename=data.baner)}}">
+                <img class="w-full rounded-lg" alt="{{data.title}}" src="{{url_for('static', filename=data.baner)}}">
             </div>
-            <p class="date py-2">تاریخ آخرین آبدیت ( {{data.date.strftime('%d- %m- %Y')}} )</p><hr class="mt-5">
-            <p calss="py-5 mt-5">{{data.content}}</p>
+            <p class="text-xs text-gray-600 my-2">تاریخ آخرین آبدیت ( {{data.date.strftime('%d- %m- %Y')}} )</p><hr class="mt-8 mb-4 border border-gray-400">
+            <p calss="mt-40">{{data.content}}</p>
             {% if gallery %}
-                <p class="tit mt-5">گالری تصاویر</p>
-                <div class="row">
+                <p class="font-tit text-lg mt-5 mb-3">گالری تصاویر</p>
+                <div class="grid grid-cols-1 gap-3 md:grid-cols-2 lg:grid-cols-3">
                     {% for select_image in data.album.split('|,|') %}
                         {% if select_image %}
-                            <div class="col-sm-12 col-md-6">
-                                <img class="image-gallery" src="{{url_for('static', filename=select_image.strip())}}" width="500" height="500" alt="برای لود کردن تصویر مشکلی پیش آمده است"></a>
+                            <div class="border-2 rounded-lg overflow-hidden hover:shadow-md hover:shadow-gray-950 hover:border-paraxin-c-300">
+                                <img class="h-full filter sepia w-full transition duration-500 hover:scale-110 hover:sepia-0" src="{{url_for('static', filename=select_image.strip())}}" alt="{{data.title}}"></a>
                             </div>
                         {% endif %}
                     {% endfor %}
@@ -27,17 +26,17 @@
             {% endif %}
         {% endif %}
     </div>
-    <div class="slider col-sm-12 col-lg-3 px-4 py-4 mt-5">
+    <div class="bg-gray-200 h-fit py-8 px-5 border border-gray-400 shadow-xl rounded-md">
         {% if data %}
-            <p class="text-center">
+            <p class="font-tit text-lg text-center">
                 لینک های مرتبط
             </p>
-            <ul>
+            <ul class="pt-3 text-gray-500">
                 {% if sample %}
                     {% if related %}
                         {% for item in related %}
-                        <li class="related-section">
-                            <a class="related-link" href="{{url_for('work_sample_detail', id=item.id)}}"><span class="dot">&#187; </span>{{item.title}}</a>
+                        <li>
+                            <a class="hover:text-gray-900" href="{{url_for('work_sample_detail', id=item.id)}}"><span class="text-paraxin-c-200">&#187;</span>{{item.title}}</a>
                         </li>
                         {% endfor %}
                     {% else %}
@@ -46,8 +45,8 @@
                 {% else %}
                     {% if related %}
                         {% for item in related %}
-                        <li class="related-section">
-                            <a class="related-link" href="{{url_for('weblog_detail', id=item.id)}}"><span class="dot">&#187; </span>{{item.title}}</a>
+                        <li>
+                            <a class="hover:text-gray-900" href="{{url_for('weblog_detail', id=item.id)}}"><span class="text-paraxin-c-200 text-opacity-50 hover:text-paraxin-c-300">&#187; </span>{{item.title}}</a>
                         </li>
                         {% endfor %}
                     {% else %}
@@ -56,12 +55,13 @@
                 {% endif %}
             </ul>
             {% if sample %}
-            <hr class="mt-5"><p class="text-center">دسته بندی</p><p>{{data.cat.text}}</p>
+            <hr class="mt-8 border border-gray-400">
+            <p class="font-tit text-lg mt-3 text-center">دسته بندی</p><p>{{data.cat.text}}</p>
             {% endif %}
-            <hr class="mt-5">
-            <p class="text-center">کلمات کلیدی</p>
+            <hr class="mt-8 border border-gray-400">
+            <p class="font-tit text-lg mt-3 text-center">کلمات کلیدی</p>
             {% for keyw in data.keyword.split(',') %}
-                <p class="keyword">{{keyw}}</p>
+                <p class="inline-block bg-gray-300 rounded-lg mt-2 px-2 py-1 border border-gray-400">{{keyw}}</p>
             {% endfor %}
         {% endif %}
     </div>
