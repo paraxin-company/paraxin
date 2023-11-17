@@ -30,7 +30,7 @@
     @apply font-tit text-2xl mb-3;
 }
 .paraxin-pro-link{
-    @apply font-tit text-xl px-4 py-1 rounded-md text-paraxin-c-300 border-3 border-paraxin-c-300 hover:ring-2 hover:bg-paraxin-c-200 hover:bg-opacity-20 hover:ring-offset-1 hover:ring-paraxin-c-200 hover:ring-opacity-40;
+    @apply font-tit text-xl px-4 py-1 rounded-md text-paraxin-c-300 border-3 border-paraxin-c-300 hover:cursor-pointer hover:ring-2 hover:bg-paraxin-c-200 hover:bg-opacity-20 hover:ring-offset-1 hover:ring-paraxin-c-200 hover:ring-opacity-40;
 }
 .simple-input{
     @apply w-full rounded-lg shadow-md focus:outline-none;
@@ -69,7 +69,7 @@
     @apply bg-gray-300 text-gray-500 cursor-default;
 }
 .alert{
-    @apply flex items-center gap-3 px-4 py-3;
+    @apply flex items-center gap-3 px-4 py-3 mt-3;
 }
 .alert-danger{
     @apply text-red-700 border-2 border-red-600 border-opacity-50 bg-red-100 bg-opacity-50 rounded-md;

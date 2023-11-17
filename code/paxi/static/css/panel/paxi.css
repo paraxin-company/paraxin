@@ -31,21 +31,7 @@
 .paraxin-color{
     color: var(--paraxin-color);
 }
-.brand{
-    margin: 10px auto;
-    width: 150px;
-}
-.brand img{
-    width: 100%;
-}
-.content{
-    padding: 25px;
-    overflow: auto !important;
-}
-.view{
-    padding: 0px !important;
-    align-self: flex-start;
-}
+
 .user-profile{
     width: 50px;
 }

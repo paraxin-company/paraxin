@@ -1,41 +1,63 @@
 {% extends 'panel/paxi.html' %}
 
-{% block style %}{{url_for('static', filename='css/panel/profile.css')}}{% endblock %}
-
 {% block content %}
 {% include "panel/form_errors.html" %}
-<div class="row mt-3">
-    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-4 col-xl-3">
+<div class="grid grid-cols-1 gap-4 lg:grid-cols-3 mt-3">
+    <div class="bg-gray-300 p-5 rounded-md">
         <form action="{{url_for('change_profile_baner')}}" method="post" class="image-side" enctype="multipart/form-data">
-            <p>خوش آمدین {{current_user.fullname}}</p>
+            <p class="font-tit text-center text-md text-gray-700">خوش آمدین {{current_user.fullname}}</p>
             <input type="file" name="profile_baner" id="profile_baner" accept=".png, .jfif, .jpeg, .jpg, .webp, .svg, .icon, .ico" required class="hidden">
-            <div class="edit-profile">
-                <label for="profile_baner">
-                    <svg class="pen" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil-fill" viewBox="0 0 16 16">
+            <div class="relative">
+                <label for="profile_baner" class="flex justify-center items-center absolute bottom-0 p-1 left-0 w-7 h-7 bg-white rounded-md hover:cursor-pointer">
+                    <svg class="" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil-fill" viewBox="0 0 16 16">
                         <path d="M12.854.146a.5.5 0 0 0-.707 0L10.5 1.793 14.207 5.5l1.647-1.646a.5.5 0 0 0 0-.708l-3-3zm.646 6.061L9.793 2.5 3.293 9H3.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.207l6.5-6.5zm-7.468 7.468A.5.5 0 0 1 6 13.5V13h-.5a.5.5 0 0 1-.5-.5V12h-.5a.5.5 0 0 1-.5-.5V11h-.5a.5.5 0 0 1-.5-.5V10h-.5a.499.499 0 0 1-.175-.032l-.179.178a.5.5 0 0 0-.11.168l-2 5a.5.5 0 0 0 .65.65l5-2a.5.5 0 0 0 .168-.11l.178-.178z"/>
                     </svg>
                 </label>
-                <img class="profile-image" src="{{url_for('static', filename=current_user.profile)}}" alt="profile image">
+                <img class="border-3 border-white rounded-lg w-full" src="{{url_for('static', filename=current_user.profile)}}" alt="profile image">
             </div>
-            <input type="submit" class="mt-5 style-link-in-paraxin input-profile" value="تغییر عکس پروفایل">
+            <div class="flex justify-center">
+                <input style="font-size: medium;" type="submit" class="mt-5 paraxin-pro-link" value="تغییر عکس پروفایل">
+            </div>
         </form>
     </div>
-    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-8 col-xl-9 mt-2 p-3">
-        <p class="in-back">اسم کامل : {{current_user.fullname}}</p>
-        <p class="in-back">ایمیل: {{current_user.email}}</p>
-        <form action="" method="post" class="mt-2">
+    <div class="lg:col-span-2">
+        <p class="mt-3 text-gray-500">اسم کامل : {{current_user.fullname}}</p>
+        <p class="mt-3 text-gray-500">ایمیل: {{current_user.email}}</p>
+        <form style="direction: ltr !important" action="" method="post" class="mt-2">
             {{form.csrf_token}}
-            {{form.username.label(class="english-font mt-3")}}{{form.username(class="form-control", value=current_user.username)}}
-            {{form.old_password.label(class="form-label english-font mt-3")}}{{form.old_password(class="form-control")}}
-            <div class="row">
-                <div class="col-xs-12 col-sm-12 col-lg-6 px-2">
-                    {{form.password.label(class="form-label english-font mt-3")}}{{form.password(class="form-control")}}
-                </div>
-                <div class="col-xs-12 col-sm-12 col-lg-6 px-2">
-                    {{form.confirm_password.label(class="form-label english-font mt-3")}}{{form.confirm_password(class="form-control")}}
+            <div style="direction: ltr !important" class="mt-5">
+                {{form.username.label(class="font-serif")}}
+                <div class="relative">
+                    {{form.username(style="direction: ltr !important",class="simple-input px-3 py-2 pl-9", value=current_user.username)}}
+                    <div class="absolute top-2 left-2 text-gray-400">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M17.982 18.725A7.488 7.488 0 0012 15.75a7.488 7.488 0 00-5.982 2.975m11.963 0a9 9 0 10-11.963 0m11.963 0A8.966 8.966 0 0112 21a8.966 8.966 0 01-5.982-2.275M15 9.75a3 3 0 11-6 0 3 3 0 016 0z" />
+                        </svg>                                                                                                           
+                    </div>
                 </div>
             </div>
-            <br><input class="style-link-in-paraxin mt-2" type="submit" value="ذخیره تغییرات">
+            <div style="direction: ltr !important" class="mt-5">
+                {{form.old_password.label(class="font-serif")}}
+                <div class="relative">
+                    {{form.old_password(style="direction: ltr !important",class="simple-input px-3 py-2 pl-9")}}
+                    <div class="absolute top-2 left-2 text-gray-400">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M16.5 10.5V6.75a4.5 4.5 0 10-9 0v3.75m-.75 11.25h10.5a2.25 2.25 0 002.25-2.25v-6.75a2.25 2.25 0 00-2.25-2.25H6.75a2.25 2.25 0 00-2.25 2.25v6.75a2.25 2.25 0 002.25 2.25z" />
+                        </svg>                                                                                  
+                    </div>
+                </div>
+            </div>
+            <div class="grid grid-cols-1 gap-3 sm:grid-cols-2 mt-3">
+                <div>
+                    {{form.password.label(class="font-serif")}}{{form.password(style="direction: ltr !important",class="simple-input px-3 py-2")}}
+                </div>
+                <div>
+                    {{form.confirm_password.label(class="font-serif")}}{{form.confirm_password(style="direction: ltr !important",class="simple-input px-3 py-2")}}
+                </div>
+            </div>
+            <div class="flex justify-center mt-5">
+                <input class="paraxin-pro-link" type="submit" value="ذخیره تغییرات">
+            </div>
         </form>
     </div>
 </div>
