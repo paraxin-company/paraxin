@@ -77,6 +77,21 @@
 .alert-success{
     @apply text-green-700 border-2 border-green-600 border-opacity-50 bg-green-100 bg-opacity-50 rounded-md;
 }
+.table{
+    @apply text-gray-500 w-full;
+}
+.table-head{
+    @apply bg-black text-white;
+}
+.table-head-item{
+    @apply py-2;
+}
+.table-row{
+    @apply bg-gray-200 cursor-default hover:bg-gray-300;
+}
+.table-row:nth-child(even){
+    @apply bg-gray-100 cursor-default hover:bg-gray-300;
+}
 @layer base {
     *{
         direction: rtl;

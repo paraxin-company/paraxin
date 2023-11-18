@@ -1,67 +1,80 @@
 {% extends 'panel/paxi.html' %}
 
-<<<<<<< HEAD
-{% block style %}static/css/panel/weblog.css{% endblock %}
-{% block weblog_page %}active{% endblock %}
+{% block weblog_page %}text-paraxin-c-200 font-bold{% endblock %}
 
-=======
->>>>>>> feature/work_sample_in_paxi
 {% block content %}
-<h1 class="paraxin-color text-center mt-4 tit">صفحه‌ی وبلاگ</h1>
-<a class="style-link-in-paraxin" href="{{url_for('paxi_add_weblog')}}">افزودن وبلاگ جدید</a>
-<table class="table table-striped table-hover table-borderless mt-5">
-    <thead class="table-dark">
+<h1 class="text-paraxin-c-300 text-center mt-4 font-tit text-2xl">صفحه‌ی وبلاگ</h1>
+<div class="flex justify-between flex-wrap items-center mt-5">
+
+    <a class="paraxin-pro-link" href="{{url_for('paxi_add_weblog')}}">افزودن وبلاگ جدید</a>
+    <form action="" class="w-full sm:w-4/12">
+        <div class="relative w-full sm:mt-0">
+            <input class="simple-input px-3 pl-9 py-2" id="search" name="search" placeholder="search" required type="search" value="{{search_text}}">
+            <div class="absolute left-2 top-3 text-gray-400 hover:cursor-pointer">
+                <button type="submit">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
+                        <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/>
+                    </svg>
+                </button>
+            </div>
+        </div>
+    </form>
+</div>
+<table class="table mt-8">
+    <thead class="table-head">
         <tr>
-            <th scope="col">id</th>
-            <th scope="col">title</th>
-            <th scope="col">content</th>
-            <th scope="col">date</th>
-            <th scope="col">action</th>
+            <th scope="col" class="table-head-item">id</th>
+            <th scope="col" class="table-head-item">title</th>
+            <th scope="col" class="table-head-item">content</th>
+            <th scope="col" class="table-head-item">date</th>
+            <th scope="col" class="table-head-item">action</th>
         </tr>
     </thead>
     <tbody>
         {% for log in data%}
-        <tr>
-            <th scope="row">{{log.id}}</th>
-            <td>{{log.title[:15]}} ..</td>
-            <td>{{log.content[:25]}} ..</td>
-            <td>{{log.date}}</td>
-            <td>
-                <span class="p-1">
-                    <a class="action-link" title="delete record" data-bs-toggle="modal" data-bs-target="#exampleModal{{log.id}}">
-                        <svg class="link-danger" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash3-fill" viewBox="0 0 16 16">
+        <tr class="table-row">
+            <th scope="row" class="text-paraxin-c-200">{{log.id}}</th>
+            <td class="text-center py-1">{{log.title[:15]}} ..</td>
+            <td class="text-center py-1">{{log.content[:25]}} ..</td>
+            <td class="text-center py-1">{{log.date}}</td>
+            <td class="text-center py-1 flex justify-center items-center">
+                <span class="p-1" x-data="{ paraxin{{log.id}} : false }">
+                    <div class="text-red-500 cursor-pointer hover:text-red-700" title="delete record" @click="paraxin{{log.id}} = true">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="bi bi-trash3-fill w-4 h-4" viewBox="0 0 16 16">
                             <path d="M11 1.5v1h3.5a.5.5 0 0 1 0 1h-.538l-.853 10.66A2 2 0 0 1 11.115 16h-6.23a2 2 0 0 1-1.994-1.84L2.038 3.5H1.5a.5.5 0 0 1 0-1H5v-1A1.5 1.5 0 0 1 6.5 0h3A1.5 1.5 0 0 1 11 1.5Zm-5 0v1h4v-1a.5.5 0 0 0-.5-.5h-3a.5.5 0 0 0-.5.5ZM4.5 5.029l.5 8.5a.5.5 0 1 0 .998-.06l-.5-8.5a.5.5 0 1 0-.998.06Zm6.53-.528a.5.5 0 0 0-.528.47l-.5 8.5a.5.5 0 0 0 .998.058l.5-8.5a.5.5 0 0 0-.47-.528ZM8 4.5a.5.5 0 0 0-.5.5v8.5a.5.5 0 0 0 1 0V5a.5.5 0 0 0-.5-.5Z"/>
                         </svg>
-                    </a>
-                    <div class="modal fade" id="exampleModal{{log.id}}" data-bs-backdrop="static" data-bs-keyboard="false" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                        <div class="modal-dialog">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                    <h1 class="modal-title fs-5" id="exampleModalLabel">حذف رکورد</h1>
-                                </div>
-                                <div class="modal-body">
-                                    <p>
-                                        آیا از حذف کردن رکورد
-                                        ( {{log.id}})
-                                        اطمینان دارید .
-                                    </p>
-                                    <form class="scape pt-3" action="{{url_for('paxi_delete_weblog', weblog_id=log.id)}}" method="post">
-                                        <button type="button" class="ml-auto btn btn-success" data-bs-dismiss="modal">لغو</button>
-                                        <input type="submit" value="حذف رکورد ( {{log.id}})" class="btn btn-danger">
-                                    </form>
-                                </div>
-                                
+                    </div>
+                    <div class="fixed z-50 inset-0 bg-gray-800 bg-opacity-40 flex items-start justify-center pt-24" x-cloak x-show="paraxin{{log.id}}">
+                        <div class="bg-gray-150 border-2 border-gray-500 rounded-md p-5 mx-6 max-w-3xl">
+                            <div class="flex justify-between text-gray-900 mb-5">
+                                <h1 class="text-lg">حذف رکورد</h1>
+                                <span class="cursor-pointer" x-on:click="paraxin{{log.id}} = false">
+                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                                        <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+                                    </svg>                              
+                                </span>
+                            </div>
+                            <div>
+                                <p>
+                                    آیا از حذف کردن رکورد
+                                    ( {{log.id}})
+                                    اطمینان دارید .
+                                </p>
+                                <form class="flex justify-between mt-5" action="{{url_for('paxi_delete_weblog', weblog_id=log.id)}}" method="post">
+                                    <div class="bg-green-500 border-3 cursor-pointer border-green-600 text-gray-100 rounded-md px-3 py-1 hover:bg-green-600" x-on:click="paraxin{{log.id}} = false">لغو</div>
+                                    <input type="submit" value="حذف رکورد ( {{log.id}})" class="bg-red-500 text-gray-100 cursor-pointer border-3 border-red-600 rounded-md px-3 py-1 hover:bg-red-600">
+                                </form>
                             </div>
                         </div>
                     </div>
-                    
                 </span>
-                <span class="p-1"><a class="action-link" title="edit record" href="{{url_for('paxi_edit_weblog', weblog_id=log.id)}}">
-                    <svg class="link-warning" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil-fill" viewBox="0 0 16 16">
-                        <path d="M12.854.146a.5.5 0 0 0-.707 0L10.5 1.793 14.207 5.5l1.647-1.646a.5.5 0 0 0 0-.708l-3-3zm.646 6.061L9.793 2.5 3.293 9H3.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.207l6.5-6.5zm-7.468 7.468A.5.5 0 0 1 6 13.5V13h-.5a.5.5 0 0 1-.5-.5V12h-.5a.5.5 0 0 1-.5-.5V11h-.5a.5.5 0 0 1-.5-.5V10h-.5a.499.499 0 0 1-.175-.032l-.179.178a.5.5 0 0 0-.11.168l-2 5a.5.5 0 0 0 .65.65l5-2a.5.5 0 0 0 .168-.11l.178-.178z"/>
-                    </svg>
-                </a></span>
+                <span class="p-1">
+                    <a class="text-yellow-500 hover:text-yellow-700" title="edit record" href="{{url_for('paxi_edit_weblog', weblog_id=log.id)}}">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="bi bi-pencil-fill w-4 h-4" viewBox="0 0 16 16">
+                            <path d="M12.854.146a.5.5 0 0 0-.707 0L10.5 1.793 14.207 5.5l1.647-1.646a.5.5 0 0 0 0-.708l-3-3zm.646 6.061L9.793 2.5 3.293 9H3.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.207l6.5-6.5zm-7.468 7.468A.5.5 0 0 1 6 13.5V13h-.5a.5.5 0 0 1-.5-.5V12h-.5a.5.5 0 0 1-.5-.5V11h-.5a.5.5 0 0 1-.5-.5V10h-.5a.499.499 0 0 1-.175-.032l-.179.178a.5.5 0 0 0-.11.168l-2 5a.5.5 0 0 0 .65.65l5-2a.5.5 0 0 0 .168-.11l.178-.178z"/>
+                        </svg>
+                    </a>
+                </span>
             </td>
         </tr>
         {% endfor %}
