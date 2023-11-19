@@ -4,9 +4,9 @@
 {% block header %}ویرایش نمونه کار{% endblock %}
 {% block buttonText %}ویرایش نمونه کار{% endblock %}
 {% block inputs %}
-{{form.category.label(class="form-label english-font mt-3")}}{{form.category(class="form-control")}}
-{{form.album.label(class="form-label english-font mt-3")}}{{form.album(class="form-control" ,accept=".png, .jfif, .jpeg, .jpg, .webp, .svg, .icon, .ico")}}
-<p class="text-center mt-5">عکس های آلبوم</p>
-( {{album.replace('|,|' ,' - - ').replace('media/sample/' ,'')}} )<br>
+{{form.category.label(class="simple-label mt-6")}}{{form.category(class="simple-input mt-1")}}
+{{form.album.label(class="simple-label mt-6")}}{{form.album(class="simple-input mt-1" ,accept=".png, .jfif, .jpeg, .jpg, .webp, .svg, .icon, .ico")}}
+<p class="mt-6 font-tit">عکس های آلبوم</p>
+<p class="mt-1">( {{album.replace('|,|' ,' - - ').replace('media/sample/' ,'')}} )</p>
 {% endblock %}
 {% block baner_text %} ( {{baner}} ) {% endblock %}

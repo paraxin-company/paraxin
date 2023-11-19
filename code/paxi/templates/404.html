@@ -1,19 +1,18 @@
 {% extends "base.html" %}
 
 {% block title %}صفحه یافت نشد{% endblock %}
-{% block style %}{{url_for('static', filename='css/not_found.css')}}{% endblock %}
 
 {% block content %}
-<div class="row">
-    <div class="img-container col-sm-12 col-lg-6 px-5 my-3">
-        <img src="{{url_for('static', filename='media/404_Error.svg')}}" alt="صفحه یافت نشد| پاراکسین" class="img-responsive">
+<div class="grid grid-cols-1 gap-5 md:grid-cols-2 mt-2">
+    <div class="w-8/12 m-auto md:w-10/12">
+        <img src="{{url_for('static', filename='media/404_Error.svg')}}" alt="صفحه یافت نشد| پاراکسین" class="w-full">
     </div>
-    <div class="col-sm-12 col-lg-6 my-2">
-        <p class="desc t-center">
+    <div class="flex flex-col justify-center items-center">
+        <p class="text-center">
             متاسفانه صفحه موردنظر یافت نشد
         </p>
-        <div class="links">
-            <a class="style-link-in-paraxin" href="{{url_for('home')}}">صفحه اصلی</a>
+        <div class="flex justify-center mt-5">
+            <a class="paraxin-pro-link" href="{{url_for('home')}}">صفحه اصلی</a>
         </div>
     </div>
 </div>

@@ -75,12 +75,12 @@
                                 <div>
                                     <p>
                                         آیا از حذف کردن رکورد
-                                        ( {{log.id}})
+                                        ({{log.id}})
                                         اطمینان دارید .
                                     </p>
                                     <form class="flex justify-between mt-5" action="{{url_for('paxi_delete_weblog', weblog_id=log.id)}}" method="post">
                                         <div class="btn-success" x-on:click="paraxin{{log.id}} = false">لغو</div>
-                                        <input type="submit" value="حذف رکورد ( {{log.id}})" class="btn-danger">
+                                        <input type="submit" value="حذف رکورد ({{log.id}})" class="btn-danger">
                                     </form>
                                 </div>
                             </div>
@@ -99,7 +99,7 @@
         </tbody>
     </table>
     {% else %}
-    <p class="text-center alert alert-danger mt-5">محتوایی برای ( {{search_text}}) پیدا نشد</p>
+    <p class="text-center alert alert-danger mt-5">محتوایی برای ({{search_text}}) پیدا نشد</p>
     {% endif %}
     <div class="my-10 flex justify-center items-center">
         <ul class="pagination">

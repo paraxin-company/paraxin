@@ -1,17 +1,18 @@
 {% extends 'panel/paxi.html' %}
 
-{% block style %}static/css/panel/base_form.css{% endblock %}
-
 {% block content %}
 {% include "panel/form_errors.html" %}
-<h1 class="tit mt-4 text-center">{% block header %}{% endblock %}</h1>
+<h1 class="text-paraxin-c-300 text-center mt-4 font-tit text-2xl">{% block header %}{% endblock %}</h1>
 <form action="" enctype="multipart/form-data" method="post">
     {{form.csrf_token}}
-    {{form.title.label(class="form-label english-font mt-3")}} {{form.title(class="form-control")}}
-    {{form.baner.label(class="form-label english-font mt-3")}} {% block baner_text %}{% endblock %} {{form.baner(class="form-control" ,accept=".png, .jfif, .jpeg, .jpg, .webp, .svg, .icon, .ico")}}
-    {{form.keyword.label(class="form-label english-font mt-3")}} {{form.keyword(class="form-control")}}
-    {{form.content.label(class="form-label english-font mt-3")}} {{form.content(class="form-control")}}
+    {{form.title.label(class="simple-label")}} {{form.title(class="simple-input mt-1")}}
+    <div class="inline-flex mt-7 items-center gap-2">
+        {{form.baner.label(class="text-sm text-left font-medium leading-6 text-gray-900")}} {% block baner_text %}{% endblock %}
+    </div>
+    {{form.baner(class="block mt-1" ,accept=".png, .jfif, .jpeg, .jpg, .webp, .svg, .icon, .ico")}}
+    {{form.keyword.label(class="simple-label mt-7")}} {{form.keyword(class="simple-input mt-1 h-28")}}
+    {{form.content.label(class="simple-label mt-7")}} {{form.content(class="simple-input mt-1 h-28")}}
     {% block inputs %}{% endblock %}
-    <input class="style-link-in-paraxin mt-4 px-3 py-1" type="submit" value="{% block buttonText %}{% endblock %}">    
+    <input class="paraxin-pro-link mt-7 px-3 py-1" type="submit" value="{% block buttonText %}{% endblock %}">    
 </form>
 {% endblock %}

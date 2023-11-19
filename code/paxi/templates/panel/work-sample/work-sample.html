@@ -75,12 +75,12 @@
                             <div>
                                 <p>
                                     آیا از حذف کردن رکورد
-                                    ( {{log.id}})
+                                    ({{log.id}})
                                     اطمینان دارید .
                                 </p>
                                 <form class="flex justify-between mt-5" action="{{url_for('paxi_delete_work_sample', sample_id=log.id)}}" method="post">
                                     <div class="btn-success" x-on:click="paraxin{{log.id}} = false">لغو</div>
-                                    <input type="submit" value="حذف رکورد ( {{log.id}})" class="btn-danger">
+                                    <input type="submit" value="حذف رکورد ({{log.id}})" class="btn-danger">
                                 </form>
                             </div>
                         </div>

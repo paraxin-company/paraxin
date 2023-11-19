@@ -31,9 +31,6 @@
     </div>
 </div>
 {% if data.total %}
-    {% if search_text %}
-        <p class="text-sm text-gray-500 mb-1">نتایج مربوط به {{search_text}}</p>
-    {% endif %}
     <table class="table">
         <thead class="table-head">
             <tr>
@@ -84,14 +81,14 @@
             {% endfor %}
         </tbody>
     </table>
-    {% else %}
-    <p class="text-center alert alert-danger mt-5">محتوایی برای ( {{search_text}}) پیدا نشد</p>
-    {% endif %}
+{% else %}
+    <p class="text-center alert alert-danger mt-5">محتوایی پیدا نشد</p>
+{% endif %}
     <div class="my-10 flex justify-center items-center">
         <ul class="pagination">
             {% if data.has_prev %}
                 <li class="pagination-control">
-                    <a href="{{url_for('paxi_weblog', page=data.page-1, search=search_text)}}" aria-label="Previous">
+                    <a href="{{url_for('paxi_work_sample_category', page=data.page-1)}}" aria-label="Previous">
                         <span>&laquo;</span>
                     </a>
                 </li>
@@ -103,15 +100,15 @@
 
             {% for page in data.iter_pages() %}
                 {% if page != data.page %}
-                    <li class="pagination-item"><a href="{{url_for('paxi_weblog', page=page, search=search_text)}}">{{page}}</a></li> 
+                    <li class="pagination-item"><a href="{{url_for('paxi_work_sample_category', page=page)}}">{{page}}</a></li> 
                 {% else %}
-                    <li class="pagination-item pagination-here"><a href="{{url_for('paxi_weblog', page=page, search=search_text)}}">{{page}}</a></li>
+                    <li class="pagination-item pagination-here"><a href="{{url_for('paxi_work_sample_category', page=page)}}">{{page}}</a></li>
                 {% endif %}
             {% endfor %}
             
             {% if data.has_next %}
                 <li class="pagination-control">
-                    <a href="{{url_for('paxi_weblog', page=data.page+1, search=search_text)}}">
+                    <a href="{{url_for('paxi_work_sample_category', page=data.page+1)}}">
                         <span>&raquo;</span>
                     </a>
                 </li>
