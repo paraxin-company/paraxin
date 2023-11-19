@@ -33,7 +33,10 @@
     @apply font-tit text-xl px-4 py-1 rounded-md text-paraxin-c-300 border-3 border-paraxin-c-300 hover:cursor-pointer hover:ring-2 hover:bg-paraxin-c-200 hover:bg-opacity-20 hover:ring-offset-1 hover:ring-paraxin-c-200 hover:ring-opacity-40;
 }
 .simple-input{
-    @apply w-full rounded-lg shadow-md focus:outline-none;
+    @apply w-full rounded-lg shadow-md focus:outline-none px-3 py-2;
+}
+.simple-label{
+    @apply block text-sm font-medium leading-6 text-gray-900;
 }
 .box{
     @apply overflow-hidden border-2 border-gray-300 w-full rounded-xl hover:border-gray-500 hover:shadow-2xl;
@@ -91,6 +94,15 @@
 }
 .table-row:nth-child(even){
     @apply bg-gray-100 cursor-default hover:bg-gray-300;
+}
+.btn-warning{
+    @apply cursor-pointer text-yellow-700 bg-yellow-400 px-2 py-1 rounded-md border-2 hover:border-yellow-950 hover:text-yellow-950;
+}
+.btn-success{
+    @apply cursor-pointer text-green-700 bg-green-400 px-2 py-1 rounded-md border-2 hover:border-green-950 hover:text-green-950;
+}
+.btn-danger{
+    @apply cursor-pointer text-red-800 bg-red-400 bg-opacity-70 px-2 py-1 rounded-md border-2 hover:border-red-950 hover:text-red-950;
 }
 @layer base {
     *{

@@ -4,14 +4,13 @@
 
 {% block content %}
 <h1 class="text-paraxin-c-300 text-center mt-4 font-tit text-2xl">صفحه‌ی وبلاگ</h1>
-<div class="mt-1 mb-8 flex-container">
+<div class="mt-1 mb-8">
     <div class="flex justify-between flex-wrap items-center mt-5">
-
         <a class="paraxin-pro-link" href="{{url_for('paxi_add_weblog')}}">افزودن وبلاگ جدید</a>
         <form action="" class="w-full sm:w-4/12">
             {% if search_text %}
             <div class="relative">
-                <input class="simple-input px-3 pl-9 py-2" id="search" name="search" placeholder="search" required type="search" value="{{search_text}}">
+                <input class="simple-input pl-9" id="search" name="search" placeholder="search" required type="search" value="{{search_text}}">
                 <div class="absolute left-2 top-3 text-gray-400 hover:cursor-pointer">
                     <button type="submit">
                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
@@ -22,7 +21,7 @@
             </div>
             {% else %}
             <div class="relative">
-                <input class="simple-input px-3 pl-9 py-2" id="search" name="search" placeholder="search" required type="search">
+                <input class="simple-input pl-9" id="search" name="search" placeholder="search" required type="search">
                 <div class="absolute left-2 top-3 text-gray-400 hover:cursor-pointer">
                     <button type="submit">
                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
@@ -64,7 +63,7 @@
                             </svg>
                         </div>
                         <div class="fixed z-50 inset-0 bg-gray-800 bg-opacity-40 flex items-start justify-center pt-24" x-cloak x-show="paraxin{{log.id}}">
-                            <div class="bg-gray-150 border-2 border-gray-500 rounded-md p-5 mx-6 max-w-3xl">
+                            <div class="bg-gray-150 border-2 border-gray-500 rounded-md p-5 mx-6 w-96">
                                 <div class="flex justify-between text-gray-900 mb-5">
                                     <h1 class="text-lg">حذف رکورد</h1>
                                     <span class="cursor-pointer" x-on:click="paraxin{{log.id}} = false">
@@ -80,8 +79,8 @@
                                         اطمینان دارید .
                                     </p>
                                     <form class="flex justify-between mt-5" action="{{url_for('paxi_delete_weblog', weblog_id=log.id)}}" method="post">
-                                        <div class="bg-green-500 border-3 cursor-pointer border-green-600 text-gray-100 rounded-md px-3 py-1 hover:bg-green-600" x-on:click="paraxin{{log.id}} = false">لغو</div>
-                                        <input type="submit" value="حذف رکورد ( {{log.id}})" class="bg-red-500 text-gray-100 cursor-pointer border-3 border-red-600 rounded-md px-3 py-1 hover:bg-red-600">
+                                        <div class="btn-success" x-on:click="paraxin{{log.id}} = false">لغو</div>
+                                        <input type="submit" value="حذف رکورد ( {{log.id}})" class="btn-danger">
                                     </form>
                                 </div>
                             </div>
@@ -101,40 +100,40 @@
     </table>
     {% else %}
     <p class="text-center alert alert-danger mt-5">محتوایی برای ( {{search_text}}) پیدا نشد</p>
-{% endif %}
-<div class="my-10 flex justify-center items-center">
-    <ul class="pagination">
-        {% if data.has_prev %}
-            <li class="pagination-control">
-                <a href="{{url_for('paxi_weblog', page=data.page-1, search=search_text)}}" aria-label="Previous">
-                    <span>&laquo;</span>
-                </a>
-            </li>
-        {% else %}
-            <li class="pagination-control pagination-disable">
-                <span>&laquo;</span>
-            </li>
-        {% endif %}
-
-        {% for page in data.iter_pages() %}
-            {% if page != data.page %}
-                <li class="pagination-item"><a href="{{url_for('paxi_weblog', page=page, search=search_text)}}">{{page}}</a></li> 
+    {% endif %}
+    <div class="my-10 flex justify-center items-center">
+        <ul class="pagination">
+            {% if data.has_prev %}
+                <li class="pagination-control">
+                    <a href="{{url_for('paxi_weblog', page=data.page-1, search=search_text)}}" aria-label="Previous">
+                        <span>&laquo;</span>
+                    </a>
+                </li>
             {% else %}
-                <li class="pagination-item pagination-here"><a href="{{url_for('paxi_weblog', page=page, search=search_text)}}">{{page}}</a></li>
+                <li class="pagination-control pagination-disable">
+                    <span>&laquo;</span>
+                </li>
             {% endif %}
-        {% endfor %}
-        
-        {% if data.has_next %}
-            <li class="pagination-control">
-                <a href="{{url_for('paxi_weblog', page=data.page+1, search=search_text)}}">
+
+            {% for page in data.iter_pages() %}
+                {% if page != data.page %}
+                    <li class="pagination-item"><a href="{{url_for('paxi_weblog', page=page, search=search_text)}}">{{page}}</a></li> 
+                {% else %}
+                    <li class="pagination-item pagination-here"><a href="{{url_for('paxi_weblog', page=page, search=search_text)}}">{{page}}</a></li>
+                {% endif %}
+            {% endfor %}
+            
+            {% if data.has_next %}
+                <li class="pagination-control">
+                    <a href="{{url_for('paxi_weblog', page=data.page+1, search=search_text)}}">
+                        <span>&raquo;</span>
+                    </a>
+                </li>
+            {% else %}
+                <li class="pagination-control pagination-disable">
                     <span>&raquo;</span>
-                </a>
-            </li>
-        {% else %}
-            <li class="pagination-control pagination-disable">
-                <span>&raquo;</span>
-            </li>
-        {% endif %}
-    </ul>
-</div>
+                </li>
+            {% endif %}
+        </ul>
+    </div>
 {% endblock %}

@@ -17,11 +17,11 @@
         <div class="scroll-m-4">
             <form action="">
                 <div class="mt-3">
-                    {% if search_text %}
-                        <div class="lg:w-10/12 m-auto">
-                            <label class="block text-sm font-medium leading-6 text-gray-900" for="search">جست‌وجو</label>
+                    <div class="lg:w-10/12 m-auto">
+                        <label class="simple-label" for="search">جست‌وجو</label>
+                        {% if search_text %}
                             <div class="relative">
-                                <input class="simple-input px-3 pl-9 py-2" id="search" name="search" placeholder="search" required type="search" value="{{search_text}}">
+                                <input style="padding-left: 2.25rem;" class="simple-input" id="search" name="search" placeholder="search" required type="search" value="{{search_text}}">
                                 <div class="absolute left-2 top-3 text-gray-400 hover:cursor-pointer">
                                     <button type="submit">
                                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
@@ -30,12 +30,9 @@
                                     </button>
                                 </div>
                             </div>
-                        </div>
-                    {% else %}
-                        <div class="lg:w-10/12 m-auto">
-                            <label class="block text-sm font-medium leading-6 text-gray-900" for="search">جست‌وجو</label>
+                        {% else %}
                             <div class="relative">
-                                <input class="simple-input px-3 pl-9 py-2" id="search" name="search" placeholder="search" required type="search" value="">
+                                <input style="padding-left: 2.25rem;" class="simple-input" id="search" name="search" placeholder="search" required type="search" value="">
                                 <div class="absolute left-2 top-3 text-gray-400 hover:cursor-pointer">
                                     <button type="submit">
                                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
@@ -44,8 +41,8 @@
                                     </button>
                                 </div>
                             </div>
-                        </div>
-                    {% endif %}
+                        {% endif %}
+                    </div>
                 </div>
             </form>
         </div>
