@@ -191,10 +191,10 @@ def paxi_delete_weblog(weblog_id):
         else:
             flash(f'برای پاک کردن فایل مشکلی پیش آمده است ({current_weblog.baner})', 'danger')
 
-        flash(f'وبلاگ با موفقیت حذف شد ( id={current_weblog.id})','success')
+        flash(f'وبلاگ با موفقیت حذف شد (id={current_weblog.id})','success')
         return redirect(url_for('paxi_weblog'))
     except:
-        flash(f'برای حذف کردن وبلاگ مشکلی پیش آمده است ( id={current_weblog.id})','danger')
+        flash(f'برای حذف کردن وبلاگ مشکلی پیش آمده است (id={current_weblog.id})','danger')
         return redirect(url_for('paxi_weblog'))
 
 
@@ -236,13 +236,13 @@ def paxi_edit_weblog(weblog_id):
                 # save changes into the table
                 db.session.commit()
 
-                flash(f'اطلاعات وبلاگ با موفقیت تغییر کرد ( id={current_weblog.id})', 'success')
+                flash(f'اطلاعات وبلاگ با موفقیت تغییر کرد (id={current_weblog.id})', 'success')
                 return redirect(url_for('paxi_weblog'))
             else:
                 flash(f'فرمت فایل مورد قبول نیست ({weblog_form.baner.data.filename})', 'danger')
                 return redirect(url_for('paxi_edit_weblog', weblog_id=current_weblog.id))
         except:
-            flash(f'برای آبدیت کردن وبلاگ مشکلی پیش آمده است ( id={current_weblog.id})', 'danger')
+            flash(f'برای آبدیت کردن وبلاگ مشکلی پیش آمده است (id={current_weblog.id})', 'danger')
             return redirect(url_for('paxi_edit_weblog', weblog_id=current_weblog.id))
 
     # set data in current_weblog
@@ -367,10 +367,10 @@ def paxi_delete_work_sample(sample_id):
         db.session.delete(current_sample)
         db.session.commit()
 
-        flash(f'نمونه کار با موفقیت حذف شد ( id={current_sample.id})','success')
+        flash(f'نمونه کار با موفقیت حذف شد (id={current_sample.id})','success')
         return redirect(url_for('paxi_work_sample'))
     except:
-        flash(f'برای حذف کردن نمونه کار مشکلی پیش آمده است ( id={current_sample.id})','danger')
+        flash(f'برای حذف کردن نمونه کار مشکلی پیش آمده است (id={current_sample.id})','danger')
         return redirect(url_for('paxi_work_sample'))
 
 
@@ -451,13 +451,13 @@ def paxi_edit_work_sample(sample_id):
                 # save changes
                 db.session.commit()
 
-                flash(f'تغییرات با موفقیت اعمال شد ( id={sample_id})', 'success')
+                flash(f'تغییرات با موفقیت اعمال شد (id={sample_id})', 'success')
                 return redirect(url_for('paxi_work_sample'))
             else:
                 flash(f'فرمت فایل مورد قبول نیست ({baner_image.filename})', 'danger')
                 return redirect(url_for('paxi_work_sample'))
         except:
-            flash(f'برای تغییر نمونه کار مشکلی پیش آمده است ( id={sample_id})','danger')
+            flash(f'برای تغییر نمونه کار مشکلی پیش آمده است (id={sample_id})','danger')
             return redirect(url_for('paxi_work_sample'))
 
     category_list = []
@@ -508,7 +508,7 @@ def paxi_edit_work_sample_category(cat_id):
                         # save changes
                         db.session.commit()
 
-                        flash(f'اطلاعات دسته بندی با موفقیت تغییر کرد ( ID={current_category.id})', 'success')
+                        flash(f'اطلاعات دسته بندی با موفقیت تغییر کرد (ID={current_category.id})', 'success')
                     else:
                         flash('برای تغییر اسم پوشه در هاست مشکلی پیش آمده است', 'danger')
                 else:
@@ -518,7 +518,7 @@ def paxi_edit_work_sample_category(cat_id):
         else:
             flash(result_folder_name, 'danger')
     except:
-        flash(f'برای تغییر دسته بندی مشکلی پیش آمده است ( ID={current_category.id})', 'danger')
+        flash(f'برای تغییر دسته بندی مشکلی پیش آمده است (ID={current_category.id})', 'danger')
     return redirect(url_for('paxi_work_sample_category'))
 
 
