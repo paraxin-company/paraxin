@@ -124,8 +124,14 @@ def paxi_logout():
 @app.route('/paxi/weblog', methods=['POST', 'GET'])
 @login_required
 def paxi_weblog():
-    all_weblog = Weblog.query.all()
-    return render_template('panel/weblog/weblog.html', data=all_weblog)
+    page = request.args.get('page', default=1, type=int)
+    search = request.args.get('search')
+
+    if search:
+        all_weblog = Weblog.query.filter(Weblog.keyword.contains(search)+Weblog.title.contains(search)).paginate(page=page, per_page=15)
+    else:
+        all_weblog = Weblog.query.paginate(page=page, per_page=15)
+    return render_template('panel/weblog/weblog.html', data=all_weblog, search_text=search)
 
 
 @app.route('/paxi/weblog/add', methods=['POST', 'GET'])
@@ -250,8 +256,14 @@ def paxi_edit_weblog(weblog_id):
 @app.route('/paxi/work-sample')
 @login_required
 def paxi_work_sample():
-    samples = Sample.query.all()
-    return render_template('panel/work-sample/work-sample.html', data=samples)
+    page = request.args.get('page', default=1, type=int)
+    search = request.args.get('search')
+
+    if search:
+        samples = Sample.query.filter(Sample.title.contains(search)+Sample.keyword.contains(search)).paginate(page=page, per_page=15)
+    else:
+        samples = Sample.query.paginate(page=page, per_page=15)
+    return render_template('panel/work-sample/work-sample.html', data=samples, search_text=search)
 
 
 @app.route('/paxi/work-sample/add', methods=['GET', 'POST'])
@@ -266,36 +278,37 @@ def paxi_add_work_sample():
             album = request.files.getlist("album")
             
             if files.is_valid(baner_image.filename):
-                # save baner in host
-                
                 new_category = passwords.small(sample_form.category.data)
 
                 baner_path = os.path.join(os.path.join(folder_upload, 'sample'), new_category, files.rename_name(baner_image.filename))
-                baner_image.save(baner_path)
 
-                if len(album) >= 1:
+                if len(album) > 1:
                     album_path_host = []
+
                     # Iterate for each file in the files List, and Save them
-                    for image in album:
-                        if image:
-                            if files.is_valid(image.filename):
-                                # save album image in host
-                                album_path = os.path.join(os.path.join(folder_upload, 'sample'), new_category, files.rename_name(image.filename))
-                                album_path_host.append(files.get_url(album_path, os.path.join('sample', new_category)))
-                                image.save(album_path)
-                            else:
-                                flash(f'فرمت فایل مورد قبول نیست ({image.filename})', 'danger')
-                                return redirect(url_for('paxi_work_sample'))
+                    if files.is_valid_album(album):
+                        for image in album:
+                            # save album image in host
+                            album_path = os.path.join(os.path.join(folder_upload, 'sample'), new_category, files.rename_name(image.filename))
+                            album_path_host.append(files.get_url(album_path, os.path.join('sample', new_category)))
+                            image.save(album_path)
+                    else:
+                        flash(f'فرمت فایل یا فایل های album نادرست می باشد', 'danger')
+                        return redirect(url_for('paxi_work_sample'))
+                    
                     if len(album_path_host) == 1:
                         album_result = album_path_host[0]+'|,|'
                     else:
                         album_result = '|,|'.join(album_path_host)
                 else:
                     album_result = ''
+                
+                # save baner in host
+                baner_image.save(baner_path)
 
                 # find baner path
                 new_baner_path = files.get_url(baner_path, os.path.join('sample', new_category))
-
+    
                 # find category info
                 for item in all_category:
                     if sample_form.category.data in str(item):
@@ -463,7 +476,9 @@ def paxi_edit_work_sample(sample_id):
 @app.route('/paxi/work-sample/category')
 @login_required
 def paxi_work_sample_category():
-    cats = Category.query.order_by(Category.id).all()
+    page = request.args.get('page', default=1, type=int)
+
+    cats = Category.query.order_by(Category.id).paginate(page=page, per_page=15)
     cat_form = CategoryForm()
     return render_template('panel/work-sample/category.html', data=cats, form=cat_form)
 

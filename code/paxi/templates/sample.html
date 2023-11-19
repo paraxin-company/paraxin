@@ -76,7 +76,7 @@
                 <ul class="pagination">
                     {% if sample.has_prev %}
                         <li class="pagination-control">
-                            <a class="page-link" href="{{url_for('work_sample', page=sample.page-1, search=search_text)}}" aria-label="Previous">
+                            <a href="{{url_for('work_sample', page=sample.page-1, search=search_text)}}" aria-label="Previous">
                                 <span>&laquo;</span>
                             </a>
                         </li>
@@ -88,9 +88,9 @@
                     
                     {% for page in sample.iter_pages() %}
                         {% if page != sample.page %}
-                            <li class="pagination-item"><a class="page-link" href="{{url_for('work_sample', page=page, search=search_text)}}">{{page}}</a></li> 
+                            <li class="pagination-item"><a href="{{url_for('work_sample', page=page, search=search_text)}}">{{page}}</a></li> 
                         {% else %}
-                            <li class="pagination-item pagination-here"><a class="page-link" href="{{url_for('work_sample', page=page, search=search_text)}}">{{page}}</a></li>
+                            <li class="pagination-item pagination-here"><a href="{{url_for('work_sample', page=page, search=search_text)}}">{{page}}</a></li>
                         {% endif %}
                     {% endfor %}
                     

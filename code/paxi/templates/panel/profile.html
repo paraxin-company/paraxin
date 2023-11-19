@@ -5,7 +5,7 @@
 <div class="grid grid-cols-1 gap-4 lg:grid-cols-3 mt-3">
     <div class="bg-gray-300 p-5 rounded-md">
         <form action="{{url_for('change_profile_baner')}}" method="post" class="image-side" enctype="multipart/form-data">
-            <p class="font-tit text-center text-md text-gray-700">خوش آمدین {{current_user.fullname}}</p>
+            <p class="font-tit text-center text-md text-gray-700">سلام {{current_user.fullname}}</p>
             <input type="file" name="profile_baner" id="profile_baner" accept=".png, .jfif, .jpeg, .jpg, .webp, .svg, .icon, .ico" required class="hidden">
             <div class="relative">
                 <label for="profile_baner" class="flex justify-center items-center absolute bottom-0 p-1 left-0 w-7 h-7 bg-white rounded-md hover:cursor-pointer">
