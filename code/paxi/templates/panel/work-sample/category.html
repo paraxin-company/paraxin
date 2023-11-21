@@ -68,7 +68,7 @@
                                         {{form.text.label(class="simple-label text-right")}}
                                         {{form.text(class="simple-input", value=log.text)}}
                                         <div class="flex justify-between mt-5">
-                                            <button type="button" class="btn-success" data-bs-dismiss="modal">لغو</button>
+                                            <button type="button" class="btn-success" x-on:click="paraxin{{log.id}} = false">لغو</button>
                                             <input class="btn-warning" type="submit", value="آبدیت رکورد ({{log.id}})">
                                         </div>
                                     </form>

@@ -18,7 +18,8 @@
                     </a>
                     <div class="p-2">
                         <p class="text-gray-600">{{web_log.title}}</p>
-                        <p>{{web_log.content}}<a class="text-blue-500 text-opacity-50 font-tit hover:underline hover:underline-offset-4" href="{{url_for('weblog_detail', id=web_log.id)}}">... ادامه ی متلب</a></p>
+                        <p class="truncate">{{web_log.content}}</p>
+                        <a class="text-blue-500 text-opacity-50 font-tit hover:underline hover:underline-offset-4" href="{{url_for('weblog_detail', id=web_log.id)}}">ادامه ی متلب</a>
                     </div>
                 </div>
                 {% endfor %}

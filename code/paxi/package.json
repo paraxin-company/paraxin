@@ -1,8 +1,12 @@
 {
   "scripts": {
-    "dev":"npx tailwindcss -i ./static/css/input.css -o ./static/css/output.css --watch"
+    "prod": "cross-env NODE_ENV=production npx tailwindcss -i ./static/css/input.css -o ./static/css/output.css",
+    "dev": "npx tailwindcss -i ./static/css/input.css -o ./static/css/output.css --watch"
   },
   "devDependencies": {
     "tailwindcss": "^3.3.3"
+  },
+  "dependencies": {
+    "cross-env": "^7.0.3"
   }
 }
