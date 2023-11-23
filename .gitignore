@@ -1,5 +1,7 @@
 readme.md
 venv*
 __pycache__*
-media*
+/code/paxi/static/media/sample*
+/code/paxi/static/media/weblog*
+/code/paxi/static/media/panel*
 node_modules
