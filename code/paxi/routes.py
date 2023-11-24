@@ -41,7 +41,12 @@ def work_sample():
     search = request.args.get('search')
 
     if search:
-        sample = Sample.query.filter(Sample.title.contains(search)+Sample.keyword.contains(search)).paginate(page=page, per_page=12)
+        cat_find_by_search = Category.query.filter(Category.text.contains(search)).first()
+
+        if cat_find_by_search:
+            sample = Sample.query.filter(Sample.title.contains(search)+Sample.keyword.contains(search)+Sample.category_id.contains(cat_find_by_search.id)).paginate(page=page, per_page=12)
+        else:
+            sample = Sample.query.filter(Sample.title.contains(search)+Sample.keyword.contains(search)).paginate(page=page, per_page=12)
     else:
         sample = Sample.query.paginate(page=page, per_page=12)
 
