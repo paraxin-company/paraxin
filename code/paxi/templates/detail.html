@@ -46,7 +46,7 @@
                     {% if related %}
                         {% for item in related %}
                         <li>
-                            <a class="hover:text-gray-900" href="{{url_for('weblog_detail', id=item.id)}}"><span class="text-paraxin-c-200 text-opacity-50 hover:text-paraxin-c-300">&#187; </span>{{item.title}}</a>
+                            <a class="hover:text-gray-900" href="{{url_for('weblog_detail', id=item.id)}}"><span class="text-paraxin-c-200">&#187; </span>{{item.title}}</a>
                         </li>
                         {% endfor %}
                     {% else %}

@@ -27,9 +27,6 @@ class BaseForm(FlaskForm):
         DataRequired(),
         Length(min=100, message="برای قسمت محتوا تعداد باید بیشتر از 100 تا حروف باشه")
     ])
-    baner = FileField('baner', validators=[
-        DataRequired()
-    ])
     keyword = TextAreaField('keyword', validators=[
         DataRequired(),
         Length(min=10, max=115, message="برای قسمت کلمات کلیدی نمیشه بیشتر از 115 تا حرف وارد کرد")
@@ -40,11 +37,17 @@ class BaseForm(FlaskForm):
             raise ValidationError('کاراکتر "," در قسمت کلمات کلیدی مورد قبول نیست')
 
 
+class WeblogFormEdit(BaseForm):
+    baner = FileField('baner')
+
+
 class WeblogForm(BaseForm):
-    pass
+    baner = FileField('baner', validators=[
+        DataRequired()
+    ])
 
 
-class SampleForm(BaseForm):
+class SampleBase(BaseForm):
     app.app_context().push()
     
     all_category = Category.query.all()
@@ -56,6 +59,15 @@ class SampleForm(BaseForm):
     category = RadioField('category', choices=category_list, validators=[
         DataRequired()
     ])
+
+class SampleForm(SampleBase):
+    baner = FileField('baner', validators=[
+        DataRequired()
+    ])
+
+
+class SampleFormEdit(SampleBase):
+    baner = FileField('baner')
 
 
 class CategoryForm(FlaskForm):
