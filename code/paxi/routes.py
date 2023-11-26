@@ -83,16 +83,6 @@ def logo_design():
     return render_template('services/logo-design.html')
 
 
-@app.route('/qr-code')
-def qrcode():
-    return render_template('services/qr-code.html')
-
-
-@app.route('/fap-builder')
-def fap():
-    return render_template('services/fap-builder.html')
-
-
 @app.route('/paxi')
 @login_required
 def paxi_panel():
