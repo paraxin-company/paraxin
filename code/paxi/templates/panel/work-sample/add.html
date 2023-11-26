@@ -1,8 +1,17 @@
 {% extends 'panel/base_form.html' %}
 
+{% block work_page %}text-paraxin-c-200 font-bold{% endblock %}
 {% block header %}افزودن نمونه کار{% endblock %}
 {% block buttonText %}افزودن نمونه کار{% endblock %}
+
 {% block inputs %}
 {{form.category.label(class="simple-label mt-6")}}{{form.category(class="simple-input mt-1")}}
 {{form.album.label(class="simple-label mt-6")}}{{form.album(class="simple-input mt-1" ,accept=".png, .jfif, .jpeg, .jpg, .webp, .svg, .icon, .ico")}}
+{% endblock %}
+
+{% block baner %}
+<div class="mt-7">
+    {{form.baner.label(class="simple-label")}}
+</div>
+{{form.baner(class="simple-input mt-1" ,accept=".png, .jfif, .jpeg, .jpg, .webp, .svg, .icon, .ico")}}
 {% endblock %}

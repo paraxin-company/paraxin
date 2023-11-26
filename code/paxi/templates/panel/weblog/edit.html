@@ -1,6 +1,25 @@
 {% extends 'panel/base_form.html' %}
 
-{% block weblog_page %}active{% endblock %}
+{% block weblog_page %}text-paraxin-c-200 font-bold{% endblock %}
 {% block header %}ویرایش وبلاگ{% endblock %}
 {% block buttonText %}ویرایش وبلاگ{% endblock %}
-{% block baner_text %} ( {{baner}} ) {% endblock %}
+
+{% block baner %}
+<div class="flex flex-col gap-2">
+    <div class="flex mt-7 items-center gap-2">
+        <p class="simple-label">baner</p>
+        ( {{baner}} )
+    </div>
+    <div>
+        {{form.baner(class="hidden", id="baner_input" ,accept=".png, .jfif, .jpeg, .jpg, .webp, .svg, .icon, .ico")}}
+        <div class="relative w-52">
+            <label for="baner_input" class="flex justify-center items-center absolute bottom-0 p-1 left-0 w-6 h-6 bg-paraxin-c-300 bg-opacity-80 text-gray-150 rounded-md hover:cursor-pointer">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="bi bi-pencil-fill" viewBox="0 0 16 16">
+                    <path d="M12.854.146a.5.5 0 0 0-.707 0L10.5 1.793 14.207 5.5l1.647-1.646a.5.5 0 0 0 0-.708l-3-3zm.646 6.061L9.793 2.5 3.293 9H3.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.207l6.5-6.5zm-7.468 7.468A.5.5 0 0 1 6 13.5V13h-.5a.5.5 0 0 1-.5-.5V12h-.5a.5.5 0 0 1-.5-.5V11h-.5a.5.5 0 0 1-.5-.5V10h-.5a.499.499 0 0 1-.175-.032l-.179.178a.5.5 0 0 0-.11.168l-2 5a.5.5 0 0 0 .65.65l5-2a.5.5 0 0 0 .168-.11l.178-.178z"/>
+                </svg>
+            </label>
+            <img class="border-3 border-paraxin-c-200 rounded-lg w-full" src="{{url_for('static', filename=baner)}}">
+        </div>
+    </div>
+</div>
+{% endblock %}

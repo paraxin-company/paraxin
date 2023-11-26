@@ -6,10 +6,9 @@
 <form action="" enctype="multipart/form-data" method="post">
     {{form.csrf_token}}
     {{form.title.label(class="simple-label")}} {{form.title(class="simple-input mt-1")}}
-    <div class="inline-flex mt-7 items-center gap-2">
-        {{form.baner.label(class="simple-label")}} {% block baner_text %}{% endblock %}
-    </div>
-    {{form.baner(class="simple-input mt-1" ,accept=".png, .jfif, .jpeg, .jpg, .webp, .svg, .icon, .ico")}}
+    
+    {% block baner %}{% endblock %}
+    
     {{form.keyword.label(class="simple-label mt-7")}} {{form.keyword(class="simple-input mt-1 h-28")}}
     {{form.content.label(class="simple-label mt-7")}} {{form.content(class="simple-input mt-1 h-28")}}
     {% block inputs %}{% endblock %}

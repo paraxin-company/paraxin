@@ -719,11 +719,6 @@ video {
   margin-bottom: 1.5rem;
 }
 
-.my-40 {
-  margin-top: 10rem;
-  margin-bottom: 10rem;
-}
-
 .mb-1 {
   margin-bottom: 0.25rem;
 }
@@ -946,8 +941,12 @@ video {
   width: 100%;
 }
 
-.w-6\/12 {
-  width: 50%;
+.w-40 {
+  width: 10rem;
+}
+
+.w-52 {
+  width: 13rem;
 }
 
 .max-w-md {
@@ -1128,14 +1127,6 @@ video {
   border-color: rgb(119 0 93 / var(--tw-border-opacity));
 }
 
-<<<<<<< HEAD
-.border-red-500 {
-  --tw-border-opacity: 1;
-  border-color: rgb(239 68 68 / var(--tw-border-opacity));
-}
-
-=======
->>>>>>> feature/remove-some
 .bg-gray-100 {
   --tw-bg-opacity: 1;
   background-color: rgb(243 244 246 / var(--tw-bg-opacity));
@@ -1946,11 +1937,6 @@ video {
 .hover\:text-paraxin-c-200:hover {
   --tw-text-opacity: 1;
   color: rgb(178 41 159 / var(--tw-text-opacity));
-}
-
-.hover\:text-paraxin-c-300:hover {
-  --tw-text-opacity: 1;
-  color: rgb(119 0 93 / var(--tw-text-opacity));
 }
 
 .hover\:text-red-600:hover {

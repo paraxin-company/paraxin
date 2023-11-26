@@ -1,5 +1,12 @@
 {% extends 'panel/base_form.html' %}
 
-{% block weblog_page %}active{% endblock %}
+{% block weblog_page %}text-paraxin-c-200 font-bold{% endblock %}
 {% block header %}افزودن وبلاگ{% endblock %}
 {% block buttonText %}ثبت وبلاگ جدید{% endblock %}
+
+{% block baner %}
+<div class="mt-7">
+    {{form.baner.label(class="simple-label")}}
+</div>
+{{form.baner(class="simple-input mt-1" ,accept=".png, .jfif, .jpeg, .jpg, .webp, .svg, .icon, .ico")}}
+{% endblock %}
