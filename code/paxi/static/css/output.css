@@ -1127,6 +1127,14 @@ video {
   border-color: rgb(119 0 93 / var(--tw-border-opacity));
 }
 
+<<<<<<< HEAD
+=======
+.border-red-500 {
+  --tw-border-opacity: 1;
+  border-color: rgb(239 68 68 / var(--tw-border-opacity));
+}
+
+>>>>>>> feature/changes
 .bg-gray-100 {
   --tw-bg-opacity: 1;
   background-color: rgb(243 244 246 / var(--tw-bg-opacity));
@@ -1553,6 +1561,7 @@ video {
   --tw-text-opacity: 1;
   color: rgb(178 41 159 / var(--tw-text-opacity));
   text-decoration-line: underline;
+  text-underline-offset: 8px;
 }
 
 .header-text {

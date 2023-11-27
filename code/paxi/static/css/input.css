@@ -24,7 +24,7 @@
     @apply text-gray-100;
 }
 .main-nav{
-    @apply underline text-paraxin-c-200;
+    @apply underline text-paraxin-c-200 underline-offset-8;
 }
 .header-text{
     @apply font-tit text-2xl mb-3;
