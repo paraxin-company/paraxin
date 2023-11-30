@@ -1,7 +1,7 @@
 from flask import render_template, abort, redirect, url_for, flash, request
 from flask_login import login_user, logout_user, current_user, login_required
 from paxi.model import User, Category, Weblog, Sample
-from paxi.forms import LoginForm, WeblogForm, WeblogFormEdit, SampleForm, SampleFormEdit, ProfileForm, CategoryForm
+from paxi.forms import LoginForm, WeblogForm, WeblogFormEdit, SampleForm, SampleFormEdit, ProfileForm, CategoryForm, ContactForm
 from paxi.method import passwords, files, comma, folder, operation
 from paxi import app, db, folder_upload
 import os
@@ -16,9 +16,10 @@ def about():
    return render_template('about.html')
 
 
-@app.route('/contact')
+@app.route('/contact', methods=['post', 'get'])
 def contact():
-    return render_template('contact.html')
+    form = ContactForm()
+    return render_template('contact.html', form=form)
 
 
 @app.route('/weblog')

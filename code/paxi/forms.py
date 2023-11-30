@@ -1,10 +1,9 @@
 from flask_wtf import FlaskForm
-from wtforms import StringField, PasswordField, BooleanField, TextAreaField, RadioField, FileField, MultipleFileField
+from wtforms import StringField, PasswordField, BooleanField, TextAreaField, RadioField, FileField, MultipleFileField, EmailField, SelectField
 from wtforms.validators import DataRequired, Length, ValidationError, EqualTo
 from flask_login import current_user
 from paxi.method import passwords
-from paxi.model import User
-from paxi.model import Category
+from paxi.model import User, Category
 from paxi import app
 
 class LoginForm(FlaskForm):
@@ -100,3 +99,33 @@ class ProfileForm(FlaskForm):
     def validate_old_password(self, old_password):
         if passwords.check_pass(current_user.password, old_password.data) == False:
             raise ValidationError('پسورد وارد شده درست نمی باشد')
+        
+
+class ContactForm(FlaskForm):
+    email = EmailField('ایمیل شما', validators=[
+        DataRequired()
+    ])
+    phone = StringField("شماره همراه", validators=[
+        DataRequired(),
+        Length(max=9)
+    ])
+    name = StringField("نام شما", validators=[
+        DataRequired()
+    ])
+    department = SelectField("انتخاب دپارتمان", validators=[DataRequired()], choices=[
+        "تیم پشتیبانی",
+        "امور مالی",
+        "ثبت درخواست مشاوره",
+        "نقد و انتقاد",
+        "دعوت به همکاری"
+    ])
+    relation = SelectField("طریقه‌ی آشنایی", validators=[DataRequired()], choices=[
+        'از طریق تبلیغات',
+        'از طریق آشنایان',
+        'از طریق تلگرام',
+        'موارد دیگر'
+    ])
+    text = TextAreaField("متن شما", validators=[
+        DataRequired()
+    ])
+    NotRobot = BooleanField('من ربات نیستم', validators=[DataRequired()])
