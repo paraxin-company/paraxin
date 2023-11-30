@@ -1,6 +1,6 @@
 from flask import render_template, abort, redirect, url_for, flash, request
 from flask_login import login_user, logout_user, current_user, login_required
-from paxi.model import User, Category, Weblog, Sample
+from paxi.model import User, Category, Weblog, Sample, Contact
 from paxi.forms import LoginForm, WeblogForm, WeblogFormEdit, SampleForm, SampleFormEdit, ProfileForm, CategoryForm, ContactForm
 from paxi.method import passwords, files, comma, folder, operation
 from paxi import app, db, folder_upload
@@ -16,10 +16,33 @@ def about():
    return render_template('about.html')
 
 
-@app.route('/contact', methods=['post', 'get'])
+@app.route('/contact', methods=['POST', 'GET'])
 def contact():
-    form = ContactForm()
-    return render_template('contact.html', form=form)
+    cotact_form = ContactForm()
+    
+    # if cotact_form.validate_on_submit():
+    if request.method == 'POST':
+        try:
+            add_new_contact = Contact(
+                text = cotact_form.text.data,
+                email = cotact_form.email.data,
+                phone = cotact_form.phone.data,
+                name = cotact_form.name.data,
+                department = cotact_form.department.data,
+                relation = cotact_form.relation.data
+            )
+
+            # commit a contact text in database
+            db.session.add(add_new_contact)
+            db.session.commit()
+
+            flash(f'پیام شما با موفقیت ارسال شد (شماره تیکت {add_new_contact.id})', 'success')
+            return redirect('/contact#send-mail')
+        except:
+            flash('پیام شما ارسال نشد .', 'danger')
+            return redirect('/contact#send-mail')
+
+    return render_template('contact.html', form=cotact_form)
 
 
 @app.route('/weblog')
@@ -101,7 +124,7 @@ def paxi_login():
         if user and passwords.check_pass(user.password, form.password.data):
             login_user(user, remember=form.remember.data)
             next_page = request.args.get('next')
-            
+
             flash('ورود با موفقیت', 'success')
             return redirect(next_page if next_page else url_for('paxi_panel'))
         else:
@@ -566,8 +589,8 @@ def paxi_add_work_sample_category():
 @app.route('/paxi/profile', methods=['POST', 'GET'])
 @login_required
 def profile():
-    profile_form = ProfileForm()
 
+    profile_form = ProfileForm()
     if profile_form.validate_on_submit():
         current_user.username = profile_form.username.data
         current_user.password = passwords.get_hash(profile_form.password.data)

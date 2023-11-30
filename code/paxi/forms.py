@@ -59,6 +59,7 @@ class SampleBase(BaseForm):
         DataRequired()
     ])
 
+
 class SampleForm(SampleBase):
     baner = FileField('baner', validators=[
         DataRequired()

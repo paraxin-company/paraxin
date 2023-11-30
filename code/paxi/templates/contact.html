@@ -63,6 +63,12 @@
             </svg>
         </div>
         <form method="post" class="flex flex-col items-center w-full px-5 py-8 border-2 border-paraxin-c-300 bg-paraxin-c-200 bg-opacity-10 rounded-xl shadow-2xl">
+            <div class="w-full mb-3">
+                {% include "include/message.html" %}
+            </div>
+            <div class="w-full mb-3">
+                {% include "panel/form_errors.html" %}
+            </div>
             <div class="w-full grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
                 <div class="animate__animated animate__fadeIn wow" data-wow-delay=".1s">
                     {{form.name.label(class="simple-label")}}
@@ -89,24 +95,24 @@
                 <div class="animate__animated animate__fadeIn wow" data-wow-delay=".5s">
                     {{form.phone.label(class="simple-label")}}
                     <div class="relative">
-                        {{form.phone(style="direction: ltr !important; padding-left: 2.3rem; padding-right: 2.25rem;", pattern="[0-9]{9}", class="simple-input", placeholder="123456789")}}
+                        {{form.phone(style="direction: ltr !important; padding-left: 2rem; padding-right: 2.25rem;", pattern="[0-9]{9}", class="simple-input", placeholder="123456789")}}
                         <div class="absolute top-2 right-2 text-gray-400">
                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
                                 <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 6.75c0 8.284 6.716 15 15 15h2.25a2.25 2.25 0 002.25-2.25v-1.372c0-.516-.351-.966-.852-1.091l-4.423-1.106c-.44-.11-.902.055-1.173.417l-.97 1.293c-.282.376-.769.542-1.21.38a12.035 12.035 0 01-7.143-7.143c-.162-.441.004-.928.38-1.21l1.293-.97c.363-.271.527-.734.417-1.173L6.963 3.102a1.125 1.125 0 00-1.091-.852H4.5A2.25 2.25 0 002.25 4.5v2.25z" />
                             </svg>                                                                                     
                         </div>
-                        <div class="absolute top-2 left-5">
-                            <p class="text-red-500 text-md">09</p>
+                        <div class="absolute top-2 left-3">
+                            <p class="text-paraxin-c-200 text-md font-bold">09</p>
                         </div>
                     </div>
                 </div>
                 <div class="mt-auto animate__animated animate__fadeIn wow" data-wow-delay=".7s">
                     {{form.relation.label(class="simple-label")}}
-                    {{form.relation(class="bg-white simple-input text-gray-400 cursor-pointer")}}
+                    {{form.relation(style="padding-bottom: 10px; padding-top: 10px;", class="bg-white simple-input text-gray-400 cursor-pointer")}}
                 </div>
                 <div class="mt-auto animate__animated animate__fadeIn wow" data-wow-delay=".9s">
                     {{form.department.label(class="simple-label")}}
-                    {{form.department(class="bg-white simple-input text-gray-400 cursor-pointer")}}
+                    {{form.department(style="padding-bottom: 10px; padding-top: 10px;", class="bg-white simple-input text-gray-400 cursor-pointer")}}
                 </div>
             </div>
             <div class="my-6 w-full sm:w-8/12">
