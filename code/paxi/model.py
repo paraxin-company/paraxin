@@ -61,7 +61,7 @@ class Weblog(db.Model):
         return f"{self.id}) {self.title[:30]} | {self.date}"
 
 
-class Contact(db.Model):
+class Ticket(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     email = db.Column(db.String(30), nullable=False)
     phone = db.Column(db.String(11), nullable=False)
@@ -69,6 +69,7 @@ class Contact(db.Model):
     department = db.Column(db.String(25), nullable=False)
     relation = db.Column(db.String(25), nullable=False)
     text = db.Column(db.Text, nullable=False)
+    time = db.Column(db.DateTime, default=datetime.datetime.now)
 
     def __repr__(self):
         return f"|{self.id}"

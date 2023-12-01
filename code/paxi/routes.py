@@ -1,6 +1,6 @@
 from flask import render_template, abort, redirect, url_for, flash, request
 from flask_login import login_user, logout_user, current_user, login_required
-from paxi.model import User, Category, Weblog, Sample, Contact
+from paxi.model import User, Category, Weblog, Sample, Ticket
 from paxi.forms import LoginForm, WeblogForm, WeblogFormEdit, SampleForm, SampleFormEdit, ProfileForm, CategoryForm, ContactForm
 from paxi.method import passwords, files, comma, folder, operation
 from paxi import app, db, folder_upload
@@ -23,7 +23,7 @@ def contact():
     # if cotact_form.validate_on_submit():
     if request.method == 'POST':
         try:
-            add_new_contact = Contact(
+            add_new_contact = Ticket(
                 text = cotact_form.text.data,
                 email = cotact_form.email.data,
                 phone = cotact_form.phone.data,
@@ -628,6 +628,19 @@ def change_profile_baner():
     else:
         flash(f'فرمت فایل مورد قبول نیست ({the_file.filename})', 'danger')
     return redirect(url_for('profile'))
+
+@app.route('/paxi/ticket')
+@login_required
+def paxi_ticket():
+    page = request.args.get('page',type=int, default=1)
+    search = request.args.get('search')
+
+    if search:
+        all_ticket = Ticket.query.filter(Ticket.id==search).order_by(Ticket.time.desc()).paginate(page=page, per_page=15)
+    else:
+        all_ticket = Ticket.query.order_by(Ticket.time.desc()).paginate(page=page, per_page=15)
+
+    return render_template('panel/ticket/ticket.html', data=all_ticket, search_text=search)
 
 
 @app.errorhandler(404)
