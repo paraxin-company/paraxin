@@ -113,6 +113,10 @@ class ContactForm(FlaskForm):
     name = StringField("نام شما", validators=[
         DataRequired()
     ])
+    title = StringField("عنوان پیام", validators=[
+        DataRequired(),
+        Length(max=50)
+    ])
     department = SelectField("انتخاب دپارتمان", validators=[DataRequired()], choices=[
         "تیم پشتیبانی",
         "امور مالی",
@@ -126,7 +130,7 @@ class ContactForm(FlaskForm):
         'از طریق تلگرام',
         'موارد دیگر'
     ])
-    text = TextAreaField("متن شما", validators=[
+    text = TextAreaField("متن پیام", validators=[
         DataRequired()
     ])
     NotRobot = BooleanField('من ربات نیستم', validators=[DataRequired()])

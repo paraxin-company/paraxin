@@ -117,8 +117,12 @@
             </div>
             <div class="my-6 w-full sm:w-8/12">
                 <div class="animate__animated animate__fadeIn wow" data-wow-delay="1.2s">
+                    {{form.title.label(class="simple-label")}}
+                    {{form.title(class="simple-input", placeholder="عنوان پیام")}}
+                </div>
+                <div class="animate__animated animate__fadeIn wow mt-3" data-wow-delay="1.5s">
                     {{form.text.label(class="simple-label")}}
-                    {{form.text(class="simple-input py-4 h-28", placeholder="متن شما")}}
+                    {{form.text(class="simple-input py-4 h-28", placeholder="متن پیام")}}
                 </div>
                 <div class="flex items-center justify-center gap-1 mt-3 text-center animate__animated animate__fadeIn wow" data-wow-delay="1.5s">
                     {{form.NotRobot(class="w-4 h-4 focus:ring-2 focus:ring-offset-1")}}

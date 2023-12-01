@@ -18,18 +18,19 @@ def about():
 
 @app.route('/contact', methods=['POST', 'GET'])
 def contact():
-    cotact_form = ContactForm()
+    contact_form = ContactForm()
     
-    # if cotact_form.validate_on_submit():
+    # if contact_form.validate_on_submit():
     if request.method == 'POST':
         try:
             add_new_contact = Ticket(
-                text = cotact_form.text.data,
-                email = cotact_form.email.data,
-                phone = cotact_form.phone.data,
-                name = cotact_form.name.data,
-                department = cotact_form.department.data,
-                relation = cotact_form.relation.data
+                text = contact_form.text.data,
+                title = contact_form.title.data,
+                email = contact_form.email.data,
+                phone = contact_form.phone.data,
+                name = contact_form.name.data,
+                department = contact_form.department.data,
+                relation = contact_form.relation.data
             )
 
             # commit a contact text in database
@@ -42,7 +43,7 @@ def contact():
             flash('پیام شما ارسال نشد .', 'danger')
             return redirect('/contact#send-mail')
 
-    return render_template('contact.html', form=cotact_form)
+    return render_template('contact.html', form=contact_form)
 
 
 @app.route('/weblog')
@@ -636,11 +637,18 @@ def paxi_ticket():
     search = request.args.get('search')
 
     if search:
-        all_ticket = Ticket.query.filter(Ticket.id==search).order_by(Ticket.time.desc()).paginate(page=page, per_page=15)
+        all_ticket = Ticket.query.filter(Ticket.id.contains(search)+Ticket.title.contains(search)+Ticket.department.contains(search)).order_by(Ticket.time.desc()).paginate(page=page, per_page=15)
     else:
         all_ticket = Ticket.query.order_by(Ticket.time.desc()).paginate(page=page, per_page=15)
 
     return render_template('panel/ticket/ticket.html', data=all_ticket, search_text=search)
+
+
+@app.route('/paxi/ticket/chat/<int:id_ticket>')
+@login_required
+def paxi_answer_ticket(id_ticket):
+    data = Ticket.query.get(id_ticket)
+    return render_template('panel/ticket/chat.html', data=data)
 
 
 @app.errorhandler(404)

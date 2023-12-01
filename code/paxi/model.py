@@ -64,6 +64,7 @@ class Weblog(db.Model):
 class Ticket(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     email = db.Column(db.String(30), nullable=False)
+    title = db.Column(db.String(50), nullable=False)
     phone = db.Column(db.String(11), nullable=False)
     name = db.Column(db.String(25), nullable=False)
     department = db.Column(db.String(25), nullable=False)
