@@ -104,6 +104,9 @@
 .btn-danger{
     @apply cursor-pointer text-red-800 bg-red-300 px-2 py-1 rounded-md border-2 border-red-700 hover:bg-red-500 hover:border-red-950 hover:text-red-950;
 }
+.ruller{
+    @apply border-gray-400 h-0 border mb-2;
+}
 @layer base {
     *{
         direction: rtl;

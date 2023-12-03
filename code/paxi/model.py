@@ -61,6 +61,17 @@ class Weblog(db.Model):
         return f"{self.id}) {self.title[:30]} | {self.date}"
 
 
+class Answer(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    text = db.Column(db.Text, nullable=False)
+    full_name = db.Column(db.String(25), nullable=False)
+    time = db.Column(db.DateTime, default=datetime.datetime.now)
+    ticket_id = db.Column(db.Integer, db.ForeignKey('ticket.id'), nullable=False)
+
+    def __repr__(self):
+        return f"|{self.id}"
+
+
 class Ticket(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     email = db.Column(db.String(30), nullable=False)
@@ -71,6 +82,7 @@ class Ticket(db.Model):
     relation = db.Column(db.String(25), nullable=False)
     text = db.Column(db.Text, nullable=False)
     time = db.Column(db.DateTime, default=datetime.datetime.now)
+    answers = db.relationship('Answer', backref='tick', lazy=True)
 
     def __repr__(self):
         return f"|{self.id}"

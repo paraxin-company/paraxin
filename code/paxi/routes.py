@@ -1,6 +1,6 @@
 from flask import render_template, abort, redirect, url_for, flash, request
 from flask_login import login_user, logout_user, current_user, login_required
-from paxi.model import User, Category, Weblog, Sample, Ticket
+from paxi.model import User, Category, Weblog, Sample, Ticket, Answer
 from paxi.forms import LoginForm, WeblogForm, WeblogFormEdit, SampleForm, SampleFormEdit, ProfileForm, CategoryForm, ContactForm
 from paxi.method import passwords, files, comma, folder, operation
 from paxi import app, db, folder_upload
@@ -644,11 +644,30 @@ def paxi_ticket():
     return render_template('panel/ticket/ticket.html', data=all_ticket, search_text=search)
 
 
-@app.route('/paxi/ticket/chat/<int:id_ticket>')
+@app.route('/paxi/ticket/chat/<int:id_ticket>', methods=['POST', 'GET'])
 @login_required
 def paxi_answer_ticket(id_ticket):
-    data = Ticket.query.get(id_ticket)
-    return render_template('panel/ticket/chat.html', data=data)
+    find_ticket = Ticket.query.get_or_404(id_ticket)
+    find_answers = Answer.query.filter_by(tick=find_ticket).order_by(Answer.time).all()
+
+    if request.method == 'POST':
+        try:
+            answer_for_ticket = Answer(
+                text = request.form.get('answer_input'),
+                full_name=current_user.fullname,
+                tick=find_ticket
+            )
+
+            # save answer for ticket
+            db.session.add(answer_for_ticket)
+            db.session.commit()
+
+            flash(f'پاسخ شما به تیکت {find_ticket.id} به درستی ارسال شد', 'success')
+            return redirect(url_for('paxi_ticket'))
+        except:
+            flash(f'برای پاسخ دادن به تیکت {find_ticket.id} مشکلی پیش آمده است', 'danger')
+
+    return render_template('panel/ticket/chat.html', data=find_ticket, find_answers=find_answers)
 
 
 @app.errorhandler(404)

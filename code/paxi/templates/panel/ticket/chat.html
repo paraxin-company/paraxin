@@ -3,7 +3,7 @@
 {% block ticket_page %}text-paraxin-c-200 font-bold{% endblock %}
 
 {% block content %}
-<div class="flex justify-between items-center mb-4">
+<div class="flex justify-between items-center my-4">
     <h1>عنوان : <span class="text-paraxin-c-200">{{data.title}}</span></h1>
     <h1><span class="text-paraxin-c-200">{{data.id}}</span> : شماره تیکت</h1>
 </div>
@@ -20,27 +20,45 @@
                 <div>
                     {{data.time.strftime('%Y-%m-%d')}}
                 </div>
-                
             </div>
-            {{data.text}}
-            <div class="block mt-2">
-                دپارتمان <span class="font-bold text-paraxin-c-200">{{data.department}}</span>
+            <div>
+                {% for line in data.text.split('\r\n') %}
+                <p>{{line}}</p>
+                {% endfor %}
             </div>
-        </div>
-        <div style="border-bottom-left-radius: 0px;" class="bg-paraxin-c-200 bg-opacity-20 p-4 rounded-3xl shadow-xl border border-gray-400 w-7/12 mr-auto mb-5">
-            <div class="w-full flex justify-between mb-3">
-                <div>
-                    {{data.time.strftime('%Y-%m-%d')}}
+            <hr class="ruller mt-5">
+            <div class="flex justify-between items-center">
+                <div class="text-gray-500 text-sm">
+                    دپارتمان <span class="font-bold text-paraxin-c-200">{{data.department}}</span>
                 </div>
                 <div>
-                    {{data.name}}
+                    {{data.time.strftime('%H:%M')}}
                 </div>
             </div>
-            {{data.text}}
-            <div class="block mt-2">
-                دپارتمان <span class="font-bold text-paraxin-c-200">{{data.department}}</span>
-            </div>
         </div>
+        {% if find_answers %}
+            {% for answer in find_answers %}
+            <div style="border-bottom-left-radius: 0px;" class="bg-paraxin-c-200 bg-opacity-20 p-4 rounded-3xl shadow-xl border border-gray-400 w-7/12 mr-auto mb-5">
+                <div class="w-full flex justify-between mb-3">
+                    <div>
+                        {{answer.time.strftime('%Y-%m-%d')}}
+                    </div>
+                    <div>
+                        {{answer.full_name}}
+                    </div>
+                </div>
+                <div>
+                    {% for line in answer.text.split('\r\n') %}
+                    <p>{{line}}</p>
+                    {% endfor %}
+                </div>
+                <div class="mt-5">
+                    <hr class="ruller">
+                    {{answer.time.strftime('%H:%M')}}
+                </div>
+            </div>
+            {% endfor %}
+        {% endif %}
     </div>
     <form class="fixed bottom-5 flex justify-center w-9/12" method="post">
         <div class="w-10/12 flex gap-3">
@@ -49,7 +67,7 @@
                     <path stroke-linecap="round" stroke-linejoin="round" d="M6 12L3.269 3.126A59.768 59.768 0 0121.485 12 59.77 59.77 0 013.27 20.876L5.999 12zm0 0h7.5" />
                 </svg>              
             </button>
-            <textarea type="text" class="simple-input" rows="1" required></textarea>
+            <textarea type="text" class="simple-input" name="answer_input" rows="1" required></textarea>
         </div>
     </form>
 </div>
