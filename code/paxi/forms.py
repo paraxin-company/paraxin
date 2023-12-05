@@ -78,14 +78,9 @@ class CategoryForm(FlaskForm):
 
 
 class ProfileForm(FlaskForm):
-    fullname = StringField('Full Name', validators=[
-        DataRequired(),
-        Length(min=8)
-    ])
+    fullname = StringField('Full Name')
     username = StringField('User Name', validators=[DataRequired()])
-    password = PasswordField('Password', validators=[
-        DataRequired(),
-    ])
+    password = PasswordField('Password', validators=[DataRequired()])
 
     def validate_username(self, username):
         if current_user.username != username.data:
