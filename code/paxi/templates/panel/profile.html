@@ -21,12 +21,46 @@
         </form>
     </div>
     <div class="lg:col-span-2">
-        <p class="mt-3 text-gray-500">اسم کامل : {{current_user.fullname}}</p>
         <p class="mt-3 text-gray-500">ایمیل: {{current_user.email}}</p>
-        <form style="direction: ltr !important" action="" method="post" class="mt-2">
+        <form action="" method="post" class="mt-2">
             {{form.csrf_token}}
-            <div style="direction: ltr !important" class="mt-5">
-                {{form.username.label(class="font-serif")}}
+            <div class="mt-10" x-data="{ fullname_popup: false }">
+                <div class="flex flex-row-reverse items-center gap-1 mb-1 relative">
+                    {{form.fullname.label(class="simple-label", style="direction: ltr !important;")}}
+                    <div class="text-red-500 cursor-pointer" @click="fullname_popup = ! fullname_popup">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v3.75m9-.75a9 9 0 11-18 0 9 9 0 0118 0zm-9 3.75h.008v.008H12v-.008z" />
+                        </svg>
+                    </div>
+                    <div class="w-40 rounded-md shadow-xl border bg-gray-150 border-gray-400 absolute bottom-7 z-50" x-cloak x-show="fullname_popup" @click.outside="fullname_popup = false">
+                        <p class="text-xs p-1 text-gray-500">
+                            full name نامی است که از شما باقی می ماند و کاربران دیگر این نام را می بینند
+                        </p>
+                    </div>
+                </div>
+                <div class="relative">
+                    {{form.fullname(style="direction: ltr !important; padding-left: 2.25rem;", class="simple-input", value=current_user.fullname)}}
+                    <div class="absolute top-2 left-2 text-gray-400">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M17.982 18.725A7.488 7.488 0 0012 15.75a7.488 7.488 0 00-5.982 2.975m11.963 0a9 9 0 10-11.963 0m11.963 0A8.966 8.966 0 0112 21a8.966 8.966 0 01-5.982-2.275M15 9.75a3 3 0 11-6 0 3 3 0 016 0z" />
+                        </svg>                                                                                                           
+                    </div>
+                </div>              
+            </div>
+            <div class="mt-5" x-data="{ username_popup : false }">
+                <div class="flex flex-row-reverse items-center gap-1 mb-1 relative">
+                    {{form.username.label(class="simple-label", style="direction:ltr !important;")}}
+                    <div class="text-red-500 cursor-pointer" @click="username_popup  = ! username_popup ">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v3.75m9-.75a9 9 0 11-18 0 9 9 0 0118 0zm-9 3.75h.008v.008H12v-.008z" />
+                        </svg>
+                    </div>
+                    <div class="w-40 rounded-md shadow-xl border bg-gray-150 border-gray-400 absolute bottom-7 z-50" x-cloak x-show="username_popup " @click.outside="username_popup  = false">
+                        <p class="text-xs p-1 text-gray-500">
+                            username برای ورود شما به پنل استفاده می شود. کسی از این نام اطلاعی نخواهد داشت
+                        </p>
+                    </div>
+                </div>
                 <div class="relative">
                     {{form.username(style="direction: ltr !important; padding-left: 2.25rem;",class="simple-input", value=current_user.username)}}
                     <div class="absolute top-2 left-2 text-gray-400">
@@ -36,25 +70,15 @@
                     </div>
                 </div>
             </div>
-            <div style="direction: ltr !important" class="mt-5">
-                {{form.old_password.label(class="font-serif")}}
+            <div class="mt-5">
+                {{form.password.label(style="direction: ltr !important", class="simple-label")}}
                 <div class="relative">
-                    {{form.old_password(style="direction: ltr !important; padding-left: 2.25rem;",class="simple-input")}}
+                    {{form.password(style="direction: ltr !important; padding-left: 2.25rem;",class="simple-input")}}
                     <div class="absolute top-2 left-2 text-gray-400">
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
                             <path stroke-linecap="round" stroke-linejoin="round" d="M16.5 10.5V6.75a4.5 4.5 0 10-9 0v3.75m-.75 11.25h10.5a2.25 2.25 0 002.25-2.25v-6.75a2.25 2.25 0 00-2.25-2.25H6.75a2.25 2.25 0 00-2.25 2.25v6.75a2.25 2.25 0 002.25 2.25z" />
                         </svg>                                                                                  
                     </div>
-                </div>
-            </div>
-            <div class="grid grid-cols-1 gap-3 sm:grid-cols-2 mt-3">
-                <div>
-                    {{form.password.label(class="font-serif")}}
-                    {{form.password(style="direction: ltr !important;",class="simple-input")}}
-                </div>
-                <div>
-                    {{form.confirm_password.label(class="font-serif")}}
-                    {{form.confirm_password(style="direction: ltr !important;",class="simple-input")}}
                 </div>
             </div>
             <div class="flex justify-center mt-5">

@@ -595,6 +595,7 @@ def profile():
     if profile_form.validate_on_submit():
         current_user.username = profile_form.username.data
         current_user.password = passwords.get_hash(profile_form.password.data)
+        current_user.fullname = profile_form.fullname.data
 
         # save changes
         db.session.commit()

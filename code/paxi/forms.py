@@ -1,6 +1,6 @@
 from flask_wtf import FlaskForm
 from wtforms import StringField, PasswordField, BooleanField, TextAreaField, RadioField, FileField, MultipleFileField, EmailField, SelectField
-from wtforms.validators import DataRequired, Length, ValidationError, EqualTo
+from wtforms.validators import DataRequired, Length, ValidationError
 from flask_login import current_user
 from paxi.method import passwords
 from paxi.model import User, Category
@@ -78,27 +78,25 @@ class CategoryForm(FlaskForm):
 
 
 class ProfileForm(FlaskForm):
-    username = StringField('user name', validators=[DataRequired()])
-    password = PasswordField('new password', validators=[
+    fullname = StringField('Full Name', validators=[
         DataRequired(),
         Length(min=8)
     ])
-    confirm_password = PasswordField('confirm new password', validators=[
+    username = StringField('User Name', validators=[DataRequired()])
+    password = PasswordField('Password', validators=[
         DataRequired(),
-        EqualTo('password', message='پسورد وارد شده در قسمت پسورد جدید باید با هم برابر باشن')
     ])
-    old_password = PasswordField('old password', validators=[DataRequired()])
 
     def validate_username(self, username):
         if current_user.username != username.data:
             if current_user.fullname != username.data:
                 if User.query.filter_by(username=username.data).first():
-                    raise ValidationError(f'یوزر نیم {username.data} قبلا توسط کسی انتخاب شده است')
+                    raise ValidationError(f'یوزر نیم {username.data} قبلا توسط شخص دیگری انتخاب شده است. نام جدید انتخاب کنید')
             else:
-                raise ValidationError('نمی شه نام کاربری با اسم کامل یکی باشه (برای امنیت بیشتر توصیه میشه)')
-    
-    def validate_old_password(self, old_password):
-        if passwords.check_pass(current_user.password, old_password.data) == False:
+                raise ValidationError('توصیه ما به شما این است که UserName و FullName با هم متفاوت باشند (برای امنیت بیشتر توصیه میشود)')
+        
+    def validate_password(self, password):
+        if passwords.check_pass(current_user.password, password.data) == False:
             raise ValidationError('پسورد وارد شده درست نمی باشد')
         
 
