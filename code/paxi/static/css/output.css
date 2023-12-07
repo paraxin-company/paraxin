@@ -1172,6 +1172,11 @@ video {
   border-color: rgb(119 0 93 / var(--tw-border-opacity));
 }
 
+.border-gray-900 {
+  --tw-border-opacity: 1;
+  border-color: rgb(17 24 39 / var(--tw-border-opacity));
+}
+
 .bg-gray-100 {
   --tw-bg-opacity: 1;
   background-color: rgb(243 244 246 / var(--tw-bg-opacity));
@@ -1205,6 +1210,11 @@ video {
 .bg-paraxin-c-300 {
   --tw-bg-opacity: 1;
   background-color: rgb(119 0 93 / var(--tw-bg-opacity));
+}
+
+.bg-red-200 {
+  --tw-bg-opacity: 1;
+  background-color: rgb(254 202 202 / var(--tw-bg-opacity));
 }
 
 .bg-white {
