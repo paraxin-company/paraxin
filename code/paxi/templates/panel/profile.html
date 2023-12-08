@@ -30,28 +30,9 @@
                 </svg>
             </span>
             {% else %}
-            <div x-data="{verify:false}">
-                <div class="text-red-500 cursor-pointer" @click="verify = ! verify">
-                    تایید ایمیل
-                </div>
-                <div class="fixed inset-0 z-50 bg-gray-800 bg-opacity-40 flex justify-center items-center" x-cloak x-show="verify" @click.outside="verify = false">
-                    <div class="flex flex-col gap-5 bg-gray-100 border-2 border-gray-500 rounded-md p-5">
-                        <div class="flex justify-between items-center">
-                            <span class="cursor-pointer" x-on:click="verify = false">
-                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-                                    <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
-                                </svg>                              
-                            </span>
-                            <p class="text-lg">تایید ایمیل</p>
-                        </div>
-                        <form>
-                            <p>کد ارسالی به ایمیل {{current_user.email}} را وارد کنید</p>
-                            <input class="simple-input mt-5" required type="text">
-                            <input class="paraxin-pro-link mt-5" type="submit" value="تاییدحساب ایمیل">
-                        </form>
-                    </div>
-                </div>
-            </div>
+            <a class="text-red-500 cursor-pointer" href="{{url_for('verify', verify_type='email', value=current_user.email)}}">
+                تایید ایمیل
+            </a>
             {% endif %}
         </div>
         <div class="flex mt-3 gap-2 items-center">
@@ -63,28 +44,9 @@
                 </svg>
             </span>
             {% else %}
-            <div x-data="{verify:false}">
-                <div class="text-red-500 cursor-pointer" @click="verify = ! verify">
-                    تایید تلفن
-                </div>
-                <div class="fixed inset-0 z-50 bg-gray-800 bg-opacity-40 flex justify-center items-center w-full h-full" x-cloak x-show="verify" @click.outside="verify = false">
-                    <div class="flex flex-col gap-5 bg-gray-100 border-2 border-gray-500 rounded-md p-5">
-                        <div class="flex justify-between items-center">
-                            <span class="cursor-pointer" x-on:click="verify = false">
-                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-                                    <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
-                                </svg>                              
-                            </span>
-                            <p class="text-lg">تایید تلفن</p>
-                        </div>
-                        <form>
-                            <p>کد ارسالی به شماره {{current_user.phone}} را وارد کنید</p>
-                            <input class="simple-input mt-5" required type="text">
-                            <input class="paraxin-pro-link mt-5" type="submit" value="تایید تلفن">
-                        </form>
-                    </div>
-                </div>
-            </div>
+            <a class="text-red-500 cursor-pointer" href="{{url_for('verify', verify_type='phone', value=current_user.phone)}}">
+                تایید تلفن
+            </a>
             {% endif %}
         </div>
         <form style="direction: ltr !important;" action="" method="post" class="mt-2">

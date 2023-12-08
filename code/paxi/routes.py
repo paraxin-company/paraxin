@@ -2,7 +2,7 @@ from flask import render_template, abort, redirect, url_for, flash, request
 from flask_login import login_user, logout_user, current_user, login_required
 from paxi.model import User, Category, Weblog, Sample, Ticket, Answer
 from paxi.forms import LoginForm, WeblogForm, WeblogFormEdit, SampleForm, SampleFormEdit, ProfileForm, CategoryForm, ContactForm
-from paxi.method import passwords, files, comma, folder, operation
+from paxi.method import passwords, files, comma, folder, operation, verify_pro
 from paxi import app, db, folder_upload
 import os
 
@@ -628,6 +628,27 @@ def change_profile_baner():
     else:
         flash(f'فرمت فایل مورد قبول نیست ({the_file.filename})', 'danger')
     return redirect(url_for('profile'))
+
+
+@app.route('/paxi/verify/<string:verify_type>/<string:value>', methods=['POST', 'GET'])
+def verify(verify_type,value):
+    
+    print(verify_type)
+    if verify_type == 'email':
+        result = verify_pro.email(value)
+        if result == True:
+            flash('پیامی حاوی کد تایید با موفقیت برای شما ارسال شد.', 'success')
+        else:
+            flash(result, 'danger')
+    else:
+        result = verify_pro.phone(value)
+        if result == True:
+            flash('پیامی حاوی کد تایید با موفقیت برای شما ارسال شد.', 'success')
+        else:
+            flash(result, 'danger')
+
+    return render_template('/panel/verify.html', verify_type=verify_type, value=value)
+
 
 @app.route('/paxi/ticket')
 @login_required
