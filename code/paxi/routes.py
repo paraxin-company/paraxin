@@ -587,19 +587,27 @@ def paxi_add_work_sample_category():
         return redirect(url_for('paxi_work_sample_category'))
 
 
-@app.route('/paxi/change/email', methods=['POST'])
+@app.route('/paxi/change/info', methods=['POST'])
 @login_required
 def change_info():
     if request.method == 'POST':
         try:
-            current_user.email = request.form.get('new_email')
-            current_user.verify = '0'+current_user.verify[1]
+            if request.form.get('new_email'):
+                if current_user.email != request.form.get('new_email'):
+                    current_user.email = request.form.get('new_email')
+                    current_user.verify = '0'+current_user.verify[1]
 
-            # save new email for user
+                    flash('با موفقیت ایمیل شما تغییر کرد','success')
+            elif request.form.get('new_phone'):
+                if current_user.phone != request.form.get('new_phone'):
+                    current_user.phone = request.form.get('new_phone')
+                    current_user.verify = current_user.verify[0]+'0'
+
+                    flash('با موفقیت شماره‌ی تلفن شما تغییر کرد','success')
+            # save changes
             db.session.commit()
-            flash('با موفقیت ایمیل شما تغییر کرد','success')
         except:
-            flash('برای تغییر ایمیل مشکلی پیش آمده است','danger')
+            flash('برای تغییر اطلاعات حساب شما مشکلی پیش آمده است','danger')
         return redirect(url_for('profile'))
 
 
