@@ -1,6 +1,6 @@
 from flask import render_template, abort, redirect, url_for, flash, request
 from flask_login import login_user, logout_user, current_user, login_required
-from paxi.model import User, Category, Weblog, Sample, Ticket, Answer
+from paxi.model import User, Category, Weblog, Sample, Ticket, Answer, Verify
 from paxi.forms import LoginForm, WeblogForm, WeblogFormEdit, SampleForm, SampleFormEdit, ProfileForm, CategoryForm, ContactForm
 from paxi.method import passwords, files, comma, folder, operation, verify_pro
 from paxi import app, db, folder_upload
@@ -632,21 +632,52 @@ def change_profile_baner():
 
 @app.route('/paxi/verify/<string:verify_type>/<string:value>', methods=['POST', 'GET'])
 def verify(verify_type,value):
-    
-    print(verify_type)
-    if verify_type == 'email':
-        result = verify_pro.email(value)
-        if result == True:
-            flash('پیامی حاوی کد تایید با موفقیت برای شما ارسال شد.', 'success')
-        else:
-            flash(result, 'danger')
-    else:
-        result = verify_pro.phone(value)
-        if result == True:
-            flash('پیامی حاوی کد تایید با موفقیت برای شما ارسال شد.', 'success')
-        else:
-            flash(result, 'danger')
+    if request.method == 'POST':
+        try:
+            tocken_user = request.form.get('verify_tocken').strip()
 
+            # get verify code in tabel
+            if verify_type == 'phone':
+                tocken_tabel = Verify.query.filter_by(item=current_user.phone).order_by(Verify.time.desc()).first()
+            else:
+                tocken_tabel = Verify.query.filter_by(item=current_user.email).order_by(Verify.time.desc()).first()
+
+            # check verify code is true or no
+            if str(tocken_user) == str(tocken_tabel.tocken) and tocken_tabel.item == value:
+                if verify_pro.check_not_expire(tocken_tabel.time):
+                    if verify_type == 'email':
+                        current_user.verify = '1'+current_user.verify[1]
+                    else:
+                        current_user.verify = current_user.verify = current_user.verify[0]+'1'
+
+                    # update verify for user
+                    db.session.commit()
+
+                    flash(f'با موفقیت {verify_type} شما تایید شد.','success')
+                    return redirect(url_for('profile'))
+                else:
+                    flash('کد تایید منقضی شده است','danger')
+            else:
+                flash('کد تایید اشتباه وارد شده است','danger')
+        except:
+            flash(f'برای تایید {verify_type} شما مشکلی پیش آمده است', 'danger')
+            return redirect(url_for('profile'))
+
+    else:
+        if verify_type == 'email':
+            if current_user.email == value:
+                if current_user.verify.startswith('0'):
+                    result = verify_pro.email(value)
+                    if result == True:
+                        flash('پیامی حاوی کد تایید با موفقیت برای شما ارسال شد.', 'success')
+                    else:
+                        flash(result, 'danger')
+                else:
+                    flash('شما یک بار حساب ایمیل خودتون رو تایید کرده اید. دوبار نمی توانید اینکار ور بکنید.', 'danger')
+                    return redirect(url_for('profile'))
+            else:
+                flash('ایمیل وارد شده برای شما نیست', 'danger')
+                return redirect(url_for('profile'))
     return render_template('/panel/verify.html', verify_type=verify_type, value=value)
 
 
