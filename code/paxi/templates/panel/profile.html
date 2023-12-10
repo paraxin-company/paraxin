@@ -21,7 +21,7 @@
         </form>
     </div>
     <div class="lg:col-span-2">
-        <div class="flex mt-3 gap-2 items-center">
+        <div class="flex mt-3 gap-3 items-center">
             <p class="text-gray-500">ایمیل: {{current_user.email}}</p>
             {% if current_user.verify.startswith('1') %}
             <span class="text-green-500">
@@ -34,6 +34,26 @@
                 تایید ایمیل
             </a>
             {% endif %}
+            <span class="flex items-center gap-2" x-data="{change_item:false}">
+                <div class="cursor-pointer text-gray-400" x-on:click="change_item = true" x-bind:class="{'hidden':change_item}">تغییر ایمیل</div>
+                <div class="text-gray-100" x-on:click="change_item = false" x-bind:class="{'cursor-pointer':change_item}">
+                    <svg x-bind:class="{'text-gray-400':change_item}" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+                    </svg>
+                                       
+                </div>
+                <form action="{{url_for('change_info')}}" method="post" class="inline-block w-full" x-cloak x-show="change_item">
+                    <div class="relative">
+                        <input style="direction: ltr; padding-left: 2.25rem;padding-top:0px;padding-bottom:0px;" type="email" name="new_email" class="simple-input" required>
+                        <div style="top:2px" class="absolute left-2 text-gray-400">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M21.75 6.75v10.5a2.25 2.25 0 01-2.25 2.25h-15a2.25 2.25 0 01-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25m19.5 0v.243a2.25 2.25 0 01-1.07 1.916l-7.5 4.615a2.25 2.25 0 01-2.36 0L3.32 8.91a2.25 2.25 0 01-1.07-1.916V6.75" />
+                            </svg>
+                        </div>
+                    </div>
+                    <input type="submit" class="hidden">
+                </form>
+            </span>
         </div>
         <div class="flex mt-3 gap-2 items-center">
             <p class="text-gray-500">تلفن: {{current_user.phone}}</p>

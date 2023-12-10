@@ -587,6 +587,22 @@ def paxi_add_work_sample_category():
         return redirect(url_for('paxi_work_sample_category'))
 
 
+@app.route('/paxi/change/email', methods=['POST'])
+@login_required
+def change_info():
+    if request.method == 'POST':
+        try:
+            current_user.email = request.form.get('new_email')
+            current_user.verify = '0'+current_user.verify[1]
+
+            # save new email for user
+            db.session.commit()
+            flash('با موفقیت ایمیل شما تغییر کرد','success')
+        except:
+            flash('برای تغییر ایمیل مشکلی پیش آمده است','danger')
+        return redirect(url_for('profile'))
+
+
 @app.route('/paxi/profile', methods=['POST', 'GET'])
 @login_required
 def profile():

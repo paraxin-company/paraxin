@@ -10,7 +10,7 @@ def check_not_expire(tocken_time):
         tocken_time_splited = str(tocken_time.time()).split(':')
         time_now_splited = str(time_now.time()).split(':')
 
-        if tocken_time_splited[0] == time_now_splited[0] and int(time_now_splited[1])-int(tocken_time_splited[1]) <= 2:
+        if tocken_time_splited[0] == time_now_splited[0] and int(time_now_splited[1])-int(tocken_time_splited[1]) <= 3:
             return True
     return False
 
