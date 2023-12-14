@@ -611,6 +611,27 @@ def change_info():
         return redirect(url_for('profile'))
 
 
+@app.route('/paxi/change/password')
+@login_required
+def change_pass():
+    if current_user.verify.startswith('1'):
+
+        # send email for change password
+        title = 'تغییر گذرواژه حساب شما در پاراکسین'
+        message = 'amir mahdi joon'
+        send_change_pass_email = operation.Send(destination=current_user.email, message=message, title=title)
+        send_change_pass_email.as_email()
+
+        if send_change_pass_email.response == True:
+            flash('ایمیلی برای تغییر دادن پسورد حساب شما با موفقیت ارسال شد', 'success')
+        else:
+            flash('پروسه ارسال ایمیل جهت تغییر دادن گذرواژه با مشکل مواجه شده است', 'danger')
+        return redirect(url_for('profile'))        
+    else:
+        flash('ابتدا باید ایمیل خودتون رو تایید کنید', 'danger')
+        return redirect(url_for('profile'))
+
+
 @app.route('/paxi/profile', methods=['POST', 'GET'])
 @login_required
 def profile():
@@ -655,7 +676,7 @@ def change_profile_baner():
 
 
 @app.route('/paxi/verify/<string:verify_type>/<string:value>', methods=['POST', 'GET'])
-def verify(verify_type,value):
+def verify_account(verify_type,value):
     if request.method == 'POST':
         try:
             tocken_user = request.form.get('verify_tocken').strip()
