@@ -56,12 +56,26 @@ def email(value):
 def phone(value):
     #TODO: send tocken and save in database
     try:
+        import kavenegar
+        
+        # get tocken for verify
         tocken = get_tocken()
 
-        # save tocken in database
-        db.session.add(Verify(tocken=tocken, item=value))
-        db.session.commit()
+        api = kavenegar.KavenegarAPI('Your API Key')
+        params = {
+            'sender': '1000xxxx',
+            'receptor' : value,
+            'message' : f"کد تایید شماره شما در پاراکسین\ncode:{tocken}"
+        }   
+        response = api.sms_send(params)
 
-        return True
+        if response == True:
+            # save tocken in database
+            db.session.add(Verify(tocken=tocken, item=value))
+            db.session.commit()
+
+            return True
+        else:
+            return 'پروسه ارسال پیامک حاوی کد تایید با اختلال مواجح شده است'
     except:
         return f'برای ارسال کد به {value} مشکلی پیش آمده است'

@@ -587,30 +587,6 @@ def paxi_add_work_sample_category():
         return redirect(url_for('paxi_work_sample_category'))
 
 
-@app.route('/paxi/change/info', methods=['POST'])
-@login_required
-def change_info():
-    if request.method == 'POST':
-        try:
-            if request.form.get('new_email'):
-                if current_user.email != request.form.get('new_email'):
-                    current_user.email = request.form.get('new_email')
-                    current_user.verify = '0'+current_user.verify[1]
-
-                    flash('با موفقیت ایمیل شما تغییر کرد','success')
-            elif request.form.get('new_phone'):
-                if current_user.phone != request.form.get('new_phone'):
-                    current_user.phone = request.form.get('new_phone')
-                    current_user.verify = current_user.verify[0]+'0'
-
-                    flash('با موفقیت شماره‌ی تلفن شما تغییر کرد','success')
-            # save changes
-            db.session.commit()
-        except:
-            flash('برای تغییر اطلاعات حساب شما مشکلی پیش آمده است','danger')
-        return redirect(url_for('profile'))
-
-
 @app.route('/paxi/profile', methods=['POST', 'GET'])
 @login_required
 def profile():
@@ -655,6 +631,7 @@ def change_profile_baner():
 
 
 @app.route('/paxi/verify/<string:verify_type>/<string:value>', methods=['POST', 'GET'])
+@login_required
 def verify(verify_type,value):
     if request.method == 'POST':
         try:
@@ -686,8 +663,7 @@ def verify(verify_type,value):
         except:
             flash(f'برای تایید {verify_type} شما مشکلی پیش آمده است', 'danger')
             return redirect(url_for('profile'))
-
-    else:
+    elif verify_type == 'email' or verify_type == 'phone':
         if verify_type == 'email':
             if current_user.email == value:
                 if current_user.verify.startswith('0'):
@@ -702,7 +678,47 @@ def verify(verify_type,value):
             else:
                 flash('ایمیل وارد شده برای شما نیست', 'danger')
                 return redirect(url_for('profile'))
+        else:
+            if current_user.phone == value:
+                if current_user.verify.startswith('0'):
+                    result = verify_pro.phone(value)
+                    if result == True:
+                        flash('پیامی حاوی کد تایید با موفقیت برای شما ارسال شد.', 'success')
+                    else:
+                        flash(result, 'danger')
+                else:
+                    flash('شما یک بار حساب ایمیل خودتون رو تایید کرده اید. دوبار نمی توانید اینکار ور بکنید.', 'danger')
+                    return redirect(url_for('profile'))
+            else:
+                flash('ایمیل وارد شده برای شما نیست', 'danger')
+                return redirect(url_for('profile'))
+    else:
+        abort(404)
     return render_template('/panel/verify.html', verify_type=verify_type, value=value)
+
+
+@app.route('/paxi/change/info', methods=['POST'])
+@login_required
+def change_info():
+    if request.method == 'POST':
+        try:
+            if request.form.get('new_email'):
+                if current_user.email != request.form.get('new_email'):
+                    current_user.email = request.form.get('new_email')
+                    current_user.verify = '0'+current_user.verify[1]
+
+                    flash('با موفقیت ایمیل شما تغییر کرد','success')
+            elif request.form.get('new_phone'):
+                if current_user.phone != request.form.get('new_phone'):
+                    current_user.phone = request.form.get('new_phone')
+                    current_user.verify = current_user.verify[0]+'0'
+
+                    flash('با موفقیت شماره‌ی تلفن شما تغییر کرد','success')
+            # save changes
+            db.session.commit()
+        except:
+            flash('برای تغییر اطلاعات حساب شما مشکلی پیش آمده است','danger')
+        return redirect(url_for('profile'))
 
 
 @app.route('/paxi/ticket')
