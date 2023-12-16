@@ -12,7 +12,7 @@ db = SQLAlchemy(app)
 migrate = Migrate(app, db)
 
 login_manager = LoginManager(app)
-login_manager.login_view = 'paxi_login'
+login_manager.login_view = 'panel.paxi_login'
 login_manager.login_message = 'ابتدا باید وارد شوید'
 login_manager.login_message_category = 'danger'
 

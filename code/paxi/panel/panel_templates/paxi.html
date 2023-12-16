@@ -14,13 +14,12 @@
 		<div class="hidden md:block bg-gray-200 h-[100vh]">
 			<div class="slider col-md-4 col-lg-3 col-xl-2 text-gray-500">
 				<div class="w-8/12 m-auto mt-5">
-					<a href="{{url_for('paxi_panel')}}">
+					<a href="{{url_for('panel.paxi_panel')}}">
 						<img class="w-full" src="{{url_for('static', filename='media/paraxin_icon.png')}}" alt="paraxin brand">
 					</a>
 				</div>
 				<ul class="flex flex-col gap2 p-5 mt-3">
 					<li class="p-2">
-						<a class="{% block weblog_page %}{% endblock %} hover:text-gray-950" href="{{url_for('paxi_weblog')}}">وبلاگ</a>
 					</li>
 					<li class="p-2" x-data="{ open: false }">
                         <a class="hover:text-gray-950 flex items-center gap-1 cursor-pointer" @click="open = ! open">
@@ -32,16 +31,13 @@
                         <div x-cloak x-show="open" @click.outside="open = false">
                             <ul class="bg-gray-150 fiexd flex flex-col justify-center gap-2 mt-1 w-48 rounded-md p-2 border border-gray-400">
                                 <li>
-									<a class="{% block work_page %}{% endblock %} hover:text-gray-950" href="{{url_for('paxi_work_sample')}}">کل نمونه ها</a>
                                 </li>
                                 <li>
-									<a class="{% block category_page %}{% endblock %} hover:text-gray-950" href="{{url_for('paxi_work_sample_category')}}">دسته بندی</a>
                                 </li>
                             </ul>
                         </div>
                     </li>
 					<li class="p-2">
-						<a class="{% block ticket_page %}{% endblock %} hover:text-gray-950" href="{{url_for('paxi_ticket')}}">تیکت</a>
 					</li>
 				</ul>
 			</div>
@@ -59,7 +55,6 @@
 					<div x-cloak x-show="account" @click.outside="account = false">
 						<ul class="bg-gray-200 text-gray-500 left-2 absolute mt-1 w-48 rounded-md p-4 px-2 border border-gray-400 flex flex-col">
 							<li>
-								<a class="flex gap-1 items-center rounded-md hover:bg-gray-50 p-2" href="{{url_for('profile')}}">
 									<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
 										<path stroke-linecap="round" stroke-linejoin="round" d="M17.982 18.725A7.488 7.488 0 0012 15.75a7.488 7.488 0 00-5.982 2.975m11.963 0a9 9 0 10-11.963 0m11.963 0A8.966 8.966 0 0112 21a8.966 8.966 0 01-5.982-2.275M15 9.75a3 3 0 11-6 0 3 3 0 016 0z" />
 									</svg>										  
@@ -67,7 +62,7 @@
 								</a>
 							</li>
 							<li>									  
-								<a class="flex gap-1 items-center rounded-md hover:bg-gray-50 p-2 text-red-600" href="{{url_for('paxi_logout')}}">
+								<a class="flex gap-1 items-center rounded-md hover:bg-gray-50 p-2 text-red-600" href="{{url_for('panel.paxi_logout')}}">
 									<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
 										<path stroke-linecap="round" stroke-linejoin="round" d="M15.75 9V5.25A2.25 2.25 0 0013.5 3h-6a2.25 2.25 0 00-2.25 2.25v13.5A2.25 2.25 0 007.5 21h6a2.25 2.25 0 002.25-2.25V15m3 0l3-3m0 0l-3-3m3 3H9" />
 									</svg>

@@ -3,18 +3,8 @@ from wtforms import StringField, PasswordField, BooleanField, TextAreaField, Rad
 from wtforms.validators import DataRequired, Length, ValidationError
 from flask_login import current_user
 from paxi.method import passwords
-from paxi.model import User, Category
+from paxi.model import Category
 from paxi import app
-
-class LoginForm(FlaskForm):
-    username = StringField('User name', validators=[
-        DataRequired(),
-        Length(min=4, max=20, message="طول نام کاربری شما درست نمی باشد")        
-    ])
-    password = PasswordField('Password', validators=[
-        DataRequired()
-    ])
-    remember = BooleanField('remember me')
 
 
 class BaseForm(FlaskForm):
@@ -82,13 +72,13 @@ class ProfileForm(FlaskForm):
     username = StringField('User Name', validators=[DataRequired()])
     password = PasswordField('Password', validators=[DataRequired()])
 
-    def validate_username(self, username):
-        if current_user.username != username.data:
-            if current_user.fullname != username.data:
-                if User.query.filter_by(username=username.data).first():
-                    raise ValidationError(f'یوزر نیم {username.data} قبلا توسط شخص دیگری انتخاب شده است. نام جدید انتخاب کنید')
-            else:
-                raise ValidationError('توصیه ما به شما این است که UserName و FullName با هم متفاوت باشند (برای امنیت بیشتر توصیه میشود)')
+    # def validate_username(self, username):
+    #     if current_user.username != username.data:
+    #         if current_user.fullname != username.data:
+    #             if User.query.filter_by(username=username.data).first():
+    #                 raise ValidationError(f'یوزر نیم {username.data} قبلا توسط شخص دیگری انتخاب شده است. نام جدید انتخاب کنید')
+    #         else:
+    #             raise ValidationError('توصیه ما به شما این است که UserName و FullName با هم متفاوت باشند (برای امنیت بیشتر توصیه میشود)')
         
     def validate_password(self, password):
         if passwords.check_pass(current_user.password, password.data) == False:
