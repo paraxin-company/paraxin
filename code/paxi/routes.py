@@ -587,7 +587,27 @@ def paxi_add_work_sample_category():
         return redirect(url_for('paxi_work_sample_category'))
 
 
-<<<<<<< HEAD
+@app.route('/paxi/change/password')
+@login_required
+def change_pass():
+    if current_user.verify.startswith('1'):
+
+        # send email for change password
+        title = 'تغییر گذرواژه حساب شما در پاراکسین'
+        message = 'amir mahdi joon'
+        send_change_pass_email = operation.Send(destination=current_user.email, message=message, title=title)
+        send_change_pass_email.as_email()
+
+        if send_change_pass_email.response == True:
+            flash('ایمیلی برای تغییر دادن پسورد حساب شما با موفقیت ارسال شد', 'success')
+        else:
+            flash('پروسه ارسال ایمیل جهت تغییر دادن گذرواژه با مشکل مواجه شده است', 'danger')
+        return redirect(url_for('profile'))        
+    else:
+        flash('ابتدا باید ایمیل خودتون رو تایید کنید', 'danger')
+        return redirect(url_for('profile'))
+
+
 @app.route('/paxi/change/info', methods=['POST'])
 @login_required
 def change_info():
@@ -612,29 +632,6 @@ def change_info():
         return redirect(url_for('profile'))
 
 
-@app.route('/paxi/change/password')
-@login_required
-def change_pass():
-    if current_user.verify.startswith('1'):
-
-        # send email for change password
-        title = 'تغییر گذرواژه حساب شما در پاراکسین'
-        message = 'amir mahdi joon'
-        send_change_pass_email = operation.Send(destination=current_user.email, message=message, title=title)
-        send_change_pass_email.as_email()
-
-        if send_change_pass_email.response == True:
-            flash('ایمیلی برای تغییر دادن پسورد حساب شما با موفقیت ارسال شد', 'success')
-        else:
-            flash('پروسه ارسال ایمیل جهت تغییر دادن گذرواژه با مشکل مواجه شده است', 'danger')
-        return redirect(url_for('profile'))        
-    else:
-        flash('ابتدا باید ایمیل خودتون رو تایید کنید', 'danger')
-        return redirect(url_for('profile'))
-
-
-=======
->>>>>>> feature/email_verify
 @app.route('/paxi/profile', methods=['POST', 'GET'])
 @login_required
 def profile():
@@ -679,12 +676,8 @@ def change_profile_baner():
 
 
 @app.route('/paxi/verify/<string:verify_type>/<string:value>', methods=['POST', 'GET'])
-<<<<<<< HEAD
-def verify_account(verify_type,value):
-=======
 @login_required
-def verify(verify_type,value):
->>>>>>> feature/email_verify
+def verify_account(verify_type,value):
     if request.method == 'POST':
         try:
             tocken_user = request.form.get('verify_tocken').strip()
@@ -747,30 +740,6 @@ def verify(verify_type,value):
     else:
         abort(404)
     return render_template('/panel/verify.html', verify_type=verify_type, value=value)
-
-
-@app.route('/paxi/change/info', methods=['POST'])
-@login_required
-def change_info():
-    if request.method == 'POST':
-        try:
-            if request.form.get('new_email'):
-                if current_user.email != request.form.get('new_email'):
-                    current_user.email = request.form.get('new_email')
-                    current_user.verify = '0'+current_user.verify[1]
-
-                    flash('با موفقیت ایمیل شما تغییر کرد','success')
-            elif request.form.get('new_phone'):
-                if current_user.phone != request.form.get('new_phone'):
-                    current_user.phone = request.form.get('new_phone')
-                    current_user.verify = current_user.verify[0]+'0'
-
-                    flash('با موفقیت شماره‌ی تلفن شما تغییر کرد','success')
-            # save changes
-            db.session.commit()
-        except:
-            flash('برای تغییر اطلاعات حساب شما مشکلی پیش آمده است','danger')
-        return redirect(url_for('profile'))
 
 
 @app.route('/paxi/ticket')
