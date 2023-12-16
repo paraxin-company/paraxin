@@ -575,7 +575,6 @@ def profile():
         db.session.commit()
         flash('اطلاعات با موفقیت تغییر کرد', 'success')
         return redirect(url_for('profile'))
-
     return render_template('panel/profile.html', form=profile_form)
 
 
