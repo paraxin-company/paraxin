@@ -3,11 +3,14 @@
 {% block ticket_page %}text-paraxin-c-200 font-bold{% endblock %}
 
 {% block content %}
-<div class="flex justify-between items-center my-4">
-    <h1>عنوان : <span class="text-paraxin-c-200">{{data.title}}</span></h1>
+<div class="flex justify-between items-center">
+    <div class="text-gray-500 text-sm">
+        واحد <span class="font-bold text-paraxin-c-200">{{data.department}}</span>
+    </div>
     <h1><span class="text-paraxin-c-200">{{data.id}}</span> : شماره تیکت</h1>
 </div>
-<div>
+<h1 class="text-center">عنوان : <span class="text-paraxin-c-200">{{data.title}}</span></h1>
+<div class="mt-8">
     <div class="w-full mb-20">
         <!-- <svg xmlns="http://www.w3.org/2000/svg" class="text-gray-200 rotate-90 w-24 -ml-12" viewBox="0 0 1440 600">
             <path fill="currentcolor" d="M0,192L720,32L1440,192L1440,320L720,320L0,320Z"></path>
@@ -26,14 +29,9 @@
                 <p>{{line}}</p>
                 {% endfor %}
             </div>
-            <hr class="ruller mt-5">
-            <div class="flex justify-between items-center">
-                <div class="text-gray-500 text-sm">
-                    دپارتمان <span class="font-bold text-paraxin-c-200">{{data.department}}</span>
-                </div>
-                <div>
-                    {{data.time.strftime('%H:%M')}}
-                </div>
+            <div class="mt-5">
+                <hr class="ruller">
+                {{data.time.strftime('%H:%M')}}
             </div>
         </div>
         {% if find_answers %}

@@ -1,8 +1,8 @@
 from flask import render_template, abort, redirect, url_for, flash, request
 from flask_login import login_user, logout_user, current_user, login_required
-from paxi.model import User, Category, Weblog, Sample, Ticket, Answer
+from paxi.model import User, Category, Weblog, Sample, Ticket, Answer, Verify
 from paxi.forms import LoginForm, WeblogForm, WeblogFormEdit, SampleForm, SampleFormEdit, ProfileForm, CategoryForm, ContactForm
-from paxi.method import passwords, files, comma, folder, operation
+from paxi.method import passwords, files, comma, folder, operation, verify_pro
 from paxi import app, db, folder_upload
 import os
 
@@ -587,14 +587,61 @@ def paxi_add_work_sample_category():
         return redirect(url_for('paxi_work_sample_category'))
 
 
+<<<<<<< HEAD
+@app.route('/paxi/change/info', methods=['POST'])
+@login_required
+def change_info():
+    if request.method == 'POST':
+        try:
+            if request.form.get('new_email'):
+                if current_user.email != request.form.get('new_email'):
+                    current_user.email = request.form.get('new_email')
+                    current_user.verify = '0'+current_user.verify[1]
+
+                    flash('با موفقیت ایمیل شما تغییر کرد','success')
+            elif request.form.get('new_phone'):
+                if current_user.phone != request.form.get('new_phone'):
+                    current_user.phone = request.form.get('new_phone')
+                    current_user.verify = current_user.verify[0]+'0'
+
+                    flash('با موفقیت شماره‌ی تلفن شما تغییر کرد','success')
+            # save changes
+            db.session.commit()
+        except:
+            flash('برای تغییر اطلاعات حساب شما مشکلی پیش آمده است','danger')
+        return redirect(url_for('profile'))
+
+
+@app.route('/paxi/change/password')
+@login_required
+def change_pass():
+    if current_user.verify.startswith('1'):
+
+        # send email for change password
+        title = 'تغییر گذرواژه حساب شما در پاراکسین'
+        message = 'amir mahdi joon'
+        send_change_pass_email = operation.Send(destination=current_user.email, message=message, title=title)
+        send_change_pass_email.as_email()
+
+        if send_change_pass_email.response == True:
+            flash('ایمیلی برای تغییر دادن پسورد حساب شما با موفقیت ارسال شد', 'success')
+        else:
+            flash('پروسه ارسال ایمیل جهت تغییر دادن گذرواژه با مشکل مواجه شده است', 'danger')
+        return redirect(url_for('profile'))        
+    else:
+        flash('ابتدا باید ایمیل خودتون رو تایید کنید', 'danger')
+        return redirect(url_for('profile'))
+
+
+=======
+>>>>>>> feature/email_verify
 @app.route('/paxi/profile', methods=['POST', 'GET'])
 @login_required
 def profile():
-
     profile_form = ProfileForm()
+
     if profile_form.validate_on_submit():
         current_user.username = profile_form.username.data
-        current_user.password = passwords.get_hash(profile_form.password.data)
 
         # save changes
         db.session.commit()
@@ -629,6 +676,102 @@ def change_profile_baner():
     else:
         flash(f'فرمت فایل مورد قبول نیست ({the_file.filename})', 'danger')
     return redirect(url_for('profile'))
+
+
+@app.route('/paxi/verify/<string:verify_type>/<string:value>', methods=['POST', 'GET'])
+<<<<<<< HEAD
+def verify_account(verify_type,value):
+=======
+@login_required
+def verify(verify_type,value):
+>>>>>>> feature/email_verify
+    if request.method == 'POST':
+        try:
+            tocken_user = request.form.get('verify_tocken').strip()
+
+            # get verify code in tabel
+            if verify_type == 'phone':
+                tocken_tabel = Verify.query.filter_by(item=current_user.phone).order_by(Verify.time.desc()).first()
+            else:
+                tocken_tabel = Verify.query.filter_by(item=current_user.email).order_by(Verify.time.desc()).first()
+
+            # check verify code is true or no
+            if str(tocken_user) == str(tocken_tabel.tocken) and tocken_tabel.item == value:
+                if verify_pro.check_not_expire(tocken_tabel.time):
+                    if verify_type == 'email':
+                        current_user.verify = '1'+current_user.verify[1]
+                    else:
+                        current_user.verify = current_user.verify = current_user.verify[0]+'1'
+
+                    # update verify for user
+                    db.session.commit()
+
+                    flash(f'با موفقیت {verify_type} شما تایید شد.','success')
+                    return redirect(url_for('profile'))
+                else:
+                    flash('کد تایید منقضی شده است','danger')
+            else:
+                flash('کد تایید اشتباه وارد شده است','danger')
+        except:
+            flash(f'برای تایید {verify_type} شما مشکلی پیش آمده است', 'danger')
+            return redirect(url_for('profile'))
+    elif verify_type == 'email' or verify_type == 'phone':
+        if verify_type == 'email':
+            if current_user.email == value:
+                if current_user.verify.startswith('0'):
+                    result = verify_pro.email(value)
+                    if result == True:
+                        flash('پیامی حاوی کد تایید با موفقیت برای شما ارسال شد.', 'success')
+                    else:
+                        flash(result, 'danger')
+                else:
+                    flash('شما یک بار حساب ایمیل خودتون رو تایید کرده اید. دوبار نمی توانید اینکار ور بکنید.', 'danger')
+                    return redirect(url_for('profile'))
+            else:
+                flash('ایمیل وارد شده برای شما نیست', 'danger')
+                return redirect(url_for('profile'))
+        else:
+            if current_user.phone == value:
+                if current_user.verify.startswith('0'):
+                    result = verify_pro.phone(value)
+                    if result == True:
+                        flash('پیامی حاوی کد تایید با موفقیت برای شما ارسال شد.', 'success')
+                    else:
+                        flash(result, 'danger')
+                else:
+                    flash('شما یک بار حساب ایمیل خودتون رو تایید کرده اید. دوبار نمی توانید اینکار ور بکنید.', 'danger')
+                    return redirect(url_for('profile'))
+            else:
+                flash('ایمیل وارد شده برای شما نیست', 'danger')
+                return redirect(url_for('profile'))
+    else:
+        abort(404)
+    return render_template('/panel/verify.html', verify_type=verify_type, value=value)
+
+
+@app.route('/paxi/change/info', methods=['POST'])
+@login_required
+def change_info():
+    if request.method == 'POST':
+        try:
+            if request.form.get('new_email'):
+                if current_user.email != request.form.get('new_email'):
+                    current_user.email = request.form.get('new_email')
+                    current_user.verify = '0'+current_user.verify[1]
+
+                    flash('با موفقیت ایمیل شما تغییر کرد','success')
+            elif request.form.get('new_phone'):
+                if current_user.phone != request.form.get('new_phone'):
+                    current_user.phone = request.form.get('new_phone')
+                    current_user.verify = current_user.verify[0]+'0'
+
+                    flash('با موفقیت شماره‌ی تلفن شما تغییر کرد','success')
+            # save changes
+            db.session.commit()
+        except:
+            flash('برای تغییر اطلاعات حساب شما مشکلی پیش آمده است','danger')
+        return redirect(url_for('profile'))
+
 
 @app.route('/paxi/ticket')
 @login_required
