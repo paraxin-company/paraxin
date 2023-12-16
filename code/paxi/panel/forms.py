@@ -1,6 +1,9 @@
 from flask_wtf import FlaskForm
 from wtforms import StringField, PasswordField, BooleanField, TextAreaField, FileField
 from wtforms.validators import DataRequired, Length, ValidationError
+from paxi.method import passwords
+from paxi.panel.model import User
+from flask_login import current_user
 
 class LoginForm(FlaskForm):
     username = StringField('User name', validators=[
@@ -41,3 +44,21 @@ class WeblogForm(BaseForm):
         DataRequired()
     ])
 
+
+class ProfileForm(FlaskForm):
+    fullname = StringField('Full Name')
+    username = StringField('User Name', validators=[DataRequired()])
+    password = PasswordField('Password', validators=[DataRequired()])
+
+    def validate_username(self, username):
+        if current_user.username != username.data:
+            if current_user.fullname != username.data:
+                if User.query.filter_by(username=username.data).first():
+                    raise ValidationError(f'یوزر نیم {username.data} قبلا توسط شخص دیگری انتخاب شده است. نام جدید انتخاب کنید')
+            else:
+                raise ValidationError('توصیه ما به شما این است که UserName و FullName با هم متفاوت باشند (برای امنیت بیشتر توصیه میشود)')
+        
+    def validate_password(self, password):
+        if passwords.check_pass(current_user.password, password.data) == False:
+            raise ValidationError('پسورد وارد شده درست نمی باشد')
+        

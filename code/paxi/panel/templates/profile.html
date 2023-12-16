@@ -1,10 +1,10 @@
-{% extends 'panel/paxi.html' %}
+{% extends 'paxi.html' %}
 
 {% block content %}
-{% include "panel/form_errors.html" %}
+{% include "include/form_errors.html" %}
 <div class="grid grid-cols-1 gap-4 lg:grid-cols-3 mt-3">
     <div class="bg-gray-300 p-5 rounded-md h-fit">
-        <form action="{{url_for('change_profile_baner')}}" method="post" class="image-side" enctype="multipart/form-data">
+        <form action="{{url_for('panel.change_profile_baner')}}" method="post" class="image-side" enctype="multipart/form-data">
             <p class="font-tit text-center text-md text-gray-700">سلام {{current_user.fullname}}</p>
             <input type="file" name="profile_baner" id="profile_baner" accept=".png, .jfif, .jpeg, .jpg, .webp, .svg, .icon, .ico" required class="hidden">
             <div class="relative">
@@ -30,7 +30,7 @@
                 </svg>
             </span>
             {% else %}
-            <a class="text-red-500 cursor-pointer" href="{{url_for('verify_account', verify_type='email', value=current_user.email)}}">
+            <a class="text-red-500 cursor-pointer" href="{{url_for('panel.verify_account', verify_type='email', value=current_user.email)}}">
                 تایید ایمیل
             </a>
             {% endif %}
@@ -42,7 +42,7 @@
                     </svg>
                                        
                 </div>
-                <form action="{{url_for('change_info')}}" method="post" class="inline-block w-full" x-cloak x-show="change_item">
+                <form action="{{url_for('panel.change_info')}}" method="post" class="inline-block w-full" x-cloak x-show="change_item">
                     <div class="relative">
                         <input style="direction: ltr; padding-left: 2.25rem;padding-top:0px;padding-bottom:0px;" type="email" name="new_email" class="simple-input" required>
                         <div style="top:2px" class="absolute left-2 text-gray-400">
@@ -64,7 +64,7 @@
                 </svg>
             </span>
             {% else %}
-            <a class="text-red-500 cursor-pointer" href="{{url_for('verify_account', verify_type='phone', value=current_user.phone)}}">
+            <a class="text-red-500 cursor-pointer" href="{{url_for('panel.verify_account', verify_type='phone', value=current_user.phone)}}">
                 تایید تلفن
             </a>
             {% endif %}
@@ -76,7 +76,7 @@
                     </svg>
                                        
                 </div>
-                <form action="{{url_for('change_info')}}" method="post" class="inline-block w-full" x-cloak x-show="change_item">
+                <form action="{{url_for('panel.change_info')}}" method="post" class="inline-block w-full" x-cloak x-show="change_item">
                     <div class="relative">
                         <input style="direction: ltr; padding-left: 2.25rem;padding-top:0px;padding-bottom:0px;" type="text" pattern="09[0-9]{9}" name="new_phone" maxlength="11" placeholder="09123456789" class="simple-input" required>
                         <div style="top:2px" class="absolute left-2 text-gray-400">
@@ -90,7 +90,7 @@
             </span>
         </div>
         <div class="mt-3">
-            <a class="text-gray-500 hover:text-paraxin-c-200 hover:underline" href="{{url_for('change_pass')}}">تغییر گذرواژه</a>
+            <a class="text-gray-500 hover:text-paraxin-c-200 hover:underline" href="{{url_for('panel.change_pass')}}">تغییر گذرواژه</a>
         </div>
         <form style="direction: ltr !important;" action="" method="post" class="mt-2">
             {{form.csrf_token}}

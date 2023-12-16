@@ -1,24 +1,21 @@
-from flask_login import login_required
-from flask import url_for, render_template, redirect, flash ,request
-from flask_login import current_user, logout_user, login_user
+from flask import url_for, render_template, redirect, flash ,request, abort
+from flask_login import current_user, logout_user, login_user, login_required
+import os
 
 # paxi panel importing
 from paxi.panel import panel
-from paxi.panel.forms import LoginForm, WeblogForm, WeblogFormEdit
-from paxi.panel.model import User
+from paxi.panel.forms import LoginForm, WeblogForm, WeblogFormEdit, ProfileForm
+from paxi.panel.model import User, Verify
 
 # paxi importing
 from paxi import folder_upload, db
-from paxi.method import passwords
 from paxi.model import Weblog
-from paxi.method import files, comma
-
-import os
+from paxi.method import files, comma, operation, verify_pro, passwords
 
 @panel.route('/')
 @login_required
 def paxi_panel():
-    return render_template('home_paxi.html')
+    return render_template('paxi_home.html')
 
 
 @panel.route('/login/', methods=['POST', 'GET'])
@@ -178,3 +175,156 @@ def paxi_edit_weblog(weblog_id):
 
     return render_template('weblog/edit.html', form=weblog_form, baner=current_weblog.baner)
 
+
+@panel.route('/change/password/')
+@login_required
+def change_pass():
+    if current_user.verify.startswith('1'):
+
+        # send email for change password
+        title = 'تغییر گذرواژه حساب شما در پاراکسین'
+        message = 'amir mahdi joon'
+        send_change_pass_email = operation.Send(destination=current_user.email, message=message, title=title)
+        send_change_pass_email.as_email()
+
+        if send_change_pass_email.response == True:
+            flash('ایمیلی برای تغییر دادن پسورد حساب شما با موفقیت ارسال شد', 'success')
+        else:
+            flash('پروسه ارسال ایمیل جهت تغییر دادن گذرواژه با مشکل مواجه شده است', 'danger')
+        return redirect(url_for('panel.profile'))        
+    else:
+        flash('ابتدا باید ایمیل خودتون رو تایید کنید', 'danger')
+        return redirect(url_for('panel.profile'))
+
+
+@panel.route('/change/info/', methods=['POST'])
+@login_required
+def change_info():
+    if request.method == 'POST':
+        try:
+            if request.form.get('new_email'):
+                if current_user.email != request.form.get('new_email'):
+                    current_user.email = request.form.get('new_email')
+                    current_user.verify = '0'+current_user.verify[1]
+
+                    flash('با موفقیت ایمیل شما تغییر کرد','success')
+            elif request.form.get('new_phone'):
+                if current_user.phone != request.form.get('new_phone'):
+                    current_user.phone = request.form.get('new_phone')
+                    current_user.verify = current_user.verify[0]+'0'
+
+                    flash('با موفقیت شماره‌ی تلفن شما تغییر کرد','success')
+            # save changes
+            db.session.commit()
+        except:
+            flash('برای تغییر اطلاعات حساب شما مشکلی پیش آمده است','danger')
+        return redirect(url_for('panel.profile'))
+
+
+@panel.route('/profile/', methods=['POST', 'GET'])
+@login_required
+def profile():
+    profile_form = ProfileForm()
+
+    if profile_form.validate_on_submit():
+        current_user.username = profile_form.username.data
+
+        # save changes
+        db.session.commit()
+        flash('اطلاعات با موفقیت تغییر کرد', 'success')
+        return redirect(url_for('panel.profile'))
+    return render_template('profile.html', form=profile_form)
+
+
+@panel.route('/profile/baner/', methods=['POST'])
+@login_required
+def change_profile_baner():
+    the_file = request.files['profile_baner']
+    
+    if files.is_valid(the_file.filename):
+        # save new profile image
+        profile_path = os.path.join(folder_upload, 'panel', files.rename_name(the_file.filename))
+        the_file.save(profile_path)
+
+        # delete old profile image
+        result = files.delete_file(current_user.profile)
+        if result == True:
+            flash(f'فایل {current_user.profile} با موفقیت پاک شد', 'success')
+        else:
+            flash(f'نتونستیم فایل {current_user.profile} رو پاک کنیم', 'danger')
+
+        current_user.profile = files.get_url(profile_path, 'panel')
+
+        # save changes
+        db.session.commit()
+        flash('تصویر پروفایل شما با موفقیت عوض شد', 'success')
+    else:
+        flash(f'فرمت فایل مورد قبول نیست ({the_file.filename})', 'danger')
+    return redirect(url_for('panel.profile'))
+
+
+@panel.route('/verify/<string:verify_type>/<string:value>/', methods=['POST', 'GET'])
+@login_required
+def verify_account(verify_type,value):
+    if request.method == 'POST':
+        try:
+            tocken_user = request.form.get('verify_tocken').strip()
+
+            # get verify code in tabel
+            if verify_type == 'phone':
+                tocken_tabel = Verify.query.filter_by(item=current_user.phone).order_by(Verify.time.desc()).first()
+            else:
+                tocken_tabel = Verify.query.filter_by(item=current_user.email).order_by(Verify.time.desc()).first()
+
+            # check verify code is true or no
+            if str(tocken_user) == str(tocken_tabel.tocken) and tocken_tabel.item == value:
+                if verify_pro.check_not_expire(tocken_tabel.time):
+                    if verify_type == 'email':
+                        current_user.verify = '1'+current_user.verify[1]
+                    else:
+                        current_user.verify = current_user.verify = current_user.verify[0]+'1'
+
+                    # update verify for user
+                    db.session.commit()
+
+                    flash(f'با موفقیت {verify_type} شما تایید شد.','success')
+                    return redirect(url_for('panel.profile'))
+                else:
+                    flash('کد تایید منقضی شده است','danger')
+            else:
+                flash('کد تایید اشتباه وارد شده است','danger')
+        except:
+            flash(f'برای تایید {verify_type} شما مشکلی پیش آمده است', 'danger')
+            return redirect(url_for('panel.profile'))
+    elif verify_type == 'email' or verify_type == 'phone':
+        if verify_type == 'email':
+            if current_user.email == value:
+                if current_user.verify.startswith('0'):
+                    result = verify_pro.email(value)
+                    if result == True:
+                        flash('پیامی حاوی کد تایید با موفقیت برای شما ارسال شد.', 'success')
+                    else:
+                        flash(result, 'danger')
+                else:
+                    flash('شما یک بار حساب ایمیل خودتون رو تایید کرده اید. دوبار نمی توانید اینکار ور بکنید.', 'danger')
+                    return redirect(url_for('panel.profile'))
+            else:
+                flash('ایمیل وارد شده برای شما نیست', 'danger')
+                return redirect(url_for('panel.profile'))
+        else:
+            if current_user.phone == value:
+                if current_user.verify.endswith('0'):
+                    result = verify_pro.phone(value)
+                    if result == True:
+                        flash('پیامی حاوی کد تایید با موفقیت برای شما ارسال شد.', 'success')
+                    else:
+                        flash(result, 'danger')
+                else:
+                    flash('شما یک بار شماره‌ی همراه خودتون رو تایید کرده اید. دوبار نمی توانید اینکار ور بکنید.', 'danger')
+                    return redirect(url_for('panel.profile'))
+            else:
+                flash('شماره‌ی همراه وارد شده برای شما نیست', 'danger')
+                return redirect(url_for('panel.profile'))
+    else:
+        abort(404)
+    return render_template('verify.html', verify_type=verify_type, value=value)

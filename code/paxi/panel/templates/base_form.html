@@ -1,7 +1,7 @@
 {% extends 'paxi.html' %}
 
 {% block content %}
-{% include "panel/form_errors.html" %}
+{% include "include/form_errors.html" %}
 <h1 class="text-paraxin-c-300 text-center mt-4 font-tit text-2xl">{% block header %}{% endblock %}</h1>
 <form action="" enctype="multipart/form-data" method="post">
     {{form.csrf_token}}

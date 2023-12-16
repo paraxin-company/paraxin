@@ -1,8 +1,6 @@
 from flask_wtf import FlaskForm
-from wtforms import StringField, PasswordField, BooleanField, TextAreaField, RadioField, FileField, MultipleFileField, EmailField, SelectField
+from wtforms import StringField, BooleanField, TextAreaField, RadioField, FileField, MultipleFileField, EmailField, SelectField
 from wtforms.validators import DataRequired, Length, ValidationError
-from flask_login import current_user
-from paxi.method import passwords
 from paxi.model import Category
 from paxi import app
 
@@ -56,24 +54,6 @@ class CategoryForm(FlaskForm):
         Length(min=8, max=45, message='اطلاعات وارده در بخش عنوان دسته بندی نباید کمتر از 8 و بیشتر از 45 حرف باشد')
     ])
 
-
-class ProfileForm(FlaskForm):
-    fullname = StringField('Full Name')
-    username = StringField('User Name', validators=[DataRequired()])
-    password = PasswordField('Password', validators=[DataRequired()])
-
-    # def validate_username(self, username):
-    #     if current_user.username != username.data:
-    #         if current_user.fullname != username.data:
-    #             if User.query.filter_by(username=username.data).first():
-    #                 raise ValidationError(f'یوزر نیم {username.data} قبلا توسط شخص دیگری انتخاب شده است. نام جدید انتخاب کنید')
-    #         else:
-    #             raise ValidationError('توصیه ما به شما این است که UserName و FullName با هم متفاوت باشند (برای امنیت بیشتر توصیه میشود)')
-        
-    def validate_password(self, password):
-        if passwords.check_pass(current_user.password, password.data) == False:
-            raise ValidationError('پسورد وارد شده درست نمی باشد')
-        
 
 class ContactForm(FlaskForm):
     email = EmailField('ایمیل شما', validators=[

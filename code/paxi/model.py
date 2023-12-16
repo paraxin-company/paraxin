@@ -68,13 +68,3 @@ class Ticket(db.Model):
 
     def __repr__(self):
         return f"|{self.id}"
-
-
-class Verify(db.Model):
-    id = db.Column(db.Integer, primary_key=True)
-    tocken = db.Column(db.String(5), nullable=False)
-    time = db.Column(db.DateTime, default=datetime.datetime.now)
-    item = db.Column(db.String(40), nullable=False)
-
-    def __repr__(self):
-        return f"|{self.id}"

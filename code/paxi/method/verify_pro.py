@@ -1,4 +1,4 @@
-from paxi.model import Verify
+from paxi.panel.model import Verify
 from paxi import db
 from datetime import datetime
 

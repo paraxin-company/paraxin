@@ -1,5 +1,7 @@
 from paxi import login_manager, db
 from flask_login import UserMixin
+import datetime
+
 
 @login_manager.user_loader
 def get_id(user_id):
@@ -20,3 +22,13 @@ class User(db.Model, UserMixin):
 
     def __repr__(self):
         return f"{self.id}) {self.fullname}"
+
+
+class Verify(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    tocken = db.Column(db.String(5), nullable=False)
+    time = db.Column(db.DateTime, default=datetime.datetime.now)
+    item = db.Column(db.String(40), nullable=False)
+
+    def __repr__(self):
+        return f"|{self.id}"
