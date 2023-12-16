@@ -3,7 +3,7 @@
 {% block content %}
 {% include "panel/form_errors.html" %}
 <div class="grid grid-cols-1 gap-4 lg:grid-cols-3 mt-3">
-    <div class="bg-gray-300 p-5 rounded-md">
+    <div class="bg-gray-300 p-5 rounded-md h-fit">
         <form action="{{url_for('change_profile_baner')}}" method="post" class="image-side" enctype="multipart/form-data">
             <p class="font-tit text-center text-md text-gray-700">سلام {{current_user.fullname}}</p>
             <input type="file" name="profile_baner" id="profile_baner" accept=".png, .jfif, .jpeg, .jpg, .webp, .svg, .icon, .ico" required class="hidden">
@@ -21,14 +21,119 @@
         </form>
     </div>
     <div class="lg:col-span-2">
-        <p class="mt-3 text-gray-500">اسم کامل : {{current_user.fullname}}</p>
-        <p class="mt-3 text-gray-500">ایمیل: {{current_user.email}}</p>
-        <form style="direction: ltr !important" action="" method="post" class="mt-2">
+        <div class="flex mt-3 gap-3 items-center">
+            <p class="text-gray-500">ایمیل: {{current_user.email}}</p>
+            {% if current_user.verify.startswith('1') %}
+            <span class="text-green-500">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12c0 1.268-.63 2.39-1.593 3.068a3.745 3.745 0 01-1.043 3.296 3.745 3.745 0 01-3.296 1.043A3.745 3.745 0 0112 21c-1.268 0-2.39-.63-3.068-1.593a3.746 3.746 0 01-3.296-1.043 3.745 3.745 0 01-1.043-3.296A3.745 3.745 0 013 12c0-1.268.63-2.39 1.593-3.068a3.745 3.745 0 011.043-3.296 3.746 3.746 0 013.296-1.043A3.746 3.746 0 0112 3c1.268 0 2.39.63 3.068 1.593a3.746 3.746 0 013.296 1.043 3.746 3.746 0 011.043 3.296A3.745 3.745 0 0121 12z" />
+                </svg>
+            </span>
+            {% else %}
+            <a class="text-red-500 cursor-pointer" href="{{url_for('verify_account', verify_type='email', value=current_user.email)}}">
+                تایید ایمیل
+            </a>
+            {% endif %}
+            <span class="flex items-center gap-2" x-data="{change_item:false}">
+                <div class="cursor-pointer text-gray-400" x-on:click="change_item = true" x-bind:class="{'hidden':change_item}">تغییر ایمیل</div>
+                <div class="text-gray-100" x-on:click="change_item = false" x-bind:class="{'cursor-pointer':change_item}">
+                    <svg x-bind:class="{'text-gray-400':change_item}" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+                    </svg>
+                                       
+                </div>
+                <form action="{{url_for('change_info')}}" method="post" class="inline-block w-full" x-cloak x-show="change_item">
+                    <div class="relative">
+                        <input style="direction: ltr; padding-left: 2.25rem;padding-top:0px;padding-bottom:0px;" type="email" name="new_email" class="simple-input" required>
+                        <div style="top:2px" class="absolute left-2 text-gray-400">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M21.75 6.75v10.5a2.25 2.25 0 01-2.25 2.25h-15a2.25 2.25 0 01-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25m19.5 0v.243a2.25 2.25 0 01-1.07 1.916l-7.5 4.615a2.25 2.25 0 01-2.36 0L3.32 8.91a2.25 2.25 0 01-1.07-1.916V6.75" />
+                            </svg>
+                        </div>
+                    </div>
+                    <input type="submit" class="hidden">
+                </form>
+            </span>
+        </div>
+        <div class="flex mt-3 gap-2 items-center">
+            <p class="text-gray-500">تلفن: {{current_user.phone}}</p>
+            {% if current_user.verify.endswith('1') %}
+            <span class="text-green-500">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12c0 1.268-.63 2.39-1.593 3.068a3.745 3.745 0 01-1.043 3.296 3.745 3.745 0 01-3.296 1.043A3.745 3.745 0 0112 21c-1.268 0-2.39-.63-3.068-1.593a3.746 3.746 0 01-3.296-1.043 3.745 3.745 0 01-1.043-3.296A3.745 3.745 0 013 12c0-1.268.63-2.39 1.593-3.068a3.745 3.745 0 011.043-3.296 3.746 3.746 0 013.296-1.043A3.746 3.746 0 0112 3c1.268 0 2.39.63 3.068 1.593a3.746 3.746 0 013.296 1.043 3.746 3.746 0 011.043 3.296A3.745 3.745 0 0121 12z" />
+                </svg>
+            </span>
+            {% else %}
+            <a class="text-red-500 cursor-pointer" href="{{url_for('verify_account', verify_type='phone', value=current_user.phone)}}">
+                تایید تلفن
+            </a>
+            {% endif %}
+            <span class="flex items-center gap-2" x-data="{change_item:false}">
+                <div class="cursor-pointer text-gray-400" x-on:click="change_item = true" x-bind:class="{'hidden':change_item}">تغییر شماره‌ی تلفن</div>
+                <div class="text-gray-100" x-on:click="change_item = false" x-bind:class="{'cursor-pointer':change_item}">
+                    <svg x-bind:class="{'text-gray-400':change_item}" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+                    </svg>
+                                       
+                </div>
+                <form action="{{url_for('change_info')}}" method="post" class="inline-block w-full" x-cloak x-show="change_item">
+                    <div class="relative">
+                        <input style="direction: ltr; padding-left: 2.25rem;padding-top:0px;padding-bottom:0px;" type="text" pattern="09[0-9]{9}" name="new_phone" maxlength="11" placeholder="09123456789" class="simple-input" required>
+                        <div style="top:2px" class="absolute left-2 text-gray-400">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 6.75c0 8.284 6.716 15 15 15h2.25a2.25 2.25 0 002.25-2.25v-1.372c0-.516-.351-.966-.852-1.091l-4.423-1.106c-.44-.11-.902.055-1.173.417l-.97 1.293c-.282.376-.769.542-1.21.38a12.035 12.035 0 01-7.143-7.143c-.162-.441.004-.928.38-1.21l1.293-.97c.363-.271.527-.734.417-1.173L6.963 3.102a1.125 1.125 0 00-1.091-.852H4.5A2.25 2.25 0 002.25 4.5v2.25z" />
+                            </svg>                              
+                        </div>
+                    </div>
+                    <input type="submit" class="hidden">
+                </form>
+            </span>
+        </div>
+        <div class="mt-3">
+            <a class="text-gray-500 hover:text-paraxin-c-200 hover:underline" href="{{url_for('change_pass')}}">تغییر گذرواژه</a>
+        </div>
+        <form style="direction: ltr !important;" action="" method="post" class="mt-2">
             {{form.csrf_token}}
-            <div style="direction: ltr !important" class="mt-5">
-                {{form.username.label(class="font-serif")}}
+            <div class="mt-10" x-data="{ fullname_popup: false }">
+                <div class="flex flex-row-reverse items-center gap-1 mb-1 relative">
+                    {{form.fullname.label(class="simple-label")}}
+                    <div class="text-red-500 cursor-pointer" @click="fullname_popup = ! fullname_popup">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v3.75m9-.75a9 9 0 11-18 0 9 9 0 0118 0zm-9 3.75h.008v.008H12v-.008z" />
+                        </svg>
+                    </div>
+                    <div class="w-40 rounded-md shadow-xl border bg-gray-150 border-gray-400 absolute bottom-7 z-50" x-cloak x-show="fullname_popup" @click.outside="fullname_popup = false">
+                        <p class="text-xs p-1 text-gray-500">
+                            full name نامی است که از شما باقی می ماند و کاربران دیگر این نام را می بینند
+                            <span class="text-red-500">امکان تغییر وجود ندارد</span>
+                        </p>
+                    </div>
+                </div>
                 <div class="relative">
-                    {{form.username(style="direction: ltr !important; padding-left: 2.25rem;",class="simple-input", value=current_user.username)}}
+                    {{form.fullname(style="direction:ltr ; padding-left: 2.25rem;", class="simple-input text-gray-400", value=current_user.fullname, disabled='')}}
+                    <div class="absolute top-2 left-2 text-gray-400">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M17.982 18.725A7.488 7.488 0 0012 15.75a7.488 7.488 0 00-5.982 2.975m11.963 0a9 9 0 10-11.963 0m11.963 0A8.966 8.966 0 0112 21a8.966 8.966 0 01-5.982-2.275M15 9.75a3 3 0 11-6 0 3 3 0 016 0z" />
+                        </svg>                                                                                                           
+                    </div>
+                </div>              
+            </div>
+            <div class="mt-5" x-data="{ username_popup : false }">
+                <div class="flex flex-row-reverse items-center gap-1 mb-1 relative">
+                    {{form.username.label(class="simple-label")}}
+                    <div class="text-red-500 cursor-pointer" @click="username_popup  = ! username_popup ">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v3.75m9-.75a9 9 0 11-18 0 9 9 0 0118 0zm-9 3.75h.008v.008H12v-.008z" />
+                        </svg>
+                    </div>
+                    <div class="w-40 rounded-md shadow-xl border bg-gray-150 border-gray-400 absolute bottom-7 z-50" x-cloak x-show="username_popup " @click.outside="username_popup  = false">
+                        <p class="text-xs p-1 text-gray-500">
+                            username برای ورود شما به پنل پکسی استفاده می شود. کسی از این نام اطلاعی نخواهد داشت
+                        </p>
+                    </div>
+                </div>
+                <div class="relative">
+                    {{form.username(style="direction:ltr ; padding-left: 2.25rem;",class="simple-input", value=current_user.username)}}
                     <div class="absolute top-2 left-2 text-gray-400">
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
                             <path stroke-linecap="round" stroke-linejoin="round" d="M17.982 18.725A7.488 7.488 0 0012 15.75a7.488 7.488 0 00-5.982 2.975m11.963 0a9 9 0 10-11.963 0m11.963 0A8.966 8.966 0 0112 21a8.966 8.966 0 01-5.982-2.275M15 9.75a3 3 0 11-6 0 3 3 0 016 0z" />
@@ -36,25 +141,15 @@
                     </div>
                 </div>
             </div>
-            <div style="direction: ltr !important" class="mt-5">
-                {{form.old_password.label(class="font-serif")}}
+            <div class="mt-5">
+                {{form.password.label(class="simple-label", style="direction: ltr !important;")}}
                 <div class="relative">
-                    {{form.old_password(style="direction: ltr !important; padding-left: 2.25rem;",class="simple-input")}}
+                    {{form.password(style="direction:ltr ; padding-left: 2.25rem;",class="simple-input")}}
                     <div class="absolute top-2 left-2 text-gray-400">
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
                             <path stroke-linecap="round" stroke-linejoin="round" d="M16.5 10.5V6.75a4.5 4.5 0 10-9 0v3.75m-.75 11.25h10.5a2.25 2.25 0 002.25-2.25v-6.75a2.25 2.25 0 00-2.25-2.25H6.75a2.25 2.25 0 00-2.25 2.25v6.75a2.25 2.25 0 002.25 2.25z" />
                         </svg>                                                                                  
                     </div>
-                </div>
-            </div>
-            <div class="grid grid-cols-1 gap-3 sm:grid-cols-2 mt-3">
-                <div>
-                    {{form.password.label(class="font-serif")}}
-                    {{form.password(style="direction: ltr !important;",class="simple-input")}}
-                </div>
-                <div>
-                    {{form.confirm_password.label(class="font-serif")}}
-                    {{form.confirm_password(style="direction: ltr !important;",class="simple-input")}}
                 </div>
             </div>
             <div class="flex justify-center mt-5">

@@ -1,8 +1,8 @@
 from flask import render_template, abort, redirect, url_for, flash, request
 from flask_login import login_user, logout_user, current_user, login_required
-from paxi.model import User, Category, Weblog, Sample
-from paxi.forms import LoginForm, WeblogForm, WeblogFormEdit, SampleForm, SampleFormEdit, ProfileForm, CategoryForm
-from paxi.method import passwords, files, comma, folder, operation
+from paxi.model import User, Category, Weblog, Sample, Ticket, Answer, Verify
+from paxi.forms import LoginForm, WeblogForm, WeblogFormEdit, SampleForm, SampleFormEdit, ProfileForm, CategoryForm, ContactForm
+from paxi.method import passwords, files, comma, folder, operation, verify_pro
 from paxi import app, db, folder_upload
 import os
 
@@ -16,9 +16,34 @@ def about():
    return render_template('about.html')
 
 
-@app.route('/contact')
+@app.route('/contact', methods=['POST', 'GET'])
 def contact():
-    return render_template('contact.html')
+    contact_form = ContactForm()
+    
+    # if contact_form.validate_on_submit():
+    if request.method == 'POST':
+        try:
+            add_new_contact = Ticket(
+                text = contact_form.text.data,
+                title = contact_form.title.data,
+                email = contact_form.email.data,
+                phone = contact_form.phone.data,
+                name = contact_form.name.data,
+                department = contact_form.department.data,
+                relation = contact_form.relation.data
+            )
+
+            # commit a contact text in database
+            db.session.add(add_new_contact)
+            db.session.commit()
+
+            flash(f'پیام شما با موفقیت ارسال شد (شماره تیکت {add_new_contact.id})', 'success')
+            return redirect('/contact#send-mail')
+        except:
+            flash('پیام شما ارسال نشد .', 'danger')
+            return redirect('/contact#send-mail')
+
+    return render_template('contact.html', form=contact_form)
 
 
 @app.route('/weblog')
@@ -100,7 +125,7 @@ def paxi_login():
         if user and passwords.check_pass(user.password, form.password.data):
             login_user(user, remember=form.remember.data)
             next_page = request.args.get('next')
-            
+
             flash('ورود با موفقیت', 'success')
             return redirect(next_page if next_page else url_for('paxi_panel'))
         else:
@@ -562,6 +587,51 @@ def paxi_add_work_sample_category():
         return redirect(url_for('paxi_work_sample_category'))
 
 
+@app.route('/paxi/change/password')
+@login_required
+def change_pass():
+    if current_user.verify.startswith('1'):
+
+        # send email for change password
+        title = 'تغییر گذرواژه حساب شما در پاراکسین'
+        message = 'amir mahdi joon'
+        send_change_pass_email = operation.Send(destination=current_user.email, message=message, title=title)
+        send_change_pass_email.as_email()
+
+        if send_change_pass_email.response == True:
+            flash('ایمیلی برای تغییر دادن پسورد حساب شما با موفقیت ارسال شد', 'success')
+        else:
+            flash('پروسه ارسال ایمیل جهت تغییر دادن گذرواژه با مشکل مواجه شده است', 'danger')
+        return redirect(url_for('profile'))        
+    else:
+        flash('ابتدا باید ایمیل خودتون رو تایید کنید', 'danger')
+        return redirect(url_for('profile'))
+
+
+@app.route('/paxi/change/info', methods=['POST'])
+@login_required
+def change_info():
+    if request.method == 'POST':
+        try:
+            if request.form.get('new_email'):
+                if current_user.email != request.form.get('new_email'):
+                    current_user.email = request.form.get('new_email')
+                    current_user.verify = '0'+current_user.verify[1]
+
+                    flash('با موفقیت ایمیل شما تغییر کرد','success')
+            elif request.form.get('new_phone'):
+                if current_user.phone != request.form.get('new_phone'):
+                    current_user.phone = request.form.get('new_phone')
+                    current_user.verify = current_user.verify[0]+'0'
+
+                    flash('با موفقیت شماره‌ی تلفن شما تغییر کرد','success')
+            # save changes
+            db.session.commit()
+        except:
+            flash('برای تغییر اطلاعات حساب شما مشکلی پیش آمده است','danger')
+        return redirect(url_for('profile'))
+
+
 @app.route('/paxi/profile', methods=['POST', 'GET'])
 @login_required
 def profile():
@@ -569,7 +639,6 @@ def profile():
 
     if profile_form.validate_on_submit():
         current_user.username = profile_form.username.data
-        current_user.password = passwords.get_hash(profile_form.password.data)
 
         # save changes
         db.session.commit()
@@ -603,6 +672,113 @@ def change_profile_baner():
     else:
         flash(f'فرمت فایل مورد قبول نیست ({the_file.filename})', 'danger')
     return redirect(url_for('profile'))
+
+
+@app.route('/paxi/verify/<string:verify_type>/<string:value>', methods=['POST', 'GET'])
+@login_required
+def verify_account(verify_type,value):
+    if request.method == 'POST':
+        try:
+            tocken_user = request.form.get('verify_tocken').strip()
+
+            # get verify code in tabel
+            if verify_type == 'phone':
+                tocken_tabel = Verify.query.filter_by(item=current_user.phone).order_by(Verify.time.desc()).first()
+            else:
+                tocken_tabel = Verify.query.filter_by(item=current_user.email).order_by(Verify.time.desc()).first()
+
+            # check verify code is true or no
+            if str(tocken_user) == str(tocken_tabel.tocken) and tocken_tabel.item == value:
+                if verify_pro.check_not_expire(tocken_tabel.time):
+                    if verify_type == 'email':
+                        current_user.verify = '1'+current_user.verify[1]
+                    else:
+                        current_user.verify = current_user.verify = current_user.verify[0]+'1'
+
+                    # update verify for user
+                    db.session.commit()
+
+                    flash(f'با موفقیت {verify_type} شما تایید شد.','success')
+                    return redirect(url_for('profile'))
+                else:
+                    flash('کد تایید منقضی شده است','danger')
+            else:
+                flash('کد تایید اشتباه وارد شده است','danger')
+        except:
+            flash(f'برای تایید {verify_type} شما مشکلی پیش آمده است', 'danger')
+            return redirect(url_for('profile'))
+    elif verify_type == 'email' or verify_type == 'phone':
+        if verify_type == 'email':
+            if current_user.email == value:
+                if current_user.verify.startswith('0'):
+                    result = verify_pro.email(value)
+                    if result == True:
+                        flash('پیامی حاوی کد تایید با موفقیت برای شما ارسال شد.', 'success')
+                    else:
+                        flash(result, 'danger')
+                else:
+                    flash('شما یک بار حساب ایمیل خودتون رو تایید کرده اید. دوبار نمی توانید اینکار ور بکنید.', 'danger')
+                    return redirect(url_for('profile'))
+            else:
+                flash('ایمیل وارد شده برای شما نیست', 'danger')
+                return redirect(url_for('profile'))
+        else:
+            if current_user.phone == value:
+                if current_user.verify.startswith('0'):
+                    result = verify_pro.phone(value)
+                    if result == True:
+                        flash('پیامی حاوی کد تایید با موفقیت برای شما ارسال شد.', 'success')
+                    else:
+                        flash(result, 'danger')
+                else:
+                    flash('شما یک بار حساب ایمیل خودتون رو تایید کرده اید. دوبار نمی توانید اینکار ور بکنید.', 'danger')
+                    return redirect(url_for('profile'))
+            else:
+                flash('ایمیل وارد شده برای شما نیست', 'danger')
+                return redirect(url_for('profile'))
+    else:
+        abort(404)
+    return render_template('/panel/verify.html', verify_type=verify_type, value=value)
+
+
+@app.route('/paxi/ticket')
+@login_required
+def paxi_ticket():
+    page = request.args.get('page',type=int, default=1)
+    search = request.args.get('search')
+
+    if search:
+        all_ticket = Ticket.query.filter(Ticket.id.contains(search)+Ticket.title.contains(search)+Ticket.department.contains(search)).order_by(Ticket.time.desc()).paginate(page=page, per_page=15)
+    else:
+        all_ticket = Ticket.query.order_by(Ticket.time.desc()).paginate(page=page, per_page=15)
+
+    return render_template('panel/ticket/ticket.html', data=all_ticket, search_text=search)
+
+
+@app.route('/paxi/ticket/chat/<int:id_ticket>', methods=['POST', 'GET'])
+@login_required
+def paxi_answer_ticket(id_ticket):
+    find_ticket = Ticket.query.get_or_404(id_ticket)
+    find_answers = Answer.query.filter_by(tick=find_ticket).order_by(Answer.time).all()
+
+    if request.method == 'POST':
+        try:
+            answer_for_ticket = Answer(
+                text = request.form.get('answer_input'),
+                full_name=current_user.fullname,
+                tick=find_ticket
+            )
+
+            # save answer for ticket
+            db.session.add(answer_for_ticket)
+            db.session.commit()
+
+            flash(f'پاسخ شما به تیکت {find_ticket.id} به درستی ارسال شد', 'success')
+            return redirect(url_for('paxi_ticket'))
+        except:
+            flash(f'برای پاسخ دادن به تیکت {find_ticket.id} مشکلی پیش آمده است', 'danger')
+
+    return render_template('panel/ticket/chat.html', data=find_ticket, find_answers=find_answers)
 
 
 @app.errorhandler(404)

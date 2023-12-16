@@ -1,0 +1,72 @@
+{% extends 'panel/paxi.html' %}
+
+{% block ticket_page %}text-paraxin-c-200 font-bold{% endblock %}
+
+{% block content %}
+<div class="flex justify-between items-center">
+    <div class="text-gray-500 text-sm">
+        واحد <span class="font-bold text-paraxin-c-200">{{data.department}}</span>
+    </div>
+    <h1><span class="text-paraxin-c-200">{{data.id}}</span> : شماره تیکت</h1>
+</div>
+<h1 class="text-center">عنوان : <span class="text-paraxin-c-200">{{data.title}}</span></h1>
+<div class="mt-8">
+    <div class="w-full mb-20">
+        <!-- <svg xmlns="http://www.w3.org/2000/svg" class="text-gray-200 rotate-90 w-24 -ml-12" viewBox="0 0 1440 600">
+            <path fill="currentcolor" d="M0,192L720,32L1440,192L1440,320L720,320L0,320Z"></path>
+        </svg> -->
+        <div style="border-bottom-right-radius: 0px;" class="bg-gray-200 p-4 rounded-3xl shadow-xl border border-gray-400 w-7/12 ml-auto mb-5">
+            <div class="w-full flex justify-between mb-3">
+                <div>
+                    {{data.name}}
+                </div>
+                <div>
+                    {{data.time.strftime('%Y-%m-%d')}}
+                </div>
+            </div>
+            <div>
+                {% for line in data.text.split('\r\n') %}
+                <p>{{line}}</p>
+                {% endfor %}
+            </div>
+            <div class="mt-5">
+                <hr class="ruller">
+                {{data.time.strftime('%H:%M')}}
+            </div>
+        </div>
+        {% if find_answers %}
+            {% for answer in find_answers %}
+            <div style="border-bottom-left-radius: 0px;" class="bg-paraxin-c-200 bg-opacity-20 p-4 rounded-3xl shadow-xl border border-gray-400 w-7/12 mr-auto mb-5">
+                <div class="w-full flex justify-between mb-3">
+                    <div>
+                        {{answer.time.strftime('%Y-%m-%d')}}
+                    </div>
+                    <div>
+                        {{answer.full_name}}
+                    </div>
+                </div>
+                <div>
+                    {% for line in answer.text.split('\r\n') %}
+                    <p>{{line}}</p>
+                    {% endfor %}
+                </div>
+                <div class="mt-5">
+                    <hr class="ruller">
+                    {{answer.time.strftime('%H:%M')}}
+                </div>
+            </div>
+            {% endfor %}
+        {% endif %}
+    </div>
+    <form class="fixed bottom-5 flex justify-center w-9/12" method="post">
+        <div class="w-10/12 flex gap-3">
+            <button class="bg-paraxin-c-200 text-white text-lg rounded-full p-4 self-center" type="submit" title="ارسال">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M6 12L3.269 3.126A59.768 59.768 0 0121.485 12 59.77 59.77 0 013.27 20.876L5.999 12zm0 0h7.5" />
+                </svg>              
+            </button>
+            <textarea type="text" class="simple-input" name="answer_input" rows="1" required></textarea>
+        </div>
+    </form>
+</div>
+{% endblock %}

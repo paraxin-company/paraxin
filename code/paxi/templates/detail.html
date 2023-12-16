@@ -10,7 +10,7 @@
             <div>
                 <img class="w-full rounded-lg" alt="{{data.title}}" src="{{url_for('static', filename=data.baner)}}">
             </div>
-            <p class="text-xs text-gray-600 my-2">تاریخ آخرین آبدیت ( {{data.date.strftime('%d- %m- %Y')}} )</p><hr class="mt-8 mb-4 border border-gray-400">
+            <p class="text-xs text-gray-600 my-2">تاریخ آخرین آبدیت ( {{data.date.strftime('%d - %m - %Y')}} )</p><hr class="mt-8 mb-4 border border-gray-400">
             <p calss="mt-40">{{data.content}}</p>
             {% if gallery %}
                 <p class="font-tit text-lg mt-5 mb-3">گالری تصاویر</p>

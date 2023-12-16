@@ -1,10 +1,9 @@
 from flask_wtf import FlaskForm
-from wtforms import StringField, PasswordField, BooleanField, TextAreaField, RadioField, FileField, MultipleFileField
-from wtforms.validators import DataRequired, Length, ValidationError, EqualTo
+from wtforms import StringField, PasswordField, BooleanField, TextAreaField, RadioField, FileField, MultipleFileField, EmailField, SelectField
+from wtforms.validators import DataRequired, Length, ValidationError
 from flask_login import current_user
 from paxi.method import passwords
-from paxi.model import User
-from paxi.model import Category
+from paxi.model import User, Category
 from paxi import app
 
 class LoginForm(FlaskForm):
@@ -60,6 +59,7 @@ class SampleBase(BaseForm):
         DataRequired()
     ])
 
+
 class SampleForm(SampleBase):
     baner = FileField('baner', validators=[
         DataRequired()
@@ -78,25 +78,52 @@ class CategoryForm(FlaskForm):
 
 
 class ProfileForm(FlaskForm):
-    username = StringField('user name', validators=[DataRequired()])
-    password = PasswordField('new password', validators=[
-        DataRequired(),
-        Length(min=8)
-    ])
-    confirm_password = PasswordField('confirm new password', validators=[
-        DataRequired(),
-        EqualTo('password', message='پسورد وارد شده در قسمت پسورد جدید باید با هم برابر باشن')
-    ])
-    old_password = PasswordField('old password', validators=[DataRequired()])
+    fullname = StringField('Full Name')
+    username = StringField('User Name', validators=[DataRequired()])
+    password = PasswordField('Password', validators=[DataRequired()])
 
     def validate_username(self, username):
         if current_user.username != username.data:
             if current_user.fullname != username.data:
                 if User.query.filter_by(username=username.data).first():
-                    raise ValidationError(f'یوزر نیم {username.data} قبلا توسط کسی انتخاب شده است')
+                    raise ValidationError(f'یوزر نیم {username.data} قبلا توسط شخص دیگری انتخاب شده است. نام جدید انتخاب کنید')
             else:
-                raise ValidationError('نمی شه نام کاربری با اسم کامل یکی باشه (برای امنیت بیشتر توصیه میشه)')
-    
-    def validate_old_password(self, old_password):
-        if passwords.check_pass(current_user.password, old_password.data) == False:
+                raise ValidationError('توصیه ما به شما این است که UserName و FullName با هم متفاوت باشند (برای امنیت بیشتر توصیه میشود)')
+        
+    def validate_password(self, password):
+        if passwords.check_pass(current_user.password, password.data) == False:
             raise ValidationError('پسورد وارد شده درست نمی باشد')
+        
+
+class ContactForm(FlaskForm):
+    email = EmailField('ایمیل شما', validators=[
+        DataRequired()
+    ])
+    phone = StringField("شماره همراه", validators=[
+        DataRequired(),
+        Length(max=9)
+    ])
+    name = StringField("نام شما", validators=[
+        DataRequired()
+    ])
+    title = StringField("عنوان پیام", validators=[
+        DataRequired(),
+        Length(max=50)
+    ])
+    department = SelectField("انتخاب دپارتمان", validators=[DataRequired()], choices=[
+        "تیم پشتیبانی",
+        "امور مالی",
+        "ثبت درخواست مشاوره",
+        "نقد و انتقاد",
+        "دعوت به همکاری"
+    ])
+    relation = SelectField("طریقه‌ی آشنایی", validators=[DataRequired()], choices=[
+        'از طریق تبلیغات',
+        'از طریق آشنایان',
+        'از طریق تلگرام',
+        'موارد دیگر'
+    ])
+    text = TextAreaField("متن پیام", validators=[
+        DataRequired()
+    ])
+    NotRobot = BooleanField('من ربات نیستم', validators=[DataRequired()])

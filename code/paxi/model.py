@@ -6,17 +6,22 @@ import datetime
 def get_id(user_id):
     return User.query.get(int(user_id))
 
+
 class User(db.Model, UserMixin):
     # TODO: admin table
     id = db.Column(db.Integer, primary_key=True)
-    fullname = db.Column(db.String(50))
+    fullname = db.Column(db.String(40))
     username = db.Column(db.String(40), unique=True, nullable=False)
-    email = db.Column(db.String(50), unique=True, nullable=False)
+    phone = db.Column(db.String(11), nullable=False)
+    # verify value use for email and phone varification, first number is for email and second is for phone
+    verify = db.Column(db.String(2), nullable=False, default='00')
+    email = db.Column(db.String(40), unique=True, nullable=False)
     password = db.Column(db.String(80), nullable=False)
     profile = db.Column(db.Text, nullable=False)
 
     def __repr__(self):
         return f"{self.id}) {self.fullname}"
+
 
 class Category(db.Model):
     # TODO: work sample category table
@@ -29,6 +34,7 @@ class Category(db.Model):
     
     def count(self):
         return len(str(self.samples).split('|'))-1
+
 
 class Sample(db.Model):
     # TODO: work sample table
@@ -44,6 +50,7 @@ class Sample(db.Model):
     def __repr__(self):
         return f"|{self.id}"
 
+
 class Weblog(db.Model):
     # TODO: weblog table
     id = db.Column(db.Integer, primary_key=True)
@@ -55,3 +62,40 @@ class Weblog(db.Model):
 
     def __repr__(self):
         return f"{self.id}) {self.title[:30]} | {self.date}"
+
+
+class Answer(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    text = db.Column(db.Text, nullable=False)
+    full_name = db.Column(db.String(25), nullable=False)
+    time = db.Column(db.DateTime, default=datetime.datetime.now)
+    ticket_id = db.Column(db.Integer, db.ForeignKey('ticket.id'), nullable=False)
+
+    def __repr__(self):
+        return f"|{self.id}"
+
+
+class Ticket(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    email = db.Column(db.String(40), nullable=False)
+    title = db.Column(db.String(50), nullable=False)
+    phone = db.Column(db.String(11), nullable=False)
+    name = db.Column(db.String(25), nullable=False)
+    department = db.Column(db.String(25), nullable=False)
+    relation = db.Column(db.String(25), nullable=False)
+    text = db.Column(db.Text, nullable=False)
+    time = db.Column(db.DateTime, default=datetime.datetime.now)
+    answers = db.relationship('Answer', backref='tick', lazy=True)
+
+    def __repr__(self):
+        return f"|{self.id}"
+
+
+class Verify(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    tocken = db.Column(db.String(5), nullable=False)
+    time = db.Column(db.DateTime, default=datetime.datetime.now)
+    item = db.Column(db.String(40), nullable=False)
+
+    def __repr__(self):
+        return f"|{self.id}"
