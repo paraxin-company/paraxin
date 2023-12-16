@@ -77,7 +77,7 @@ class Answer(db.Model):
 
 class Ticket(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    email = db.Column(db.String(30), nullable=False)
+    email = db.Column(db.String(40), nullable=False)
     title = db.Column(db.String(50), nullable=False)
     phone = db.Column(db.String(11), nullable=False)
     name = db.Column(db.String(25), nullable=False)
@@ -86,6 +86,16 @@ class Ticket(db.Model):
     text = db.Column(db.Text, nullable=False)
     time = db.Column(db.DateTime, default=datetime.datetime.now)
     answers = db.relationship('Answer', backref='tick', lazy=True)
+
+    def __repr__(self):
+        return f"|{self.id}"
+
+
+class Verify(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    tocken = db.Column(db.String(5), nullable=False)
+    time = db.Column(db.DateTime, default=datetime.datetime.now)
+    item = db.Column(db.String(40), nullable=False)
 
     def __repr__(self):
         return f"|{self.id}"
