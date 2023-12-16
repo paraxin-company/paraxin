@@ -1,10 +1,7 @@
-from flask import render_template, abort, redirect, url_for, flash, request
-from flask_login import login_user, logout_user, current_user, login_required
-from paxi.model import Category, Weblog, Sample, Ticket, Answer, Verify
-from paxi.forms import WeblogForm, WeblogFormEdit, SampleForm, SampleFormEdit, ProfileForm, CategoryForm, ContactForm
-from paxi.method import passwords, files, comma, folder, operation, verify_pro
-from paxi import app, db, folder_upload
-import os
+from flask import render_template, abort, redirect, flash, request
+from paxi.model import Category, Weblog, Sample, Ticket
+from paxi.forms import ContactForm
+from paxi import app, db
 from paxi.panel import panel
 app.register_blueprint(panel)
 

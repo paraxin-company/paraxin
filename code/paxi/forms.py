@@ -26,16 +26,6 @@ class BaseForm(FlaskForm):
             raise ValidationError('کاراکتر "," در قسمت کلمات کلیدی مورد قبول نیست')
 
 
-class WeblogFormEdit(BaseForm):
-    baner = FileField('baner')
-
-
-class WeblogForm(BaseForm):
-    baner = FileField('baner', validators=[
-        DataRequired()
-    ])
-
-
 class SampleBase(BaseForm):
     app.app_context().push()
     
