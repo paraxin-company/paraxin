@@ -32,8 +32,10 @@
                         <div x-cloak x-show="open" @click.outside="open = false">
                             <ul class="bg-gray-150 fiexd flex flex-col justify-center gap-2 mt-1 w-48 rounded-md p-2 border border-gray-400">
                                 <li>
+									<a class="{% block work_page %}{% endblock %} hover:text-gray-950" href="{{url_for('panel.paxi_work_sample')}}">کل نمونه ها</a>
                                 </li>
                                 <li>
+									<a class="{% block category_page %}{% endblock %} hover:text-gray-950" href="{{url_for('panel.paxi_work_sample_category')}}">دسته بندی</a>
                                 </li>
                             </ul>
                         </div>

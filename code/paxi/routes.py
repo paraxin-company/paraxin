@@ -110,9 +110,9 @@ def logo_design():
 
 @app.errorhandler(404)
 def page_not_found_error(error):
-    return render_template('404.html'), 404
+    return render_template('base/404.html'), 404
 
 
 @app.errorhandler(405)
 def not_allowed(error):
-    return render_template('405.html'), 405
+    return render_template('base/405.html'), 405
