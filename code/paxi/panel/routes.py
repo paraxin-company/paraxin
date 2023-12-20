@@ -9,7 +9,7 @@ from paxi.panel.model import User, Verify
 
 # paxi importing
 from paxi import folder_upload, db
-from paxi.model import Weblog, Sample, Category
+from paxi.model import Weblog, Sample, Category, Ticket, Answer
 from paxi.method import files, comma, operation, verify_pro, passwords, folder
 
 @panel.route('/')
@@ -644,15 +644,50 @@ def paxi_add_work_sample_category():
         flash(f'برای اضافه کردن دسته بندی نمونه کار جدید مشکلی پیش آمده است', 'danger')
         return redirect(url_for('panel.paxi_work_sample_category'))
 
+
+@panel.route('/ticket')
+@login_required
+def paxi_ticket():
+    page = request.args.get('page',type=int, default=1)
+    search = request.args.get('search')
+
+    if search:
+        all_ticket = Ticket.query.filter(Ticket.id.contains(search)+Ticket.title.contains(search)+Ticket.department.contains(search)).order_by(Ticket.time.desc()).paginate(page=page, per_page=15)
+    else:
+        all_ticket = Ticket.query.order_by(Ticket.time.desc()).paginate(page=page, per_page=15)
+
+    return render_template('ticket/ticket.html', data=all_ticket, search_text=search)
+
+
+@panel.route('/ticket/chat/<int:id_ticket>', methods=['POST', 'GET'])
+@login_required
+def paxi_answer_ticket(id_ticket):
+    find_ticket = Ticket.query.get_or_404(id_ticket)
+    find_answers = Answer.query.filter_by(tick=find_ticket).order_by(Answer.time).all()
+
+    if request.method == 'POST':
+        try:
+            answer_for_ticket = Answer(
+                text = request.form.get('answer_input'),
+                full_name=current_user.fullname,
+                tick=find_ticket
+            )
+
+            # save answer for ticket
+            db.session.add(answer_for_ticket)
+            db.session.commit()
+
+            flash(f'پاسخ شما به تیکت {find_ticket.id} به درستی ارسال شد', 'success')
+            return redirect(url_for('panel.paxi_ticket'))
+        except:
+            flash(f'برای پاسخ دادن به تیکت {find_ticket.id} مشکلی پیش آمده است', 'danger')
+
+    return render_template('ticket/chat.html', data=find_ticket, find_answers=find_answers)
+
 @panel.route('/<path:input>')
 def can_not_find_page(input):
     abort(404)
 
 @panel.errorhandler(404)
 def page_not_found_error(error):
-    return render_template('base/panel_404.html'), 404
-
-
-@panel.errorhandler(405)
-def not_allowed(error):
-    return render_template('base/panel_405.html'), 405
+    return render_template('base/404_paxi_panel.html'), 404
