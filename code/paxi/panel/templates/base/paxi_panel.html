@@ -25,7 +25,7 @@
 					</li>
 					{% endif %}
 					<li class="p-2" x-data="{ open: false }">
-                        <a class="hover:text-gray-950 flex items-center gap-1 cursor-pointer" @click="open = ! open">
+						<a class="hover:text-gray-950 flex items-center gap-1 cursor-pointer" @click="open = ! open">
 							<span>نمونه کار</span>
                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-4 h-4 transition duration-300" x-bind:class="{'rotate-180':open}">
                                 <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5" />
@@ -33,9 +33,11 @@
                         </a>
                         <div x-cloak x-show="open" @click.outside="open = false">
                             <ul class="bg-gray-150 fiexd flex flex-col justify-center gap-2 mt-1 w-48 rounded-md p-2 border border-gray-400">
-                                <li>
+								{% if current_user.roll[2] != '0' %}
+								<li>
 									<a class="{% block work_page %}{% endblock %} hover:text-gray-950" href="{{url_for('panel.paxi_work_sample')}}">کل نمونه ها</a>
                                 </li>
+								{% endif %}
                                 <li>
 									<a class="{% block category_page %}{% endblock %} hover:text-gray-950" href="{{url_for('panel.paxi_work_sample_category')}}">دسته بندی</a>
                                 </li>

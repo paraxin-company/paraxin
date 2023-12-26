@@ -341,198 +341,115 @@ def verify_account(verify_type,value):
     return render_template('verify.html', verify_type=verify_type, value=value)
 
 
-@panel.route('/work-sample')
+@panel.route('/work-sample/')
 @login_required
 def paxi_work_sample():
-    page = request.args.get('page', default=1, type=int)
-    search = request.args.get('search')
+    if  current_user.roll[2] != '0':
+        page = request.args.get('page', default=1, type=int)
+        search = request.args.get('search')
 
-    if search:
-        samples = Sample.query.filter(Sample.title.contains(search)+Sample.keyword.contains(search)).paginate(page=page, per_page=15)
+        if search:
+            samples = Sample.query.filter(Sample.title.contains(search)+Sample.keyword.contains(search)).paginate(page=page, per_page=15)
+        else:
+            samples = Sample.query.paginate(page=page, per_page=15)
+        return render_template('work-sample/work-sample.html', data=samples, search_text=search, roll=current_user.roll[2])
     else:
-        samples = Sample.query.paginate(page=page, per_page=15)
-    return render_template('work-sample/work-sample.html', data=samples, search_text=search)
+        abort(405)
 
 
-@panel.route('/work-sample/add', methods=['GET', 'POST'])
+@panel.route('/work-sample/add/', methods=['GET', 'POST'])
 @login_required
 def paxi_add_work_sample():
-    try:
-        sample_form = SampleForm()
-        all_category = Category.query.order_by(Category.id).all()
-
-        if sample_form.validate_on_submit():
-            baner_image = request.files['baner']
-            album = request.files.getlist("album")
-            
-            if files.is_valid(baner_image.filename):
-                new_category = passwords.small(sample_form.category.data)
-
-                baner_path = os.path.join(os.path.join(folder_upload, 'sample'), new_category, files.rename_name(baner_image.filename))
-
-                if len(album) > 1:
-                    album_path_host = []
-
-                    # Iterate for each file in the files List, and Save them
-                    if files.is_valid_album(album):
-                        for image in album:
-                            # save album image in host
-                            album_path = os.path.join(os.path.join(folder_upload, 'sample'), new_category, files.rename_name(image.filename))
-                            album_path_host.append(files.get_url(album_path, os.path.join('sample', new_category)))
-                            image.save(album_path)
-                    else:
-                        flash(f'فرمت فایل یا فایل های album نادرست می باشد', 'danger')
-                        return redirect(url_for('panel.paxi_work_sample'))
-                    
-                    if len(album_path_host) == 1:
-                        album_result = album_path_host[0]+'|,|'
-                    else:
-                        album_result = '|,|'.join(album_path_host)
-                else:
-                    album_result = ''
-                
-                # save baner in host
-                baner_image.save(baner_path)
-
-                # find baner path
-                new_baner_path = files.get_url(baner_path, os.path.join('sample', new_category))
-    
-                # find category info
-                for item in all_category:
-                    if sample_form.category.data in str(item):
-                        current_cat = item
-
-                add_sample = Sample(
-                    title = sample_form.title.data,
-                    content = sample_form.content.data,
-                    keyword = comma.save(sample_form.keyword.data),
-                    baner = str(new_baner_path),
-                    album = album_result,
-                    cat = current_cat
-                )
-
-                # save new record
-                db.session.add(add_sample)
-                db.session.commit()
-
-                flash('رکورد جدید به درستی اضافه شد', 'success')
-                return redirect(url_for('panel.paxi_work_sample'))
-            else:
-                flash(f'فرمت فایل مورد قبول نیست ({baner_image.filename})', 'danger')
-                return redirect(url_for('panel.paxi_work_sample'))
-        return render_template('work-sample/add.html', form=sample_form, cats=all_category)
-    except:
-        flash('برای اضافه کردن رکورد جدید مشکلی پیش آمده است', 'danger')
-        return redirect(url_for('panel.paxi_work_sample'))
-
-
-@panel.route('/work-sample/delete/<int:sample_id>', methods=['POST'])
-@login_required
-def paxi_delete_work_sample(sample_id):
-    try:
-        current_sample = Sample.query.get_or_404(int(sample_id))
-
-        baner = current_sample.baner
-        album = current_sample.album
-
-        result = files.delete_file(baner)
-        if result == True:
-            flash(f'فایل با موفقیت پاک شد ({current_sample.baner})', 'success')
-        else:
-            flash(f'برای پاک کردن فایل مشکلی پیش آمده است ({current_sample.baner})', 'danger')
-
-        if '|,|' in album:
-            images_in_album = album.split('|,|')
-            for image in images_in_album:
-                if len(image) != 0:
-                    state_image = files.delete_file(image)
-                    if state_image == True:
-                        flash(f'فایل با موفقیت پاک شد ({image})', 'success')
-                    else:
-                        flash(f'برای پاک کردن فایل مشکلی پیش آمده است ({image})', 'danger')
-
-        # delete record
-        db.session.delete(current_sample)
-        db.session.commit()
-
-        flash(f'نمونه کار با موفقیت حذف شد (id={current_sample.id})','success')
-        return redirect(url_for('panel.paxi_work_sample'))
-    except:
-        flash(f'برای حذف کردن نمونه کار مشکلی پیش آمده است (id={current_sample.id})','danger')
-        return redirect(url_for('panel.paxi_work_sample'))
-
-
-@panel.route('/work-sample/edit/<int:sample_id>', methods=['GET', 'POST'])
-@login_required
-def paxi_edit_work_sample(sample_id):
-    current_sample = Sample.query.get_or_404(int(sample_id))
-    all_category = Category.query.all()
-    sample_form = SampleFormEdit()
-
-    if sample_form.validate_on_submit():
+    if current_user.roll[2] == '1' or current_user.roll[2] == '4' or current_user.roll[2] == '9':
         try:
-            baner_image = request.files['baner']
-            album = request.files.getlist('album')
+            sample_form = SampleForm()
+            all_category = Category.query.order_by(Category.id).all()
 
-            new_category = passwords.small(sample_form.category.data)
-
-            if sample_form.baner.data:
+            if sample_form.validate_on_submit():
+                baner_image = request.files['baner']
+                album = request.files.getlist("album")
+                
                 if files.is_valid(baner_image.filename):
-                    # save new baner in host
+                    new_category = passwords.small(sample_form.category.data)
+
                     baner_path = os.path.join(os.path.join(folder_upload, 'sample'), new_category, files.rename_name(baner_image.filename))
+
+                    if len(album) > 1:
+                        album_path_host = []
+
+                        # Iterate for each file in the files List, and Save them
+                        if files.is_valid_album(album):
+                            for image in album:
+                                # save album image in host
+                                album_path = os.path.join(os.path.join(folder_upload, 'sample'), new_category, files.rename_name(image.filename))
+                                album_path_host.append(files.get_url(album_path, os.path.join('sample', new_category)))
+                                image.save(album_path)
+                        else:
+                            flash(f'فرمت فایل یا فایل های album نادرست می باشد', 'danger')
+                            return redirect(url_for('panel.paxi_work_sample'))
+                        
+                        if len(album_path_host) == 1:
+                            album_result = album_path_host[0]+'|,|'
+                        else:
+                            album_result = '|,|'.join(album_path_host)
+                    else:
+                        album_result = ''
+                    
+                    # save baner in host
                     baner_image.save(baner_path)
 
                     # find baner path
                     new_baner_path = files.get_url(baner_path, os.path.join('sample', new_category))
+        
+                    # find category info
+                    for item in all_category:
+                        if sample_form.category.data in str(item):
+                            current_cat = item
 
-                    # delete old baner
-                    result = files.delete_file(current_sample.baner)
-                    if result == True:
-                        flash(f'بنر قبلی با موفقیت پاک شد ({current_sample.baner})', 'success')
-                    else:
-                        flash(f'برای حذف کردن بنر قبلی مشکلی پیش آمده است ({current_sample.baner})', 'danger')
+                    add_sample = Sample(
+                        title = sample_form.title.data,
+                        content = sample_form.content.data,
+                        keyword = comma.save(sample_form.keyword.data),
+                        baner = str(new_baner_path),
+                        album = album_result,
+                        cat = current_cat
+                    )
 
+                    # save new record
+                    db.session.add(add_sample)
+                    db.session.commit()
+
+                    flash('رکورد جدید به درستی اضافه شد', 'success')
+                    return redirect(url_for('panel.paxi_work_sample'))
                 else:
                     flash(f'فرمت فایل مورد قبول نیست ({baner_image.filename})', 'danger')
                     return redirect(url_for('panel.paxi_work_sample'))
-            else:
-                # find baner path
-                if new_category == passwords.small(current_sample.cat.text):
-                    new_baner_path = current_sample.baner
-                else:
-                    # copy baner in new folder
-                    new_baner_path = operation.copy_to_new_category(current_sample.baner, passwords.small(current_sample.cat.text), passwords.small(sample_form.category.data))
-                    
-                    # delete old baner
-                    result = files.delete_file(current_sample.baner)
-                    if result == True:
-                        flash(f'بنر قبلی با موفقیت پاک شد ({current_sample.baner})', 'success')
-                    else:
-                        flash(f'برای حذف کردن بنر قبلی مشکلی پیش آمده است ({current_sample.baner})', 'danger')
+            return render_template('work-sample/add.html', form=sample_form, cats=all_category)
+        except:
+            flash('برای اضافه کردن رکورد جدید مشکلی پیش آمده است', 'danger')
+            return redirect(url_for('panel.paxi_work_sample'))
+    else:
+        abort(405)
 
-            # check album is set or no
-            if len(album) == 1 and new_category == passwords.small(current_sample.cat.text):
-                album_result = current_sample.album
+
+@panel.route('/work-sample/delete/<int:sample_id>/', methods=['POST'])
+@login_required
+def paxi_delete_work_sample(sample_id):
+    if current_user.roll[2] == '3' or current_user.roll[2] == '9':
+        try:
+            current_sample = Sample.query.get_or_404(int(sample_id))
+
+            baner = current_sample.baner
+            album = current_sample.album
+
+            result = files.delete_file(baner)
+            if result == True:
+                flash(f'فایل با موفقیت پاک شد ({current_sample.baner})', 'success')
             else:
-                album_path_host = []
-                # Iterate for each file in the files List, and Save them
-                for image in album:
-                    if image:
-                        if files.is_valid(image.filename):
-                            # save album image in host
-                            album_path = os.path.join(os.path.join(folder_upload, 'sample'), new_category, files.rename_name(image.filename))
-                            album_path_host.append(files.get_url(album_path, os.path.join('sample', new_category)))
-                            image.save(album_path)
-                        else:
-                            flash(f'فرمت فایل مورد قبول نیست ({image.filename})', 'danger')
-                            return redirect(url_for('panel.paxi_work_sample'))
-                if len(album_path_host) == 1:
-                    album_result = album_path_host[0]+'|,|'
-                else:
-                    album_result = '|,|'.join(album_path_host)
-                
-                # delete old album from host
-                images_in_album = current_sample.album.split('|,|')
+                flash(f'برای پاک کردن فایل مشکلی پیش آمده است ({current_sample.baner})', 'danger')
+
+            if '|,|' in album:
+                images_in_album = album.split('|,|')
                 for image in images_in_album:
                     if len(image) != 0:
                         state_image = files.delete_file(image)
@@ -541,40 +458,134 @@ def paxi_edit_work_sample(sample_id):
                         else:
                             flash(f'برای پاک کردن فایل مشکلی پیش آمده است ({image})', 'danger')
 
-            # find category info
-            for item in all_category:
-                if sample_form.category.data in str(item):
-                    current_cat = item
-                    break
-
-            current_sample.title = sample_form.title.data,
-            current_sample.content = sample_form.content.data,
-            current_sample.baner = new_baner_path,
-            current_sample.album = album_result,
-            current_sample.keyword = comma.save(sample_form.keyword.data),
-            current_sample.cat = current_cat
-
-            # save changes
+            # delete record
+            db.session.delete(current_sample)
             db.session.commit()
 
-            flash(f'تغییرات با موفقیت اعمال شد (id={sample_id})', 'success')
+            flash(f'نمونه کار با موفقیت حذف شد (id={current_sample.id})','success')
             return redirect(url_for('panel.paxi_work_sample'))
         except:
-            flash(f'برای تغییر نمونه کار مشکلی پیش آمده است (id={sample_id})','danger')
+            flash(f'برای حذف کردن نمونه کار مشکلی پیش آمده است (id={current_sample.id})','danger')
             return redirect(url_for('panel.paxi_work_sample'))
+    else:
+        abort(405)
 
-    category_list = []
-    for category in all_category:
-        category_list.append(category.text)
 
-    sample_form.title.data = current_sample.title
-    sample_form.content.data = current_sample.content
-    sample_form.category.data = current_sample.cat.text
-    sample_form.baner.data = current_sample.baner
-    sample_form.keyword.data = comma.show(current_sample.keyword)
+@panel.route('/work-sample/edit/<int:sample_id>/', methods=['GET', 'POST'])
+@login_required
+def paxi_edit_work_sample(sample_id):
+    if current_user.roll[2] == '2' or current_user.roll[2] == '4' or current_user.roll[2] == '9':
+        current_sample = Sample.query.get_or_404(int(sample_id))
+        all_category = Category.query.all()
+        sample_form = SampleFormEdit()
 
-    return render_template('work-sample/edit.html', form=sample_form, baner=current_sample.baner, album=current_sample.album, choice=category_list)
+        if sample_form.validate_on_submit():
+            try:
+                baner_image = request.files['baner']
+                album = request.files.getlist('album')
 
+                new_category = passwords.small(sample_form.category.data)
+
+                if sample_form.baner.data:
+                    if files.is_valid(baner_image.filename):
+                        # save new baner in host
+                        baner_path = os.path.join(os.path.join(folder_upload, 'sample'), new_category, files.rename_name(baner_image.filename))
+                        baner_image.save(baner_path)
+
+                        # find baner path
+                        new_baner_path = files.get_url(baner_path, os.path.join('sample', new_category))
+
+                        # delete old baner
+                        result = files.delete_file(current_sample.baner)
+                        if result == True:
+                            flash(f'بنر قبلی با موفقیت پاک شد ({current_sample.baner})', 'success')
+                        else:
+                            flash(f'برای حذف کردن بنر قبلی مشکلی پیش آمده است ({current_sample.baner})', 'danger')
+
+                    else:
+                        flash(f'فرمت فایل مورد قبول نیست ({baner_image.filename})', 'danger')
+                        return redirect(url_for('panel.paxi_work_sample'))
+                else:
+                    # find baner path
+                    if new_category == passwords.small(current_sample.cat.text):
+                        new_baner_path = current_sample.baner
+                    else:
+                        # copy baner in new folder
+                        new_baner_path = operation.copy_to_new_category(current_sample.baner, passwords.small(current_sample.cat.text), passwords.small(sample_form.category.data))
+                        
+                        # delete old baner
+                        result = files.delete_file(current_sample.baner)
+                        if result == True:
+                            flash(f'بنر قبلی با موفقیت پاک شد ({current_sample.baner})', 'success')
+                        else:
+                            flash(f'برای حذف کردن بنر قبلی مشکلی پیش آمده است ({current_sample.baner})', 'danger')
+
+                # check album is set or no
+                if len(album) == 1 and new_category == passwords.small(current_sample.cat.text):
+                    album_result = current_sample.album
+                else:
+                    album_path_host = []
+                    # Iterate for each file in the files List, and Save them
+                    for image in album:
+                        if image:
+                            if files.is_valid(image.filename):
+                                # save album image in host
+                                album_path = os.path.join(os.path.join(folder_upload, 'sample'), new_category, files.rename_name(image.filename))
+                                album_path_host.append(files.get_url(album_path, os.path.join('sample', new_category)))
+                                image.save(album_path)
+                            else:
+                                flash(f'فرمت فایل مورد قبول نیست ({image.filename})', 'danger')
+                                return redirect(url_for('panel.paxi_work_sample'))
+                    if len(album_path_host) == 1:
+                        album_result = album_path_host[0]+'|,|'
+                    else:
+                        album_result = '|,|'.join(album_path_host)
+                    
+                    # delete old album from host
+                    images_in_album = current_sample.album.split('|,|')
+                    for image in images_in_album:
+                        if len(image) != 0:
+                            state_image = files.delete_file(image)
+                            if state_image == True:
+                                flash(f'فایل با موفقیت پاک شد ({image})', 'success')
+                            else:
+                                flash(f'برای پاک کردن فایل مشکلی پیش آمده است ({image})', 'danger')
+
+                # find category info
+                for item in all_category:
+                    if sample_form.category.data in str(item):
+                        current_cat = item
+                        break
+
+                current_sample.title = sample_form.title.data,
+                current_sample.content = sample_form.content.data,
+                current_sample.baner = new_baner_path,
+                current_sample.album = album_result,
+                current_sample.keyword = comma.save(sample_form.keyword.data),
+                current_sample.cat = current_cat
+
+                # save changes
+                db.session.commit()
+
+                flash(f'تغییرات با موفقیت اعمال شد (id={sample_id})', 'success')
+                return redirect(url_for('panel.paxi_work_sample'))
+            except:
+                flash(f'برای تغییر نمونه کار مشکلی پیش آمده است (id={sample_id})','danger')
+                return redirect(url_for('panel.paxi_work_sample'))
+
+        category_list = []
+        for category in all_category:
+            category_list.append(category.text)
+
+        sample_form.title.data = current_sample.title
+        sample_form.content.data = current_sample.content
+        sample_form.category.data = current_sample.cat.text
+        sample_form.baner.data = current_sample.baner
+        sample_form.keyword.data = comma.show(current_sample.keyword)
+
+        return render_template('work-sample/edit.html', form=sample_form, baner=current_sample.baner, album=current_sample.album, choice=category_list)
+    else:
+        abort(405)
 
 @panel.route('/work-sample/category')
 @login_required
@@ -656,7 +667,7 @@ def paxi_add_work_sample_category():
         return redirect(url_for('panel.paxi_work_sample_category'))
 
 
-@panel.route('/ticket')
+@panel.route('/ticket/')
 @login_required
 def paxi_ticket():
     page = request.args.get('page',type=int, default=1)
@@ -670,7 +681,7 @@ def paxi_ticket():
     return render_template('ticket/ticket.html', data=all_ticket, search_text=search)
 
 
-@panel.route('/ticket/chat/<int:id_ticket>', methods=['POST', 'GET'])
+@panel.route('/ticket/chat/<int:id_ticket>/', methods=['POST', 'GET'])
 @login_required
 def paxi_answer_ticket(id_ticket):
     find_ticket = Ticket.query.get_or_404(id_ticket)
@@ -695,7 +706,7 @@ def paxi_answer_ticket(id_ticket):
 
     return render_template('ticket/chat.html', data=find_ticket, find_answers=find_answers)
 
-@panel.route('/<path:input>')
+@panel.route('/<path:input>/')
 def can_not_find_page(input):
     abort(404)
 
