@@ -5,9 +5,8 @@
 {% block content %}
 <h1 class="text-paraxin-c-300 text-center mt-4 font-tit text-2xl">صفحه‌ی وبلاگ</h1>
 <div class="mt-1 mb-8">
-    <div class="flex justify-between flex-wrap items-center mt-5">
-        <a class="paraxin-pro-link" href="{{url_for('panel.paxi_add_weblog')}}">افزودن وبلاگ جدید</a>
-        <form action="" class="w-full sm:w-4/12">
+    <div class="flex justify-between flex-wrap items-center mt-5 bg-red-500">
+        <form action="" class="w-full sm:w-4/12 text-left">
             {% if search_text %}
             <div class="relative">
                 <input class="simple-input pl-9" id="search" name="search" placeholder="search" required type="search" value="{{search_text}}">
@@ -32,6 +31,9 @@
             </div>
             {% endif %}
         </form>
+        {% if roll == '1' or roll == '4' or roll == '9' %}
+        <a class="paraxin-pro-link" href="{{url_for('panel.paxi_add_weblog')}}">افزودن وبلاگ جدید</a>
+        {% endif %}
     </div>
 </div>
 {% if data.total %}

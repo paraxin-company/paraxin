@@ -19,6 +19,7 @@ class User(db.Model, UserMixin):
     email = db.Column(db.String(40), unique=True, nullable=False)
     password = db.Column(db.String(80), nullable=False)
     profile = db.Column(db.Text, nullable=False)
+    roll = db.Column(db.String(8), nullable=False)
 
     def __repr__(self):
         return f"{self.id}) {self.fullname}"

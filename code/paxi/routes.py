@@ -2,6 +2,7 @@ from flask import render_template, abort, redirect, flash, request
 from paxi.model import Category, Weblog, Sample, Ticket
 from paxi.forms import ContactForm
 from paxi import app, db
+
 from paxi.panel import panel
 app.register_blueprint(panel)
 

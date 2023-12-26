@@ -48,51 +48,56 @@ def paxi_logout():
 @panel.route('/weblog/', methods=['POST', 'GET'])
 @login_required
 def paxi_weblog():
-    page = request.args.get('page', default=1, type=int)
-    search = request.args.get('search')
+    if current_user.roll[1] != '0':
+        page = request.args.get('page', default=1, type=int)
+        search = request.args.get('search')
 
-    if search:
-        all_weblog = Weblog.query.filter(Weblog.keyword.contains(search)+Weblog.title.contains(search)).paginate(page=page, per_page=15)
+        if search:
+            all_weblog = Weblog.query.filter(Weblog.keyword.contains(search)+Weblog.title.contains(search)).paginate(page=page, per_page=15)
+        else:
+            all_weblog = Weblog.query.paginate(page=page, per_page=15)
+        return render_template('weblog/weblog.html', data=all_weblog, search_text=search, roll=current_user.roll[1])
     else:
-        all_weblog = Weblog.query.paginate(page=page, per_page=15)
-    return render_template('weblog/weblog.html', data=all_weblog, search_text=search)
-
+        abort(405)
 
 @panel.route('/weblog/add/', methods=['POST', 'GET'])
 @login_required
 def paxi_add_weblog():
-    weblog_form = WeblogForm()
-    if weblog_form.validate_on_submit():
-        try:
-            the_file = request.files['baner']
-            
-            if files.is_valid(the_file.filename):
-                # save image in the path
-                baner_path = os.path.join(folder_upload, 'weblog', files.rename_name(the_file.filename))
-                the_file.save(baner_path)
+    if current_user.roll[1] == '1' or current_user.roll[1] == '4' or current_user.roll[1] == '9':
+        weblog_form = WeblogForm()
+        if weblog_form.validate_on_submit():
+            try:
+                the_file = request.files['baner']
+                
+                if files.is_valid(the_file.filename):
+                    # save image in the path
+                    baner_path = os.path.join(folder_upload, 'weblog', files.rename_name(the_file.filename))
+                    the_file.save(baner_path)
 
-                new_baner_path = files.get_url(baner_path, 'weblog')
+                    new_baner_path = files.get_url(baner_path, 'weblog')
 
-                add_weblog = Weblog(
-                    title = weblog_form.title.data,
-                    content = weblog_form.content.data,
-                    keyword = comma.save(weblog_form.keyword.data),
-                    baner = str(new_baner_path)
-                )
+                    add_weblog = Weblog(
+                        title = weblog_form.title.data,
+                        content = weblog_form.content.data,
+                        keyword = comma.save(weblog_form.keyword.data),
+                        baner = str(new_baner_path)
+                    )
 
-                # add new record
-                db.session.add(add_weblog)
-                db.session.commit()
+                    # add new record
+                    db.session.add(add_weblog)
+                    db.session.commit()
 
-                flash('وبلاگ جدید به درستی اضافه شد', 'success')
+                    flash('وبلاگ جدید به درستی اضافه شد', 'success')
+                    return redirect(url_for('panel.paxi_weblog'))
+                else:
+                    flash(f'فرمت فایل مورد قبول نیست ({the_file.filename})', 'danger')
+                    return redirect(url_for('panel.paxi_weblog'))
+            except:
+                flash('برای اضافه کردن وبلاگ جدید مشکلی پیش آمده است', 'danger')
                 return redirect(url_for('panel.paxi_weblog'))
-            else:
-                flash(f'فرمت فایل مورد قبول نیست ({the_file.filename})', 'danger')
-                return redirect(url_for('panel.paxi_weblog'))
-        except:
-            flash('برای اضافه کردن وبلاگ جدید مشکلی پیش آمده است', 'danger')
-            return redirect(url_for('panel.paxi_weblog'))
-    return render_template('weblog/add.html', form=weblog_form)
+        return render_template('weblog/add.html', form=weblog_form)
+    else:
+        abort(405)
 
 
 @panel.route('/weblog/delete/<int:weblog_id>/', methods=['POST'])
@@ -687,6 +692,10 @@ def paxi_answer_ticket(id_ticket):
 @panel.route('/<path:input>')
 def can_not_find_page(input):
     abort(404)
+
+@panel.errorhandler(405)
+def not_allowed(error):
+    return render_template('base/405_paxi_panel.html'), 405
 
 @panel.errorhandler(404)
 def page_not_found_error(error):
