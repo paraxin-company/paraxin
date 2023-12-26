@@ -58,6 +58,7 @@
                 <td class="text-center py-1">{{log.content[:25]}} ..</td>
                 <td class="text-center py-1">{{log.date}}</td>
                 <td class="text-center py-1 flex justify-center items-center">
+                    {% if roll == '3' or roll == '9' %}
                     <span class="p-1" x-data="{ paraxin{{log.id}} : false }">
                         <div class="text-red-500 cursor-pointer hover:text-red-700" title="delete record" @click="paraxin{{log.id}} = true">
                             <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="bi bi-trash3-fill w-4 h-4" viewBox="0 0 16 16">
@@ -88,6 +89,8 @@
                             </div>
                         </div>
                     </span>
+                    {% endif %}
+                    {% if roll == '2' or roll == '4' or roll == '9' %}
                     <span class="p-1">
                         <a class="text-yellow-500 hover:text-yellow-700" title="edit record" href="{{url_for('panel.paxi_edit_weblog', weblog_id=log.id)}}">
                             <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="bi bi-pencil-fill w-4 h-4" viewBox="0 0 16 16">
@@ -95,6 +98,7 @@
                             </svg>
                         </a>
                     </span>
+                    {% endif %}
                 </td>
             </tr>
             {% endfor %}

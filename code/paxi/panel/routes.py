@@ -103,82 +103,88 @@ def paxi_add_weblog():
 @panel.route('/weblog/delete/<int:weblog_id>/', methods=['POST'])
 @login_required
 def paxi_delete_weblog(weblog_id):
-    try:
-        current_weblog = Weblog.query.get_or_404(int(weblog_id))
-        
-        # get old file for delete
-        old_file = current_weblog.baner
-        
-        # delete record in table
-        db.session.delete(current_weblog)
-        db.session.commit()
+    if current_user.roll[1] == '3' or current_user.roll[1] == '9':
+        try:
+            current_weblog = Weblog.query.get_or_404(int(weblog_id))
+            
+            # get old file for delete
+            old_file = current_weblog.baner
+            
+            # delete record in table
+            db.session.delete(current_weblog)
+            db.session.commit()
 
-        # try to delete file
-        result = files.delete_file(old_file)
-        if result == True:
-            flash(f'فایل با موفقیت پاک شد ({current_weblog.baner})', 'success')
-        else:
-            flash(f'برای پاک کردن فایل مشکلی پیش آمده است ({current_weblog.baner})', 'danger')
+            # try to delete file
+            result = files.delete_file(old_file)
+            if result == True:
+                flash(f'فایل با موفقیت پاک شد ({current_weblog.baner})', 'success')
+            else:
+                flash(f'برای پاک کردن فایل مشکلی پیش آمده است ({current_weblog.baner})', 'danger')
 
-        flash(f'وبلاگ با موفقیت حذف شد (id={current_weblog.id})','success')
-        return redirect(url_for('panel.paxi_weblog'))
-    except:
-        flash(f'برای حذف کردن وبلاگ مشکلی پیش آمده است (id={current_weblog.id})','danger')
-        return redirect(url_for('panel.paxi_weblog'))
+            flash(f'وبلاگ با موفقیت حذف شد (id={current_weblog.id})','success')
+            return redirect(url_for('panel.paxi_weblog'))
+        except:
+            flash(f'برای حذف کردن وبلاگ مشکلی پیش آمده است (id={current_weblog.id})','danger')
+            return redirect(url_for('panel.paxi_weblog'))
+    else:
+        abort(405)
 
 
 @panel.route('/weblog/edit/<int:weblog_id>/', methods=['POST', 'GET'])
 @login_required
 def paxi_edit_weblog(weblog_id):
-    current_weblog = Weblog.query.get_or_404(int(weblog_id))
-    weblog_form = WeblogFormEdit()
+    if current_user.roll[1] == '2' or current_user.roll[1] == '4' or current_user.roll[1] == '9' :
+        current_weblog = Weblog.query.get_or_404(int(weblog_id))
+        weblog_form = WeblogFormEdit()
 
-    if weblog_form.validate_on_submit():
-        # set new data into the record
-        try:
-            if weblog_form.baner.data:
-                if files.is_valid(weblog_form.baner.data.filename):
-                    the_file = request.files['baner']
+        if weblog_form.validate_on_submit():
+            # set new data into the record
+            try:
+                if weblog_form.baner.data:
+                    if files.is_valid(weblog_form.baner.data.filename):
+                        the_file = request.files['baner']
 
-                    # save image in the path
-                    baner_path = os.path.join(folder_upload, 'weblog', files.rename_name(the_file.filename))
-                    the_file.save(baner_path)
+                        # save image in the path
+                        baner_path = os.path.join(folder_upload, 'weblog', files.rename_name(the_file.filename))
+                        the_file.save(baner_path)
 
-                    # get the old url for delete that
-                    old_file = current_weblog.baner
+                        # get the old url for delete that
+                        old_file = current_weblog.baner
 
-                    current_weblog.baner = files.get_url(baner_path, 'weblog')
+                        current_weblog.baner = files.get_url(baner_path, 'weblog')
 
-                    result = files.delete_file(old_file)
-                    if result == True:
-                        flash(f'فایل با موفقیت پاک شد ({old_file})', 'success')
+                        result = files.delete_file(old_file)
+                        if result == True:
+                            flash(f'فایل با موفقیت پاک شد ({old_file})', 'success')
+                        else:
+                            flash(f'برای پاک کردن فایل مشکلی پیش آمده است ({old_file})', 'danger')
                     else:
-                        flash(f'برای پاک کردن فایل مشکلی پیش آمده است ({old_file})', 'danger')
+                        flash(f'فرمت فایل مورد قبول نیست ({weblog_form.baner.data.filename})', 'danger')
+                        return redirect(url_for('panel.paxi_edit_weblog', weblog_id=current_weblog.id))
                 else:
-                    flash(f'فرمت فایل مورد قبول نیست ({weblog_form.baner.data.filename})', 'danger')
-                    return redirect(url_for('panel.paxi_edit_weblog', weblog_id=current_weblog.id))
-            else:
-                current_weblog.baner = current_weblog.baner
+                    current_weblog.baner = current_weblog.baner
 
-            current_weblog.title = weblog_form.title.data
-            current_weblog.content = weblog_form.content.data
-            current_weblog.keyword = comma.save(weblog_form.keyword.data)
+                current_weblog.title = weblog_form.title.data
+                current_weblog.content = weblog_form.content.data
+                current_weblog.keyword = comma.save(weblog_form.keyword.data)
 
-            # save changes into the table
-            db.session.commit()
+                # save changes into the table
+                db.session.commit()
 
-            flash(f'اطلاعات وبلاگ با موفقیت تغییر کرد (id={current_weblog.id})', 'success')
-            return redirect(url_for('panel.paxi_weblog'))
-        except:
-            flash(f'برای آبدیت کردن وبلاگ مشکلی پیش آمده است (id={current_weblog.id})', 'danger')
-            return redirect(url_for('panel.paxi_edit_weblog', weblog_id=current_weblog.id))
+                flash(f'اطلاعات وبلاگ با موفقیت تغییر کرد (id={current_weblog.id})', 'success')
+                return redirect(url_for('panel.paxi_weblog'))
+            except:
+                flash(f'برای آبدیت کردن وبلاگ مشکلی پیش آمده است (id={current_weblog.id})', 'danger')
+                return redirect(url_for('panel.paxi_edit_weblog', weblog_id=current_weblog.id))
 
-    # set data in current_weblog
-    weblog_form.title.data = current_weblog.title
-    weblog_form.content.data = current_weblog.content
-    weblog_form.keyword.data = comma.show(current_weblog.keyword)
+        # set data in current_weblog
+        weblog_form.title.data = current_weblog.title
+        weblog_form.content.data = current_weblog.content
+        weblog_form.keyword.data = comma.show(current_weblog.keyword)
 
-    return render_template('weblog/edit.html', form=weblog_form, baner=current_weblog.baner)
+        return render_template('weblog/edit.html', form=weblog_form, baner=current_weblog.baner)
+    else:
+        abort(405)
 
 
 @panel.route('/change/password/')
