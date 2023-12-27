@@ -57,8 +57,7 @@ def paxi_weblog():
         else:
             all_weblog = Weblog.query.paginate(page=page, per_page=15)
         return render_template('weblog/weblog.html', data=all_weblog, search_text=search, roll=current_user.roll[1])
-    else:
-        abort(405)
+    else:abort(405)
 
 @panel.route('/weblog/add/', methods=['POST', 'GET'])
 @login_required
@@ -96,8 +95,7 @@ def paxi_add_weblog():
                 flash('برای اضافه کردن وبلاگ جدید مشکلی پیش آمده است', 'danger')
                 return redirect(url_for('panel.paxi_weblog'))
         return render_template('weblog/add.html', form=weblog_form)
-    else:
-        abort(405)
+    else:abort(405)
 
 
 @panel.route('/weblog/delete/<int:weblog_id>/', methods=['POST'])
@@ -126,8 +124,7 @@ def paxi_delete_weblog(weblog_id):
         except:
             flash(f'برای حذف کردن وبلاگ مشکلی پیش آمده است (id={current_weblog.id})','danger')
             return redirect(url_for('panel.paxi_weblog'))
-    else:
-        abort(405)
+    else:abort(405)
 
 
 @panel.route('/weblog/edit/<int:weblog_id>/', methods=['POST', 'GET'])
@@ -183,8 +180,7 @@ def paxi_edit_weblog(weblog_id):
         weblog_form.keyword.data = comma.show(current_weblog.keyword)
 
         return render_template('weblog/edit.html', form=weblog_form, baner=current_weblog.baner)
-    else:
-        abort(405)
+    else:abort(405)
 
 
 @panel.route('/change/password/')
@@ -353,8 +349,7 @@ def paxi_work_sample():
         else:
             samples = Sample.query.paginate(page=page, per_page=15)
         return render_template('work-sample/work-sample.html', data=samples, search_text=search, roll=current_user.roll[2])
-    else:
-        abort(405)
+    else:abort(405)
 
 
 @panel.route('/work-sample/add/', methods=['GET', 'POST'])
@@ -428,8 +423,7 @@ def paxi_add_work_sample():
         except:
             flash('برای اضافه کردن رکورد جدید مشکلی پیش آمده است', 'danger')
             return redirect(url_for('panel.paxi_work_sample'))
-    else:
-        abort(405)
+    else:abort(405)
 
 
 @panel.route('/work-sample/delete/<int:sample_id>/', methods=['POST'])
@@ -467,8 +461,7 @@ def paxi_delete_work_sample(sample_id):
         except:
             flash(f'برای حذف کردن نمونه کار مشکلی پیش آمده است (id={current_sample.id})','danger')
             return redirect(url_for('panel.paxi_work_sample'))
-    else:
-        abort(405)
+    else:abort(405)
 
 
 @panel.route('/work-sample/edit/<int:sample_id>/', methods=['GET', 'POST'])
@@ -584,87 +577,92 @@ def paxi_edit_work_sample(sample_id):
         sample_form.keyword.data = comma.show(current_sample.keyword)
 
         return render_template('work-sample/edit.html', form=sample_form, baner=current_sample.baner, album=current_sample.album, choice=category_list)
-    else:
-        abort(405)
+    else:abort(405)
 
-@panel.route('/work-sample/category')
+@panel.route('/work-sample/category/')
 @login_required
 def paxi_work_sample_category():
-    page = request.args.get('page', default=1, type=int)
+    if current_user.roll[3] != '0':
+        page = request.args.get('page', default=1, type=int)
 
-    cats = Category.query.order_by(Category.id).paginate(page=page, per_page=15)
-    cat_form = CategoryForm()
-    return render_template('work-sample/category.html', data=cats, form=cat_form)
+        cats = Category.query.order_by(Category.id).paginate(page=page, per_page=15)
+        cat_form = CategoryForm()
+        return render_template('work-sample/category.html', data=cats, form=cat_form, roll=current_user.roll[3])
+    else:abort(405)
 
 
-@panel.route('/work-sample/category/edit/<int:cat_id>', methods=['POST'])
+@panel.route('/work-sample/category/edit/<int:cat_id>/', methods=['POST'])
 @login_required
 def paxi_edit_work_sample_category(cat_id):
-    try:
-        current_category = Category.query.get_or_404(int(cat_id))
-        all_sample_match = Sample.query.filter_by(cat=current_category).all()
-        cat_form = CategoryForm()
+    if current_user.roll[3] == '2' or current_user.roll[3] == '9':
+        try:
+            current_category = Category.query.get_or_404(int(cat_id))
+            all_sample_match = Sample.query.filter_by(cat=current_category).all()
+            cat_form = CategoryForm()
 
-        new_category_text = passwords.small(cat_form.text.data)
-        result_folder_name = folder.check_name(cat_form.text.data)
-        if result_folder_name == True:
-            if current_category.text != cat_form.text.data:
-                if Category.query.filter_by(text=new_category_text).first() == None:
-                    if folder.rename('sample', passwords.small(current_category.text), new_category_text):
-                        # change sample directory
-                        if all_sample_match:
-                            for item in all_sample_match:
-                                item.baner = item.baner.replace(passwords.small(current_category.text), new_category_text)
-                                item.album = item.album.replace(passwords.small(current_category.text), new_category_text)
+            new_category_text = passwords.small(cat_form.text.data)
+            result_folder_name = folder.check_name(cat_form.text.data)
+            if result_folder_name == True:
+                if current_category.text != cat_form.text.data:
+                    if Category.query.filter_by(text=new_category_text).first() == None:
+                        if folder.rename('sample', passwords.small(current_category.text), new_category_text):
+                            # change sample directory
+                            if all_sample_match:
+                                for item in all_sample_match:
+                                    item.baner = item.baner.replace(passwords.small(current_category.text), new_category_text)
+                                    item.album = item.album.replace(passwords.small(current_category.text), new_category_text)
 
-                        current_category.text = cat_form.text.data
-                        
-                        # save changes
-                        db.session.commit()
+                            current_category.text = cat_form.text.data
+                            
+                            # save changes
+                            db.session.commit()
 
-                        flash(f'اطلاعات دسته بندی با موفقیت تغییر کرد (ID={current_category.id})', 'success')
+                            flash(f'اطلاعات دسته بندی با موفقیت تغییر کرد (ID={current_category.id})', 'success')
+                        else:
+                            flash('برای تغییر اسم پوشه در هاست مشکلی پیش آمده است', 'danger')
                     else:
-                        flash('برای تغییر اسم پوشه در هاست مشکلی پیش آمده است', 'danger')
+                        flash(f'دسته بندی با نام ({cat_form.text.data}) وجود دارد', 'danger')
                 else:
-                    flash(f'دسته بندی با نام ({cat_form.text.data}) وجود دارد', 'danger')
+                    flash('اطلاعاتی تغییر نکرده است','danger')
             else:
-                flash('اطلاعاتی تغییر نکرده است','danger')
-        else:
-            flash(result_folder_name, 'danger')
-    except:
-        flash(f'برای تغییر دسته بندی مشکلی پیش آمده است (ID={current_category.id})', 'danger')
-    return redirect(url_for('panel.paxi_work_sample_category'))
+                flash(result_folder_name, 'danger')
+        except:
+            flash(f'برای تغییر دسته بندی مشکلی پیش آمده است (ID={current_category.id})', 'danger')
+        return redirect(url_for('panel.paxi_work_sample_category'))
+    else:abort(405)
 
 
-@panel.route('/work-sample/category/add', methods=['POST'])
+@panel.route('/work-sample/category/add/', methods=['POST'])
 @login_required
 def paxi_add_work_sample_category():
-    try:
-        cat_form = CategoryForm()
-        
-        result_folder_name = folder.check_name(cat_form.text.data)
-        if result_folder_name == True:
-            if Category.query.filter_by(text=cat_form.text.data).first() == None:
-                if folder.create('sample', passwords.small(cat_form.text.data)):
-                    add_category = Category(text=cat_form.text.data)
+    if current_user.roll[3] == '1' or current_user.roll[3] == '9':
+        try:
+            cat_form = CategoryForm()
+            
+            result_folder_name = folder.check_name(cat_form.text.data)
+            if result_folder_name == True:
+                if Category.query.filter_by(text=cat_form.text.data).first() == None:
+                    if folder.create('sample', passwords.small(cat_form.text.data)):
+                        add_category = Category(text=cat_form.text.data)
 
-                    # save changes
-                    db.session.add(add_category)
-                    db.session.commit()
-                    flash(f'با موفقیت دسته بندی جدید برای نمونه کار اضافه شد ({cat_form.text.data})', 'success')
-                    return redirect(url_for('panel.paxi_work_sample_category'))
+                        # save changes
+                        db.session.add(add_category)
+                        db.session.commit()
+                        flash(f'با موفقیت دسته بندی جدید برای نمونه کار اضافه شد ({cat_form.text.data})', 'success')
+                        return redirect(url_for('panel.paxi_work_sample_category'))
+                    else:
+                        flash('برای اضافه کردن پوشه در هاست مشکلی پیش آمده است', 'danger')
+                        return redirect(url_for('panel.paxi_work_sample_category'))
                 else:
-                    flash('برای اضافه کردن پوشه در هاست مشکلی پیش آمده است', 'danger')
+                    flash(f'چنین دسته بندی وجود دارد ({cat_form.text.data})', 'danger')
                     return redirect(url_for('panel.paxi_work_sample_category'))
             else:
-                flash(f'چنین دسته بندی وجود دارد ({cat_form.text.data})', 'danger')
+                flash(result_folder_name, 'danger')
                 return redirect(url_for('panel.paxi_work_sample_category'))
-        else:
-            flash(result_folder_name, 'danger')
+        except:
+            flash(f'برای اضافه کردن دسته بندی نمونه کار جدید مشکلی پیش آمده است', 'danger')
             return redirect(url_for('panel.paxi_work_sample_category'))
-    except:
-        flash(f'برای اضافه کردن دسته بندی نمونه کار جدید مشکلی پیش آمده است', 'danger')
-        return redirect(url_for('panel.paxi_work_sample_category'))
+    else:abort(405)
 
 
 @panel.route('/ticket/')

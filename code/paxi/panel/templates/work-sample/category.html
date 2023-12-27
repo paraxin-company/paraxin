@@ -4,6 +4,7 @@
 
 {% block content %}
 <h1 class="text-paraxin-c-300 text-center mt-4 font-tit text-2xl">صفحه‌ی دسته بندی نمونه کارها</h1>
+{% if roll == '1' or roll == '9' %}
 <div x-data="{ AddCategory : false }" class="mt-1 mb-8">
     <div class="paraxin-pro-link cursor-pointer inline-block" @click="AddCategory = true">افزودن دسته بندی جدید</div>
     <div class="fixed z-50 inset-0 bg-gray-800 bg-opacity-40 flex items-start justify-center pt-24" x-cloak x-show="AddCategory">
@@ -29,14 +30,15 @@
         </div>
     </div>
 </div>
+{% endif %}
 {% if data.total %}
-    <table class="table">
+    <table class="table mt-5">
         <thead class="table-head">
             <tr>
                 <th scope="col" class="table-head-item">id</th>
                 <th scope="col" class="table-head-item">text</th>
                 <th scope="col" class="table-head-item">count</th>
-                <th scope="col" class="table-head-item">action</th>
+                {% if roll == '2' or roll == '9' %}<th scope="col" class="table-head-item">action</th>{% endif %}
             </tr>
         </thead>
         <tbody>
@@ -45,6 +47,7 @@
                 <th scope="row" class="text-paraxin-c-200">{{log.id}}</th>
                 <td class="text-center py-1">{{log.text}}</td>
                 <td class="text-center py-1">{{log.count()}}</td>
+                {% if roll == '2' or roll == '9' %}
                 <td class="text-center py-1 flex justify-center items-center">
                     <span class="p-1" x-data="{ paraxin{{log.id}} : false }">
                         <div class="text-yellow-500 cursor-pointer hover:text-yellow-700" title="edit record" @click="paraxin{{log.id}} = true">
@@ -76,6 +79,7 @@
                         </div>
                     </span>
                 </td>
+                {% endif %}
             </tr>
             {% endfor %}
         </tbody>

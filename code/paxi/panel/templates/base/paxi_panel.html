@@ -38,9 +38,11 @@
 									<a class="{% block work_page %}{% endblock %} hover:text-gray-950" href="{{url_for('panel.paxi_work_sample')}}">کل نمونه ها</a>
                                 </li>
 								{% endif %}
-                                <li>
+                                {% if current_user.roll[3] != '0' %}
+								<li>
 									<a class="{% block category_page %}{% endblock %} hover:text-gray-950" href="{{url_for('panel.paxi_work_sample_category')}}">دسته بندی</a>
                                 </li>
+								{% endif %}
                             </ul>
                         </div>
                     </li>
